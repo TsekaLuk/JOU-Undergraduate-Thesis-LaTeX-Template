@@ -1,17 +1,16 @@
 % 江苏海洋大学毕业设计（论文）评语
-% Jiangsu Ocean University Thesis Evaluation
+% 像素级对齐Word XML: Table 22 (4列封面) + Table 6 (1列评语)
+% 封面网格: 2.49+6.08+2.42+3.65 = 14.64cm
+% 评语网格: 12.84cm (单列)
 
 \documentclass[a4paper,zihao=-4]{ctexart}
 
-% 必要的宏包
 \RequirePackage{geometry}
 \RequirePackage{graphicx}
 \RequirePackage{array}
-\RequirePackage{tabularx}
 \RequirePackage{multirow}
 \RequirePackage{makecell}
 
-% 页面设置
 \geometry{
     a4paper,
     top=2.5cm,
@@ -20,14 +19,13 @@
     right=2.5cm
 }
 
-% 表格精确配置
-\setlength{\tabcolsep}{6pt}
-\renewcommand{\arraystretch}{1.4}
+% 像素级对齐: tabcolsep=0pt使列宽精确匹配Word XML
+\setlength{\tabcolsep}{0pt}
+\renewcommand{\arraystretch}{1.5}
 
 % 自定义列类型
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 \newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
-\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
 
 \begin{document}
 
@@ -41,90 +39,84 @@
 
 \vspace{0.5cm}
 
-% 基本信息表格
+% ============================================================================
+% 封面信息表格 - Word XML Table 22 (4列网格)
+% 列宽: 2.49 | 6.08 | 2.42 | 3.65 cm = 14.64cm
+% ============================================================================
+
 \begin{table}[h]
 \centering
 \zihao{-4}\songti
-\begin{tabular}{|L{2.5cm}|L{4cm}|L{2.5cm}|L{6cm}|}
+\begin{tabular}{|L{2.49cm}|L{6.08cm}|L{2.42cm}|L{3.65cm}|}
 \hline
-\textbf{学生姓名} & & \textbf{学号} & \\
+\hspace{3pt}\textbf{题\hspace{1em}目} & \multicolumn{3}{L{12.15cm}|}{} \\
 \hline
-\textbf{学院} & & \textbf{专业班级} & \\
+\hspace{3pt}\textbf{学\hspace{1em}院} & \multicolumn{3}{L{12.15cm}|}{} \\
 \hline
-\multicolumn{4}{|L{15cm}|}{\textbf{毕业设计（论文）题目：}} \\
-\multicolumn{4}{|L{15cm}|}{\vspace{1cm}} \\
+\hspace{3pt}\textbf{专业班级} & \multicolumn{3}{L{12.15cm}|}{} \\
+\hline
+\hspace{3pt}\textbf{学生姓名} & & \hspace{3pt}\textbf{学\hspace{1em}号} & \\
+\hline
+\hspace{3pt}\textbf{综合成绩} & \multicolumn{3}{L{12.15cm}|}{} \\
 \hline
 \end{tabular}
 \end{table}
 
 \vspace{0.3cm}
 
-% 指导教师评语
+% ============================================================================
+% 指导教师评语 - Word XML Table 6 (1列网格)
+% 列宽: 12.84cm (单列)
+% ============================================================================
+
 \begin{table}[h]
 \centering
 \zihao{-4}\songti
-\begin{tabular}{|L{15cm}|}
+\begin{tabular}{|L{12.84cm}|}
 \hline
-\textbf{指导教师评语：} \\[0.3cm]
-（从选题质量、工作态度、工作量、研究能力、论文质量等方面进行评价）\\[0.3cm]
-\multicolumn{1}{|L{15cm}|}{
+\hspace{3pt}\textbf{指导教师评语：}
 \vspace{8cm}
-\hfill
-} \\
-\multicolumn{1}{|L{15cm}|}{
-\textbf{建议成绩：}\underline{\hspace{3cm}}（优秀/良好/中等/及格/不及格）
-} \\[0.5cm]
-\multicolumn{1}{|L{15cm}|}{
-\hfill 指导教师签名：\underline{\hspace{4cm}} \hspace{1cm} 日期：\underline{\hspace{3cm}}
-} \\[0.5cm]
+\hfill \\
+\hline
+\hspace{3pt}推荐成绩：\underline{\hspace{3cm}}\hspace{2cm}指导教师签字：\underline{\hspace{4cm}}
+
+\hfill 年\hspace{0.5cm}月\hspace{0.5cm}日\hspace{3pt}\\[0.3cm]
 \hline
 \end{tabular}
 \end{table}
 
 \clearpage
 
-% 第二页 - 评阅教师评语
+% 评阅教师评语
 \begin{table}[h]
 \centering
 \zihao{-4}\songti
-\begin{tabular}{|L{15cm}|}
+\begin{tabular}{|L{12.84cm}|}
 \hline
-\textbf{评阅教师评语：} \\[0.3cm]
-（从选题价值、研究方法、论文质量、创新性等方面进行评价）\\[0.3cm]
-\multicolumn{1}{|L{15cm}|}{
+\hspace{3pt}\textbf{评阅教师评语：}
 \vspace{8cm}
-\hfill
-} \\
-\multicolumn{1}{|L{15cm}|}{
-\textbf{建议成绩：}\underline{\hspace{3cm}}（优秀/良好/中等/及格/不及格）
-} \\[0.5cm]
-\multicolumn{1}{|L{15cm}|}{
-\hfill 评阅教师签名：\underline{\hspace{4cm}} \hspace{1cm} 日期：\underline{\hspace{3cm}}
-} \\[0.5cm]
+\hfill \\
+\hline
+\hspace{3pt}推荐成绩：\underline{\hspace{3cm}}\hspace{2cm}评阅教师签字：\underline{\hspace{4cm}}
+
+\hfill 年\hspace{0.5cm}月\hspace{0.5cm}日\hspace{3pt}\\[0.3cm]
 \hline
 \end{tabular}
 \end{table}
 
-\vspace{0.5cm}
-
-% 答辩小组意见
+% 答辩小组评语
 \begin{table}[h]
 \centering
 \zihao{-4}\songti
-\begin{tabular}{|L{15cm}|}
+\begin{tabular}{|L{12.84cm}|}
 \hline
-\textbf{答辩小组意见：} \\[0.3cm]
-（从答辩表现、问题回答情况等方面进行评价）\\[0.3cm]
-\multicolumn{1}{|L{15cm}|}{
-\vspace{5cm}
-\hfill
-} \\
-\multicolumn{1}{|L{15cm}|}{
-\textbf{建议成绩：}\underline{\hspace{3cm}}（优秀/良好/中等/及格/不及格）
-} \\[0.5cm]
-\multicolumn{1}{|L{15cm}|}{
-\hfill 答辩小组组长签名：\underline{\hspace{4cm}} \hspace{1cm} 日期：\underline{\hspace{3cm}}
-} \\[0.5cm]
+\hspace{3pt}\textbf{答辩小组评语：}
+\vspace{8cm}
+\hfill \\
+\hline
+\hspace{3pt}答辩成绩：\underline{\hspace{3cm}}\hspace{2cm}答辩小组签字：\underline{\hspace{4cm}}
+
+\hfill 年\hspace{0.5cm}月\hspace{0.5cm}日\hspace{3pt}\\[0.3cm]
 \hline
 \end{tabular}
 \end{table}

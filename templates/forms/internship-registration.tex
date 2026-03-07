@@ -2,32 +2,17 @@
 % Jiangsu Ocean University Internship Registration Form
 
 \documentclass[a4paper,zihao=-4]{ctexart}
-
-% 必要的宏包
 \RequirePackage{geometry}
 \RequirePackage{graphicx}
 \RequirePackage{array}
-\RequirePackage{tabularx}
 \RequirePackage{multirow}
 \RequirePackage{makecell}
 
-% 页面设置
-\geometry{
-    a4paper,
-    top=2.5cm,
-    bottom=2.5cm,
-    left=2.5cm,
-    right=2.5cm
-}
-
-% 表格精确配置
-\setlength{\tabcolsep}{6pt}
+\geometry{a4paper, top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
+\setlength{\tabcolsep}{0pt}
 \renewcommand{\arraystretch}{1.5}
-
-% 自定义列类型
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 \newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
-\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
 
 \begin{document}
 
@@ -41,67 +26,75 @@
 
 \vspace{0.5cm}
 
-% 主表格
+% 表格 4：实习登记表（6列网格）
+% Grid: [1.78, 3.81, 1.9, 3.04, 2.68, 1.98] cm = 15.19cm
 \begin{table}[h]
 \centering
 \zihao{-4}\songti
-\begin{tabular}{|L{3cm}|L{4.5cm}|L{3cm}|L{4.5cm}|}
+\begin{tabular}{|L{1.78cm}|L{3.81cm}|L{1.9cm}|L{3.04cm}|L{2.68cm}|L{1.98cm}|}
 \hline
-\textbf{姓名} & & \textbf{学号} & \\
+\textbf{学生姓名} & \hspace{3pt} & \textbf{班级} & \hspace{3pt} & \textbf{学号} & \hspace{3pt} \\
 \hline
-\textbf{专业} & & \textbf{班级} & \\
+\textbf{实习单位} & \hspace{3pt} & \textbf{实习地点} & \hspace{3pt} & \textbf{实习时间} & \hspace{3pt} \\
 \hline
-\textbf{学院} & \multicolumn{3}{L{12cm}|}{} \\
+\multicolumn{6}{|L{15.19cm}|}{\textbf{毕业实习内容}（不少于250字）} \\
+\multicolumn{6}{|L{15.19cm}|}{
+\vspace{5cm}
+\hfill
+} \\
 \hline
-\textbf{联系电话} & & \textbf{电子邮箱} & \\
-\hline
-\multicolumn{4}{|L{15cm}|}{\textbf{实习单位信息}} \\
-\hline
-\textbf{单位名称} & \multicolumn{3}{L{12cm}|}{} \\
-\hline
-\textbf{单位地址} & \multicolumn{3}{L{12cm}|}{} \\
-\hline
-\textbf{单位联系人} & & \textbf{联系电话} & \\
-\hline
-\textbf{实习岗位} & & \textbf{实习部门} & \\
-\hline
-\textbf{实习起止时间} & \multicolumn{3}{L{12cm}|}{自\hspace{3cm}至\hspace{3cm}} \\
-\hline
-\multicolumn{4}{|L{15cm}|}{\textbf{实习内容简述：}} \\
-\multicolumn{4}{|L{15cm}|}{
-\vspace{4cm}
+\multicolumn{6}{|L{15.19cm}|}{\textbf{毕业实习心得}（不少于250字）} \\
+\multicolumn{6}{|L{15.19cm}|}{
+\vspace{5cm}
 \hfill
 } \\
 \hline
 \end{tabular}
 \end{table}
 
-\vspace{0.5cm}
+\vspace{1cm}
 
-% 签字确认部分
+% 表格 7：实习登记详表（7列网格）
+% Grid: [2.64, 2.98, 1.64, 1.39, 1.22, 1.57, 3.5] cm = 14.94cm
+\newpage
+
 \begin{table}[h]
 \centering
 \zihao{-4}\songti
-\begin{tabular}{|L{15cm}|}
+\begin{tabular}{|L{2.64cm}|L{2.98cm}|L{1.64cm}|L{1.39cm}|L{1.22cm}|L{1.57cm}|L{3.5cm}|}
 \hline
-\textbf{学生承诺：} \\[0.3cm]
-本人承诺在实习期间遵守实习单位的各项规章制度，服从实习单位和学校的管理，注意人身安全和财产安全，认真完成实习任务。 \\[1cm]
-学生签名：\underline{\hspace{4cm}} \hspace{2cm} 日期：\underline{\hspace{3cm}} \\[0.5cm]
+\textbf{学生姓名} & \hspace{3pt} & \multicolumn{2}{c|}{\textbf{学号}} & \multicolumn{3}{c|}{} \\
 \hline
-\textbf{家长意见：} \\
+\textbf{性别} & \hspace{3pt} & \multicolumn{2}{c|}{\textbf{班级}} & \multicolumn{3}{c|}{} \\
+\hline
+\textbf{指导教师} & \hspace{3pt} & \textbf{职称} & \multicolumn{2}{c|}{} & \textbf{系部} & \hspace{3pt} \\
+\hline
+\multicolumn{7}{|L{14.94cm}|}{\textbf{毕业实习要求}（由指导教师填写）} \\
+\multicolumn{7}{|L{14.94cm}|}{
+\vspace{4cm}
+\hfill
+} \\
+\hline
+\multicolumn{7}{|L{14.94cm}|}{\textbf{实习单位意见：}} \\
+\multicolumn{7}{|L{14.94cm}|}{
+\vspace{3cm}
+
+\hfill （公章）\hspace{2cm}年\hspace{0.5cm}月\hspace{0.5cm}日\hspace{3pt}
+} \\
+\hline
+\multicolumn{7}{|L{14.94cm}|}{\textbf{实习报告成绩：}} \\
+\multicolumn{7}{|L{14.94cm}|}{
+\vspace{3cm}
+
+\hfill 指导教师签字：\underline{\hspace{4cm}}\hspace{1cm}年\hspace{0.5cm}月\hspace{0.5cm}日\hspace{3pt}
+} \\
+\hline
+\multicolumn{7}{|L{14.94cm}|}{\textbf{实习总成绩：}} \\
+\multicolumn{7}{|L{14.94cm}|}{
 \vspace{2cm}
-\hfill \\
-家长签名：\underline{\hspace{4cm}} \hspace{2cm} 日期：\underline{\hspace{3cm}} \\[0.5cm]
-\hline
-\textbf{指导教师意见：} \\
-\vspace{2cm}
-\hfill \\
-指导教师签名：\underline{\hspace{4cm}} \hspace{2cm} 日期：\underline{\hspace{3cm}} \\[0.5cm]
-\hline
-\textbf{学院审批意见：} \\
-\vspace{2cm}
-\hfill \\
-院长签名（盖章）：\underline{\hspace{4cm}} \hspace{2cm} 日期：\underline{\hspace{3cm}} \\[0.5cm]
+
+\hfill 指导教师签字：\underline{\hspace{4cm}}\hspace{1cm}年\hspace{0.5cm}月\hspace{0.5cm}日\hspace{3pt}
+} \\
 \hline
 \end{tabular}
 \end{table}
@@ -110,7 +103,8 @@
 
 \begin{center}
     \zihao{5}\songti
-    \textbf{注：}本表一式两份，学生、学院各执一份。实习前填写并经审批后方可外出实习。
+    \textbf{注：}1. 实习报告另附，可书写或打印，字数不少于3000字；\\
+    2. 实习单位意见需加盖实习单位公章。
 \end{center}
 
 \end{document}

@@ -1,17 +1,16 @@
 % 江苏海洋大学毕业设计（论文）任务书（人文经管类）
-% Jiangsu Ocean University Thesis Task Book (Humanities/Economics/Management)
+% 像素级对齐Word XML: Table 10 (6列网格)
+% 列宽: 1.46 | 1.25 | 2.53 | 2.17 | 4.21 | 3.29 cm = 14.91cm
 
 \documentclass[a4paper,zihao=-4]{ctexart}
 
-% 必要的宏包
 \RequirePackage{geometry}
 \RequirePackage{graphicx}
 \RequirePackage{array}
-\RequirePackage{tabularx}
 \RequirePackage{multirow}
 \RequirePackage{makecell}
+\RequirePackage{enumitem}
 
-% 页面设置
 \geometry{
     a4paper,
     top=2.5cm,
@@ -20,14 +19,13 @@
     right=2.5cm
 }
 
-% 表格精确配置
-\setlength{\tabcolsep}{6pt}
-\renewcommand{\arraystretch}{1.3}
+% 像素级对齐: tabcolsep=0pt使列宽精确匹配Word XML
+\setlength{\tabcolsep}{0pt}
+\renewcommand{\arraystretch}{1.5}
 
 % 自定义列类型
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 \newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
-\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
 
 \begin{document}
 
@@ -42,102 +40,108 @@
 
 \vspace{0.5cm}
 
-% 基本信息表格
+% ============================================================================
+% 封面信息表格 - Word XML Table 10 (6列网格)
+% 列宽: 1.46 | 1.25 | 2.53 | 2.17 | 4.21 | 3.29 cm = 14.91cm
+% ============================================================================
+
 \begin{table}[h]
 \centering
 \zihao{-4}\songti
-\begin{tabular}{|L{2.5cm}|L{4cm}|L{2.5cm}|L{6cm}|}
+\begin{tabular}{|L{1.46cm}|L{1.25cm}|L{2.53cm}|L{2.17cm}|L{4.21cm}|L{3.29cm}|}
 \hline
-\textbf{学生姓名} & & \textbf{学号} & \\
+\multicolumn{2}{|L{2.71cm}|}{\hspace{3pt}\textbf{题\hspace{1em}目}} & \multicolumn{4}{L{10.2cm}|}{} \\
 \hline
-\textbf{学院} & & \textbf{专业} & \\
+\multicolumn{2}{|L{2.71cm}|}{\hspace{3pt}\textbf{学\hspace{1em}院}} & \multicolumn{4}{L{10.2cm}|}{} \\
 \hline
-\textbf{指导教师} & & \textbf{职称} & \\
+\multicolumn{2}{|L{2.71cm}|}{\hspace{3pt}\textbf{专业班级}} & \multicolumn{4}{L{10.2cm}|}{} \\
 \hline
-\multicolumn{4}{|L{15cm}|}{\textbf{毕业设计（论文）题目：}} \\
-\multicolumn{4}{|L{15cm}|}{\vspace{1cm}} \\
+\multicolumn{2}{|L{2.71cm}|}{\hspace{3pt}\textbf{学生姓名}} & \multicolumn{2}{L{4.7cm}|}{} & \hspace{3pt}\textbf{学\hspace{1em}号} & \\
 \hline
 \end{tabular}
 \end{table}
 
-\vspace{0.3cm}
+% ============================================================================
+% 内容表格 - Word XML Table 10 (6列网格)
+% 列宽: 1.46 | 1.25 | 2.53 | 2.17 | 4.21 | 3.29 cm = 14.91cm
+% ============================================================================
 
-% 任务内容表格
 \begin{table}[h]
 \centering
 \zihao{-4}\songti
-\begin{tabular}{|L{15cm}|}
+\begin{tabular}{|L{1.46cm}|L{1.25cm}|L{2.53cm}|L{2.17cm}|L{4.21cm}|L{3.29cm}|}
 \hline
-\textbf{一、毕业论文的主要内容及要求：} \\
-\multicolumn{1}{|L{15cm}|}{
-\vspace{6cm}
-\hfill
-} \\
-\hline
-\textbf{二、研究的主要问题和预期目标：} \\
-\multicolumn{1}{|L{15cm}|}{
+% 1. 毕业设计应达到的目的
+\multicolumn{6}{|L{14.91cm}|}{\hspace{3pt}\textbf{1.毕业设计（论文）应达到的目的}} \\
+\multicolumn{6}{|L{14.91cm}|}{
 \vspace{4cm}
 \hfill
 } \\
 \hline
-\textbf{三、研究方法和手段：} \\
-\multicolumn{1}{|L{15cm}|}{
-\vspace{5cm}
+
+% 2. 研究内容和要求
+\multicolumn{6}{|L{14.91cm}|}{\hspace{3pt}\textbf{2.毕业设计（论文）的研究内容和要求}} \\
+\multicolumn{6}{|L{14.91cm}|}{
+\vspace{4cm}
 \hfill
 } \\
 \hline
-\end{tabular}
-\end{table}
 
-\newpage
-
-% 第二页
-\begin{table}[h]
-\centering
-\zihao{-4}\songti
-\begin{tabular}{|L{15cm}|}
+% 3. 研究方案和目标
+\multicolumn{6}{|L{14.91cm}|}{\hspace{3pt}\textbf{3.研究方案和目标}} \\
+\multicolumn{6}{|L{14.91cm}|}{
+\vspace{4cm}
+\hfill
+} \\
 \hline
-\textbf{四、进度安排：} \\
-\multicolumn{1}{|L{15cm}|}{
-\begin{itemize}
-    \item 第\hspace{1cm}周至第\hspace{1cm}周：\hspace{8cm}
-    \item 第\hspace{1cm}周至第\hspace{1cm}周：\hspace{8cm}
-    \item 第\hspace{1cm}周至第\hspace{1cm}周：\hspace{8cm}
-    \item 第\hspace{1cm}周至第\hspace{1cm}周：\hspace{8cm}
-    \item 第\hspace{1cm}周至第\hspace{1cm}周：\hspace{8cm}
-\end{itemize}
+
+% 4. 毕业设计成果要求
+\multicolumn{6}{|L{14.91cm}|}{\hspace{3pt}\textbf{4.毕业设计（论文）成果要求}} \\
+\multicolumn{6}{|L{14.91cm}|}{
+\vspace{4cm}
+\hfill
+} \\
+\hline
+
+% 5. 主要参考文献
+\multicolumn{6}{|L{14.91cm}|}{\hspace{3pt}\textbf{5.主要参考文献}} \\
+\multicolumn{6}{|L{14.91cm}|}{
+\vspace{4cm}
+\hfill
+} \\
+\hline
+
+% 6. 毕业设计工作进度计划
+\multicolumn{6}{|L{14.91cm}|}{\hspace{3pt}\textbf{6.毕业设计（论文）工作进度计划}} \\
+\hline
+\multicolumn{2}{|L{2.71cm}|}{\hspace{3pt}\textbf{序号}} & \multicolumn{2}{L{4.7cm}|}{\hspace{3pt}\textbf{起\hspace{0.5em}迄\hspace{0.5em}日\hspace{0.5em}期}} & \multicolumn{2}{L{7.5cm}|}{\hspace{3pt}\textbf{工\hspace{0.5em}作\hspace{0.5em}内\hspace{0.5em}容}} \\
+\hline
+\multicolumn{2}{|L{2.71cm}|}{} & \multicolumn{2}{L{4.7cm}|}{} & \multicolumn{2}{L{7.5cm}|}{} \\
+\hline
+\multicolumn{2}{|L{2.71cm}|}{} & \multicolumn{2}{L{4.7cm}|}{} & \multicolumn{2}{L{7.5cm}|}{} \\
+\hline
+\multicolumn{2}{|L{2.71cm}|}{} & \multicolumn{2}{L{4.7cm}|}{} & \multicolumn{2}{L{7.5cm}|}{} \\
+\hline
+\multicolumn{2}{|L{2.71cm}|}{} & \multicolumn{2}{L{4.7cm}|}{} & \multicolumn{2}{L{7.5cm}|}{} \\
+\hline
+\multicolumn{2}{|L{2.71cm}|}{} & \multicolumn{2}{L{4.7cm}|}{} & \multicolumn{2}{L{7.5cm}|}{} \\
+\hline
+
+% 指导教师签名
+\multicolumn{6}{|L{14.91cm}|}{
+\hspace{3pt}\textbf{指导教师}\hspace{6cm}\textbf{日期：}\hspace{1cm}年\hspace{0.5cm}月\hspace{0.5cm}日
+} \\[0.8cm]
+\hline
+
+% 系意见
+\multicolumn{6}{|L{14.91cm}|}{
+\hspace{3pt}\textbf{系意见：}
 \vspace{2cm}
-} \\
-\hline
-\textbf{五、主要参考文献：} \\
-\multicolumn{1}{|L{15cm}|}{
-\vspace{5cm}
-\hfill
-} \\
-\hline
-\textbf{六、应收集的资料：} \\
-\multicolumn{1}{|L{15cm}|}{
-\vspace{4cm}
-\hfill
-} \\
-\hline
-\end{tabular}
-\end{table}
 
-\vspace{0.5cm}
+\hfill 系主任签字：\underline{\hspace{4cm}}\hspace{1cm}年\hspace{0.5cm}月\hspace{0.5cm}日\hspace{3pt}
+} \\
+\hline
 
-% 签字部分
-\begin{table}[h]
-\centering
-\zihao{-4}\songti
-\begin{tabular}{|L{15cm}|}
-\hline
-\textbf{指导教师签名：}\hspace{8cm}\textbf{日期：}\underline{\hspace{3cm}} \\[0.8cm]
-\hline
-\textbf{系（教研室）主任签名：}\hspace{6cm}\textbf{日期：}\underline{\hspace{3cm}} \\[0.8cm]
-\hline
-\textbf{学院院长签名（盖章）：}\hspace{5cm}\textbf{日期：}\underline{\hspace{3cm}} \\[0.8cm]
-\hline
 \end{tabular}
 \end{table}
 

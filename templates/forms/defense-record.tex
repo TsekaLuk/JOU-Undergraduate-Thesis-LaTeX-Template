@@ -1,17 +1,15 @@
 % 江苏海洋大学毕业设计（论文）答辩记录
-% Jiangsu Ocean University Thesis Defense Record
+% 像素级对齐Word XML: Table 23 (4列网格)
+% 网格: 2.68+5.44+2.59+3.72 = 14.43cm
 
 \documentclass[a4paper,zihao=-4]{ctexart}
 
-% 必要的宏包
 \RequirePackage{geometry}
 \RequirePackage{graphicx}
 \RequirePackage{array}
-\RequirePackage{tabularx}
 \RequirePackage{multirow}
 \RequirePackage{makecell}
 
-% 页面设置
 \geometry{
     a4paper,
     top=2.5cm,
@@ -20,14 +18,13 @@
     right=2.5cm
 }
 
-% 表格精确配置
-\setlength{\tabcolsep}{6pt}
+% 像素级对齐: tabcolsep=0pt使列宽精确匹配Word XML
+\setlength{\tabcolsep}{0pt}
 \renewcommand{\arraystretch}{1.5}
 
 % 自定义列类型
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 \newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
-\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
 
 \begin{document}
 
@@ -41,129 +38,45 @@
 
 \vspace{0.5cm}
 
-% 基本信息表格
+% ============================================================================
+% 单一表格 - Word XML Table 23 (4列网格)
+% 列宽: 2.68 | 5.44 | 2.59 | 3.72 cm = 14.43cm
+% ============================================================================
+
 \begin{table}[h]
 \centering
 \zihao{-4}\songti
-\begin{tabular}{|L{2.5cm}|L{4cm}|L{2.5cm}|L{6cm}|}
+\begin{tabular}{|L{2.68cm}|L{5.44cm}|L{2.59cm}|L{3.72cm}|}
 \hline
-\textbf{学生姓名} & & \textbf{学号} & \\
+% 封面信息
+\hspace{3pt}\textbf{题\hspace{1em}目} & \multicolumn{3}{L{11.75cm}|}{} \\
 \hline
-\textbf{学院} & & \textbf{专业班级} & \\
+\hspace{3pt}\textbf{学\hspace{1em}院} & \multicolumn{3}{L{11.75cm}|}{} \\
 \hline
-\multicolumn{4}{|L{15cm}|}{\textbf{毕业设计（论文）题目：}} \\
-\multicolumn{4}{|L{15cm}|}{\vspace{1cm}} \\
+\hspace{3pt}\textbf{专业班级} & \multicolumn{3}{L{11.75cm}|}{} \\
 \hline
-\textbf{答辩时间} & \multicolumn{3}{L{12cm}|}{} \\
+\hspace{3pt}\textbf{学生姓名} & & \hspace{3pt}\textbf{学\hspace{1em}号} & \\
 \hline
-\textbf{答辩地点} & \multicolumn{3}{L{12cm}|}{} \\
+\hspace{3pt}\textbf{答辩时间} & & \hspace{3pt}\textbf{答辩地点} & \\
 \hline
-\end{tabular}
-\end{table}
-
-\vspace{0.3cm}
 
 % 答辩小组成员
-\begin{table}[h]
-\centering
-\zihao{-4}\songti
-\begin{tabular}{|L{15cm}|}
+\multicolumn{4}{|L{14.43cm}|}{
+\hspace{3pt}\textbf{答辩小组成员：}
+\vspace{3cm}
+\hfill
+} \\
 \hline
-\textbf{答辩小组成员：} \\[0.3cm]
-\begin{tabular}{llll}
-组长：\underline{\hspace{3cm}}（职称：\underline{\hspace{2cm}}）& 成员：\underline{\hspace{3cm}}（职称：\underline{\hspace{2cm}}）\\[0.5cm]
-成员：\underline{\hspace{3cm}}（职称：\underline{\hspace{2cm}}）& 成员：\underline{\hspace{3cm}}（职称：\underline{\hspace{2cm}}）\\[0.5cm]
-成员：\underline{\hspace{3cm}}（职称：\underline{\hspace{2cm}}）& 记录：\underline{\hspace{3cm}}\\[0.3cm]
-\end{tabular} \\
-\hline
-\end{tabular}
-\end{table}
-
-\vspace{0.3cm}
 
 % 答辩过程记录
-\begin{table}[h]
-\centering
-\zihao{-4}\songti
-\begin{tabular}{|L{15cm}|}
-\hline
-\textbf{一、学生陈述（时间：\hspace{2cm}分钟）} \\
-\multicolumn{1}{|L{15cm}|}{
-主要内容概要：
-\vspace{4cm}
-\hfill
-} \\
-\hline
-\textbf{二、答辩小组提问及学生回答情况} \\[0.3cm]
-\textbf{问题1：} \\
-\multicolumn{1}{|L{15cm}|}{
-\vspace{2cm}
-\hfill
-} \\
-\textbf{回答：} \\
-\multicolumn{1}{|L{15cm}|}{
-\vspace{2cm}
-\hfill
-} \\
-\hline
-\end{tabular}
-\end{table}
+\multicolumn{4}{|L{14.43cm}|}{
+\hspace{3pt}\textbf{答辩中提出的问题及学生回答问题的简要情况：}
+\vspace{14cm}
 
-\newpage
+\hspace{3pt}答辩小组组长签字：\underline{\hspace{3cm}}\hspace{1cm}记录人：\underline{\hspace{3cm}}\hspace{1cm}年\hspace{0.5cm}月\hspace{0.5cm}日\hspace{3pt}
+} \\
+\hline
 
-% 第二页继续
-\begin{table}[h]
-\centering
-\zihao{-4}\songti
-\begin{tabular}{|L{15cm}|}
-\hline
-\textbf{问题2：} \\
-\multicolumn{1}{|L{15cm}|}{
-\vspace{2cm}
-\hfill
-} \\
-\textbf{回答：} \\
-\multicolumn{1}{|L{15cm}|}{
-\vspace{2cm}
-\hfill
-} \\
-\hline
-\textbf{问题3：} \\
-\multicolumn{1}{|L{15cm}|}{
-\vspace{2cm}
-\hfill
-} \\
-\textbf{回答：} \\
-\multicolumn{1}{|L{15cm}|}{
-\vspace{2cm}
-\hfill
-} \\
-\hline
-\textbf{（可另附页）} \\
-\hline
-\end{tabular}
-\end{table}
-
-\vspace{0.3cm}
-
-% 答辩意见
-\begin{table}[h]
-\centering
-\zihao{-4}\songti
-\begin{tabular}{|L{15cm}|}
-\hline
-\textbf{三、答辩小组综合意见：} \\
-\multicolumn{1}{|L{15cm}|}{
-\vspace{4cm}
-\hfill
-} \\
-\multicolumn{1}{|L{15cm}|}{
-\textbf{答辩成绩：}\underline{\hspace{3cm}}（优秀/良好/中等/及格/不及格）
-} \\[0.5cm]
-\multicolumn{1}{|L{15cm}|}{
-\hfill 答辩小组组长签名：\underline{\hspace{4cm}} \hspace{1cm} 日期：\underline{\hspace{3cm}}
-} \\[0.5cm]
-\hline
 \end{tabular}
 \end{table}
 
@@ -171,9 +84,7 @@
 
 \begin{center}
     \zihao{5}\songti
-    \textbf{注：}1. 本记录表一式两份，学生、学院各执一份；\\
-    2. 答辩小组提问不少于3个问题；\\
-    3. 记录应如实、完整填写。
+    \textbf{注：}本记录表一式两份，学生、学院各执一份。
 \end{center}
 
 \end{document}

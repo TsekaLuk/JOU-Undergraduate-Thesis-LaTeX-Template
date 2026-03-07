@@ -1,16 +1,16 @@
 % 江苏海洋大学毕业设计（论文）外文资料翻译
-% Jiangsu Ocean University Foreign Material Translation
+% 像素级对齐Word XML: Table 16 (4列封面) + Table 17 (1列评语)
+% 封面网格: 3.33+3.68+2.23+3.77 = 13.0cm
+% 评语网格: 13.11cm (单列)
 
 \documentclass[a4paper,zihao=-4]{ctexart}
 
-% 必要的宏包
 \RequirePackage{geometry}
 \RequirePackage{graphicx}
 \RequirePackage{array}
 \RequirePackage{setspace}
 \RequirePackage{indentfirst}
 
-% 页面设置
 \geometry{
     a4paper,
     top=2.5cm,
@@ -19,16 +19,17 @@
     right=2.5cm
 }
 
-% 行距设置 - 1.25倍行距
-\linespread{1.25}
+% 像素级对齐: tabcolsep=0pt使列宽精确匹配Word XML
+\setlength{\tabcolsep}{0pt}
+\renewcommand{\arraystretch}{1.5}
 
-% 首行缩进2字符
+% 行距设置
+\linespread{1.25}
 \setlength{\parindent}{2em}
 
 % 自定义列类型
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 \newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
-\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
 
 \begin{document}
 
@@ -42,20 +43,27 @@
 
 \vspace{0.5cm}
 
-% 基本信息表格
+% ============================================================================
+% 封面信息表格 - Word XML Table 16 (4列网格)
+% 列宽: 3.33 | 3.68 | 2.23 | 3.77 cm = 13.0cm
+% ============================================================================
+
 \begin{table}[h]
 \centering
 \zihao{-4}\songti
-\begin{tabular}{|L{2.5cm}|L{4cm}|L{2.5cm}|L{6cm}|}
+\begin{tabular}{|L{3.33cm}|L{3.68cm}|L{2.23cm}|L{3.77cm}|}
 \hline
-\textbf{学生姓名} & & \textbf{学号} & \\
+\hspace{3pt}\textbf{学\hspace{1em}院：} & \multicolumn{3}{L{9.67cm}|}{} \\
 \hline
-\textbf{学院} & & \textbf{专业班级} & \\
+\hspace{3pt}\textbf{专业班级：} & \multicolumn{3}{L{9.67cm}|}{} \\
 \hline
-\textbf{指导教师} & & \textbf{职称} & \\
+\hspace{3pt}\textbf{学生姓名：} & & \hspace{3pt}\textbf{学\hspace{0.5em}号：} & \\
 \hline
-\multicolumn{4}{|L{15cm}|}{\textbf{毕业设计（论文）题目：}} \\
-\multicolumn{4}{|L{15cm}|}{\vspace{1cm}} \\
+\hspace{3pt}\textbf{指导教师：} & \multicolumn{3}{L{9.67cm}|}{} \\
+\hline
+\hspace{3pt}\textbf{外文出处：} & \multicolumn{3}{L{9.67cm}|}{} \\
+\hline
+\hspace{3pt}\textbf{附\hspace{1em}件：} & \multicolumn{3}{L{9.67cm}|}{} \\
 \hline
 \end{tabular}
 \end{table}
@@ -75,7 +83,6 @@
 
 \vspace{1cm}
 
-% 原文内容
 （此处粘贴外文资料原文，字数不少于3000个外文印刷符号或译成中文不少于2000汉字）
 
 \clearpage
@@ -89,20 +96,20 @@
 
 \clearpage
 
-% 评语页
+% ============================================================================
+% 评语表格 - Word XML Table 17 (1列网格)
+% 列宽: 13.11cm (单列)
+% ============================================================================
+
 \begin{table}[h]
 \centering
 \zihao{-4}\songti
-\begin{tabular}{|L{15cm}|}
+\begin{tabular}{|L{13.11cm}|}
 \hline
-\textbf{指导教师评语：} \\
-\multicolumn{1}{|L{15cm}|}{
-\vspace{6cm}
-\hfill
-} \\
-\multicolumn{1}{|L{15cm}|}{
-\hfill 指导教师签名：\underline{\hspace{4cm}} \hspace{1cm} 日期：\underline{\hspace{3cm}}
-} \\[0.5cm]
+\hspace{3pt}\textbf{指导教师评语：}
+\vspace{8cm}
+
+\hspace{3pt}指导教师签字：\underline{\hspace{4cm}} \hspace{3cm} 年\hspace{0.5cm}月\hspace{0.5cm}日\hspace{3pt}\\[0.3cm]
 \hline
 \end{tabular}
 \end{table}

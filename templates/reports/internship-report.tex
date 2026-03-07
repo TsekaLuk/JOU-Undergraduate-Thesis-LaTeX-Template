@@ -1,18 +1,15 @@
 % 江苏海洋大学毕业实习报告书
-% Jiangsu Ocean University Internship Report
+% 像素级对齐Word XML: Table 3/5 (2列封面)
+% 封面网格: 3.33+9.67 = 13.0cm
 
 \documentclass[a4paper,zihao=-4]{ctexart}
 
-% 必要的宏包
 \RequirePackage{geometry}
 \RequirePackage{graphicx}
 \RequirePackage{array}
-\RequirePackage{tabularx}
-\RequirePackage{multirow}
 \RequirePackage{setspace}
 \RequirePackage{indentfirst}
 
-% 页面设置
 \geometry{
     a4paper,
     top=2.5cm,
@@ -21,16 +18,17 @@
     right=2.5cm
 }
 
-% 行距设置 - 1.25倍行距
-\linespread{1.25}
+% 像素级对齐: tabcolsep=0pt使列宽精确匹配Word XML
+\setlength{\tabcolsep}{0pt}
+\renewcommand{\arraystretch}{1.5}
 
-% 首行缩进2字符
+% 行距设置
+\linespread{1.25}
 \setlength{\parindent}{2em}
 
 % 自定义列类型
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 \newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
-\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
 
 \begin{document}
 
@@ -43,16 +41,20 @@
 
 \includegraphics[width=13cm]{../../figures/jou-logo-full.png}\\[3cm]
 
-{\heiti\zihao{2}\textbf{毕业实习报告书}}\\[4cm]
+{\heiti\zihao{2}\textbf{毕业实习报告书}}\\[3cm]
+
+% ============================================================================
+% 封面信息表格 - Word XML Table 3 (2列网格)
+% 列宽: 3.33 | 9.67 cm = 13.0cm
+% ============================================================================
 
 {\kaishu\zihao{4}
-\begin{tabular}{rl}
-学\\hspace{2em}院： & \underline{\makebox[8cm][c]{}} \\[0.8cm]
-专业班级： & \underline{\makebox[8cm][c]{}} \\[0.8cm]
-学生姓名： & \underline{\makebox[8cm][c]{}} \\[0.8cm]
-学\\hspace{2em}号： & \underline{\makebox[8cm][c]{}} \\[0.8cm]
-实习单位： & \underline{\makebox[8cm][c]{}} \\[0.8cm]
-实习时间： & \underline{\makebox[8cm][c]{}} \\[0.8cm]
+\begin{tabular}{L{3.33cm}L{9.67cm}}
+\hspace{3pt}题\hspace{1em}目: & \underline{\makebox[9cm][c]{}} \\[0.8cm]
+\hspace{3pt}学\hspace{1em}院： & \underline{\makebox[9cm][c]{}} \\[0.8cm]
+\hspace{3pt}专业班级： & \underline{\makebox[9cm][c]{}} \\[0.8cm]
+\hspace{3pt}学生姓名： & \underline{\makebox[9cm][c]{}} \\[0.8cm]
+\hspace{3pt}学\hspace{1em}号： & \underline{\makebox[9cm][c]{}} \\[0.8cm]
 \end{tabular}
 }
 
@@ -66,7 +68,6 @@
 
 % 报告正文部分
 \section*{一、实习目的}
-\addcontentsline{toc}{section}{一、实习目的}
 
 \vspace{1cm}
 
@@ -75,7 +76,6 @@
 \vspace{5cm}
 
 \section*{二、实习单位简介}
-\addcontentsline{toc}{section}{二、实习单位简介}
 
 \vspace{1cm}
 
@@ -84,7 +84,6 @@
 \vspace{5cm}
 
 \section*{三、实习内容}
-\addcontentsline{toc}{section}{三、实习内容}
 
 \vspace{1cm}
 
@@ -93,7 +92,6 @@
 \clearpage
 
 \section*{四、实习收获与体会}
-\addcontentsline{toc}{section}{四、实习收获与体会}
 
 \vspace{1cm}
 
@@ -102,7 +100,6 @@
 \vspace{6cm}
 
 \section*{五、存在的问题与建议}
-\addcontentsline{toc}{section}{五、存在的问题与建议}
 
 \vspace{1cm}
 
@@ -111,7 +108,6 @@
 \vspace{6cm}
 
 \section*{六、总结}
-\addcontentsline{toc}{section}{六、总结}
 
 \vspace{1cm}
 

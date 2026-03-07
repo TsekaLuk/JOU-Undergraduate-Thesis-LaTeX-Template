@@ -1,18 +1,16 @@
 % 江苏海洋大学毕业设计（论文）开题报告（理工农医类）
-% Jiangsu Ocean University Thesis Proposal (Science/Engineering/Agriculture/Medicine)
+% 像素级对齐Word XML: Table 11 (4列封面) + Table 12 (1列内容)
+% 封面网格: 3.33+3.68+1.97+4.02 = 13.0cm
+% 内容网格: 15.04cm (单列)
 
 \documentclass[a4paper,zihao=-4]{ctexart}
 
-% 必要的宏包
 \RequirePackage{geometry}
 \RequirePackage{graphicx}
 \RequirePackage{array}
-\RequirePackage{tabularx}
 \RequirePackage{multirow}
-\RequirePackage{setspace}
-\RequirePackage{indentfirst}
+\RequirePackage{makecell}
 
-% 页面设置
 \geometry{
     a4paper,
     top=2.5cm,
@@ -21,22 +19,19 @@
     right=2.5cm
 }
 
-% 行距设置 - 1.25倍行距
-\linespread{1.25}
-
-% 首行缩进2字符
-\setlength{\parindent}{2em}
+% 像素级对齐: tabcolsep=0pt使列宽精确匹配Word XML
+\setlength{\tabcolsep}{0pt}
+\renewcommand{\arraystretch}{1.5}
 
 % 自定义列类型
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 \newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
-\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
 
 \begin{document}
 
 \pagestyle{empty}
 
-% 封面
+% 顶部学校logo和标题
 \begin{center}
     \includegraphics[width=9cm]{../../figures/jou-name-large.png}\\[0.5cm]
     {\heiti\zihao{3}\textbf{毕业设计（论文）开题报告}}\\[0.3cm]
@@ -45,110 +40,111 @@
 
 \vspace{0.5cm}
 
-% 基本信息表格
+% ============================================================================
+% 封面信息表格 - Word XML Table 11 (4列网格)
+% 列宽: 3.33 | 3.68 | 1.97 | 4.02 cm = 13.0cm
+% ============================================================================
+
 \begin{table}[h]
 \centering
 \zihao{-4}\songti
-\begin{tabular}{|L{2.5cm}|L{4cm}|L{2.5cm}|L{6cm}|}
+\begin{tabular}{|L{3.33cm}|L{3.68cm}|L{1.97cm}|L{4.02cm}|}
 \hline
-\textbf{学生姓名} & & \textbf{学号} & \\
+\hspace{3pt}\textbf{题\hspace{1em}目:} & \multicolumn{3}{L{9.67cm}|}{} \\
 \hline
-\textbf{学院} & & \textbf{专业班级} & \\
+\hspace{3pt}\textbf{学\hspace{1em}院：} & \multicolumn{3}{L{9.67cm}|}{} \\
 \hline
-\textbf{指导教师} & & \textbf{职称} & \\
+\hspace{3pt}\textbf{专业班级：} & \multicolumn{3}{L{9.67cm}|}{} \\
 \hline
-\multicolumn{4}{|L{15cm}|}{\textbf{毕业设计（论文）题目：}} \\
-\multicolumn{4}{|L{15cm}|}{\vspace{1cm}} \\
+\hspace{3pt}\textbf{学生姓名：} & & \hspace{3pt}\textbf{学\hspace{0.5em}号：} & \\
+\hline
+\hspace{3pt}\textbf{指导教师：} & \multicolumn{3}{L{9.67cm}|}{} \\
 \hline
 \end{tabular}
 \end{table}
 
-\clearpage
-\pagestyle{plain}
+\vspace{0.3cm}
 
-% 开题报告正文
-\section*{一、选题的背景及意义}
+% ============================================================================
+% 内容表格 - Word XML Table 12 (1列网格)
+% 列宽: 15.04cm (单列)
+% ============================================================================
 
-（阐述选题的研究背景、国内外研究现状、选题的理论意义和实际应用价值）
+\begin{table}[h]
+\centering
+\zihao{-4}\songti
+\begin{tabular}{|L{15.04cm}|}
+\hline
+\hspace{3pt}\textbf{1.课题研究的意义，国内外研究现状、水平和发展趋势} \\
+\multicolumn{1}{|L{15.04cm}|}{
+\vspace{6cm}
+\hfill
+} \\
+\hline
 
+\hspace{3pt}\textbf{2.课题的基本内容，可能遇到的困难，提出解决问题的方法和措施} \\
+\multicolumn{1}{|L{15.04cm}|}{
+\vspace{6cm}
+\hfill
+} \\
+\hline
+
+\hspace{3pt}\textbf{3.课题拟采用的研究手段（途径）和可行性分析} \\
+\multicolumn{1}{|L{15.04cm}|}{
 \vspace{5cm}
+\hfill
+} \\
+\hline
 
-\section*{二、研究的主要内容}
+\end{tabular}
+\end{table}
 
-（详细说明研究的具体内容、技术指标或研究目标）
+\newpage
 
-\vspace{5cm}
+\begin{table}[h]
+\centering
+\zihao{-4}\songti
+\begin{tabular}{|L{15.04cm}|}
+\hline
 
-\section*{三、拟采用的研究方法、技术路线及可行性分析}
+\hspace{3pt}\textbf{4.课题研究工作进度安排（起止时间、工作内容）} \\
+\multicolumn{1}{|L{15.04cm}|}{
+\vspace{6cm}
+\hfill
+} \\
+\hline
 
-\subsection*{（一）研究方法}
+\hspace{3pt}\textbf{5.主要参考文献} \\
+\multicolumn{1}{|L{15.04cm}|}{
+\vspace{6cm}
+\hfill
+} \\
+\hline
 
-（说明拟采用的研究方法）
-
+\multicolumn{1}{|L{15.04cm}|}{
+\hspace{3pt}\textbf{指导教师意见（对课题的深度、广度及工作量的意见和对结果的预测）}
 \vspace{3cm}
 
-\subsection*{（二）技术路线}
+\hfill 指导教师签字：\underline{\hspace{4cm}} \hspace{1cm} 年\hspace{0.5cm}月\hspace{0.5cm}日\hspace{3pt}
+} \\
+\hline
 
-（描述技术实现路线、实验方案等）
-
+\multicolumn{1}{|L{15.04cm}|}{
+\hspace{3pt}\textbf{系意见：}
 \vspace{3cm}
 
-\subsection*{（三）可行性分析}
+\hfill 系主任签字：\underline{\hspace{4cm}} \hspace{1cm} 年\hspace{0.5cm}月\hspace{0.5cm}日\hspace{3pt}
+} \\
+\hline
 
-（分析研究的可行性，包括技术条件、实验条件等）
+\end{tabular}
+\end{table}
 
-\clearpage
+\vfill
 
-\section*{四、研究工作的步骤与进度安排}
-
-\begin{itemize}
-    \item 第\hspace{1cm}周至第\hspace{1cm}周：\hspace{8cm}
-    \item 第\hspace{1cm}周至第\hspace{1cm}周：\hspace{8cm}
-    \item 第\hspace{1cm}周至第\hspace{1cm}周：\hspace{8cm}
-    \item 第\hspace{1cm}周至第\hspace{1cm}周：\hspace{8cm}
-    \item 第\hspace{1cm}周至第\hspace{1cm}周：\hspace{8cm}
-\end{itemize}
-
-\vspace{3cm}
-
-\section*{五、主要参考文献}
-
-\begin{enumerate}
-    \item
-    \item
-    \item
-    \item
-    \item
-\end{enumerate}
-
-\vspace{3cm}
-
-\section*{六、指导教师意见}
-
-\vspace{4cm}
-
-\begin{flushright}
-    指导教师签名：\underline{\hspace{4cm}} \hspace{1cm} 日期：\underline{\hspace{3cm}}
-\end{flushright}
-
-\clearpage
-
-\section*{七、开题答辩小组意见}
-
-\vspace{5cm}
-
-\begin{flushright}
-    开题答辩小组组长签名：\underline{\hspace{4cm}} \hspace{1cm} 日期：\underline{\hspace{3cm}}
-\end{flushright}
-
-\vspace{2cm}
-
-\section*{八、学院审核意见}
-
-\vspace{5cm}
-
-\begin{flushright}
-    院长签名（盖章）：\underline{\hspace{4cm}} \hspace{1cm} 日期：\underline{\hspace{3cm}}
-\end{flushright}
+\begin{center}
+    \zihao{5}\songti
+    \textbf{注：}本报告一式两份，学生、学院各执一份。
+\end{center}
 
 \end{document}
