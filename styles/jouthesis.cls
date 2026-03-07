@@ -128,11 +128,11 @@
         beforeskip=0.5\baselineskip,
         afterskip=0.5\baselineskip
     },
-    % 二级标题: 四号黑体，段前段后无间距
+    % 二级标题: 小四号黑体，段前段后0.5行间距
     section={
-        format={\heiti\zihao{4}},
-        beforeskip=0pt,
-        afterskip=0pt,
+        format={\heiti\zihao{-4}},
+        beforeskip=0.5\baselineskip,
+        afterskip=0.5\baselineskip,
         indent=0pt
     },
     % 三级标题: 小四号黑体，段前段后无间距
@@ -319,11 +319,19 @@
 \Crefformat{subsection}{#2#1#3小节}
 
 \newcommand{\JOUCoverHeader}{figures/jou-cover-header-clean.png}
+\newcommand{\jou@coverrule}[1]{%
+    \makebox[0pt][l]{\raisebox{-0.52ex}{\rule{#1}{0.35pt}}}%
+}
 \newcommand{\jou@coverunderline}[2]{%
-    \underline{\makebox[#1][l]{#2\hfill}}%
+    \jou@coverrule{#1}\makebox[#1][l]{#2\hfill}%
 }
 
-\newcommand{\jou@coverrowspace}{\\[0.35cm]}
+\newcommand{\jou@coverrowspace}{\\[0.24cm]}
+\newcommand{\jou@coverlabelacademy}{\makebox[3.57cm][l]{学\hspace{1.41cm}院：}}
+\newcommand{\jou@coverlabelclass}{\makebox[3.57cm][l]{专\hspace{0.37cm}业\hspace{0.37cm}班\hspace{0.37cm}级：}}
+\newcommand{\jou@coverlabelstudent}{\makebox[3.57cm][l]{学\hspace{0.37cm}生\hspace{0.37cm}姓\hspace{0.37cm}名：}}
+\newcommand{\jou@coverlabelsupervisor}{\makebox[3.57cm][l]{指\hspace{0.37cm}导\hspace{0.37cm}教\hspace{0.37cm}师：}}
+\newcommand{\jou@coverlabelid}{\makebox[2.72cm][l]{学\hspace{0.55cm}号：}}
 
 % 封面命令
 \newcommand{\makecover}{
@@ -333,36 +341,36 @@
         \vspace*{2.10cm}
 
         \includegraphics[width=11.05cm]{\JOUCoverHeader}\par
-        \vspace{-0.10cm}
-
-        {\JOUHei\zihao{2}本\hspace{1em}科\hspace{1em}毕\hspace{1em}业\hspace{1em}设\hspace{0.5em}计\hspace{0.5em}（论\hspace{0.5em}文）\par}
-        \vspace{2.80cm}
-
-        {\JOUCoverKai\zihao{2}\@title\par}
         \vspace{0.48cm}
 
-        {\fontspec{Times New Roman Bold}\fontsize{22pt}{28pt}\selectfont \@entitle\par}
-        \vspace{3.55cm}
+        {\makebox[0pt][c]{\hspace*{-0.12cm}\JOUCoverHei\zihao{2}本\hspace{0.42em}科\hspace{0.42em}毕\hspace{0.42em}业\hspace{0.42em}设\hspace{0.42em}计\hspace{0.42em}（论\hspace{0.42em}文）}\par}
+        \vspace{3.56cm}
+
+        {\makebox[0pt][c]{\hspace*{0.17cm}\JOUCoverKai\zihao{2}\scalebox{0.965}[1]{\@title}}\par}
+        \vspace{0.53cm}
+
+        {\makebox[0pt][c]{\hspace*{0.14cm}\fontspec{Times New Roman Bold}\fontsize{21.5pt}{28pt}\selectfont \scalebox{0.960}[1]{\@entitle}}\par}
+        \vspace{3.92cm}
 
         {\JOUCoverKai\zihao{4}
-            \begin{tabular}{@{}p{3.324cm}p{3.676cm}p{2.228cm}p{3.769cm}@{}}
-                {\JOUCoverKai 学\hspace{1.6em}院：} &
-                \multicolumn{3}{@{}l@{}}{\jou@coverunderline{9.673cm}{\@major}}
+            \makebox[0pt][c]{\hspace*{0.16cm}\begin{tabular}{@{}p{3.57cm}p{3.43cm}p{2.72cm}p{3.10cm}@{}}
+                {\JOUCoverKai \jou@coverlabelacademy} &
+                \multicolumn{3}{@{}l@{}}{\jou@coverunderline{9.25cm}{\@major}}
                 \jou@coverrowspace
-                {\JOUCoverKai 专业班级：} &
-                \multicolumn{3}{@{}l@{}}{\jou@coverunderline{9.673cm}{\@class}}
+                {\JOUCoverKai \jou@coverlabelclass} &
+                \multicolumn{3}{@{}l@{}}{\jou@coverunderline{9.25cm}{\@class}}
                 \jou@coverrowspace
-                {\JOUCoverKai 学生姓名：} &
-                \jou@coverunderline{3.676cm}{\@author} &
-                {\JOUCoverKai 学\hspace{0.8em}号：} &
-                \jou@coverunderline{3.769cm}{\@studentid}
+                {\JOUCoverKai \jou@coverlabelstudent} &
+                \jou@coverunderline{3.15cm}{\@author} &
+                {\JOUCoverKai \jou@coverlabelid} &
+                \jou@coverunderline{3.10cm}{\@studentid}
                 \jou@coverrowspace
-                {\JOUCoverKai 指导教师：} &
-                \multicolumn{3}{@{}l@{}}{\jou@coverunderline{9.673cm}{\@supervisor}}\\
-            \end{tabular}\par
+                {\JOUCoverKai \jou@coverlabelsupervisor} &
+                \multicolumn{3}{@{}l@{}}{\jou@coverunderline{9.25cm}{\@supervisor}}\\
+            \end{tabular}}\par
         }
 
-        \vspace{1.05cm}
+        \vspace{1.15cm}
         {\JOUCoverKai\zihao{3} \@coverdate\par}
     \end{titlepage}
 
