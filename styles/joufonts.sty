@@ -22,6 +22,7 @@
 
 \newcommand{\JOUOpenSourceFontDir}{fonts/opensource}
 \newcommand{\JOUProprietaryFontDir}{fonts/proprietary}
+\newcommand{\JOUWPSFontDir}{}
 
 \IfFileExists{fonts/opensource/Tinos-Regular.ttf}{%
     \renewcommand{\JOUOpenSourceFontDir}{fonts/opensource}%
@@ -31,6 +32,22 @@
         \renewcommand{\JOUOpenSourceFontDir}{../../fonts/opensource}%
         \renewcommand{\JOUProprietaryFontDir}{../../fonts/proprietary}%
     }{}
+}
+
+\IfFileExists{/Applications/wpsoffice.app/Contents/Resources/office6/fonts/HYKaiTiJ.ttf}{%
+    \renewcommand{\JOUWPSFontDir}{/Applications/wpsoffice.app/Contents/Resources/office6/fonts}%
+}{%
+    \IfFileExists{/Applications/WPS Office.app/Contents/Resources/office6/fonts/HYKaiTiJ.ttf}{%
+        \renewcommand{\JOUWPSFontDir}{/Applications/WPS Office.app/Contents/Resources/office6/fonts}%
+    }{%
+        \IfFileExists{/opt/kingsoft/wps-office/office6/fonts/HYKaiTiJ.ttf}{%
+            \renewcommand{\JOUWPSFontDir}{/opt/kingsoft/wps-office/office6/fonts}%
+        }{%
+            \IfFileExists{/usr/share/fonts/wps-office/HYKaiTiJ.ttf}{%
+                \renewcommand{\JOUWPSFontDir}{/usr/share/fonts/wps-office}%
+            }{}%
+        }%
+    }%
 }
 
 \newcommand{\JOUFontMode}{oss}
@@ -251,6 +268,56 @@
     ]{NotoSerifCJKsc-Black.otf}%
 }
 
+\newcommand{\jou@setupwpsbundledcjk}{%
+    \renewcommand{\JOUFontMode}{wps-exact}%
+    \setCJKmainfont[
+        Path=\JOUWPSFontDir/,
+        UprightFont=FZSSK.ttf
+    ]{FZSSK.ttf}%
+    \setCJKfamilyfont{zhsong}[
+        Path=\JOUWPSFontDir/,
+        UprightFont=FZSSK.ttf
+    ]{FZSSK.ttf}%
+    \setCJKsansfont[
+        Path=\JOUWPSFontDir/,
+        UprightFont=HYZhongJianHeiJ.ttf
+    ]{HYZhongJianHeiJ.ttf}%
+    \setCJKfamilyfont{zhhei}[
+        Path=\JOUWPSFontDir/,
+        UprightFont=HYZhongJianHeiJ.ttf
+    ]{HYZhongJianHeiJ.ttf}%
+    \setCJKfamilyfont{zhkai}[
+        Path=\JOUWPSFontDir/,
+        UprightFont=HYKaiTiJ.ttf
+    ]{HYKaiTiJ.ttf}%
+    \newCJKfontfamily\JOUCoverKai[
+        Path=\JOUWPSFontDir/,
+        UprightFont=HYKaiTiJ.ttf,
+        BoldFont=HYKaiTiJ.ttf,
+        AutoFakeBold=2.0
+    ]{HYKaiTiJ.ttf}%
+    \setCJKfamilyfont{zhfs}[
+        Path=\JOUWPSFontDir/,
+        UprightFont=FZFSK.ttf
+    ]{FZFSK.ttf}%
+    \newCJKfontfamily\JOUXiaobiaoSong[
+        Path=\JOUWPSFontDir/,
+        UprightFont=FZSSK.ttf
+    ]{FZSSK.ttf}%
+    \IfFontExistsTF{STXingkai}{%
+        \newCJKfontfamily\JOUXingkai{STXingkai}%
+    }{%
+        \newCJKfontfamily\JOUXingkai[
+            Path=\JOUOpenSourceFontDir/,
+            UprightFont=LXGWWenKaiGB-Medium.ttf
+        ]{LXGWWenKaiGB-Medium.ttf}%
+    }%
+    \newCJKfontfamily\JOULishu[
+        Path=\JOUOpenSourceFontDir/,
+        UprightFont=NotoSerifCJKsc-Black.otf
+    ]{NotoSerifCJKsc-Black.otf}%
+}
+
 % ============================================================================
 % 字体加载策略：优先商业字体，确保毕业论文标准化
 % ============================================================================
@@ -299,8 +366,16 @@
     \newif\ifjou@systemcjkfound
     \jou@systemcjkfoundfalse
     %
-    % 最优先：检测 WPS 实际使用的字体（参考 PDF 嵌入字体）
+    % 最优先：直接使用 WPS 应用包自带字体文件
+    \IfFileExists{\JOUWPSFontDir/HYKaiTiJ.ttf}{%
+        \jou@systemcjkfoundtrue
+        \typeout{JOU: Using WPS bundled fonts from \JOUWPSFontDir}%
+        \jou@setupwpsbundledcjk
+    }{}%
+    %
+    % 其次：检测已安装的 WPS 实际字体（参考 PDF 嵌入字体）
     % 基于江苏海洋大学2026届毕业实习与设计（论文）工作手册.pdf 的实际嵌入字体
+    \ifjou@systemcjkfound\else
     \IfFontExistsTF{HYKaiTiKW}{%
         \jou@systemcjkfoundtrue
         \renewcommand{\JOUFontMode}{wps-exact}%
@@ -320,6 +395,7 @@
         \IfFontExistsTF{STXingkai}{\newCJKfontfamily\JOUXingkai{STXingkai}}{\newCJKfontfamily\JOUXingkai[Path=\JOUOpenSourceFontDir/,UprightFont=LXGWWenKaiGB-Medium.ttf]{LXGWWenKaiGB-Medium.ttf}}%
         \newCJKfontfamily\JOULishu[Path=\JOUOpenSourceFontDir/,UprightFont=NotoSerifCJKsc-Black.otf]{NotoSerifCJKsc-Black.otf}%
     }{}%
+    \fi
     %
     % 其次：检测 Windows 通用字体
     \ifjou@systemcjkfound\else

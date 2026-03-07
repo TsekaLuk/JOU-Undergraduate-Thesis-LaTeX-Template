@@ -408,14 +408,23 @@ def test_font_stack_contract(spec: dict) -> bool:
     if "LMRoman" in font_output:
         failures.append("代表性 PDF 仍嵌入了 Latin Modern Roman，说明未完全切换到仓库字体。")
 
+    uses_times = "TimesNewRoman" in font_output
+    uses_oss_stack = all(marker in font_output for marker in ["Tinos", "NotoSerifCJKsc", "NotoSansCJKsc"])
+    uses_system_commercial = (
+        ("SimSun" in font_output and "KaiTi" in font_output)
+        or ("STSong" in font_output and "STKaiti" in font_output)
+    )
+    uses_wps_stack = (
+        ("FZShuSong" in font_output or "HYShuSongErKW" in font_output)
+        and ("HYKaiTi" in font_output or "HYc1gj" in font_output)
+        and ("HYZhongJianHei" in font_output or "HYZhongHeiKW" in font_output)
+    )
+
     if PROPRIETARY_TIMES.exists():
-        if "TimesNewRoman" not in font_output:
+        if not uses_times:
             failures.append("检测到 proprietary 字体模式，但代表性 PDF 未嵌入 Times New Roman。")
-    else:
-        expected_markers = ["Tinos", "NotoSerifCJKsc", "NotoSansCJKsc"]
-        for marker in expected_markers:
-            if marker not in font_output:
-                failures.append(f"OSS 字体模式下缺少嵌入字体标记: {marker}")
+    elif not (uses_oss_stack or (uses_times and (uses_system_commercial or uses_wps_stack))):
+        failures.append("代表性 PDF 未落在可接受的字体契约内（OSS / 系统商用 / WPS 字体栈均不满足）。")
 
     if failures:
         print("\n  FAIL:")

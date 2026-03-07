@@ -100,6 +100,13 @@ def main() -> int:
             "KaiTi_GB2312",
             "FangSong",
             "FangSong_GB2312",
+            "FZShuSong",
+            "FZFangSong",
+            "HYKaiTi",
+            "HYc1gj",
+            "HYZhongJianHei",
+            "HYShuSongErKW",
+            "HYZhongHeiKW",
         ]
     )
     licensed_mode = commercial_latin and commercial_cjk

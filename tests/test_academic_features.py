@@ -96,6 +96,11 @@ def main() -> int:
         has_cjk_commercial = (
             ("SimSun" in fonts and "KaiTi_GB2312" in fonts)
             or ("STSong" in fonts and "STKaiti" in fonts)
+            or (
+                ("FZShuSong" in fonts or "HYShuSongErKW" in fonts)
+                and ("HYKaiTi" in fonts or "HYc1gj" in fonts)
+                and ("HYZhongJianHei" in fonts or "HYZhongHeiKW" in fonts)
+            )
         )
         if not has_oss_stack and not (has_latin_commercial and has_cjk_commercial):
             failures.append("main.pdf 未嵌入可接受的字体栈（开源兜底或系统商用字体均未满足）")

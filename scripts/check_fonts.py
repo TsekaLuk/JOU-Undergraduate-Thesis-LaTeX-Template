@@ -12,6 +12,12 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).parent.parent
 PROPRIETARY_DIR = PROJECT_ROOT / "fonts" / "proprietary"
 OPENSOURCE_DIR = PROJECT_ROOT / "fonts" / "opensource"
+WPS_FONT_DIRS = [
+    Path("/Applications/wpsoffice.app/Contents/Resources/office6/fonts"),
+    Path("/Applications/WPS Office.app/Contents/Resources/office6/fonts"),
+    Path("/opt/kingsoft/wps-office/office6/fonts"),
+    Path("/usr/share/fonts/wps-office"),
+]
 
 # 必需的字体定义
 REQUIRED_FONTS = {
@@ -104,6 +110,15 @@ def check_local_font(filename: str) -> tuple[bool, str]:
         return False, ""
 
 
+def check_wps_bundled_font(candidates: list[str]) -> tuple[bool, str]:
+    """检查 WPS 应用包内置字体文件"""
+    for font_dir in WPS_FONT_DIRS:
+        for candidate in candidates:
+            if (font_dir / candidate).exists():
+                return True, str(font_dir / candidate)
+    return False, ""
+
+
 def print_section(title: str):
     """打印章节标题"""
     print(f"\n{'='*72}")
@@ -168,6 +183,21 @@ def main():
                     system_found = True
                     break
 
+            if not found and category == "WPS 实际字体 (最优先)":
+                bundled, bundled_path = check_wps_bundled_font(
+                    {
+                        "汉仪楷体": ["HYKaiTiJ.ttf"],
+                        "汉仪书宋二": ["FZSSK.ttf"],
+                        "汉仪中黑": ["HYZhongJianHeiJ.ttf", "HYQiHei-55J.ttf"],
+                        "方正小标宋": ["FZSSK.ttf"],
+                        "方正仿宋": ["FZFSK.ttf"],
+                    }.get(font_name, [])
+                )
+                if bundled:
+                    found = True
+                    found_name = bundled_path
+                    system_found = True
+
             if found:
                 print_font_status(f"  {font_name}", f"✓ {found_name}", "green")
             else:
@@ -195,6 +225,18 @@ def main():
             if check_system_font(sys_name):
                 wps_fonts_found.append(font_name)
                 break
+        else:
+            bundled, _ = check_wps_bundled_font(
+                {
+                    "汉仪楷体": ["HYKaiTiJ.ttf"],
+                    "汉仪书宋二": ["FZSSK.ttf"],
+                    "汉仪中黑": ["HYZhongJianHeiJ.ttf", "HYQiHei-55J.ttf"],
+                    "方正小标宋": ["FZSSK.ttf"],
+                    "方正仿宋": ["FZFSK.ttf"],
+                }.get(font_name, [])
+            )
+            if bundled:
+                wps_fonts_found.append(font_name)
 
     if prop_found:
         font_mode = "licensed (本地商业字体)"
