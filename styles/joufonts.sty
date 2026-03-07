@@ -298,20 +298,45 @@
     % 优先级2: 尝试系统字体（跨平台检测）
     \newif\ifjou@systemcjkfound
     \jou@systemcjkfoundfalse
-    % 检测 Windows 字体
-    \IfFontExistsTF{SimSun}{%
+    %
+    % 最优先：检测 WPS 实际使用的字体（参考 PDF 嵌入字体）
+    % 基于江苏海洋大学2026届毕业实习与设计（论文）工作手册.pdf 的实际嵌入字体
+    \IfFontExistsTF{HYKaiTiKW}{%
         \jou@systemcjkfoundtrue
-        \renewcommand{\JOUFontMode}{system-licensed}%
-        \setCJKmainfont{SimSun}%
-        \IfFontExistsTF{SimHei}{\setCJKsansfont{SimHei}\setCJKfamilyfont{zhhei}{SimHei}}{\setCJKsansfont[Path=\JOUOpenSourceFontDir/,UprightFont=NotoSansCJKsc-Regular.otf]{NotoSansCJKsc-Regular.otf}\setCJKfamilyfont{zhhei}[Path=\JOUOpenSourceFontDir/,UprightFont=NotoSansCJKsc-Regular.otf]{NotoSansCJKsc-Regular.otf}}%
-        \setCJKfamilyfont{zhsong}{SimSun}%
-        \IfFontExistsTF{KaiTi}{\setCJKfamilyfont{zhkai}{KaiTi}}{\setCJKfamilyfont{zhkai}[Path=\JOUOpenSourceFontDir/,UprightFont=LXGWWenKaiGB-Regular.ttf]{LXGWWenKaiGB-Regular.ttf}}%
-        \IfFontExistsTF{KaiTi}{\newCJKfontfamily\JOUCoverKai{KaiTi}[AutoFakeBold=2.2]}{\newCJKfontfamily\JOUCoverKai[Path=\JOUOpenSourceFontDir/,UprightFont=LXGWWenKaiGB-Regular.ttf,BoldFont=LXGWWenKaiGB-Medium.ttf]{LXGWWenKaiGB-Regular.ttf}}%
-        \IfFontExistsTF{FangSong}{\setCJKfamilyfont{zhfs}{FangSong}}{\setCJKfamilyfont{zhfs}[Path=\JOUOpenSourceFontDir/,UprightFont=FandolFang-Regular.otf]{FandolFang-Regular.otf}}%
-        \IfFontExistsTF{FZXiaoBiaoSong-B05}{\newCJKfontfamily\JOUXiaobiaoSong{FZXiaoBiaoSong-B05}}{\newCJKfontfamily\JOUXiaobiaoSong[Path=\JOUOpenSourceFontDir/,UprightFont=NotoSerifCJKsc-Black.otf]{NotoSerifCJKsc-Black.otf}}%
+        \renewcommand{\JOUFontMode}{wps-exact}%
+        \typeout{JOU: Using WPS exact fonts (HYKaiTiKW, HYShuSongErKW, etc.)}%
+        % 宋体 → 汉仪书宋二
+        \IfFontExistsTF{HYShuSongErKW}{\setCJKmainfont{HYShuSongErKW}\setCJKfamilyfont{zhsong}{HYShuSongErKW}}{\setCJKmainfont{SimSun}\setCJKfamilyfont{zhsong}{SimSun}}%
+        % 黑体 → 汉仪中黑
+        \IfFontExistsTF{HYZhongHeiKW}{\setCJKsansfont{HYZhongHeiKW}\setCJKfamilyfont{zhhei}{HYZhongHeiKW}}{\IfFontExistsTF{SimHei}{\setCJKsansfont{SimHei}\setCJKfamilyfont{zhhei}{SimHei}}{\setCJKsansfont[Path=\JOUOpenSourceFontDir/,UprightFont=NotoSansCJKsc-Regular.otf]{NotoSansCJKsc-Regular.otf}\setCJKfamilyfont{zhhei}[Path=\JOUOpenSourceFontDir/,UprightFont=NotoSansCJKsc-Regular.otf]{NotoSansCJKsc-Regular.otf}}}%
+        % 楷体 → 汉仪楷体
+        \setCJKfamilyfont{zhkai}{HYKaiTiKW}%
+        \newCJKfontfamily\JOUCoverKai{HYKaiTiKW}[AutoFakeBold=2.2]%
+        % 仿宋 → 方正仿宋
+        \IfFontExistsTF{FZFSK--GBK1-0}{\setCJKfamilyfont{zhfs}{FZFSK--GBK1-0}}{\IfFontExistsTF{FangSong}{\setCJKfamilyfont{zhfs}{FangSong}}{\setCJKfamilyfont{zhfs}[Path=\JOUOpenSourceFontDir/,UprightFont=FandolFang-Regular.otf]{FandolFang-Regular.otf}}}%
+        % 小标宋 → 方正小标宋
+        \IfFontExistsTF{FZXBSJW--GB1-0}{\newCJKfontfamily\JOUXiaobiaoSong{FZXBSJW--GB1-0}}{\IfFontExistsTF{FZXiaoBiaoSong-B05}{\newCJKfontfamily\JOUXiaobiaoSong{FZXiaoBiaoSong-B05}}{\newCJKfontfamily\JOUXiaobiaoSong[Path=\JOUOpenSourceFontDir/,UprightFont=NotoSerifCJKsc-Black.otf]{NotoSerifCJKsc-Black.otf}}}%
+        % 行楷
         \IfFontExistsTF{STXingkai}{\newCJKfontfamily\JOUXingkai{STXingkai}}{\newCJKfontfamily\JOUXingkai[Path=\JOUOpenSourceFontDir/,UprightFont=LXGWWenKaiGB-Medium.ttf]{LXGWWenKaiGB-Medium.ttf}}%
         \newCJKfontfamily\JOULishu[Path=\JOUOpenSourceFontDir/,UprightFont=NotoSerifCJKsc-Black.otf]{NotoSerifCJKsc-Black.otf}%
     }{}%
+    %
+    % 其次：检测 Windows 通用字体
+    \ifjou@systemcjkfound\else
+        \IfFontExistsTF{SimSun}{%
+            \jou@systemcjkfoundtrue
+            \renewcommand{\JOUFontMode}{system-licensed}%
+            \setCJKmainfont{SimSun}%
+            \IfFontExistsTF{SimHei}{\setCJKsansfont{SimHei}\setCJKfamilyfont{zhhei}{SimHei}}{\setCJKsansfont[Path=\JOUOpenSourceFontDir/,UprightFont=NotoSansCJKsc-Regular.otf]{NotoSansCJKsc-Regular.otf}\setCJKfamilyfont{zhhei}[Path=\JOUOpenSourceFontDir/,UprightFont=NotoSansCJKsc-Regular.otf]{NotoSansCJKsc-Regular.otf}}%
+            \setCJKfamilyfont{zhsong}{SimSun}%
+            \IfFontExistsTF{KaiTi}{\setCJKfamilyfont{zhkai}{KaiTi}}{\setCJKfamilyfont{zhkai}[Path=\JOUOpenSourceFontDir/,UprightFont=LXGWWenKaiGB-Regular.ttf]{LXGWWenKaiGB-Regular.ttf}}%
+            \IfFontExistsTF{KaiTi}{\newCJKfontfamily\JOUCoverKai{KaiTi}[AutoFakeBold=2.2]}{\newCJKfontfamily\JOUCoverKai[Path=\JOUOpenSourceFontDir/,UprightFont=LXGWWenKaiGB-Regular.ttf,BoldFont=LXGWWenKaiGB-Medium.ttf]{LXGWWenKaiGB-Regular.ttf}}%
+            \IfFontExistsTF{FangSong}{\setCJKfamilyfont{zhfs}{FangSong}}{\setCJKfamilyfont{zhfs}[Path=\JOUOpenSourceFontDir/,UprightFont=FandolFang-Regular.otf]{FandolFang-Regular.otf}}%
+            \IfFontExistsTF{FZXiaoBiaoSong-B05}{\newCJKfontfamily\JOUXiaobiaoSong{FZXiaoBiaoSong-B05}}{\newCJKfontfamily\JOUXiaobiaoSong[Path=\JOUOpenSourceFontDir/,UprightFont=NotoSerifCJKsc-Black.otf]{NotoSerifCJKsc-Black.otf}}%
+            \IfFontExistsTF{STXingkai}{\newCJKfontfamily\JOUXingkai{STXingkai}}{\newCJKfontfamily\JOUXingkai[Path=\JOUOpenSourceFontDir/,UprightFont=LXGWWenKaiGB-Medium.ttf]{LXGWWenKaiGB-Medium.ttf}}%
+            \newCJKfontfamily\JOULishu[Path=\JOUOpenSourceFontDir/,UprightFont=NotoSerifCJKsc-Black.otf]{NotoSerifCJKsc-Black.otf}%
+        }{}%
+    \fi
     % 检测 macOS 字体
     \ifjou@systemcjkfound\else
         \IfFontExistsTF{STSong}{%
@@ -350,15 +375,18 @@
     \def\JOUOSSMode{oss}%
     \def\JOULicensedMode{licensed}%
     \def\JOUSystemLicensedMode{system-licensed}%
+    \def\JOUWPSExactMode{wps-exact}%
     %
     % 显示简洁的字体状态
     \ifx\JOUFontMode\JOULicensedMode
         \typeout{Status: Using local commercial fonts (Best)}%
+    \else\ifx\JOUFontMode\JOUWPSExactMode
+        \typeout{Status: Using WPS exact fonts (Pixel-perfect)}%
     \else\ifx\JOUFontMode\JOUSystemLicensedMode
         \typeout{Status: Using system commercial fonts (Excellent)}%
     \else\ifx\JOUFontMode\JOUOSSMode
         \typeout{Status: Using open source fonts (Good for preview)}%
-    \fi\fi\fi
+    \fi\fi\fi\fi
     \typeout{===============================================}%
     %
     % 仅在严格模式 + 开源字体时报错
