@@ -290,7 +290,7 @@ for col in cols:
 | `tests/update_table_structures.py` | 表格结构批量更新工具 |
 | `tests/table_structures.json` | 提取的表格结构数据 |
 | `templates/forms/task-book-science-EXACT.tex` | 像素级精确示范模板 |
-| `PIXEL-PERFECT-REPORT.md` | 本报告 |
+| `docs/reports/pixel-perfect-report.md` | 本报告 |
 
 ---
 

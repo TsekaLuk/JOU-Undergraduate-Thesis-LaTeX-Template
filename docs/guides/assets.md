@@ -227,6 +227,6 @@ ls figures/jou-logo-full.png
 
 ## 📚 相关文档
 
-- [README.md](README.md) - 项目总览
-- [USAGE.md](USAGE.md) - 使用指南
-- [TABLE-EXAMPLES.md](TABLE-EXAMPLES.md) - 表格示例
+- [README.md](../../README.md) - 项目总览
+- [usage.md](usage.md) - 使用指南
+- [table-examples.md](table-examples.md) - 表格示例

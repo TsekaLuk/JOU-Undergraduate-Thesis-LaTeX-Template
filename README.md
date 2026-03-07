@@ -326,9 +326,10 @@ JOU-Undergraduate-Thesis-LaTeX-Template/
 
 | 文件 | 内容 |
 |------|------|
-| [USAGE.md](USAGE.md) | 论文正文使用说明 |
-| [TABLE-EXAMPLES.md](TABLE-EXAMPLES.md) | 表格示例 |
-| [ASSETS.md](ASSETS.md) | 图片资源说明 |
+| [docs/README.md](docs/README.md) | 文档索引 |
+| [docs/guides/usage.md](docs/guides/usage.md) | 论文正文使用说明 |
+| [docs/guides/table-examples.md](docs/guides/table-examples.md) | 表格示例 |
+| [docs/guides/assets.md](docs/guides/assets.md) | 图片资源说明 |
 | [templates/README.md](templates/README.md) | 配套模板说明 |
 | [fonts/README.md](fonts/README.md) | 字体策略与覆盖方式 |
 | [slides/README.md](slides/README.md) | 演示文稿生成说明 |

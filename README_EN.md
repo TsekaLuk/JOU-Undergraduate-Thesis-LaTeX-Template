@@ -242,9 +242,10 @@ The public, reproducible contract is currently based on the WPS render baseline 
 
 | File | Purpose |
 |------|---------|
-| [USAGE.md](USAGE.md) | Thesis usage guide |
-| [TABLE-EXAMPLES.md](TABLE-EXAMPLES.md) | Table examples |
-| [ASSETS.md](ASSETS.md) | Image asset notes |
+| [docs/README.md](docs/README.md) | Documentation index |
+| [docs/guides/usage.md](docs/guides/usage.md) | Thesis usage guide |
+| [docs/guides/table-examples.md](docs/guides/table-examples.md) | Table examples |
+| [docs/guides/assets.md](docs/guides/assets.md) | Image asset notes |
 | [templates/README.md](templates/README.md) | Auxiliary template overview |
 | [fonts/README.md](fonts/README.md) | Font tiers and override rules |
 | [slides/README.md](slides/README.md) | Slide generation workflow |

@@ -104,9 +104,11 @@ JOU-Undergraduate-Thesis-LaTeX-Template/
 │   ├── evaluations/                 # 3个评价类模板
 │   └── README.md                    # 详细使用说明
 ├── README.md                        # 主文档
-├── USAGE.md                         # 使用指南
-├── TABLE-EXAMPLES.md                # 表格示例
-├── ASSETS.md                        # 图片资源说明
+├── docs/
+│   ├── README.md                    # 文档索引
+│   ├── guides/                      # 使用指南/资源说明/截图说明
+│   ├── overview/                    # 概览总结
+│   └── reports/                     # 对齐与字体分析报告
 └── Makefile                         # 编译脚本
 ```
 
@@ -141,9 +143,10 @@ JOU-Undergraduate-Thesis-LaTeX-Template/
 | 文档 | 内容 | 状态 |
 |------|------|------|
 | README.md | 项目总览、安装指南、快速开始 | ✅ 已更新 |
-| USAGE.md | 详细使用指南（章节、图表、公式、参考文献） | ✅ 已完成 |
-| TABLE-EXAMPLES.md | 表格使用示例（三线表、跨行列、定宽列等） | ✅ 已完成 |
-| ASSETS.md | 图片资源说明（logo使用、尺寸规范） | ✅ 已完成 |
+| docs/README.md | 文档索引与分类入口 | ✅ 已整理 |
+| docs/guides/usage.md | 详细使用指南（章节、图表、公式、参考文献） | ✅ 已完成 |
+| docs/guides/table-examples.md | 表格使用示例（三线表、跨行列、定宽列等） | ✅ 已完成 |
+| docs/guides/assets.md | 图片资源说明（logo使用、尺寸规范） | ✅ 已完成 |
 | templates/README.md | 完整模板集说明（16个模板详细文档） | ✅ 新增 |
 
 ## 🧪 测试状态
