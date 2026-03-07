@@ -37,6 +37,13 @@ The font strategy is now standards-first for academic writing:
 
 The public repository does not redistribute commercial Foundertype or Microsoft fonts. Instead, it ships an open-source fallback layer in `fonts/opensource/`, supports user-provided licensed overrides in `fonts/proprietary/`, and treats WPS fonts as a compatibility fallback rather than the default target.
 
+## Distribution Channels
+
+- `GitHub repository`: the canonical maintained version, including the full font strategy, E2E tests, packaging scripts, and issue tracking.
+- `Overleaf Gallery`: a lightweight community edition for discovery and quick preview.
+
+If you are starting real thesis writing or need the latest fixes, use the GitHub repository first rather than relying only on the gallery copy.
+
 ## Highlights
 
 - `Academic standards first`: the thesis prioritizes `KaiTi_GB2312 / SimSun / SimHei / Times New Roman` for real submission workflows.

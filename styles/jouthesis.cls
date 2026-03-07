@@ -16,8 +16,8 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexbook}}
 \ProcessOptions\relax
 
-% 基于ctexbook类，设置A4纸，单面打印
-\LoadClass[a4paper,zihao=-4,openany,oneside]{ctexbook}
+% 基于ctexbook类，设置A4纸，单面打印，字体完全交由 joufonts.sty 管理
+\LoadClass[a4paper,zihao=-4,openany,oneside,fontset=none]{ctexbook}
 
 % 必要的宏包
 \RequirePackage{geometry}      % 页面设置
