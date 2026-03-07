@@ -99,6 +99,14 @@ latexmk -xelatex main.tex
 latexmk -c
 ```
 
+## ✨ 核心特性
+
+- ✅ **像素级格式对齐** - 从Word文档XML精确提取所有格式参数
+- ✅ **官方Logo集成** - 无损提取4张学校logo，已配置到封面
+- ✅ **精确表格配置** - 预设三线表样式，支持跨行跨列、定宽列等
+- ✅ **完整文档结构** - 封面、声明、摘要、目录、正文、参考文献、附录
+- ✅ **详细使用文档** - README、USAGE、TABLE-EXAMPLES、ASSETS四份文档
+
 ## 📝 格式说明
 
 本模板严格按照《江苏海洋大学2026届毕业实习与设计（论文）工作手册》要求制作：
@@ -129,6 +137,28 @@ latexmk -c
 - **图题**: 位于图下方，五号楷体
 - **表题**: 位于表上方，五号楷体
 - **表格**: 使用三线表（\toprule, \midrule, \bottomrule）
+
+## 📚 文档资源
+
+| 文档 | 内容 |
+|------|------|
+| [README.md](README.md) | 项目概述、安装指南、快速开始 |
+| [USAGE.md](USAGE.md) | 详细使用指南（章节、图表、公式、参考文献） |
+| [TABLE-EXAMPLES.md](TABLE-EXAMPLES.md) | 表格使用示例（三线表、跨行列、定宽列等） |
+| [ASSETS.md](ASSETS.md) | 图片资源说明（logo使用、尺寸规范） |
+
+## 🖼️ 官方Logo资源
+
+从官方工作手册提取的高清logo：
+
+| 文件 | 尺寸 | 用途 |
+|------|------|------|
+| `jou-logo-full.png` | 1237×873px | 封面主logo（已配置） |
+| `jou-name-large.png` | 798×160px | 横版校名（大） |
+| `jou-name-small.png` | 433×99px | 横版校名（小） |
+| `jou-name-large-rgba.png` | 798×160px | 透明背景版本 |
+
+详见 [ASSETS.md](ASSETS.md) 了解使用方法。
 
 ## 📖 快速开始
 
