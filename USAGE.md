@@ -16,7 +16,7 @@
 确保已安装：
 - TeX Live 2020+ 或 MikTeX 2.9+
 - XeLaTeX 编译器
-- 中文字体（宋体、黑体、楷体_GB2312、仿宋_GB2312）
+- 仓库内置字体资源（先执行 `make fonts`）
 
 检查安装：
 ```bash
@@ -47,8 +47,10 @@ make
 或
 
 ```bash
+make fonts
 xelatex main.tex
 bibtex main
+makeindex main.nlo -s nomencl.ist -o main.nls
 xelatex main.tex
 xelatex main.tex
 ```
@@ -280,6 +282,108 @@ xelatex main.tex
     y &= d + e + f \\
     z &= g + h + i
 \end{align}
+```
+
+### 定理与证明
+
+```latex
+\begin{definition}
+设样本集合为 $\mathcal{X}$，映射 $\phi$ 所诱导的向量空间称为特征空间。
+\end{definition}
+
+\begin{theorem}\label{thm:sample}
+若系统质量 $m>0$ 且光速 $c$ 为常数，则静能满足
+\begin{equation}
+    E = mc^2.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+证明内容写在这里。
+\end{proof}
+```
+
+### 伪代码
+
+```latex
+\begin{algorithm}[H]
+    \caption{模型训练流程}
+    \label{alg:training}
+    \begin{algorithmic}[1]
+        \Require 训练集 $\mathcal{D}$，初始参数 $\theta_0$
+        \Ensure 收敛参数 $\theta^\ast$
+        \While{未满足停止条件}
+            \State 更新模型参数
+        \EndWhile
+    \end{algorithmic}
+\end{algorithm}
+```
+
+### 代码环境
+
+```latex
+\begin{lstlisting}[language=Python,caption={训练脚本片段},label={lst:trainer}]
+def train_one_epoch(model, dataloader, optimizer):
+    for batch in dataloader:
+        loss = model(batch)
+        loss.backward()
+\end{lstlisting}
+```
+
+### 智能交叉引用
+
+模板已内置 `cleveref`，推荐直接使用：
+
+```latex
+如\cref{fig:architecture,tab:results,eq:integral,alg:training,lst:trainer,thm:sample}所示。
+```
+
+模板同时提供便捷命令：
+
+```latex
+\figref{fig:architecture}
+\tabref{tab:results}
+\eqnref{eq:integral}
+\algoref{alg:training}
+\coderef{lst:trainer}
+\thmref{thm:sample}
+```
+
+### 数值、单位与表注
+
+```latex
+\begin{table}[H]
+    \centering
+    \caption{实验结果}
+    \begin{threeparttable}
+        \begin{tabular}{lSS}
+            \toprule
+            方法 & {时延/\si{\milli\second}} & {准确率/\si{\percent}} \\
+            \midrule
+            基线模型 & 23.5 & 85.3 \\
+            改进模型 & 18.2 & 91.2 \\
+            \bottomrule
+        \end{tabular}
+        \begin{tablenotes}[flushleft]
+            \item 注：数值列由 `siunitx` 自动对齐。
+        \end{tablenotes}
+    \end{threeparttable}
+\end{table}
+```
+
+### 符号表
+
+在正文中登记符号：
+
+```latex
+\nomenclature{$E$}{能量（Energy）}
+\nomenclature{CNN}{卷积神经网络}
+```
+
+在目录后输出符号表：
+
+```latex
+\printsymbols
 ```
 
 ## 参考文献

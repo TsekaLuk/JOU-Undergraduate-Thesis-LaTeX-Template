@@ -82,8 +82,10 @@
 \newcommand{\class}[1]{\def\@class{#1}}
 \newcommand{\supervisor}[1]{\def\@supervisor{#1}}
 \newcommand{\entitle}[1]{\def\@entitle{#1}}
+\newcommand{\coverdate}[1]{\def\@coverdate{#1}}
 \newcommand{\thesiscategory}[1]{\def\@thesiscategory{#1}}
 \def\@thesiscategory{理工农医类}
+\def\@coverdate{\@date}
 
 % 页眉页脚设置
 \newcommand{\jou@frontmatterstyle}{
@@ -316,34 +318,52 @@
 \crefformat{subsection}{#2#1#3小节}
 \Crefformat{subsection}{#2#1#3小节}
 
+\newcommand{\JOUCoverHeader}{figures/jou-cover-header-clean.png}
+\newcommand{\jou@coverunderline}[2]{%
+    \underline{\makebox[#1][l]{#2\hfill}}%
+}
+
+\newcommand{\jou@coverrowspace}{\\[0.35cm]}
 
 % 封面命令
 \newcommand{\makecover}{
     \begin{titlepage}
         \thispagestyle{empty}
         \centering
-        \vspace*{2.2cm}
+        \vspace*{2.10cm}
 
-        {\JOUXiaobiaoSong\zihao{2}本\hspace{1em}科\hspace{1em}毕\hspace{1em}业\hspace{1em}设\hspace{0.5em}计（论\hspace{0.5em}文）\par}
-        \vspace{3.0cm}
+        \includegraphics[width=11.05cm]{\JOUCoverHeader}\par
+        \vspace{-0.10cm}
 
-        {\JOUXingkai\zihao{2}\@title\par}
-        \vspace{0.7cm}
+        {\JOUHei\bfseries\zihao{2}本\hspace{1em}科\hspace{1em}毕\hspace{1em}业\hspace{1em}设\hspace{0.5em}计\hspace{0.5em}（论\hspace{0.5em}文）\par}
+        \vspace{2.80cm}
 
-        {\bfseries\fontsize{22pt}{30pt}\selectfont \@entitle\par}
-        \vspace{3.0cm}
+        {\JOUCoverKai\bfseries\zihao{2}\@title\par}
+        \vspace{0.48cm}
 
-        {\kaishu\zihao{4}
-            \begin{tabular}{@{}p{2.6cm}p{10.0cm}@{}}
-                学\hspace{2em}院： & \@major \\[0.95cm]
-                专业班级： & \@class \\[0.95cm]
-                学生姓名： & \@author \hfill 学\hspace{1em}号：\ \@studentid \\[0.95cm]
-                指导教师： & \@supervisor \\[0.2cm]
+        {\bfseries\fontsize{22pt}{28pt}\selectfont \@entitle\par}
+        \vspace{3.55cm}
+
+        {\JOUCoverKai\zihao{4}
+            \begin{tabular}{@{}p{3.324cm}p{3.676cm}p{2.228cm}p{3.769cm}@{}}
+                {\JOUCoverKai\bfseries 学\hspace{1.6em}院：} &
+                \multicolumn{3}{@{}l@{}}{\jou@coverunderline{9.673cm}{\@major}}
+                \jou@coverrowspace
+                {\JOUCoverKai\bfseries 专业班级：} &
+                \multicolumn{3}{@{}l@{}}{\jou@coverunderline{9.673cm}{\@class}}
+                \jou@coverrowspace
+                {\JOUCoverKai\bfseries 学生姓名：} &
+                \jou@coverunderline{3.676cm}{\@author} &
+                {\JOUCoverKai\bfseries 学\hspace{0.8em}号：} &
+                \jou@coverunderline{3.769cm}{\@studentid}
+                \jou@coverrowspace
+                {\JOUCoverKai\bfseries 指导教师：} &
+                \multicolumn{3}{@{}l@{}}{\jou@coverunderline{9.673cm}{\@supervisor}}\\
             \end{tabular}\par
         }
 
-        \vfill
-        {\songti\zihao{4} \@date\par}
+        \vspace{1.05cm}
+        {\JOUCoverKai\bfseries\zihao{3} \@coverdate\par}
     \end{titlepage}
 
     % 原创性声明页

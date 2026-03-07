@@ -16,38 +16,80 @@
 
 技术B的详细描述。分析该技术与技术A的关系，以及两者在本研究中如何协同工作。
 
+\section{示例：定理、证明与智能引用}
+
+\begin{definition}\label{def:feature-space}
+设样本集合为 $\mathcal{X}$，映射 $\phi: \mathcal{X}\rightarrow\mathbb{R}^{d}$ 所诱导的向量空间称为特征空间。
+\end{definition}
+
+\begin{theorem}\label{thm:energy-balance}
+若系统质量 $m>0$ 且光速 $c$ 为常数，则系统静能满足
+\begin{equation}
+    E = mc^2.
+    \label{eq:einstein}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+该式是质能等价关系的标准表达。模板在这里重点演示定理、证明和公式编号，而非物理推导本身。结合\cref{thm:energy-balance,eq:einstein}可以看到定理环境与智能交叉引用已经可直接使用。
+\end{proof}
+
+\section{示例：伪代码}
+
+\begin{algorithm}[H]
+    \caption{模型训练流程}
+    \label{alg:training}
+    \begin{algorithmic}[1]
+        \Require 训练集 $\mathcal{D}$，初始参数 $\bm{\theta}_{0}$，学习率 $\eta$
+        \Ensure 收敛参数 $\bm{\theta}^{*}$
+        \State 初始化轮次 $t \gets 0$
+        \While{未满足停止条件}
+            \State 从 $\mathcal{D}$ 中采样一个小批量 $\mathcal{B}$
+            \State 计算损失 $\mathcal{L}(\bm{\theta}_{t}; \mathcal{B})$
+            \State 更新参数 $\bm{\theta}_{t+1} \gets \bm{\theta}_{t} - \eta \nabla \mathcal{L}(\bm{\theta}_{t}; \mathcal{B})$
+            \State $t \gets t + 1$
+        \EndWhile
+        \State \Return $\bm{\theta}_{t}$
+    \end{algorithmic}
+\end{algorithm}
+
 \section{示例：插入图片}
 
 图片应放在\texttt{figures/}目录下。图片和表格中的文字使用五号楷体。示例：
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     % \includegraphics[width=0.6\textwidth]{figures/example.png}
     \caption{示例图片标题}
     \label{fig:example}
 \end{figure}
 
-可以使用图\ref{fig:example}来引用图片（注意：正文中引用时不需要"\texttt{}"符号）。
+可以使用\figref{fig:example}来引用图片（注意：正文中引用时不需要"\texttt{}"符号）。
 
 \section{示例：插入表格}
 
 表格使用三线表格式，标题位于表格上方。
 
-\begin{table}[htbp]
+\begin{table}[H]
     \centering
     \caption{示例表格标题}
     \label{tab:example}
-    \begin{tabular}{ccc}
-        \toprule
-        列1 & 列2 & 列3 \\
-        \midrule
-        数据1 & 数据2 & 数据3 \\
-        数据4 & 数据5 & 数据6 \\
-        \bottomrule
-    \end{tabular}
+    \begin{threeparttable}
+        \begin{tabular}{lSS}
+            \toprule
+            方法 & {推理时延/\si{\milli\second}} & {准确率/\si{\percent}} \\
+            \midrule
+            基线模型 & 23.5 & 85.3 \\
+            改进模型 & 18.2 & 91.2 \\
+            \bottomrule
+        \end{tabular}
+        \begin{tablenotes}[flushleft]
+            \item 注：数值列采用 \texttt{siunitx} 对齐，表注由 \texttt{threeparttable} 提供。
+        \end{tablenotes}
+    \end{threeparttable}
 \end{table}
 
-可以使用表\ref{tab:example}来引用表格。
+可以使用\tabref{tab:example}来引用表格。
 
 \section{示例：数学公式}
 
@@ -59,8 +101,22 @@
     \label{eq:example}
 \end{equation}
 
-可以使用式(\ref{eq:example})来引用公式。注意公式编号格式为"(章节号-序号)"。
+可以使用\eqnref{eq:example}来引用公式。注意公式编号格式为“(章节号-序号)”。
+
+\section{示例：代码环境}
+
+\begin{lstlisting}[language=Python,caption={训练脚本片段},label={lst:trainer}]
+def train_one_epoch(model, dataloader, optimizer):
+    model.train()
+    for batch in dataloader:
+        loss = model(batch)
+        loss.backward()
+        optimizer.step()
+        optimizer.zero_grad()
+\end{lstlisting}
+
+模板默认提供统一的代码样式，也可结合\cref{alg:training,lst:trainer}在正文中直接引用算法和代码。
 
 \section{本章小结}
 
-本章对××××进行了系统性阐述，为后续研究提供了理论基础和技术支撑。
+本章对××××进行了系统性阐述，并演示了定理、伪代码、代码、图表、公式、智能引用和单位排版等常见学术写作能力。

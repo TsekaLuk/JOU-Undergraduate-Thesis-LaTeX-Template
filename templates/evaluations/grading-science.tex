@@ -1,162 +1,52 @@
-% 江苏海洋大学毕业设计（论文）评分表（理工农医类）
-% 像素级对齐Word XML: Table 24 (17列网格)
-% 网格: 0.7+1.07+1.13+1.04+3.44+0.61+0.01+0.66+0.63+0.59+0.63+0.57+0.69+0.57+0.66+0.71+1.5 = 15.22cm
+% 江苏海洋大学毕业实习与设计（论文）评分表（理工农医类）
+% 对齐参考：工作手册 PDF 第 54 页，Word XML Table 24
 
 \documentclass[a4paper,zihao=-4]{ctexart}
 
 \RequirePackage{geometry}
-\RequirePackage{graphicx}
-\RequirePackage{array}
-\RequirePackage{multirow}
-\RequirePackage{makecell}
+\RequirePackage{../../styles/jouhandbook}
 
 \geometry{
     a4paper,
-    top=2.5cm,
-    bottom=2.5cm,
-    left=2.5cm,
-    right=2.5cm
+    top=2.2cm,
+    bottom=2.2cm,
+    left=2.3cm,
+    right=2.3cm
 }
 
-% 像素级对齐: tabcolsep=0pt使列宽精确匹配Word XML
-\setlength{\tabcolsep}{0pt}
-\renewcommand{\arraystretch}{1.5}
-
-% 自定义列类型
-\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
-\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
-
 \begin{document}
-
 \pagestyle{empty}
 
-% 顶部学校logo和标题
 \begin{center}
-    \includegraphics[width=9cm]{../../figures/jou-name-large.png}\\[0.5cm]
-    {\heiti\zihao{3}\textbf{毕业设计（论文）评分表}}\\[0.3cm]
+    {\heiti\zihao{4}\textbf{毕业实习与设计（论文）评分表}}\\[0.1cm]
     {\heiti\zihao{-4}（理工农医类）}
 \end{center}
 
-\vspace{0.3cm}
+\vspace{0.15cm}
 
-% ============================================================================
-% Word XML Table 24 (17列网格)
-% 列宽: 0.7|1.07|1.13|1.04|3.44|0.61|0.01|0.66|0.63|0.59|0.63|0.57|0.69|0.57|0.66|0.71|1.5
-% ============================================================================
-
-{
-\zihao{6}\songti
-\renewcommand{\arraystretch}{1.2}
-
-\begin{table}[h]
-\centering
+{\zihao{6}\songti
+\begin{center}
+\renewcommand{\arraystretch}{1.05}
 \begin{tabular}{|C{0.7cm}|C{1.07cm}|C{1.13cm}|C{1.04cm}|L{3.44cm}|C{0.61cm}|C{0.01cm}|C{0.66cm}|C{0.63cm}|C{0.59cm}|C{0.63cm}|C{0.57cm}|C{0.69cm}|C{0.57cm}|C{0.66cm}|C{0.71cm}|C{1.5cm}|}
 \hline
-
-% Row 0: 题目
-\multicolumn{3}{|C{2.9cm}|}{\hspace{3pt}\textbf{题\hspace{0.5em}目}} & \multicolumn{14}{L{12.33cm}|}{} \\
+\multicolumn{3}{|C{2.90cm}|}{题\hspace{0.5em}目} & \multicolumn{14}{L{12.33cm}|}{毕业设计（论文）题目（四号楷体\_GB2312下同）} \\
 \hline
-
-% Row 1: 学院 + 专业班级
-\multicolumn{3}{|C{2.9cm}|}{\hspace{3pt}\textbf{学\hspace{0.5em}院}} & \multicolumn{4}{C{5.1cm}|}{} & \multicolumn{5}{C{3.08cm}|}{\textbf{专业班级}} & \multicolumn{5}{C{4.13cm}|}{} \\
+\multicolumn{3}{|C{2.90cm}|}{学\hspace{0.5em}院} & \multicolumn{4}{C{5.10cm}|}{机械工程学院} & \multicolumn{5}{C{3.08cm}|}{专业班级} & \multicolumn{5}{C{4.13cm}|}{机械201} \\
 \hline
-
-% Row 2: 学生姓名 + 学号
-\multicolumn{3}{|C{2.9cm}|}{\hspace{3pt}\textbf{学生姓名}} & \multicolumn{3}{C{5.09cm}|}{} & \multicolumn{6}{C{3.11cm}|}{\textbf{学\hspace{0.5em}号}} & \multicolumn{5}{C{4.13cm}|}{} \\
+\multicolumn{3}{|C{2.90cm}|}{学生姓名} & \multicolumn{3}{C{5.09cm}|}{扬帆起航} & \multicolumn{6}{C{3.11cm}|}{学\hspace{0.5em}号} & \multicolumn{5}{C{4.13cm}|}{2020000001} \\
 \hline
-
-% Row 3-4: 评分表头 (序号/项目内容/权重/分值/观测点/参照标准/评分)
-\multirow{2}{*}{\makecell{序\\号}} & \multirow{2}{*}{\makecell{项目\\内容}} & \multirow{2}{*}{\makecell{权\\重}} & \multirow{2}{*}{\makecell{分\\值}} & \multirow{2}{*}{\makecell[l]{\hspace{3pt}观测点}} & \multicolumn{11}{C{6.35cm}|}{\textbf{参照标准}} & \multirow{2}{*}{\makecell{评分\\(权重\\×分值)}} \\
-\cline{6-16}
-& & & & & \multicolumn{3}{C{1.28cm}|}{\makecell{优秀\\90-100}} & \multicolumn{2}{C{1.23cm}|}{\makecell{良好\\80-89}} & \multicolumn{2}{C{1.21cm}|}{\makecell{中等\\70-79}} & \multicolumn{2}{C{1.26cm}|}{\makecell{及格\\60-69}} & \multicolumn{2}{C{1.37cm}|}{\makecell{不及格\\＜60}} & \\
+序号 & 项目 & 权重 & 分值 & 观测点 & \multicolumn{11}{C{6.35cm}|}{参\hspace{0.5em}照\hspace{0.5em}标\hspace{0.5em}准} & 评\hspace{0.5em}分 \\
 \hline
-
-% ---- Item 1: 毕业实习 (weight 0.05, 3 rows) ----
-\multirow{3}{*}{1} & \multirow{3}{*}{\makecell{毕业\\实习}} & \multirow{3}{*}{0.05} & \multirow{3}{*}{100} & \hspace{3pt}实习日记 & \multicolumn{3}{C{1.28cm}|}{\multirow{3}{*}{}} & \multicolumn{2}{C{1.23cm}|}{\multirow{3}{*}{}} & \multicolumn{2}{C{1.21cm}|}{\multirow{3}{*}{}} & \multicolumn{2}{C{1.26cm}|}{\multirow{3}{*}{}} & \multicolumn{2}{C{1.37cm}|}{\multirow{3}{*}{}} & \multirow{3}{*}{} \\
-\cline{5-5}
-& & & & \hspace{3pt}实习报告 & \multicolumn{3}{C{1.28cm}|}{} & \multicolumn{2}{C{1.23cm}|}{} & \multicolumn{2}{C{1.21cm}|}{} & \multicolumn{2}{C{1.26cm}|}{} & \multicolumn{2}{C{1.37cm}|}{} & \\
-\cline{5-5}
-& & & & \hspace{3pt}实习登记表 & \multicolumn{3}{C{1.28cm}|}{} & \multicolumn{2}{C{1.23cm}|}{} & \multicolumn{2}{C{1.21cm}|}{} & \multicolumn{2}{C{1.26cm}|}{} & \multicolumn{2}{C{1.37cm}|}{} & \\
+1 & 毕业实习 & 0.05 & 100 & 实习日记 / 实习报告 / 实习登记表 & \multicolumn{11}{C{6.35cm}|}{} &  \\
 \hline
-
-% ---- Item 2: 开题情况 (weight 0.05, 4 rows) ----
-\multirow{4}{*}{2} & \multirow{4}{*}{\makecell{开题\\情况}} & \multirow{4}{*}{0.05} & \multirow{4}{*}{100} & \hspace{3pt}独立查阅文献能力 & \multicolumn{3}{C{1.28cm}|}{\multirow{4}{*}{}} & \multicolumn{2}{C{1.23cm}|}{\multirow{4}{*}{}} & \multicolumn{2}{C{1.21cm}|}{\multirow{4}{*}{}} & \multicolumn{2}{C{1.26cm}|}{\multirow{4}{*}{}} & \multicolumn{2}{C{1.37cm}|}{\multirow{4}{*}{}} & \multirow{4}{*}{} \\
-\cline{5-5}
-& & & & \hspace{3pt}分析利用文献能力 & \multicolumn{3}{C{1.28cm}|}{} & \multicolumn{2}{C{1.23cm}|}{} & \multicolumn{2}{C{1.21cm}|}{} & \multicolumn{2}{C{1.26cm}|}{} & \multicolumn{2}{C{1.37cm}|}{} & \\
-\cline{5-5}
-& & & & \hspace{3pt}课题方案设计思路 & \multicolumn{3}{C{1.28cm}|}{} & \multicolumn{2}{C{1.23cm}|}{} & \multicolumn{2}{C{1.21cm}|}{} & \multicolumn{2}{C{1.26cm}|}{} & \multicolumn{2}{C{1.37cm}|}{} & \\
-\cline{5-5}
-& & & & \hspace{3pt}开题报告质量 & \multicolumn{3}{C{1.28cm}|}{} & \multicolumn{2}{C{1.23cm}|}{} & \multicolumn{2}{C{1.21cm}|}{} & \multicolumn{2}{C{1.26cm}|}{} & \multicolumn{2}{C{1.37cm}|}{} & \\
+2 & 开题情况 & 0.05 & 100 & 独立查阅文献能力 / 开题报告质量 & \multicolumn{11}{C{6.35cm}|}{} &  \\
 \hline
-
-% ---- Item 3: 资料翻译 (weight 0.05, 3 rows) ----
-\multirow{3}{*}{3} & \multirow{3}{*}{\makecell{资料\\翻译}} & \multirow{3}{*}{0.05} & \multirow{3}{*}{100} & \hspace{3pt}翻译质量 & \multicolumn{3}{C{1.28cm}|}{\multirow{3}{*}{}} & \multicolumn{2}{C{1.23cm}|}{\multirow{3}{*}{}} & \multicolumn{2}{C{1.21cm}|}{\multirow{3}{*}{}} & \multicolumn{2}{C{1.26cm}|}{\multirow{3}{*}{}} & \multicolumn{2}{C{1.37cm}|}{\multirow{3}{*}{}} & \multirow{3}{*}{} \\
-\cline{5-5}
-& & & & \hspace{3pt}信息量 & \multicolumn{3}{C{1.28cm}|}{} & \multicolumn{2}{C{1.23cm}|}{} & \multicolumn{2}{C{1.21cm}|}{} & \multicolumn{2}{C{1.26cm}|}{} & \multicolumn{2}{C{1.37cm}|}{} & \\
-\cline{5-5}
-& & & & \hspace{3pt}结合课题程度 & \multicolumn{3}{C{1.28cm}|}{} & \multicolumn{2}{C{1.23cm}|}{} & \multicolumn{2}{C{1.21cm}|}{} & \multicolumn{2}{C{1.26cm}|}{} & \multicolumn{2}{C{1.37cm}|}{} & \\
+3 & 答辩 & 0.40 & 100 & 设计（论文）整体水平 / 回答问题正确性 & \multicolumn{11}{C{6.35cm}|}{} &  \\
 \hline
-
-% ---- Item 4: 平时工作态度 (weight 0.05, 4 rows) ----
-\multirow{4}{*}{4} & \multirow{4}{*}{\makecell{平时\\工作\\态度}} & \multirow{4}{*}{0.05} & \multirow{4}{*}{100} & \hspace{3pt}工作态度 & \multicolumn{3}{C{1.28cm}|}{\multirow{4}{*}{}} & \multicolumn{2}{C{1.23cm}|}{\multirow{4}{*}{}} & \multicolumn{2}{C{1.21cm}|}{\multirow{4}{*}{}} & \multicolumn{2}{C{1.26cm}|}{\multirow{4}{*}{}} & \multicolumn{2}{C{1.37cm}|}{\multirow{4}{*}{}} & \multirow{4}{*}{} \\
-\cline{5-5}
-& & & & \hspace{3pt}出勤及遵守纪律情况 & \multicolumn{3}{C{1.28cm}|}{} & \multicolumn{2}{C{1.23cm}|}{} & \multicolumn{2}{C{1.21cm}|}{} & \multicolumn{2}{C{1.26cm}|}{} & \multicolumn{2}{C{1.37cm}|}{} & \\
-\cline{5-5}
-& & & & \hspace{3pt}独立工作能力 & \multicolumn{3}{C{1.28cm}|}{} & \multicolumn{2}{C{1.23cm}|}{} & \multicolumn{2}{C{1.21cm}|}{} & \multicolumn{2}{C{1.26cm}|}{} & \multicolumn{2}{C{1.37cm}|}{} & \\
-\cline{5-5}
-& & & & \hspace{3pt}按进度完成任务情况 & \multicolumn{3}{C{1.28cm}|}{} & \multicolumn{2}{C{1.23cm}|}{} & \multicolumn{2}{C{1.21cm}|}{} & \multicolumn{2}{C{1.26cm}|}{} & \multicolumn{2}{C{1.37cm}|}{} & \\
+\multicolumn{5}{|C{7.38cm}|}{评分合计} & \multicolumn{12}{C{7.84cm}|}{} \\
 \hline
-
-% ---- Item 5: 课题完成质量 (weight 0.20, 4 rows, individual grade cells) ----
-\multirow{4}{*}{5} & \multirow{4}{*}{\makecell{课题\\完成\\质量}} & \multirow{4}{*}{0.20} & \multirow{4}{*}{100} & \hspace{3pt}应用理论情况 & \multirow{4}{*}{} & \multicolumn{2}{C{0.67cm}|}{\multirow{4}{*}{}} & \multirow{4}{*}{} & \multirow{4}{*}{} & \multirow{4}{*}{} & \multirow{4}{*}{} & \multirow{4}{*}{} & \multirow{4}{*}{} & \multirow{4}{*}{} & \multirow{4}{*}{} & \multirow{4}{*}{} \\
-\cline{5-5}
-& & & & \hspace{3pt}数据处理及计算 & & \multicolumn{2}{C{0.67cm}|}{} & & & & & & & & & \\
-\cline{5-5}
-& & & & \hspace{3pt}设计合理性、图纸质量 & & \multicolumn{2}{C{0.67cm}|}{} & & & & & & & & & \\
-\cline{5-5}
-& & & & \hspace{3pt}动手能力 & & \multicolumn{2}{C{0.67cm}|}{} & & & & & & & & & \\
-\hline
-
-% ---- Item 6: 创新 (weight 0.10, 2 rows, individual grade cells) ----
-\multirow{2}{*}{6} & \multirow{2}{*}{\makecell{创新}} & \multirow{2}{*}{0.10} & \multirow{2}{*}{100} & \hspace{3pt}综合前人研究成果 & \multirow{2}{*}{} & \multicolumn{2}{C{0.67cm}|}{\multirow{2}{*}{}} & \multirow{2}{*}{} & \multirow{2}{*}{} & \multirow{2}{*}{} & \multirow{2}{*}{} & \multirow{2}{*}{} & \multirow{2}{*}{} & \multirow{2}{*}{} & \multirow{2}{*}{} & \multirow{2}{*}{} \\
-\cline{5-5}
-& & & & \hspace{3pt}创新见解和做法 & & \multicolumn{2}{C{0.67cm}|}{} & & & & & & & & & \\
-\hline
-
-% ---- Item 7: 设计（论文）撰写质量 (weight 0.10, 4 rows, individual grade cells) ----
-\multirow{4}{*}{7} & \multirow{4}{*}{\makecell{设计\\(论文)\\撰写\\质量}} & \multirow{4}{*}{0.10} & \multirow{4}{*}{100} & \hspace{3pt}格式规范程度 & \multirow{4}{*}{} & \multicolumn{2}{C{0.67cm}|}{\multirow{4}{*}{}} & \multirow{4}{*}{} & \multirow{4}{*}{} & \multirow{4}{*}{} & \multirow{4}{*}{} & \multirow{4}{*}{} & \multirow{4}{*}{} & \multirow{4}{*}{} & \multirow{4}{*}{} & \multirow{4}{*}{} \\
-\cline{5-5}
-& & & & \hspace{3pt}摘要、正文写作 & & \multicolumn{2}{C{0.67cm}|}{} & & & & & & & & & \\
-\cline{5-5}
-& & & & \hspace{3pt}逻辑性和条理性 & & \multicolumn{2}{C{0.67cm}|}{} & & & & & & & & & \\
-\cline{5-5}
-& & & & \hspace{3pt}术语图表计量准确性 & & \multicolumn{2}{C{0.67cm}|}{} & & & & & & & & & \\
-\hline
-
-% ---- Item 8: 答辩 (weight 0.40, 4 rows) ----
-\multirow{4}{*}{8} & \multirow{4}{*}{\makecell{答辩}} & \multirow{4}{*}{0.40} & \multirow{4}{*}{100} & \hspace{3pt}设计（论文）整体水平 & \multicolumn{3}{C{1.28cm}|}{\multirow{4}{*}{}} & \multicolumn{2}{C{1.23cm}|}{\multirow{4}{*}{}} & \multicolumn{2}{C{1.21cm}|}{\multirow{4}{*}{}} & \multicolumn{2}{C{1.26cm}|}{\multirow{4}{*}{}} & \multicolumn{2}{C{1.37cm}|}{\multirow{4}{*}{}} & \multirow{4}{*}{} \\
-\cline{5-5}
-& & & & \hspace{3pt}语言表述能力 & \multicolumn{3}{C{1.28cm}|}{} & \multicolumn{2}{C{1.23cm}|}{} & \multicolumn{2}{C{1.21cm}|}{} & \multicolumn{2}{C{1.26cm}|}{} & \multicolumn{2}{C{1.37cm}|}{} & \\
-\cline{5-5}
-& & & & \hspace{3pt}概念及思维 & \multicolumn{3}{C{1.28cm}|}{} & \multicolumn{2}{C{1.23cm}|}{} & \multicolumn{2}{C{1.21cm}|}{} & \multicolumn{2}{C{1.26cm}|}{} & \multicolumn{2}{C{1.37cm}|}{} & \\
-\cline{5-5}
-& & & & \hspace{3pt}回答问题正确性 & \multicolumn{3}{C{1.28cm}|}{} & \multicolumn{2}{C{1.23cm}|}{} & \multicolumn{2}{C{1.21cm}|}{} & \multicolumn{2}{C{1.26cm}|}{} & \multicolumn{2}{C{1.37cm}|}{} & \\
-\hline
-
-% Row 33: 评分合计
-\multicolumn{5}{|C{7.38cm}|}{\textbf{评分合计}} & \multicolumn{12}{C{7.84cm}|}{} \\
-\hline
-
 \end{tabular}
-\end{table}
-}
-
-\vfill
-
-\begin{center}
-    \zihao{5}\songti
-    \textbf{注：}①第1、2、3、4项由指导教师单独评分；第5、6、7项由指导教师（分数记在虚线左侧）和评阅教师（分数记在虚线右侧）分别评分，权重各占50\%；第8项由答辩小组评分。\\
-    ②总评分等级：优秀（90-100）、良好（80-89）、中等（70-79）、及格（60-69）、不及格（60以下）。
 \end{center}
+}
 
 \end{document}

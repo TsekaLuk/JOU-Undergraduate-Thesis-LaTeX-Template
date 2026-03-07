@@ -119,6 +119,11 @@
         UprightFont=LXGWWenKaiGB-Regular.ttf,
         BoldFont=LXGWWenKaiGB-Medium.ttf
     ]{LXGWWenKaiGB-Regular.ttf}%
+    \newCJKfontfamily\JOUCoverKai[
+        Path=\JOUOpenSourceFontDir/,
+        UprightFont=LXGWWenKaiGB-Regular.ttf,
+        BoldFont=LXGWWenKaiGB-Medium.ttf
+    ]{LXGWWenKaiGB-Regular.ttf}%
     \setCJKfamilyfont{zhfs}[
         Path=\JOUOpenSourceFontDir/,
         UprightFont=FandolFang-Regular.otf
@@ -189,8 +194,19 @@
             Path=\JOUProprietaryFontDir/,
             UprightFont=KaiTi_GB2312.ttf
         ]{KaiTi_GB2312.ttf}%
+        \newCJKfontfamily\JOUCoverKai[
+            Path=\JOUProprietaryFontDir/,
+            UprightFont=KaiTi_GB2312.ttf,
+            BoldFont=KaiTi_GB2312.ttf,
+            AutoFakeBold=2.2
+        ]{KaiTi_GB2312.ttf}%
     }{%
         \setCJKfamilyfont{zhkai}[
+            Path=\JOUOpenSourceFontDir/,
+            UprightFont=LXGWWenKaiGB-Regular.ttf,
+            BoldFont=LXGWWenKaiGB-Medium.ttf
+        ]{LXGWWenKaiGB-Regular.ttf}%
+        \newCJKfontfamily\JOUCoverKai[
             Path=\JOUOpenSourceFontDir/,
             UprightFont=LXGWWenKaiGB-Regular.ttf,
             BoldFont=LXGWWenKaiGB-Medium.ttf
@@ -290,6 +306,7 @@
         \IfFontExistsTF{SimHei}{\setCJKsansfont{SimHei}\setCJKfamilyfont{zhhei}{SimHei}}{\setCJKsansfont[Path=\JOUOpenSourceFontDir/,UprightFont=NotoSansCJKsc-Regular.otf]{NotoSansCJKsc-Regular.otf}\setCJKfamilyfont{zhhei}[Path=\JOUOpenSourceFontDir/,UprightFont=NotoSansCJKsc-Regular.otf]{NotoSansCJKsc-Regular.otf}}%
         \setCJKfamilyfont{zhsong}{SimSun}%
         \IfFontExistsTF{KaiTi}{\setCJKfamilyfont{zhkai}{KaiTi}}{\setCJKfamilyfont{zhkai}[Path=\JOUOpenSourceFontDir/,UprightFont=LXGWWenKaiGB-Regular.ttf]{LXGWWenKaiGB-Regular.ttf}}%
+        \IfFontExistsTF{KaiTi}{\newCJKfontfamily\JOUCoverKai{KaiTi}[AutoFakeBold=2.2]}{\newCJKfontfamily\JOUCoverKai[Path=\JOUOpenSourceFontDir/,UprightFont=LXGWWenKaiGB-Regular.ttf,BoldFont=LXGWWenKaiGB-Medium.ttf]{LXGWWenKaiGB-Regular.ttf}}%
         \IfFontExistsTF{FangSong}{\setCJKfamilyfont{zhfs}{FangSong}}{\setCJKfamilyfont{zhfs}[Path=\JOUOpenSourceFontDir/,UprightFont=FandolFang-Regular.otf]{FandolFang-Regular.otf}}%
         \IfFontExistsTF{FZXiaoBiaoSong-B05}{\newCJKfontfamily\JOUXiaobiaoSong{FZXiaoBiaoSong-B05}}{\newCJKfontfamily\JOUXiaobiaoSong[Path=\JOUOpenSourceFontDir/,UprightFont=NotoSerifCJKsc-Black.otf]{NotoSerifCJKsc-Black.otf}}%
         \IfFontExistsTF{STXingkai}{\newCJKfontfamily\JOUXingkai{STXingkai}}{\newCJKfontfamily\JOUXingkai[Path=\JOUOpenSourceFontDir/,UprightFont=LXGWWenKaiGB-Medium.ttf]{LXGWWenKaiGB-Medium.ttf}}%
@@ -304,6 +321,7 @@
             \IfFontExistsTF{STHeiti}{\setCJKsansfont{STHeiti}\setCJKfamilyfont{zhhei}{STHeiti}}{\setCJKsansfont[Path=\JOUOpenSourceFontDir/,UprightFont=NotoSansCJKsc-Regular.otf]{NotoSansCJKsc-Regular.otf}\setCJKfamilyfont{zhhei}[Path=\JOUOpenSourceFontDir/,UprightFont=NotoSansCJKsc-Regular.otf]{NotoSansCJKsc-Regular.otf}}%
             \setCJKfamilyfont{zhsong}{STSong}%
             \IfFontExistsTF{STKaiti}{\setCJKfamilyfont{zhkai}{STKaiti}}{\setCJKfamilyfont{zhkai}[Path=\JOUOpenSourceFontDir/,UprightFont=LXGWWenKaiGB-Regular.ttf]{LXGWWenKaiGB-Regular.ttf}}%
+            \IfFontExistsTF{STKaiti}{\newCJKfontfamily\JOUCoverKai{STKaiti}[AutoFakeBold=2.2]}{\newCJKfontfamily\JOUCoverKai[Path=\JOUOpenSourceFontDir/,UprightFont=LXGWWenKaiGB-Regular.ttf,BoldFont=LXGWWenKaiGB-Medium.ttf]{LXGWWenKaiGB-Regular.ttf}}%
             \IfFontExistsTF{STFangsong}{\setCJKfamilyfont{zhfs}{STFangsong}}{\setCJKfamilyfont{zhfs}[Path=\JOUOpenSourceFontDir/,UprightFont=FandolFang-Regular.otf]{FandolFang-Regular.otf}}%
             \IfFontExistsTF{FZXiaoBiaoSong-B05}{\newCJKfontfamily\JOUXiaobiaoSong{FZXiaoBiaoSong-B05}}{\newCJKfontfamily\JOUXiaobiaoSong[Path=\JOUOpenSourceFontDir/,UprightFont=NotoSerifCJKsc-Black.otf]{NotoSerifCJKsc-Black.otf}}%
             \IfFontExistsTF{STXingkai}{\newCJKfontfamily\JOUXingkai{STXingkai}}{\newCJKfontfamily\JOUXingkai[Path=\JOUOpenSourceFontDir/,UprightFont=LXGWWenKaiGB-Medium.ttf]{LXGWWenKaiGB-Medium.ttf}}%
@@ -321,6 +339,7 @@
 \newcommand{\JOUHei}{\CJKfamily{zhhei}}
 \newcommand{\JOUKai}{\CJKfamily{zhkai}}
 \newcommand{\JOUFang}{\CJKfamily{zhfs}}
+\providecommand{\JOUCoverKai}{\JOUKai}
 
 % 编译时字体模式提示（友好且简洁）
 \AtBeginDocument{%

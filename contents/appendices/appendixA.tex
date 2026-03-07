@@ -2,14 +2,26 @@
 
 附录内容。可以放置代码、详细数据表、问卷等补充材料。
 
-\section{代码示例}
+\section{横向大表}
 
-可以使用verbatim环境插入代码：
+当附录包含宽表时，可以使用 \texttt{pdflscape} 提供的横向页面：
 
-\begin{verbatim}
-def hello_world():
-    print("Hello, World!")
-\end{verbatim}
+\begin{landscape}
+\begin{table}[H]
+    \centering
+    \caption{附录横向表示例}
+    \label{tab:appendix-landscape}
+    \begin{tabular}{lcccccc}
+        \toprule
+        指标 & 模型A & 模型B & 模型C & 模型D & 模型E & 模型F \\
+        \midrule
+        精度/\si{\percent} & 91.2 & 90.5 & 89.4 & 88.8 & 87.3 & 86.9 \\
+        召回率/\si{\percent} & 89.8 & 88.7 & 87.9 & 86.4 & 85.2 & 84.8 \\
+        F1/\si{\percent} & 90.5 & 89.6 & 88.6 & 87.6 & 86.2 & 85.8 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+\end{landscape}
 
 \section{其他补充材料}
 

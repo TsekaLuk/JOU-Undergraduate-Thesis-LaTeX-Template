@@ -1,15 +1,10 @@
 % 江苏海洋大学毕业设计（论文）开题报告（人文经管类）
-% 像素级对齐Word XML: Table 13 (4列封面) + Table 14 (1列内容)
-% 封面网格: 3.33+3.68+2.23+3.77 = 13.0cm
-% 内容网格: 14.64cm (单列)
+% 对齐参考：工作手册 PDF 第 30-32 页，Word XML Table 13 + Table 14
 
 \documentclass[a4paper,zihao=-4]{ctexart}
 
 \RequirePackage{geometry}
-\RequirePackage{graphicx}
-\RequirePackage{array}
-\RequirePackage{multirow}
-\RequirePackage{makecell}
+\RequirePackage{../../styles/jouhandbook}
 
 \geometry{
     a4paper,
@@ -19,139 +14,71 @@
     right=2.5cm
 }
 
-% 像素级对齐: tabcolsep=0pt使列宽精确匹配Word XML
-\setlength{\tabcolsep}{0pt}
-\renewcommand{\arraystretch}{1.5}
-
-% 自定义列类型
-\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
-\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
-
 \begin{document}
-
 \pagestyle{empty}
 
-% 顶部学校logo和标题
 \begin{center}
-    \includegraphics[width=9cm]{../../figures/jou-name-large.png}\\[0.5cm]
-    {\heiti\zihao{3}\textbf{毕业设计（论文）开题报告}}\\[0.3cm]
+    {\heiti\zihao{3}\textbf{毕业设计（论文）开题报告}}\\[0.2cm]
     {\heiti\zihao{-4}（人文经管类）}
 \end{center}
 
-\vspace{0.5cm}
+\vspace{0.8cm}
 
-% ============================================================================
-% 封面信息表格 - Word XML Table 13 (4列网格)
-% 列宽: 3.33 | 3.68 | 2.23 | 3.77 cm = 13.0cm
-% ============================================================================
-
-\begin{table}[h]
-\centering
-\zihao{-4}\songti
+{\zihao{-4}\songti
+\begin{center}
 \begin{tabular}{|L{3.33cm}|L{3.68cm}|L{2.23cm}|L{3.77cm}|}
 \hline
-\hspace{3pt}\textbf{题\hspace{1em}目:} & \multicolumn{3}{L{9.67cm}|}{} \\
+题\hspace{1em}目: & \multicolumn{3}{L{9.67cm}|}{毕业设计（论文）题目（四号楷体\_GB2312下同）} \\
 \hline
-\hspace{3pt}\textbf{学\hspace{1em}院：} & \multicolumn{3}{L{9.67cm}|}{} \\
+学\hspace{1em}院： & \multicolumn{3}{L{9.67cm}|}{商学院} \\
 \hline
-\hspace{3pt}\textbf{专业班级：} & \multicolumn{3}{L{9.67cm}|}{} \\
+专业班级： & \multicolumn{3}{L{9.67cm}|}{国际经济与贸易\hspace{0.8em}国贸201} \\
 \hline
-\hspace{3pt}\textbf{学生姓名：} & & \hspace{3pt}\textbf{学号：} & \\
+学生姓名： & 扬帆起航 & 学号： & 2020000001 \\
 \hline
-\hspace{3pt}\textbf{指导教师：} & \multicolumn{3}{L{9.67cm}|}{} \\
+指导教师： & \multicolumn{3}{L{9.67cm}|}{乘风破浪（职称）} \\
 \hline
 \end{tabular}
-\end{table}
-
-\vspace{0.3cm}
-
-% ============================================================================
-% 内容表格 - Word XML Table 14 (1列网格)
-% 列宽: 14.64cm (单列)
-% ============================================================================
-
-\begin{table}[h]
-\centering
-\zihao{-4}\songti
-\begin{tabular}{|L{14.64cm}|}
-\hline
-\hspace{3pt}\textbf{1.课题研究的意义} \\
-\multicolumn{1}{|L{14.64cm}|}{
-\vspace{5cm}
-\hfill
-} \\
-\hline
-
-\hspace{3pt}\textbf{2.课题的基本内容} \\
-\multicolumn{1}{|L{14.64cm}|}{
-\vspace{5cm}
-\hfill
-} \\
-\hline
-
-\hspace{3pt}\textbf{3.课题的重点和难点} \\
-\multicolumn{1}{|L{14.64cm}|}{
-\vspace{4cm}
-\hfill
-} \\
-\hline
-
-\hspace{3pt}\textbf{4.论文提纲} \\
-\multicolumn{1}{|L{14.64cm}|}{
-\vspace{5cm}
-\hfill
-} \\
-\hline
-
-\end{tabular}
-\end{table}
-
-\newpage
-
-\begin{table}[h]
-\centering
-\zihao{-4}\songti
-\begin{tabular}{|L{14.64cm}|}
-\hline
-
-\hspace{3pt}\textbf{5.课题研究进度计划} \\
-\multicolumn{1}{|L{14.64cm}|}{
-\vspace{5cm}
-\hfill
-} \\
-\hline
-
-\hspace{3pt}\textbf{6.主要参考文献} \\
-\multicolumn{1}{|L{14.64cm}|}{
-\vspace{6cm}
-\hfill
-} \\
-\hline
-
-\multicolumn{1}{|L{14.64cm}|}{
-\hspace{3pt}\textbf{指导教师意见（对课题的深度、广度及工作量的意见和对结果的预测）}
-\vspace{3cm}
-
-\hfill 指导教师签字：\underline{\hspace{4cm}} \hspace{1cm} 年\hspace{0.5cm}月\hspace{0.5cm}日\hspace{3pt}
-} \\
-\hline
-
-\multicolumn{1}{|L{14.64cm}|}{
-\hspace{3pt}\textbf{系意见：}
-\vspace{3cm}
-
-\hfill 系主任签字：\underline{\hspace{4cm}} \hspace{1cm} 年\hspace{0.5cm}月\hspace{0.5cm}日\hspace{3pt}
-} \\
-\hline
-
-\end{tabular}
-\end{table}
+\end{center}
+}
 
 \vfill
-
 \begin{center}
-    \zihao{5}\songti
-    \textbf{注：}本报告一式两份，学生、学院各执一份。
+    \zihao{4}\songti 年\hspace{0.8cm}月\hspace{0.8cm}日
 \end{center}
+
+\newpage
+\pagestyle{empty}
+
+{\zihao{-4}\songti
+1.课题研究的意义\par
+\vspace{4.2cm}
+2.课题的基本内容\par
+\vspace{4.2cm}
+3.课题的重点和难点\par
+\vspace{4.2cm}
+}
+
+\newpage
+\pagestyle{empty}
+
+{\zihao{-4}\songti
+\begin{center}
+\begin{tabular}{|L{14.64cm}|}
+\hline
+4.论文提纲\par
+\vspace{5.0cm} \\
+\hline
+指导教师意见（对课题的深度、广度及工作量的意见和对结果的预测）\par
+\vspace{5.0cm}
+\hfill 指导教师签字：\hspace{3.5cm}年\hspace{0.7cm}月\hspace{0.7cm}日 \\
+\hline
+系意见：\par
+\vspace{4.4cm}
+\hfill 系主任签字：\hspace{3.5cm}年\hspace{0.7cm}月\hspace{0.7cm}日 \\
+\hline
+\end{tabular}
+\end{center}
+}
 
 \end{document}

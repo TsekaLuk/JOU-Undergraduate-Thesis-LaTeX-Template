@@ -1,14 +1,10 @@
-% 江苏海洋大学毕业设计(论文)选题、审题表
-% 像素级对齐Word XML: Table 2 (14列网格)
-% 网格: 3.24+1.18+0.47+0.82+0.93+0.31+1.21+2.39+1.08+0.54+0.73+0.82+0.32+1.22 = 15.27cm
+% 江苏海洋大学毕业设计（论文）选题、审题表
+% 对齐参考：工作手册 PDF 第 14 页，Word XML Table 2
 
 \documentclass[a4paper,zihao=-4]{ctexart}
 
 \RequirePackage{geometry}
-\RequirePackage{graphicx}
-\RequirePackage{array}
-\RequirePackage{multirow}
-\RequirePackage{makecell}
+\RequirePackage{../../styles/jouhandbook}
 \RequirePackage{amssymb}
 
 \geometry{
@@ -19,95 +15,52 @@
     right=2.5cm
 }
 
-% 像素级对齐: tabcolsep=0pt使列宽精确匹配Word XML
-\setlength{\tabcolsep}{0pt}
-\renewcommand{\arraystretch}{1.5}
-
-% 自定义列类型
-\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
-\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
-
 \begin{document}
-
 \pagestyle{empty}
 
-% 顶部学校logo和标题
 \begin{center}
-    \includegraphics[width=9cm]{../../figures/jou-name-large.png}\\[0.5cm]
-    {\heiti\zihao{-2}\textbf{毕业设计（论文）选题、审题表}}
+    {\heiti\zihao{3}\textbf{毕业设计（论文）选题、审题表}}
 \end{center}
 
-\vspace{0.5cm}
+\vspace{0.2cm}
 
-% ============================================================================
-% 单一表格，14列网格系统（完全复刻Word XML Table 2）
-% 列宽(cm): 3.24|1.18|0.47|0.82|0.93|0.31|1.21|2.39|1.08|0.54|0.73|0.82|0.32|1.22
-% 总宽: 15.27cm
-% ============================================================================
-
-\begin{table}[h]
-\centering
-\zihao{-4}\songti
+{\zihao{-4}\songti
+\begin{center}
+\renewcommand{\arraystretch}{1.12}
 \begin{tabular}{|C{3.24cm}|C{1.18cm}|C{0.47cm}|C{0.82cm}|C{0.93cm}|C{0.31cm}|C{1.21cm}|C{2.39cm}|C{1.08cm}|C{0.54cm}|C{0.73cm}|C{0.82cm}|C{0.32cm}|C{1.22cm}|}
 \hline
-% 第1行: 申报课题名称（跨全部14列）
-\textbf{申报课题名称} & \multicolumn{13}{L{12.03cm}|}{} \\
+申报课题名称 & \multicolumn{13}{L{12.03cm}|}{} \\
 \hline
-
-% 第2行: 选题学生 + 学号
-\textbf{选题学生} & \multicolumn{6}{L{4.93cm}|}{} & \textbf{学\hspace{1em}号} & \multicolumn{6}{L{4.71cm}|}{} \\
+选题学生 & \multicolumn{6}{L{4.93cm}|}{} & 学\hspace{1em}号 & \multicolumn{6}{L{4.71cm}|}{} \\
 \hline
-
-% 第3行: 指导教师 + 职务
-\textbf{指导教师} & \multicolumn{6}{L{4.93cm}|}{} & \textbf{专业技术职务} & \multicolumn{6}{L{4.71cm}|}{} \\
+指导教师 & \multicolumn{6}{L{4.93cm}|}{} & 专业技术职\hspace{0.2em}务 & \multicolumn{6}{L{4.71cm}|}{} \\
 \hline
-
-% 第4-5行: 课题性质 + 课题来源（带选项）
-\multirow{2}{*}{\textbf{课题性质}} & \makecell{A} & \multicolumn{2}{C{1.30cm}|}{\makecell{B}} & \multicolumn{2}{C{1.24cm}|}{\makecell{C}} & \makecell{D} & \multirow{2}{*}{\textbf{课题来源}} & \makecell{A} & \multicolumn{2}{C{1.27cm}|}{\makecell{B}} & \multicolumn{2}{C{1.14cm}|}{\makecell{C}} & \makecell{D} \\
+\multirow{2}{*}{课题性质} & A & \multicolumn{2}{C{1.30cm}|}{B} & \multicolumn{2}{C{1.24cm}|}{C} & D & \multirow{2}{*}{课题来源} & A & \multicolumn{2}{C{1.27cm}|}{B} & \multicolumn{2}{C{1.14cm}|}{C} & D \\
 \cline{2-7}\cline{9-14}
  & $\square$ & \multicolumn{2}{C{1.30cm}|}{$\square$} & \multicolumn{2}{C{1.24cm}|}{$\square$} & $\square$ &  & $\square$ & \multicolumn{2}{C{1.27cm}|}{$\square$} & \multicolumn{2}{C{1.14cm}|}{$\square$} & $\square$ \\
 \hline
-
-% 第6-7行: 课题预计工作量 + 难易程度
-\multirow{2}{*}{\makecell{\textbf{课题预计}\\\textbf{工作量}}} & \multicolumn{2}{C{1.65cm}|}{\makecell{大}} & \multicolumn{2}{C{1.75cm}|}{\makecell{适中}} & \multicolumn{2}{C{1.52cm}|}{\makecell{小}} & \multirow{2}{*}{\makecell{\textbf{课题预计}\\\textbf{难易程度}}} & \multicolumn{2}{C{1.62cm}|}{\makecell{难}} & \multicolumn{2}{C{1.54cm}|}{\makecell{一般}} & \multicolumn{2}{C{1.54cm}|}{\makecell{易}} \\
+\multirow{2}{*}{\makecell{课题预计\\工作量}} & \multicolumn{2}{C{1.65cm}|}{大} & \multicolumn{2}{C{1.75cm}|}{适中} & \multicolumn{2}{C{1.52cm}|}{小} & \multirow{2}{*}{\makecell{课题预计\\难易程度}} & \multicolumn{2}{C{1.62cm}|}{难} & \multicolumn{2}{C{1.54cm}|}{一般} & \multicolumn{2}{C{1.54cm}|}{易} \\
 \cline{2-7}\cline{9-14}
  & \multicolumn{2}{C{1.65cm}|}{$\square$} & \multicolumn{2}{C{1.75cm}|}{$\square$} & \multicolumn{2}{C{1.52cm}|}{$\square$} &  & \multicolumn{2}{C{1.62cm}|}{$\square$} & \multicolumn{2}{C{1.54cm}|}{$\square$} & \multicolumn{2}{C{1.54cm}|}{$\square$} \\
 \hline
-
-% 第8行: 课题简介
-\textbf{课题简介} & \multicolumn{13}{L{12.03cm}|}{
-\vspace{3cm}
-\hfill
+课题简介 & \multicolumn{13}{L{12.03cm}|}{\JOUEmptyCell{2.35cm}{12.03cm}} \\
+\hline
+\makecell{毕业设计\\（论文）要求\\（包括应具备\\的条件）} & \multicolumn{13}{L{12.03cm}|}{\JOUEmptyCell{2.55cm}{12.03cm}} \\
+\hline
+\multicolumn{14}{|L{15.27cm}|}{%
+系意见：\par
+\vspace{1.0cm}
+\hfill 系主任签字：\hspace{3.4cm}年\hspace{0.8cm}月\hspace{0.8cm}日
 } \\
 \hline
-
-% 第9行: 毕业设计（论文）要求
-\makecell{\textbf{毕业设计}\\\textbf{（论文）要求}\\\textbf{（包括应具}\\\textbf{备的条件）}} & \multicolumn{13}{L{12.03cm}|}{
-\vspace{3cm}
-\hfill
-} \\
-\hline
-
-% 第10行: 系意见
-\multicolumn{14}{|L{15.27cm}|}{
-\textbf{系意见：}
-\vspace{1.5cm}
-
-\hfill 系主任签字：\underline{\hspace{4cm}} \hspace{2cm} 年\hspace{1cm}月\hspace{1cm}日
-} \\
-\hline
-
 \end{tabular}
-\end{table}
-
-\vfill
-
-\begin{center}
-    \zihao{5}\songti
-    课题性质：理工农医类 A.工程实践，B.实验研究，C.理论研究，D.科技创新；\\
-    \hspace{4.5em}人文经管类 A.应用研究，B.调研报告，C.理论研究，D.案例分析\\
-    课题来源：A.指导教师的科研课题，B.指导教师收集的科研和生产实际中的课题，\\
-    \hspace{4.5em}C.学生在科学活动和工程实践中自立的课题，D.自拟课题
 \end{center}
+}
+
+\vspace{0.35cm}
+
+{\zihao{5}\songti
+注：1．该表供本科生毕业设计（论文）课题申报时使用，由指导教师填写，经系有关人员讨论，负责人签字后生效。2．“课题性质”“课题来源”“课题预计工作量”“课题预计难易程度”栏，请在相应栏内打“√”。
+}
 
 \end{document}

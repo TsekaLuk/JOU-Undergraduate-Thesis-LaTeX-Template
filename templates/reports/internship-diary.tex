@@ -1,14 +1,10 @@
 % 江苏海洋大学毕业实习日记
-% 像素级对齐Word XML: Table 19 (4列封面) + 日记格式
-% 封面网格: 3.33+3.68+2.23+3.77 = 13.0cm
+% 对齐参考：工作手册 PDF 第 15-16 页，Word XML Table 3 + Table 4
 
 \documentclass[a4paper,zihao=-4]{ctexart}
 
 \RequirePackage{geometry}
-\RequirePackage{graphicx}
-\RequirePackage{array}
-\RequirePackage{multirow}
-\RequirePackage{makecell}
+\RequirePackage{../../styles/jouhandbook}
 
 \geometry{
     a4paper,
@@ -18,78 +14,64 @@
     right=2.5cm
 }
 
-% 像素级对齐: tabcolsep=0pt使列宽精确匹配Word XML
-\setlength{\tabcolsep}{0pt}
-\renewcommand{\arraystretch}{1.5}
-
-% 自定义列类型
-\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
-\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
-
 \begin{document}
-
 \pagestyle{empty}
 
-% 顶部学校logo和标题
 \begin{center}
-    \includegraphics[width=9cm]{../../figures/jou-name-large.png}\\[0.5cm]
     {\heiti\zihao{3}\textbf{毕业实习日记}}
 \end{center}
 
-\vspace{0.5cm}
+\vspace{1.1cm}
 
-% ============================================================================
-% 封面信息表格 - Word XML Table 19 (4列网格)
-% 列宽: 3.33 | 3.68 | 2.23 | 3.77 cm = 13.0cm
-% ============================================================================
-
-\begin{table}[h]
-\centering
-\zihao{-4}\songti
-\begin{tabular}{|L{3.33cm}|L{3.68cm}|L{2.23cm}|L{3.77cm}|}
-\hline
-\hspace{3pt}\textbf{学\hspace{1em}院：} & \multicolumn{3}{L{9.67cm}|}{} \\
-\hline
-\hspace{3pt}\textbf{专业班级：} & \multicolumn{3}{L{9.67cm}|}{} \\
-\hline
-\hspace{3pt}\textbf{学生姓名：} & & \hspace{3pt}\textbf{学\hspace{0.5em}号：} & \\
-\hline
-\hspace{3pt}\textbf{指导教师：} & \multicolumn{3}{L{9.67cm}|}{} \\
-\hline
+{\kaishu\zihao{4}
+\begin{center}
+\begin{tabular}{L{3.33cm}L{9.67cm}}
+题\hspace{1em}目: & 毕业实习（四号楷体\_GB2312下同） \\
+学\hspace{1em}院： & 机械工程学院 \\
+专业班级： & 机械设计制造及其自动化\hspace{0.8em}机械201 \\
+学生姓名： & 扬帆起航 \\
+学\hspace{1em}号： & 2020000001 \\
 \end{tabular}
-\end{table}
-
-\vspace{0.5cm}
-
-% ============================================================================
-% 日记内容表格（可复制此页用于多天记录）
-% ============================================================================
-
-\begin{table}[h]
-\centering
-\zihao{-4}\songti
-\begin{tabular}{|L{13.0cm}|}
-\hline
-\hspace{3pt}\textbf{日期：}\underline{\hspace{3cm}} \hspace{1cm} \textbf{星期：}\underline{\hspace{2cm}} \hspace{1cm} \textbf{天气：}\underline{\hspace{2cm}} \\[0.3cm]
-\hline
-\hspace{3pt}\textbf{实习内容：}
-\vspace{8cm}
-\hfill \\
-\hline
-\hspace{3pt}\textbf{收获与体会：}
-\vspace{6cm}
-\hfill \\
-\hline
-\hspace{3pt}\textbf{指导教师签字：}\hspace{8cm}\\[0.5cm]
-\hline
-\end{tabular}
-\end{table}
+\end{center}
+}
 
 \vfill
+\begin{center}
+    \zihao{4}\songti 年\hspace{0.8cm}月\hspace{0.8cm}日
+\end{center}
+
+\newpage
+\pagestyle{empty}
 
 \begin{center}
-    \zihao{5}\songti
-    \textbf{注：}1. 实习期间每天填写一篇实习日记；2. 实习日记应真实记录当天实习内容、收获与体会。
+    {\heiti\zihao{4}江苏海洋大学毕业实习日记}
 \end{center}
+
+\vspace{0.2cm}
+
+{\zihao{-4}\songti
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{|C{1.78cm}|L{3.81cm}|C{1.90cm}|L{3.04cm}|C{2.68cm}|L{1.98cm}|}
+\hline
+学\hspace{0.5em}生\hspace{0.5em}姓\hspace{0.5em}名 & & 班\hspace{0.5em}级 & & 学\hspace{0.5em}号 & \\
+\hline
+实\hspace{0.5em}习\hspace{0.5em}单\hspace{0.5em}位 & & 实\hspace{0.5em}习\hspace{0.5em}地\hspace{0.5em}点 & & 实\hspace{0.5em}习\hspace{0.5em}时\hspace{0.5em}间 & \\
+\hline
+\multicolumn{6}{|L{15.19cm}|}{毕业实习内容（不少于250字）：\par\vspace{4.0cm}} \\
+\hline
+\multicolumn{6}{|L{15.19cm}|}{毕业实习心得（不少于250字）：\par\vspace{4.0cm}} \\
+\hline
+\end{tabular}
+\end{center}
+}
+
+\vspace{0.7cm}
+\begin{flushright}
+    \zihao{-4}\songti 年\hspace{0.8cm}月\hspace{0.8cm}日
+\end{flushright}
+
+\vfill
+{\zihao{5}\songti 注：毕业实习日记记录15天。}
 
 \end{document}

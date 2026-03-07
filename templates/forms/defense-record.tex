@@ -1,14 +1,10 @@
 % 江苏海洋大学毕业设计（论文）答辩记录
-% 像素级对齐Word XML: Table 23 (4列网格)
-% 网格: 2.68+5.44+2.59+3.72 = 14.43cm
+% 对齐参考：工作手册 PDF 第 52-53 页，Word XML Table 23
 
 \documentclass[a4paper,zihao=-4]{ctexart}
 
 \RequirePackage{geometry}
-\RequirePackage{graphicx}
-\RequirePackage{array}
-\RequirePackage{multirow}
-\RequirePackage{makecell}
+\RequirePackage{../../styles/jouhandbook}
 
 \geometry{
     a4paper,
@@ -18,73 +14,46 @@
     right=2.5cm
 }
 
-% 像素级对齐: tabcolsep=0pt使列宽精确匹配Word XML
-\setlength{\tabcolsep}{0pt}
-\renewcommand{\arraystretch}{1.5}
-
-% 自定义列类型
-\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
-\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
-
 \begin{document}
-
 \pagestyle{empty}
 
-% 顶部学校logo和标题
 \begin{center}
-    \includegraphics[width=9cm]{../../figures/jou-name-large.png}\\[0.5cm]
     {\heiti\zihao{3}\textbf{毕业设计（论文）答辩记录}}
 \end{center}
 
-\vspace{0.5cm}
+\vspace{0.2cm}
 
-% ============================================================================
-% 单一表格 - Word XML Table 23 (4列网格)
-% 列宽: 2.68 | 5.44 | 2.59 | 3.72 cm = 14.43cm
-% ============================================================================
-
-\begin{table}[h]
-\centering
-\zihao{-4}\songti
+{\zihao{-4}\songti
+\begin{center}
+\renewcommand{\arraystretch}{1.10}
 \begin{tabular}{|L{2.68cm}|L{5.44cm}|L{2.59cm}|L{3.72cm}|}
 \hline
-% 封面信息
-\hspace{3pt}\textbf{题\hspace{1em}目} & \multicolumn{3}{L{11.75cm}|}{} \\
+题\hspace{1em}目 & \multicolumn{3}{L{11.75cm}|}{毕业设计（论文）题目（四号楷体\_GB2312下同）} \\
 \hline
-\hspace{3pt}\textbf{学\hspace{1em}院} & \multicolumn{3}{L{11.75cm}|}{} \\
+学\hspace{1em}院 & \multicolumn{3}{L{11.75cm}|}{机械工程学院} \\
 \hline
-\hspace{3pt}\textbf{专业班级} & \multicolumn{3}{L{11.75cm}|}{} \\
+专业班级 & \multicolumn{3}{L{11.75cm}|}{机械设计制造及其自动化\hspace{0.8em}机械201} \\
 \hline
-\hspace{3pt}\textbf{学生姓名} & & \hspace{3pt}\textbf{学\hspace{1em}号} & \\
+学生姓名 & 扬帆起航 & 学\hspace{1em}号 & 2020000001 \\
 \hline
-\hspace{3pt}\textbf{答辩时间} & & \hspace{3pt}\textbf{答辩地点} & \\
+答辩时间 &  & 答辩地点 &  \\
 \hline
-
-% 答辩小组成员
-\multicolumn{4}{|L{14.43cm}|}{
-\hspace{3pt}\textbf{答辩小组成员：}
-\vspace{3cm}
-\hfill
-} \\
+\multicolumn{4}{|L{14.43cm}|}{答辩小组成员：\par\vspace{3.2cm}} \\
 \hline
-
-% 答辩过程记录
-\multicolumn{4}{|L{14.43cm}|}{
-\hspace{3pt}\textbf{答辩中提出的问题及学生回答问题的简要情况：}
-\vspace{14cm}
-
-\hspace{3pt}答辩小组组长签字：\underline{\hspace{3cm}}\hspace{1cm}记录人：\underline{\hspace{3cm}}\hspace{1cm}年\hspace{0.5cm}月\hspace{0.5cm}日\hspace{3pt}
-} \\
+\multicolumn{4}{|L{14.43cm}|}{答辩中提出的问题及学生回答问题的简要情况：\par\vspace{8.0cm}} \\
 \hline
-
 \end{tabular}
-\end{table}
-
-\vfill
-
-\begin{center}
-    \zihao{5}\songti
-    \textbf{注：}本记录表一式两份，学生、学院各执一份。
 \end{center}
+}
+
+\newpage
+\pagestyle{empty}
+
+{\zihao{-4}\songti
+\vspace*{10cm}
+答辩小组组长签字：\hspace{3.5cm}\hspace{1cm}记录人：\hspace{3.5cm}\par
+\vspace{0.6cm}
+年\hspace{1cm}月\hspace{1cm}日
+}
 
 \end{document}

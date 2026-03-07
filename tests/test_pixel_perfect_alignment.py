@@ -1,94 +1,105 @@
 #!/usr/bin/env python3
 """
-E2E TDD测试：验证全部15个LaTeX模板与Word XML的像素级对齐
+WPS render-baseline E2E tests for the JOU handbook templates.
 
-测试内容：
-1. 表格列宽精确对齐（核心）- 每个模板 vs Word XML grid
-2. 页面设置一致性 - geometry + tabcolsep
-3. 模板完整性 + 可编译性
-4. 字体字号一致性
+This test suite defines "alignment" as a concrete contract against the
+WPS-exported handbook PDF:
 
-数据源: tests/all_table_structures.json (从Word XML提取的28个表格结构)
+1. The reference assets are present and stable.
+2. Every supported template exists and has a compiled PDF artifact.
+3. The LaTeX source uses the Word XML table grid assigned to that template.
+4. The compiled PDF matches the handbook in page count and orientation.
+5. Every template page lands on the expected content break, validated by
+   matching anchor phrases against the corresponding handbook page.
+
+The authoritative spec lives in tests/handbook_reference_spec.json.
 """
 
 import json
 import re
+import subprocess
 import sys
 from pathlib import Path
 from typing import Dict, List, Tuple
 
-# 项目根目录
+
 PROJECT_ROOT = Path(__file__).parent.parent
-
-# ============================================================================
-# 模板→Word表格映射（模板文件 → Word XML表格索引列表）
-# ============================================================================
-TEMPLATE_TABLE_MAP = {
-    "forms/topic-selection.tex": [2],
-    "forms/internship-registration.tex": [4, 7],
-    "forms/task-book-science.tex": [8, 9],
-    "forms/task-book-humanities.tex": [10],
-    "reports/proposal-science.tex": [11, 12],
-    "reports/proposal-humanities.tex": [13, 14],
-    "forms/proposal-defense-record.tex": [15],
-    "reports/translation.tex": [16, 17],
-    "forms/midterm-check.tex": [18],
-    "reports/internship-diary.tex": [19],
-    "evaluations/thesis-evaluation.tex": [22, 6],
-    "forms/defense-record.tex": [23],
-    "evaluations/grading-science.tex": [24],
-    "evaluations/grading-humanities.tex": [25],
-    "reports/internship-report.tex": [3],  # Table 5 same grid as Table 3, single tabular
-}
-
-# 容差（cm）- DXA→cm转换的舍入误差
+SPEC_PATH = PROJECT_ROOT / "tests" / "handbook_reference_spec.json"
+TABLES_PATH = PROJECT_ROOT / "tests" / "all_table_structures.json"
 TOLERANCE_CM = 0.02
+FONT_DIR = PROJECT_ROOT / "fonts" / "opensource"
+PROPRIETARY_TIMES = PROJECT_ROOT / "fonts" / "proprietary" / "TimesNewRoman-Regular.ttf"
+
+
+def load_spec() -> dict:
+    return json.loads(SPEC_PATH.read_text(encoding="utf-8"))
 
 
 def load_word_table_structures() -> Dict[int, dict]:
-    """加载Word XML表格结构数据"""
-    json_path = PROJECT_ROOT / "tests" / "all_table_structures.json"
-    with open(json_path, 'r', encoding='utf-8') as f:
-        tables = json.load(f)
-    return {t["index"]: t for t in tables}
+    tables = json.loads(TABLES_PATH.read_text(encoding="utf-8"))
+    return {table["index"]: table for table in tables}
+
+
+def normalize_text(text: str) -> str:
+    text = text.replace("\u3000", " ")
+    text = re.sub(r"\s+", "", text)
+    return text
+
+
+def run_command(cmd: List[str]) -> str:
+    completed = subprocess.run(
+        cmd,
+        check=True,
+        text=True,
+        capture_output=True,
+    )
+    return completed.stdout
+
+
+def get_pdfinfo(pdf_path: Path) -> Dict[str, str]:
+    info_text = run_command(["pdfinfo", str(pdf_path)])
+    info: Dict[str, str] = {}
+    for line in info_text.splitlines():
+        if ":" not in line:
+            continue
+        key, value = line.split(":", 1)
+        info[key.strip()] = value.strip()
+    return info
+
+
+def extract_pdf_page_text(pdf_path: Path, page: int) -> str:
+    return run_command(
+        ["pdftotext", "-layout", "-f", str(page), "-l", str(page), str(pdf_path), "-"]
+    )
+
+
+def extract_pdffonts(pdf_path: Path) -> str:
+    return run_command(["pdffonts", str(pdf_path)])
 
 
 def parse_latex_tabular_widths(tex_path: Path) -> List[List[float]]:
-    """从LaTeX文件提取所有tabular环境的列宽列表
+    content = tex_path.read_text(encoding="utf-8")
+    all_widths: List[List[float]] = []
 
-    返回: [[第1个tabular的列宽], [第2个tabular的列宽], ...]
-
-    处理嵌套大括号: \\begin{tabular}{|L{2.68cm}|C{5.44cm}|...}
-    """
-    with open(tex_path, 'r', encoding='utf-8') as f:
-        content = f.read()
-
-    all_widths = []
-
-    # 找到每个 \begin{tabular}{ 的位置，然后手动匹配平衡大括号
-    marker = r'\begin{tabular}{'
+    marker = r"\begin{tabular}{"
     pos = 0
     while True:
         idx = content.find(marker, pos)
         if idx == -1:
             break
 
-        # 从 { 开始找到平衡的 }
-        brace_start = idx + len(marker) - 1  # 指向 {
+        brace_start = idx + len(marker) - 1
         depth = 1
         i = brace_start + 1
         while i < len(content) and depth > 0:
-            if content[i] == '{':
+            if content[i] == "{":
                 depth += 1
-            elif content[i] == '}':
+            elif content[i] == "}":
                 depth -= 1
             i += 1
 
-        col_def = content[brace_start + 1:i - 1]
-
-        # 提取 L{X.XXcm}, C{X.XXcm} 等列宽
-        width_pattern = r'[LCRlcr]\{([0-9.]+)cm\}'
-        widths = [float(w) for w in re.findall(width_pattern, col_def)]
+        col_def = content[brace_start + 1 : i - 1]
+        widths = [float(w) for w in re.findall(r"[LCRlcr]\{([0-9.]+)cm\}", col_def)]
         if widths:
             all_widths.append(widths)
 
@@ -97,301 +108,364 @@ def parse_latex_tabular_widths(tex_path: Path) -> List[List[float]]:
     return all_widths
 
 
-def parse_latex_geometry(tex_path: Path) -> Dict[str, float]:
-    """从LaTeX文件提取geometry设置"""
-    with open(tex_path, 'r', encoding='utf-8') as f:
-        content = f.read()
-
-    margins = {}
-    geo_match = re.search(r'\\geometry\{([^}]+)\}', content, re.DOTALL)
-    if geo_match:
-        params = geo_match.group(1)
-        for margin in ['top', 'bottom', 'left', 'right']:
-            m = re.search(rf'{margin}=([0-9.]+)cm', params)
-            if m:
-                margins[margin] = float(m.group(1))
-    return margins
+def source_has_pattern(tex_path: Path, pattern: str) -> bool:
+    return bool(re.search(pattern, tex_path.read_text(encoding="utf-8"), re.DOTALL))
 
 
-def check_latex_has_setting(tex_path: Path, pattern: str) -> bool:
-    """检查LaTeX文件是否包含指定设置"""
-    with open(tex_path, 'r', encoding='utf-8') as f:
-        content = f.read()
-    return bool(re.search(pattern, content))
+def source_loads_shared_handbook_style(tex_path: Path) -> bool:
+    return source_has_pattern(tex_path, r"jouhandbook")
 
 
-# ============================================================================
-# 测试1: 表格列宽精确对齐（核心测试）
-# ============================================================================
-def test_table_column_widths():
-    """验证每个模板的tabular列宽与Word XML grid完全匹配"""
-    print("\n" + "=" * 70)
-    print("测试1: 表格列宽精确对齐（15个模板 vs Word XML grid）")
-    print("=" * 70)
+def expected_orientation(page_size: str) -> str:
+    match = re.search(r"([0-9.]+)\s+x\s+([0-9.]+)\s+pts", page_size)
+    if not match:
+        raise ValueError(f"Unable to parse page size: {page_size}")
+    width = float(match.group(1))
+    height = float(match.group(2))
+    return "landscape" if width > height else "portrait"
 
-    word_tables = load_word_table_structures()
-    total_tables_checked = 0
-    total_cols_checked = 0
-    failures = []
 
-    for template_rel, table_indices in sorted(TEMPLATE_TABLE_MAP.items()):
-        tex_path = PROJECT_ROOT / "templates" / template_rel
-        template_name = Path(template_rel).stem
+def print_header(title: str) -> None:
+    print("\n" + "=" * 72)
+    print(title)
+    print("=" * 72)
 
-        if not tex_path.exists():
-            failures.append((template_name, "文件不存在"))
-            continue
 
-        latex_tabulars = parse_latex_tabular_widths(tex_path)
+def test_reference_baseline(spec: dict) -> bool:
+    print_header("测试1: WPS参考基线存在且稳定")
+    reference = spec["reference"]
+    failures: List[str] = []
 
-        print(f"\n  [{template_name}]")
-        print(f"    Word表格: {table_indices}, LaTeX tabular数: {len(latex_tabulars)}")
+    docx_path = PROJECT_ROOT / reference["docx"]
+    pdf_path = PROJECT_ROOT / reference["pdf"]
 
-        # 对齐每个tabular与对应的Word表格
-        for tab_idx, word_table_idx in enumerate(table_indices):
-            word_table = word_tables.get(word_table_idx)
-            if not word_table:
-                failures.append((template_name, f"Word表格{word_table_idx}不存在"))
-                continue
+    if not docx_path.exists():
+        failures.append(f"缺少参考 DOCX: {docx_path}")
+    else:
+        print(f"  PASS - 参考 DOCX 存在: {reference['docx']}")
 
-            word_grid = word_table["grid_cm"]
-            # Use sum of individual grid_cm to avoid rounding artifacts
-            # (each grid_cm is rounded from DXA independently)
-            word_total = round(sum(word_grid), 2)
-            word_cols = word_table["num_grid_cols"]
+    if not pdf_path.exists():
+        failures.append(f"缺少参考 PDF: {pdf_path}")
+    else:
+        pdfinfo = get_pdfinfo(pdf_path)
+        pages = int(pdfinfo["Pages"])
+        page_size = pdfinfo["Page size"]
+        if pages != reference["expected_pages"]:
+            failures.append(
+                f"参考 PDF 页数={pages}，预期={reference['expected_pages']}"
+            )
+        else:
+            print(f"  PASS - 参考 PDF 页数={pages}")
 
-            if tab_idx >= len(latex_tabulars):
-                failures.append((template_name,
-                    f"缺少第{tab_idx+1}个tabular（对应Word表格{word_table_idx}）"))
-                continue
+        if reference["page_size"] not in page_size:
+            failures.append(f"参考 PDF 不是 A4: {page_size}")
+        else:
+            print(f"  PASS - 参考 PDF 页面={page_size}")
 
-            latex_widths = latex_tabulars[tab_idx]
-            latex_total = round(sum(latex_widths), 2)
-
-            total_tables_checked += 1
-
-            # 检查列数
-            if len(latex_widths) != word_cols:
-                # 某些模板使用合并列（multicolumn），tabular列数可能少于grid列数
-                # 这种情况下只比较总宽度
-                total_diff = abs(latex_total - word_total)
-                if total_diff <= TOLERANCE_CM:
-                    print(f"    表格{word_table_idx}: 列数不同(Word={word_cols}, "
-                          f"LaTeX={len(latex_widths)}) 但总宽一致 "
-                          f"({latex_total:.2f} vs {word_total:.2f}cm)")
-                    total_cols_checked += len(latex_widths)
-                else:
-                    failures.append((template_name,
-                        f"表格{word_table_idx}: 列数不同且总宽不匹配 "
-                        f"(Word={word_total:.2f}, LaTeX={latex_total:.2f})"))
-                continue
-
-            # 逐列比较
-            col_ok = True
-            for col_i in range(len(latex_widths)):
-                diff = abs(latex_widths[col_i] - word_grid[col_i])
-                if diff > TOLERANCE_CM:
-                    failures.append((template_name,
-                        f"表格{word_table_idx} 列{col_i+1}: "
-                        f"Word={word_grid[col_i]:.2f}, LaTeX={latex_widths[col_i]:.2f}, "
-                        f"误差={diff:.2f}cm"))
-                    col_ok = False
-                total_cols_checked += 1
-
-            # 检查总宽
-            total_diff = abs(latex_total - word_total)
-            if total_diff > TOLERANCE_CM:
-                failures.append((template_name,
-                    f"表格{word_table_idx} 总宽: "
-                    f"Word={word_total:.2f}, LaTeX={latex_total:.2f}"))
-                col_ok = False
-
-            status = "PASS" if col_ok else "FAIL"
-            print(f"    表格{word_table_idx}: {word_cols}列, "
-                  f"总宽={latex_total:.2f}cm (Word={word_total:.2f}cm) [{status}]")
-
-    # 汇总
-    print(f"\n  共检查: {total_tables_checked}个表格, {total_cols_checked}列")
+        print(f"  基准来源: {reference['renderer']}")
 
     if failures:
-        print(f"\n  FAIL - {len(failures)}项不对齐:")
-        for name, msg in failures:
-            print(f"    [{name}] {msg}")
+        print("\n  FAIL:")
+        for failure in failures:
+            print(f"    {failure}")
         return False
-    else:
-        print(f"\n  PASS - 全部列宽精确对齐")
-        return True
+    return True
 
 
-# ============================================================================
-# 测试2: 页面设置一致性
-# ============================================================================
-def test_page_setup_consistency():
-    """验证所有模板的页面设置一致"""
-    print("\n" + "=" * 70)
-    print("测试2: 页面设置一致性（A4 + 2.5cm边距 + tabcolsep=0pt）")
-    print("=" * 70)
+def test_template_catalog(spec: dict) -> bool:
+    print_header("测试2: 模板目录完整性（18个模板全部纳入E2E）")
+    failures: List[str] = []
 
-    failures = []
-
-    for template_rel in sorted(TEMPLATE_TABLE_MAP.keys()):
-        tex_path = PROJECT_ROOT / "templates" / template_rel
-        template_name = Path(template_rel).stem
-
+    for template in spec["templates"]:
+        tex_path = PROJECT_ROOT / template["tex"]
+        pdf_path = PROJECT_ROOT / template["pdf"]
         if not tex_path.exists():
-            failures.append((template_name, "文件不存在"))
-            continue
-
-        # 检查geometry边距
-        margins = parse_latex_geometry(tex_path)
-        for side in ['top', 'bottom', 'left', 'right']:
-            if side not in margins:
-                failures.append((template_name, f"缺少{side}边距设置"))
-            elif margins[side] != 2.5:
-                failures.append((template_name,
-                    f"{side}边距={margins[side]}cm (要求2.5cm)"))
-
-        # 检查tabcolsep=0pt
-        if not check_latex_has_setting(tex_path, r'\\setlength\{\\tabcolsep\}\{0pt\}'):
-            failures.append((template_name, "缺少tabcolsep=0pt"))
-
-        # 检查a4paper
-        if not check_latex_has_setting(tex_path, r'a4paper'):
-            failures.append((template_name, "缺少a4paper"))
-
-    if failures:
-        print(f"\n  FAIL - {len(failures)}项:")
-        for name, msg in failures:
-            print(f"    [{name}] {msg}")
-        return False
-    else:
-        print(f"  PASS - 所有15个模板页面设置一致")
-        return True
-
-
-# ============================================================================
-# 测试3: 模板完整性 + 可编译性
-# ============================================================================
-def test_template_completeness():
-    """验证15个模板文件全部存在，且已编译出PDF"""
-    print("\n" + "=" * 70)
-    print("测试3: 模板完整性 + 可编译性（15个.tex + 15个.pdf）")
-    print("=" * 70)
-
-    missing_tex = []
-    missing_pdf = []
-
-    for template_rel in sorted(TEMPLATE_TABLE_MAP.keys()):
-        tex_path = PROJECT_ROOT / "templates" / template_rel
-        pdf_path = tex_path.with_suffix('.pdf')
-        template_name = Path(template_rel).stem
-
-        if not tex_path.exists():
-            missing_tex.append(template_name)
+            failures.append(f"[{template['id']}] 缺少 TEX: {template['tex']}")
         if not pdf_path.exists():
-            missing_pdf.append(template_name)
-
-    if missing_tex:
-        print(f"  缺少.tex文件: {missing_tex}")
-    else:
-        print(f"  PASS - 15个.tex文件全部存在")
-
-    if missing_pdf:
-        print(f"  缺少.pdf文件: {missing_pdf}")
-    else:
-        print(f"  PASS - 15个.pdf文件全部存在（编译成功）")
-
-    return not missing_tex and not missing_pdf
-
-
-# ============================================================================
-# 测试4: 字体字号一致性
-# ============================================================================
-def test_font_consistency():
-    """验证模板使用正确的字体和字号"""
-    print("\n" + "=" * 70)
-    print("测试4: 字体字号一致性")
-    print("=" * 70)
-
-    failures = []
-
-    for template_rel in sorted(TEMPLATE_TABLE_MAP.keys()):
-        tex_path = PROJECT_ROOT / "templates" / template_rel
-        template_name = Path(template_rel).stem
-
-        if not tex_path.exists():
-            continue
-
-        with open(tex_path, 'r', encoding='utf-8') as f:
-            content = f.read()
-
-        # 检查表格区域使用songti
-        if '\\songti' not in content:
-            failures.append((template_name, "缺少\\songti"))
-
-        # 检查标题使用heiti
-        if '\\heiti' not in content:
-            failures.append((template_name, "缺少\\heiti"))
-
-        # 检查使用zihao字号系统
-        if '\\zihao' not in content:
-            failures.append((template_name, "缺少\\zihao字号"))
+            failures.append(f"[{template['id']}] 缺少 PDF: {template['pdf']}")
 
     if failures:
-        print(f"\n  FAIL - {len(failures)}项:")
-        for name, msg in failures:
-            print(f"    [{name}] {msg}")
+        print("\n  FAIL:")
+        for failure in failures:
+            print(f"    {failure}")
         return False
-    else:
-        print(f"  PASS - 所有模板字体字号一致")
-        return True
+
+    print(f"  PASS - {len(spec['templates'])} 个模板的 TEX/PDF 全部存在")
+    return True
 
 
-# ============================================================================
-# 主函数
-# ============================================================================
-def main():
-    print("\n" + "=" * 70)
-    print(" 江苏海洋大学LaTeX模板 - 像素级对齐 E2E TDD 测试")
-    print(" 15个模板 x Word XML 28个表格结构")
-    print("=" * 70)
+def test_source_table_mapping(spec: dict, word_tables: Dict[int, dict]) -> bool:
+    print_header("测试3: LaTeX源码表格网格与Word XML映射一致")
+    failures: List[str] = []
+    total_tables = 0
+    total_cols = 0
 
-    results = []
+    for template in spec["templates"]:
+        tex_path = PROJECT_ROOT / template["tex"]
+        latex_tabulars = parse_latex_tabular_widths(tex_path)
+        table_indices = template["table_indices"]
 
-    tests = [
-        ("表格列宽精确对齐", test_table_column_widths),
-        ("页面设置一致性", test_page_setup_consistency),
-        ("模板完整性+可编译性", test_template_completeness),
-        ("字体字号一致性", test_font_consistency),
+        if len(latex_tabulars) != len(table_indices):
+            failures.append(
+                f"[{template['id']}] tabular数量={len(latex_tabulars)}，"
+                f"预期={len(table_indices)}"
+            )
+            continue
+
+        for tabular_idx, word_index in enumerate(table_indices):
+            word_table = word_tables[word_index]
+            word_grid = word_table["grid_cm"]
+            word_total = round(sum(word_grid), 2)
+            latex_grid = latex_tabulars[tabular_idx]
+            latex_total = round(sum(latex_grid), 2)
+
+            total_tables += 1
+
+            if len(word_grid) != len(latex_grid):
+                failures.append(
+                    f"[{template['id']}] 表格{word_index}列数不一致 "
+                    f"(Word={len(word_grid)}, LaTeX={len(latex_grid)})"
+                )
+                continue
+
+            for col_idx, width in enumerate(latex_grid):
+                diff = abs(width - word_grid[col_idx])
+                if diff > TOLERANCE_CM:
+                    failures.append(
+                        f"[{template['id']}] 表格{word_index} 第{col_idx + 1}列 "
+                        f"Word={word_grid[col_idx]:.2f}cm LaTeX={width:.2f}cm"
+                    )
+                total_cols += 1
+
+            if abs(latex_total - word_total) > TOLERANCE_CM:
+                failures.append(
+                    f"[{template['id']}] 表格{word_index}总宽 "
+                    f"Word={word_total:.2f}cm LaTeX={latex_total:.2f}cm"
+                )
+
+    print(f"  共检查 {total_tables} 个表格，{total_cols} 列")
+
+    if failures:
+        print("\n  FAIL:")
+        for failure in failures:
+            print(f"    {failure}")
+        return False
+
+    print("  PASS - 所有模板的表格列宽映射与 Word XML 一致")
+    return True
+
+
+def test_source_layout_contract(spec: dict) -> bool:
+    print_header("测试4: LaTeX源码页面声明符合约定")
+    failures: List[str] = []
+
+    for template in spec["templates"]:
+        tex_path = PROJECT_ROOT / template["tex"]
+
+        if not source_has_pattern(tex_path, r"a4paper"):
+            failures.append(f"[{template['id']}] 缺少 a4paper 声明")
+        if not source_has_pattern(tex_path, r"\\geometry\{"):
+            failures.append(f"[{template['id']}] 缺少 geometry 设置")
+        if (
+            not source_has_pattern(tex_path, r"\\setlength\{\\tabcolsep\}\{0pt\}")
+            and not source_loads_shared_handbook_style(tex_path)
+        ):
+            failures.append(f"[{template['id']}] 缺少 tabcolsep=0pt")
+
+        wants_landscape = template["orientation"] == "landscape"
+        has_landscape = source_has_pattern(tex_path, r"landscape")
+        if wants_landscape and not has_landscape:
+            failures.append(f"[{template['id']}] 应为 landscape，但源码未声明")
+        if not wants_landscape and has_landscape:
+            failures.append(f"[{template['id']}] 应为 portrait，但源码含 landscape")
+
+    if failures:
+        print("\n  FAIL:")
+        for failure in failures:
+            print(f"    {failure}")
+        return False
+
+    print("  PASS - 所有模板都声明了 A4/geometry/tabcolsep，方向与 spec 一致")
+    return True
+
+
+def test_compiled_pdf_contract(spec: dict) -> bool:
+    print_header("测试5: 编译产物页数与方向对齐手册")
+    failures: List[str] = []
+
+    for template in spec["templates"]:
+        pdf_path = PROJECT_ROOT / template["pdf"]
+        pdfinfo = get_pdfinfo(pdf_path)
+        page_count = int(pdfinfo["Pages"])
+        page_size = pdfinfo["Page size"]
+        orientation = expected_orientation(page_size)
+
+        if page_count != template["expected_pages"]:
+            failures.append(
+                f"[{template['id']}] 页数={page_count}，预期={template['expected_pages']}"
+            )
+
+        if "A4" not in page_size:
+            failures.append(f"[{template['id']}] 页面不是 A4: {page_size}")
+
+        if orientation != template["orientation"]:
+            failures.append(
+                f"[{template['id']}] 方向={orientation}，预期={template['orientation']}"
+            )
+
+    if failures:
+        print("\n  FAIL:")
+        for failure in failures:
+            print(f"    {failure}")
+        return False
+
+    print("  PASS - 所有编译产物的页数、纸张和方向符合手册基线")
+    return True
+
+
+def test_reference_page_anchors(spec: dict) -> bool:
+    print_header("测试6: WPS参考页与模板页的分页锚点一致")
+    failures: List[str] = []
+    reference_pdf = PROJECT_ROOT / spec["reference"]["pdf"]
+
+    for template in spec["templates"]:
+        template_pdf = PROJECT_ROOT / template["pdf"]
+        template_pages = int(get_pdfinfo(template_pdf)["Pages"])
+
+        for page_check in template["page_anchors"]:
+            if page_check["template_page"] > template_pages:
+                failures.append(
+                    f"[{template['id']}] 缺少第{page_check['template_page']}页，"
+                    f"当前只有{template_pages}页"
+                )
+                continue
+
+            template_text = normalize_text(
+                extract_pdf_page_text(template_pdf, page_check["template_page"])
+            )
+            reference_text = normalize_text(
+                extract_pdf_page_text(reference_pdf, page_check["reference_page"])
+            )
+
+            for phrase in page_check["phrases"]:
+                target = normalize_text(phrase)
+                if target not in reference_text:
+                    failures.append(
+                        f"[{template['id']}] 参考页{page_check['reference_page']} "
+                        f"缺少锚点“{phrase}”"
+                    )
+                if target not in template_text:
+                    failures.append(
+                        f"[{template['id']}] 模板页{page_check['template_page']} "
+                        f"缺少锚点“{phrase}”"
+                    )
+
+    if failures:
+        print("\n  FAIL:")
+        for failure in failures:
+            print(f"    {failure}")
+        return False
+
+    print("  PASS - 每个模板页都落在与手册相同的内容分段上")
+    return True
+
+
+def test_font_stack_contract(spec: dict) -> bool:
+    print_header("测试7: 跨平台字体资源与嵌入字体契约")
+    failures: List[str] = []
+
+    required_fonts = [
+        "Tinos-Regular.ttf",
+        "Tinos-Bold.ttf",
+        "CourierPrime-Regular.ttf",
+        "CourierPrime-Bold.ttf",
+        "NotoSerifCJKsc-Regular.otf",
+        "NotoSerifCJKsc-Bold.otf",
+        "NotoSerifCJKsc-Black.otf",
+        "NotoSansCJKsc-Regular.otf",
+        "NotoSansCJKsc-Bold.otf",
+        "LXGWWenKaiGB-Regular.ttf",
+        "LXGWWenKaiGB-Medium.ttf",
+        "FandolFang-Regular.otf",
     ]
 
-    for name, test_fn in tests:
-        try:
-            passed = test_fn()
-            results.append((name, passed))
-        except Exception as e:
-            print(f"\n  ERROR: {e}")
-            results.append((name, False))
+    for filename in required_fonts:
+        if not (FONT_DIR / filename).exists():
+            failures.append(f"缺少开源字体文件: fonts/opensource/{filename}")
 
-    # 总结
-    print("\n" + "=" * 70)
-    print(" 测试总结")
-    print("=" * 70)
+    if not source_has_pattern(PROJECT_ROOT / "styles" / "jouthesis.cls", r"styles/joufonts"):
+        failures.append("styles/jouthesis.cls 未加载公共字体层 styles/joufonts。")
 
-    for name, passed in results:
-        status = "PASS" if passed else "FAIL"
-        print(f"  [{status}] {name}")
+    if not source_has_pattern(PROJECT_ROOT / "styles" / "jouhandbook.sty", r"joufonts"):
+        failures.append("styles/jouhandbook.sty 未加载公共字体层 joufonts。")
 
-    total_passed = sum(1 for _, p in results if p)
-    total = len(results)
-    print(f"\n  结果: {total_passed}/{total} 通过")
+    representative_pdfs = [
+        PROJECT_ROOT / "main.pdf",
+        PROJECT_ROOT / "templates" / "forms" / "topic-selection.pdf",
+    ]
+    font_output = "\n".join(extract_pdffonts(pdf) for pdf in representative_pdfs if pdf.exists())
 
-    if total_passed == total:
-        print("\n  所有测试通过！像素级对齐验证成功！")
-        return 0
+    if "LMRoman" in font_output:
+        failures.append("代表性 PDF 仍嵌入了 Latin Modern Roman，说明未完全切换到仓库字体。")
+
+    if PROPRIETARY_TIMES.exists():
+        if "TimesNewRoman" not in font_output:
+            failures.append("检测到 proprietary 字体模式，但代表性 PDF 未嵌入 Times New Roman。")
     else:
-        print(f"\n  {total - total_passed}项测试失败，需要修正")
-        return 1
+        expected_markers = ["Tinos", "NotoSerifCJKsc", "NotoSansCJKsc"]
+        for marker in expected_markers:
+            if marker not in font_output:
+                failures.append(f"OSS 字体模式下缺少嵌入字体标记: {marker}")
+
+    if failures:
+        print("\n  FAIL:")
+        for failure in failures:
+            print(f"    {failure}")
+        return False
+
+    print("  PASS - 仓库内字体资源完整，代表性 PDF 使用了统一字体栈")
+    return True
+
+
+def main() -> int:
+    spec = load_spec()
+    word_tables = load_word_table_structures()
+
+    print_header("江苏海洋大学模板对齐 E2E TDD（WPS 基线）")
+    print(f"参考 DOCX: {spec['reference']['docx']}")
+    print(f"参考 PDF : {spec['reference']['pdf']}")
+    print(f"模板数量 : {len(spec['templates'])}")
+
+    tests: List[Tuple[str, bool]] = []
+    test_functions = [
+        ("WPS参考基线", lambda: test_reference_baseline(spec)),
+        ("模板目录完整性", lambda: test_template_catalog(spec)),
+        ("Word XML表格映射", lambda: test_source_table_mapping(spec, word_tables)),
+        ("源码页面声明", lambda: test_source_layout_contract(spec)),
+        ("编译产物页数/方向", lambda: test_compiled_pdf_contract(spec)),
+        ("分页锚点一致性", lambda: test_reference_page_anchors(spec)),
+        ("跨平台字体契约", lambda: test_font_stack_contract(spec)),
+    ]
+
+    for name, test_fn in test_functions:
+        try:
+            tests.append((name, test_fn()))
+        except Exception as exc:
+            print(f"\n  ERROR - {name}: {exc}")
+            tests.append((name, False))
+
+    print_header("测试总结")
+    passed_count = sum(1 for _, passed in tests if passed)
+    for name, passed in tests:
+        print(f"  [{'PASS' if passed else 'FAIL'}] {name}")
+
+    print(f"\n  结果: {passed_count}/{len(tests)} 通过")
+    if passed_count == len(tests):
+        print("\n  所有 WPS 基线 E2E 测试通过。")
+        return 0
+
+    print(f"\n  仍有 {len(tests) - passed_count} 项失败，需要继续收敛模板版式。")
+    return 1
 
 
 if __name__ == "__main__":

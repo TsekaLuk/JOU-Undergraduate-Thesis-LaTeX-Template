@@ -1,0 +1,379 @@
+{
+  "reference": {
+    "docx": "references/江苏海洋大学2026届毕业实习与设计（论文）工作手册.docx",
+    "pdf": "references/江苏海洋大学2026届毕业实习与设计（论文）工作手册.pdf",
+    "renderer": "WPS Export to PDF",
+    "expected_pages": 57,
+    "page_size": "A4"
+  },
+  "templates": [
+    {
+      "id": "preliminary-materials-cover",
+      "tex": "templates/forms/preliminary-materials-cover.tex",
+      "pdf": "templates/forms/preliminary-materials-cover.pdf",
+      "orientation": "portrait",
+      "expected_pages": 1,
+      "table_indices": [0, 1],
+      "reference_pdf_pages": [13],
+      "page_anchors": [
+        {
+          "template_page": 1,
+          "reference_page": 13,
+          "phrases": ["前期工作材料", "材料目录"]
+        }
+      ]
+    },
+    {
+      "id": "topic-selection",
+      "tex": "templates/forms/topic-selection.tex",
+      "pdf": "templates/forms/topic-selection.pdf",
+      "orientation": "portrait",
+      "expected_pages": 1,
+      "table_indices": [2],
+      "reference_pdf_pages": [14],
+      "page_anchors": [
+        {
+          "template_page": 1,
+          "reference_page": 14,
+          "phrases": ["选题、审题表", "申报课题名称"]
+        }
+      ]
+    },
+    {
+      "id": "internship-diary",
+      "tex": "templates/reports/internship-diary.tex",
+      "pdf": "templates/reports/internship-diary.pdf",
+      "orientation": "portrait",
+      "expected_pages": 2,
+      "table_indices": [3, 4],
+      "reference_pdf_pages": [15, 16],
+      "page_anchors": [
+        {
+          "template_page": 1,
+          "reference_page": 15,
+          "phrases": ["毕业实习日记", "题目:"]
+        },
+        {
+          "template_page": 2,
+          "reference_page": 16,
+          "phrases": ["毕业实习内容", "毕业实习心得"]
+        }
+      ]
+    },
+    {
+      "id": "internship-report",
+      "tex": "templates/reports/internship-report.tex",
+      "pdf": "templates/reports/internship-report.pdf",
+      "orientation": "portrait",
+      "expected_pages": 2,
+      "table_indices": [5, 6],
+      "reference_pdf_pages": [17, 18],
+      "page_anchors": [
+        {
+          "template_page": 1,
+          "reference_page": 17,
+          "phrases": ["毕业实习报告书", "评语："]
+        },
+        {
+          "template_page": 2,
+          "reference_page": 18,
+          "phrases": ["毕业实习报告提纲", "实习目的"]
+        }
+      ]
+    },
+    {
+      "id": "internship-registration",
+      "tex": "templates/forms/internship-registration.tex",
+      "pdf": "templates/forms/internship-registration.pdf",
+      "orientation": "portrait",
+      "expected_pages": 1,
+      "table_indices": [7],
+      "reference_pdf_pages": [19],
+      "page_anchors": [
+        {
+          "template_page": 1,
+          "reference_page": 19,
+          "phrases": ["毕业实习登记表", "毕业实习要求"]
+        }
+      ]
+    },
+    {
+      "id": "task-book-science",
+      "tex": "templates/forms/task-book-science.tex",
+      "pdf": "templates/forms/task-book-science.pdf",
+      "orientation": "portrait",
+      "expected_pages": 3,
+      "table_indices": [8, 9],
+      "reference_pdf_pages": [20, 21, 22],
+      "page_anchors": [
+        {
+          "template_page": 1,
+          "reference_page": 20,
+          "phrases": ["毕业设计（论文）任务书", "（理工农医类）"]
+        },
+        {
+          "template_page": 2,
+          "reference_page": 21,
+          "phrases": ["3.毕业设计（论文）的成果要求", "4.主要参考文献"]
+        },
+        {
+          "template_page": 3,
+          "reference_page": 22,
+          "phrases": ["5.毕业设计（论文）工作进度计划", "系意见"]
+        }
+      ]
+    },
+    {
+      "id": "task-book-humanities",
+      "tex": "templates/forms/task-book-humanities.tex",
+      "pdf": "templates/forms/task-book-humanities.pdf",
+      "orientation": "portrait",
+      "expected_pages": 4,
+      "table_indices": [10],
+      "reference_pdf_pages": [23, 24, 25, 26],
+      "page_anchors": [
+        {
+          "template_page": 1,
+          "reference_page": 23,
+          "phrases": ["毕业设计（论文）任务书", "（人文经管类）"]
+        },
+        {
+          "template_page": 2,
+          "reference_page": 24,
+          "phrases": ["3.研究方案和目标", "4.毕业设计（论文）成果要求"]
+        },
+        {
+          "template_page": 3,
+          "reference_page": 25,
+          "phrases": ["5.主要参考文献"]
+        },
+        {
+          "template_page": 4,
+          "reference_page": 26,
+          "phrases": ["6.毕业设计（论文）工作进度计划", "系意见"]
+        }
+      ]
+    },
+    {
+      "id": "proposal-science",
+      "tex": "templates/reports/proposal-science.tex",
+      "pdf": "templates/reports/proposal-science.pdf",
+      "orientation": "portrait",
+      "expected_pages": 3,
+      "table_indices": [11, 12],
+      "reference_pdf_pages": [27, 28, 29],
+      "page_anchors": [
+        {
+          "template_page": 1,
+          "reference_page": 27,
+          "phrases": ["毕业设计（论文）开题报告", "（理工农医类）"]
+        },
+        {
+          "template_page": 2,
+          "reference_page": 28,
+          "phrases": ["1.课题研究的意义", "3.课题拟采用的研究手段"]
+        },
+        {
+          "template_page": 3,
+          "reference_page": 29,
+          "phrases": ["指导教师意见", "系意见"]
+        }
+      ]
+    },
+    {
+      "id": "proposal-humanities",
+      "tex": "templates/reports/proposal-humanities.tex",
+      "pdf": "templates/reports/proposal-humanities.pdf",
+      "orientation": "portrait",
+      "expected_pages": 3,
+      "table_indices": [13, 14],
+      "reference_pdf_pages": [30, 31, 32],
+      "page_anchors": [
+        {
+          "template_page": 1,
+          "reference_page": 30,
+          "phrases": ["毕业设计（论文）开题报告", "（人文经管类）"]
+        },
+        {
+          "template_page": 2,
+          "reference_page": 31,
+          "phrases": ["1.课题研究的意义", "3.课题的重点和难点"]
+        },
+        {
+          "template_page": 3,
+          "reference_page": 32,
+          "phrases": ["4.论文提纲", "指导教师意见"]
+        }
+      ]
+    },
+    {
+      "id": "proposal-defense-record",
+      "tex": "templates/forms/proposal-defense-record.tex",
+      "pdf": "templates/forms/proposal-defense-record.pdf",
+      "orientation": "portrait",
+      "expected_pages": 2,
+      "table_indices": [15],
+      "reference_pdf_pages": [33, 34],
+      "page_anchors": [
+        {
+          "template_page": 1,
+          "reference_page": 33,
+          "phrases": ["开题答辩记录", "开题答辩小组成员"]
+        },
+        {
+          "template_page": 2,
+          "reference_page": 34,
+          "phrases": ["开题答辩结果", "记录人签字"]
+        }
+      ]
+    },
+    {
+      "id": "translation",
+      "tex": "templates/reports/translation.tex",
+      "pdf": "templates/reports/translation.pdf",
+      "orientation": "portrait",
+      "expected_pages": 3,
+      "table_indices": [16, 17],
+      "reference_pdf_pages": [35, 36, 37],
+      "page_anchors": [
+        {
+          "template_page": 1,
+          "reference_page": 35,
+          "phrases": ["外文资料翻译", "指导教师评语"]
+        },
+        {
+          "template_page": 2,
+          "reference_page": 36,
+          "phrases": ["译文文章标题", "要求不少于3000字"]
+        },
+        {
+          "template_page": 3,
+          "reference_page": 37,
+          "phrases": ["外文原文（复印件）"]
+        }
+      ]
+    },
+    {
+      "id": "midterm-check",
+      "tex": "templates/forms/midterm-check.tex",
+      "pdf": "templates/forms/midterm-check.pdf",
+      "orientation": "portrait",
+      "expected_pages": 1,
+      "table_indices": [18],
+      "reference_pdf_pages": [38],
+      "page_anchors": [
+        {
+          "template_page": 1,
+          "reference_page": 38,
+          "phrases": ["中期检查表", "中期工作汇报及解答问题情况"]
+        }
+      ]
+    },
+    {
+      "id": "thesis-evaluation",
+      "tex": "templates/evaluations/thesis-evaluation.tex",
+      "pdf": "templates/evaluations/thesis-evaluation.pdf",
+      "orientation": "portrait",
+      "expected_pages": 2,
+      "table_indices": [22, 6],
+      "reference_pdf_pages": [50, 51],
+      "page_anchors": [
+        {
+          "template_page": 1,
+          "reference_page": 50,
+          "phrases": ["毕业设计（论文）评语", "指导教师评语"]
+        },
+        {
+          "template_page": 2,
+          "reference_page": 51,
+          "phrases": ["评阅教师评语", "答辩小组评语"]
+        }
+      ]
+    },
+    {
+      "id": "defense-record",
+      "tex": "templates/forms/defense-record.tex",
+      "pdf": "templates/forms/defense-record.pdf",
+      "orientation": "portrait",
+      "expected_pages": 2,
+      "table_indices": [23],
+      "reference_pdf_pages": [52, 53],
+      "page_anchors": [
+        {
+          "template_page": 1,
+          "reference_page": 52,
+          "phrases": ["毕业设计（论文）答辩记录", "答辩小组成员"]
+        },
+        {
+          "template_page": 2,
+          "reference_page": 53,
+          "phrases": ["答辩小组组长签字", "记录人"]
+        }
+      ]
+    },
+    {
+      "id": "grading-science",
+      "tex": "templates/evaluations/grading-science.tex",
+      "pdf": "templates/evaluations/grading-science.pdf",
+      "orientation": "portrait",
+      "expected_pages": 1,
+      "table_indices": [24],
+      "reference_pdf_pages": [54],
+      "page_anchors": [
+        {
+          "template_page": 1,
+          "reference_page": 54,
+          "phrases": ["毕业实习与设计（论文）评分表", "（理工农医类）", "评分合计"]
+        }
+      ]
+    },
+    {
+      "id": "grading-humanities",
+      "tex": "templates/evaluations/grading-humanities.tex",
+      "pdf": "templates/evaluations/grading-humanities.pdf",
+      "orientation": "portrait",
+      "expected_pages": 1,
+      "table_indices": [25],
+      "reference_pdf_pages": [55],
+      "page_anchors": [
+        {
+          "template_page": 1,
+          "reference_page": 55,
+          "phrases": ["毕业实习与设计（论文）评分表", "（人文经管类）", "评分合计"]
+        }
+      ]
+    },
+    {
+      "id": "topic-summary",
+      "tex": "templates/forms/topic-summary.tex",
+      "pdf": "templates/forms/topic-summary.pdf",
+      "orientation": "landscape",
+      "expected_pages": 1,
+      "table_indices": [26],
+      "reference_pdf_pages": [56],
+      "page_anchors": [
+        {
+          "template_page": 1,
+          "reference_page": 56,
+          "phrases": ["选题情况汇总表", "总课题数"]
+        }
+      ]
+    },
+    {
+      "id": "handbook-statistics",
+      "tex": "templates/forms/handbook-statistics.tex",
+      "pdf": "templates/forms/handbook-statistics.pdf",
+      "orientation": "landscape",
+      "expected_pages": 1,
+      "table_indices": [27],
+      "reference_pdf_pages": [57],
+      "page_anchors": [
+        {
+          "template_page": 1,
+          "reference_page": 57,
+          "phrases": ["情况统计表", "合计"]
+        }
+      ]
+    }
+  ]
+}

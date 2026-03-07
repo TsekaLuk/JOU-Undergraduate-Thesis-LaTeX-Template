@@ -1,120 +1,64 @@
-% 江苏海洋大学毕业设计（论文）中期检查表
-% 像素级对齐Word XML: Table 18 (11列网格)
-% 网格: 2.81+3.28+1.03+1.04+1.12+1.02+1.12+1.12+1.02+0.01+1.13 = 14.72cm
+% 江苏海洋大学本科生毕业实习与设计（论文）中期检查表
+% 对齐参考：工作手册 PDF 第 38 页，Word XML Table 18
 
 \documentclass[a4paper,zihao=-4]{ctexart}
 
 \RequirePackage{geometry}
-\RequirePackage{graphicx}
-\RequirePackage{array}
-\RequirePackage{multirow}
-\RequirePackage{makecell}
+\RequirePackage{../../styles/jouhandbook}
 \RequirePackage{amssymb}
 
 \geometry{
     a4paper,
-    top=2.5cm,
-    bottom=2.5cm,
+    top=2.3cm,
+    bottom=2.3cm,
     left=2.5cm,
     right=2.5cm
 }
 
-% 像素级对齐: tabcolsep=0pt使列宽精确匹配Word XML
-\setlength{\tabcolsep}{0pt}
-\renewcommand{\arraystretch}{1.5}
-
-% 自定义列类型
-\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
-\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
-
 \begin{document}
-
 \pagestyle{empty}
 
-% 顶部学校logo和标题
 \begin{center}
-    \includegraphics[width=9cm]{../../figures/jou-name-large.png}\\[0.5cm]
-    {\heiti\zihao{3}\textbf{毕业设计（论文）中期检查表}}
+    {\heiti\zihao{3}\textbf{本科生毕业实习与设计（论文）中期检查表}}
 \end{center}
 
-\vspace{0.5cm}
+\vspace{0.15cm}
 
-% ============================================================================
-% 单一表格 - Word XML Table 18 (11列网格)
-% 列宽: 2.81|3.28|1.03|1.04|1.12|1.02|1.12|1.12|1.02|0.01|1.13 = 14.72cm
-% ============================================================================
-
-\begin{table}[h]
-\centering
-\zihao{-4}\songti
+{\zihao{5}\songti
+\begin{center}
+\renewcommand{\arraystretch}{1.04}
 \begin{tabular}{|L{2.81cm}|L{3.28cm}|C{1.03cm}|C{1.04cm}|C{1.12cm}|C{1.02cm}|C{1.12cm}|C{1.12cm}|C{1.02cm}|C{0.01cm}|C{1.13cm}|}
 \hline
-% 第1行: 题目
-\hspace{3pt}\textbf{题\hspace{1em}目} & \multicolumn{10}{L{11.91cm}|}{} \\
+题\hspace{1em}目 & \multicolumn{10}{L{11.91cm}|}{毕业设计（论文）题目（四号楷体\_GB2312下同）} \\
 \hline
-
-% 第2行: 学院
-\hspace{3pt}\textbf{学\hspace{1em}院} & \multicolumn{10}{L{11.91cm}|}{} \\
+学\hspace{1em}院 & \multicolumn{10}{L{11.91cm}|}{机械工程学院} \\
 \hline
-
-% 第3行: 专业班级
-\hspace{3pt}\textbf{专业班级} & \multicolumn{10}{L{11.91cm}|}{} \\
+专业班级 & \multicolumn{10}{L{11.91cm}|}{机械设计制造及其自动化\hspace{0.8em}机械201} \\
 \hline
-
-% 第4行: 学生姓名 + 学号
-\hspace{3pt}\textbf{学生姓名} & \multicolumn{2}{L{4.31cm}|}{} & \multicolumn{2}{L{2.16cm}|}{\hspace{3pt}\textbf{学\hspace{1em}号}} & \multicolumn{6}{L{5.44cm}|}{} \\
+学生姓名 & \multicolumn{2}{L{4.31cm}|}{扬帆起航} & \multicolumn{2}{L{2.16cm}|}{学\hspace{1em}号} & \multicolumn{6}{L{5.44cm}|}{2020000001} \\
 \hline
-
-% 第5行: 符合规范化的要求 - 任务书/开题报告 有/无 + 翻译/实习质量
-\multirow{4}{*}{\makecell[l]{\hspace{3pt}\textbf{符合规范}\\\hspace{3pt}\textbf{化的要求}}} & \multirow{2}{*}{\makecell{\textbf{毕业设计}\\\textbf{（论文）}\\\textbf{任务书}}} & \makecell{有} & \multicolumn{2}{C{2.16cm}|}{} & \multicolumn{2}{C{2.14cm}|}{\multirow{2}{*}{\makecell{\textbf{开题}\\\textbf{报告}}}} & \makecell{有} & \multicolumn{3}{C{2.16cm}|}{} \\
+\multirow{4}{*}{\makecell{符\hspace{0.3em}合\\规范化\\的要求}} & \multirow{2}{*}{\makecell{毕业设计\\（论文）\\任务书}} & 有 & \multicolumn{2}{C{2.16cm}|}{} & \multicolumn{2}{C{2.14cm}|}{\multirow{2}{*}{开题报告}} & 有 & \multicolumn{3}{C{2.16cm}|}{} \\
 \cline{3-5}\cline{8-11}
-& & \makecell{无} & \multicolumn{2}{C{2.16cm}|}{} & \multicolumn{2}{C{2.14cm}|}{} & \makecell{无} & \multicolumn{3}{C{2.16cm}|}{} \\
+ &  & 无 & \multicolumn{2}{C{2.16cm}|}{} & \multicolumn{2}{C{2.14cm}|}{} & 无 & \multicolumn{3}{C{2.16cm}|}{} \\
 \cline{2-11}
-& \textbf{外文翻译质量} & \makecell{优} & & \makecell{良} & & \makecell{中} & & \makecell{差} & \multicolumn{2}{C{1.14cm}|}{} \\
+ & 外文翻译质量 & 优 &  & 良 &  & 中 &  & 差 & \multicolumn{2}{C{1.14cm}|}{} \\
 \cline{2-11}
-& \textbf{毕业实习质量} & \makecell{优} & & \makecell{良} & & \makecell{中} & & \makecell{差} & \multicolumn{2}{C{1.14cm}|}{} \\
+ & 毕业实习质量 & 优 &  & 良 &  & 中 &  & 差 & \multicolumn{2}{C{1.14cm}|}{} \\
 \hline
-
-% 学习态度、出勤情况
-\multicolumn{2}{|L{6.09cm}|}{\hspace{3pt}\textbf{学习态度、出勤情况}} & \makecell{优} & & \makecell{良} & & \makecell{中} & & \multicolumn{2}{C{1.03cm}|}{\makecell{差}} & \\
+\multicolumn{2}{|L{6.09cm}|}{学习态度、出勤情况} & 优 &  & 良 &  & 中 &  & \multicolumn{2}{C{1.03cm}|}{差} & \\
 \hline
-
-% 工作进度
-\multicolumn{2}{|L{6.09cm}|}{\hspace{3pt}\textbf{工作进度}} & \makecell{快} & & \multicolumn{3}{C{3.26cm}|}{\makecell{按计划进行}} & & \multicolumn{2}{C{1.03cm}|}{\makecell{慢}} & \\
+\multicolumn{2}{|L{6.09cm}|}{工作进度} & 快 &  & \multicolumn{3}{C{3.26cm}|}{按计划进行} &  & \multicolumn{2}{C{1.03cm}|}{慢} & \\
 \hline
-
-% 中期工作汇报及解答问题情况
-\multicolumn{2}{|L{6.09cm}|}{\hspace{3pt}\textbf{中期工作汇报及解答问题情况}} & \makecell{优} & & \makecell{良} & & \makecell{中} & & \multicolumn{2}{C{1.03cm}|}{\makecell{差}} & \\
+\multicolumn{2}{|L{6.09cm}|}{中期工作汇报及解答问题情况} & 优 &  & 良 &  & 中 &  & \multicolumn{2}{C{1.03cm}|}{差} & \\
 \hline
-
-% 中期成绩
-\hspace{3pt}\textbf{中期成绩} & \multicolumn{10}{L{11.91cm}|}{} \\
+中期成绩 & \multicolumn{10}{L{11.91cm}|}{} \\
 \hline
-
-% 毕业设计（论文）调整情况
-\makecell[l]{\hspace{3pt}\textbf{毕业}\\\hspace{3pt}\textbf{设计}\\\hspace{3pt}\textbf{（论文）}\\\hspace{3pt}\textbf{调整}\\\hspace{3pt}\textbf{情况}} & \multicolumn{10}{L{11.91cm}|}{
-\vspace{3cm}
-
-\hfill 指导教师签字：\underline{\hspace{4cm}} \hspace{1cm} 年\hspace{0.5cm}月\hspace{0.5cm}日\hspace{3pt}
-} \\
+\makecell{毕业\\设计\\（论文）\\调整\\情况} & \multicolumn{10}{L{11.91cm}|}{\JOUEmptyCell{2.2cm}{11.91cm}\par\hfill 指导教师签字：\hspace{3.2cm}年\hspace{0.7cm}月\hspace{0.7cm}日} \\
 \hline
-
-% 系意见
-\makecell[l]{\hspace{3pt}\textbf{系}\\\hspace{3pt}\textbf{意}\\\hspace{3pt}\textbf{见}} & \multicolumn{10}{L{11.91cm}|}{
-\vspace{3cm}
-
-\hfill 系主任签字：\underline{\hspace{4cm}} \hspace{1cm} 年\hspace{0.5cm}月\hspace{0.5cm}日\hspace{3pt}
-} \\
+\makecell{系\\意\\见} & \multicolumn{10}{L{11.91cm}|}{\JOUEmptyCell{2.1cm}{11.91cm}\par\hfill 系主任签字：\hspace{3.2cm}年\hspace{0.7cm}月\hspace{0.7cm}日} \\
 \hline
-
 \end{tabular}
-\end{table}
-
-\vfill
-
-\begin{center}
-    \zihao{5}\songti
-    \textbf{注：}本表一式两份，学生、学院各执一份。
 \end{center}
+}
 
 \end{document}

@@ -1,15 +1,10 @@
 % 江苏海洋大学毕业设计（论文）外文资料翻译
-% 像素级对齐Word XML: Table 16 (4列封面) + Table 17 (1列评语)
-% 封面网格: 3.33+3.68+2.23+3.77 = 13.0cm
-% 评语网格: 13.11cm (单列)
+% 对齐参考：工作手册 PDF 第 35-37 页，Word XML Table 16 + Table 17
 
 \documentclass[a4paper,zihao=-4]{ctexart}
 
 \RequirePackage{geometry}
-\RequirePackage{graphicx}
-\RequirePackage{array}
-\RequirePackage{setspace}
-\RequirePackage{indentfirst}
+\RequirePackage{../../styles/jouhandbook}
 
 \geometry{
     a4paper,
@@ -19,108 +14,69 @@
     right=2.5cm
 }
 
-% 像素级对齐: tabcolsep=0pt使列宽精确匹配Word XML
-\setlength{\tabcolsep}{0pt}
-\renewcommand{\arraystretch}{1.5}
-
-% 行距设置
-\linespread{1.25}
-\setlength{\parindent}{2em}
-
-% 自定义列类型
-\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
-\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
-
 \begin{document}
-
 \pagestyle{empty}
 
-% 封面
 \begin{center}
-    \includegraphics[width=9cm]{../../figures/jou-name-large.png}\\[0.5cm]
     {\heiti\zihao{3}\textbf{毕业设计（论文）外文资料翻译}}
+\end{center}
+
+\vspace{0.4cm}
+
+{\zihao{-4}\songti
+\begin{center}
+\begin{tabular}{|L{3.33cm}|L{3.68cm}|L{2.23cm}|L{3.77cm}|}
+\hline
+学\hspace{1em}院： & \multicolumn{3}{L{9.67cm}|}{机械工程学院（四号楷体\_GB2312下同）} \\
+\hline
+专业班级： & \multicolumn{3}{L{9.67cm}|}{机械设计制造及其自动化\hspace{0.8em}机械201} \\
+\hline
+学生姓名： & 扬帆起航 & 学\hspace{0.5em}号： & 2020000001 \\
+\hline
+指导教师： & \multicolumn{3}{L{9.67cm}|}{乘风破浪（职称）} \\
+\hline
+外文出处： & \multicolumn{3}{L{9.67cm}|}{（外文）\hspace{3em}（Times New Roman四号）} \\
+\hline
+附\hspace{1em}件： & \multicolumn{3}{L{9.67cm}|}{1.外文资料翻译译文；\hspace{1em}2.外文原文} \\
+\hline
+\end{tabular}
+\end{center}
+}
+
+\vspace{0.8cm}
+
+{\zihao{-4}\songti
+\begin{center}
+\begin{tabular}{|L{13.11cm}|}
+\hline
+指导教师评语：\par
+\vspace{3.2cm}
+\hfill 指导教师签字：\hspace{3.5cm}年\hspace{0.7cm}月\hspace{0.7cm}日 \\
+\hline
+\end{tabular}
+\end{center}
+}
+
+\newpage
+\pagestyle{empty}
+
+\begin{center}
+    {\heiti\zihao{3}译文文章标题}
 \end{center}
 
 \vspace{0.5cm}
 
-% ============================================================================
-% 封面信息表格 - Word XML Table 16 (4列网格)
-% 列宽: 3.33 | 3.68 | 2.23 | 3.77 cm = 13.0cm
-% ============================================================================
+{\zihao{-4}\songti
+×××××××××××正文××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××…………。（要求不少于3000字）
+}
 
-\begin{table}[h]
-\centering
-\zihao{-4}\songti
-\begin{tabular}{|L{3.33cm}|L{3.68cm}|L{2.23cm}|L{3.77cm}|}
-\hline
-\hspace{3pt}\textbf{学\hspace{1em}院：} & \multicolumn{3}{L{9.67cm}|}{} \\
-\hline
-\hspace{3pt}\textbf{专业班级：} & \multicolumn{3}{L{9.67cm}|}{} \\
-\hline
-\hspace{3pt}\textbf{学生姓名：} & & \hspace{3pt}\textbf{学\hspace{0.5em}号：} & \\
-\hline
-\hspace{3pt}\textbf{指导教师：} & \multicolumn{3}{L{9.67cm}|}{} \\
-\hline
-\hspace{3pt}\textbf{外文出处：} & \multicolumn{3}{L{9.67cm}|}{} \\
-\hline
-\hspace{3pt}\textbf{附\hspace{1em}件：} & \multicolumn{3}{L{9.67cm}|}{} \\
-\hline
-\end{tabular}
-\end{table}
-
-\clearpage
-\pagestyle{plain}
-\setcounter{page}{1}
-
-% 外文资料原文部分
-\section*{外文资料原文}
-
-\subsection*{文献题目：}
-
-\subsection*{作者：}
-
-\subsection*{出处：}
-
-\vspace{1cm}
-
-（此处粘贴外文资料原文，字数不少于3000个外文印刷符号或译成中文不少于2000汉字）
-
-\clearpage
-
-% 中文翻译部分
-\section*{中文翻译}
-
-\vspace{1cm}
-
-（此处填写翻译后的中文内容）
-
-\clearpage
-
-% ============================================================================
-% 评语表格 - Word XML Table 17 (1列网格)
-% 列宽: 13.11cm (单列)
-% ============================================================================
-
-\begin{table}[h]
-\centering
-\zihao{-4}\songti
-\begin{tabular}{|L{13.11cm}|}
-\hline
-\hspace{3pt}\textbf{指导教师评语：}
-\vspace{8cm}
-
-\hspace{3pt}指导教师签字：\underline{\hspace{4cm}} \hspace{3cm} 年\hspace{0.5cm}月\hspace{0.5cm}日\hspace{3pt}\\[0.3cm]
-\hline
-\end{tabular}
-\end{table}
-
-\vfill
+\newpage
+\pagestyle{empty}
 
 \begin{center}
-    \zihao{5}\songti
-    \textbf{注：}1. 外文资料应与毕业设计（论文）内容相关；\\
-    2. 外文资料字数不少于3000个外文印刷符号或译成中文不少于2000汉字；\\
-    3. 翻译应准确、通顺，符合专业术语规范。
+    {\heiti\zihao{3}外文原文（复印件）}
 \end{center}
+
+\vspace{8cm}
 
 \end{document}

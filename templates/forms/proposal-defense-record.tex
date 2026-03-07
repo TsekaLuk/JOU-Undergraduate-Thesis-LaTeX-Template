@@ -1,15 +1,10 @@
 % 江苏海洋大学毕业设计（论文）开题答辩记录
-% 像素级对齐Word XML: Table 15 (9列网格)
-% 网格: 2.68+1.29+1.34+0.04+2.77+0.83+1.76+1.77+1.95 = 14.43cm
+% 对齐参考：工作手册 PDF 第 33-34 页，Word XML Table 15
 
 \documentclass[a4paper,zihao=-4]{ctexart}
 
 \RequirePackage{geometry}
-\RequirePackage{graphicx}
-\RequirePackage{array}
-\RequirePackage{multirow}
-\RequirePackage{makecell}
-\RequirePackage{amssymb}
+\RequirePackage{../../styles/jouhandbook}
 
 \geometry{
     a4paper,
@@ -19,105 +14,59 @@
     right=2.5cm
 }
 
-% 像素级对齐: tabcolsep=0pt使列宽精确匹配Word XML
-\setlength{\tabcolsep}{0pt}
-\renewcommand{\arraystretch}{1.5}
-
-% 自定义列类型
-\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
-\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
-
 \begin{document}
-
 \pagestyle{empty}
 
-% 顶部学校logo和标题
 \begin{center}
-    \includegraphics[width=9cm]{../../figures/jou-name-large.png}\\[0.5cm]
     {\heiti\zihao{3}\textbf{毕业设计（论文）开题答辩记录}}
 \end{center}
 
-\vspace{0.5cm}
+\vspace{0.2cm}
 
-% ============================================================================
-% 单一表格 - Word XML Table 15 (9列网格)
-% 列宽: 2.68|1.29|1.34|0.04|2.77|0.83|1.76|1.77|1.95 cm = 14.43cm
-% ============================================================================
-
-\begin{table}[h]
-\centering
-\zihao{-4}\songti
+{\zihao{-4}\songti
+\begin{center}
+\renewcommand{\arraystretch}{1.08}
 \begin{tabular}{|L{2.68cm}|L{1.29cm}|L{1.34cm}|L{0.04cm}|L{2.77cm}|L{0.83cm}|L{1.76cm}|L{1.77cm}|L{1.95cm}|}
 \hline
-% 第1行: 题目（跨全部9列）
-\hspace{3pt}\textbf{题\hspace{1em}目} & \multicolumn{8}{L{11.75cm}|}{} \\
+题\hspace{1em}目 & \multicolumn{8}{L{11.75cm}|}{毕业设计（论文）题目（四号楷体\_GB2312下同）} \\
 \hline
-
-% 第2行: 学院 + 专业班级
-\hspace{3pt}\textbf{学\hspace{1em}院} & \multicolumn{8}{L{11.75cm}|}{} \\
+学\hspace{1em}院 & \multicolumn{8}{L{11.75cm}|}{机械工程学院} \\
 \hline
-
-% 第3行: 专业班级
-\hspace{3pt}\textbf{专业班级} & \multicolumn{8}{L{11.75cm}|}{} \\
+专业班级 & \multicolumn{8}{L{11.75cm}|}{机械设计制造及其自动化\hspace{0.8em}机械201} \\
 \hline
-
-% 第4行: 学生姓名 + 学号
-\hspace{3pt}\textbf{学生姓名} & \multicolumn{4}{L{5.44cm}|}{} & \multicolumn{2}{L{2.59cm}|}{\hspace{3pt}\textbf{学\hspace{1em}号}} & \multicolumn{2}{L{3.72cm}|}{} \\
+学生姓名 & \multicolumn{4}{L{5.44cm}|}{} & \multicolumn{2}{L{2.59cm}|}{学\hspace{1em}号} & \multicolumn{2}{L{3.72cm}|}{} \\
 \hline
-
-% 第5行: 指导教师 + 职称
-\hspace{3pt}\textbf{指导教师} & \multicolumn{2}{L{2.63cm}|}{} & \multicolumn{2}{L{2.81cm}|}{} & \multicolumn{2}{L{2.59cm}|}{\hspace{3pt}\textbf{职\hspace{1em}称}} & & \\
+指导教师 & \multicolumn{2}{L{2.63cm}|}{} & \multicolumn{2}{L{2.81cm}|}{} & \multicolumn{2}{L{2.59cm}|}{职\hspace{1em}称} & & \\
 \hline
-
-% 第6行: 答辩时间 + 地点
-\hspace{3pt}\textbf{答辩时间} & \multicolumn{4}{L{5.44cm}|}{} & \multicolumn{2}{L{2.59cm}|}{\hspace{3pt}\textbf{答辩地点}} & \multicolumn{2}{L{3.72cm}|}{} \\
+答辩时间 & \multicolumn{4}{L{5.44cm}|}{} & \multicolumn{2}{L{2.59cm}|}{答辩地点} & \multicolumn{2}{L{3.72cm}|}{} \\
 \hline
-
-% 第7行: 开题答辩小组成员（表格格式：姓名/职称/工作单位）
-\multirow{7}{*}{\makecell{\textbf{开题}\\\textbf{答辩}\\\textbf{小组}\\\textbf{成员}}} & \multicolumn{3}{L{2.67cm}|}{\hspace{3pt}\textbf{姓名}} & \multicolumn{2}{L{3.60cm}|}{\hspace{3pt}\textbf{职称}} & \multicolumn{3}{L{5.48cm}|}{\hspace{3pt}\textbf{工作单位}} \\
+\multirow{5}{*}{\makecell{开题\\答辩\\小组\\成员}} & \multicolumn{3}{L{2.67cm}|}{姓名} & \multicolumn{2}{L{3.60cm}|}{职称} & \multicolumn{3}{L{5.48cm}|}{工作单位} \\
 \cline{2-9}
-& \multicolumn{3}{L{2.67cm}|}{} & \multicolumn{2}{L{3.60cm}|}{} & \multicolumn{3}{L{5.48cm}|}{} \\
+ & \multicolumn{3}{L{2.67cm}|}{} & \multicolumn{2}{L{3.60cm}|}{} & \multicolumn{3}{L{5.48cm}|}{} \\
 \cline{2-9}
-& \multicolumn{3}{L{2.67cm}|}{} & \multicolumn{2}{L{3.60cm}|}{} & \multicolumn{3}{L{5.48cm}|}{} \\
+ & \multicolumn{3}{L{2.67cm}|}{} & \multicolumn{2}{L{3.60cm}|}{} & \multicolumn{3}{L{5.48cm}|}{} \\
 \cline{2-9}
-& \multicolumn{3}{L{2.67cm}|}{} & \multicolumn{2}{L{3.60cm}|}{} & \multicolumn{3}{L{5.48cm}|}{} \\
+ & \multicolumn{3}{L{2.67cm}|}{} & \multicolumn{2}{L{3.60cm}|}{} & \multicolumn{3}{L{5.48cm}|}{} \\
 \cline{2-9}
-& \multicolumn{3}{L{2.67cm}|}{} & \multicolumn{2}{L{3.60cm}|}{} & \multicolumn{3}{L{5.48cm}|}{} \\
-\cline{2-9}
-& \multicolumn{3}{L{2.67cm}|}{} & \multicolumn{2}{L{3.60cm}|}{} & \multicolumn{3}{L{5.48cm}|}{} \\
-\cline{2-9}
-& \multicolumn{3}{L{2.67cm}|}{} & \multicolumn{2}{L{3.60cm}|}{} & \multicolumn{3}{L{5.48cm}|}{} \\
+ & \multicolumn{3}{L{2.67cm}|}{} & \multicolumn{2}{L{3.60cm}|}{} & \multicolumn{3}{L{5.48cm}|}{} \\
 \hline
-
-% 第8行: 开题答辩情况简述
-\multicolumn{9}{|L{14.43cm}|}{
-\hspace{3pt}\textbf{开题答辩情况简述：}\par\vspace{0.2cm}
-\hspace{3pt}用简明语言记录答辩过程，答辩小组评审组成员提出问题和学生回答情况：
-\vspace{10cm}
-\hfill
-} \\
+\multicolumn{9}{|L{14.43cm}|}{开题答辩情况简述：\par 用简明语言记录答辩过程，答辩小组评审组成员提出问题和学生回答情况：\par\vspace{5.2cm}} \\
 \hline
-
-% 第9行: 开题答辩结果
-\hspace{3pt}\textbf{开题答辩结果：} & \multicolumn{8}{L{11.75cm}|}{\hspace{3pt}通过\hspace{0.5em}（\hspace{1.5em}）\par\vspace{0.3cm}\hspace{3pt}未通过\hspace{0.5em}（\hspace{1.5em}）} \\
-\hline
-
-% 第10行: 签字
-\multicolumn{9}{|L{14.43cm}|}{
-\hspace{3pt}开题答辩小组组长签字：\underline{\hspace{3cm}}\hspace{1cm}记录人签字：\underline{\hspace{3cm}}
-\par\vspace{0.5cm}
-\hspace{3pt}年\hspace{1cm}月\hspace{1cm}日
-} \\
-\hline
-
 \end{tabular}
-\end{table}
-
-\vfill
-
-\begin{center}
-    \zihao{5}\songti
-    \textbf{注：}本记录表一式两份，学生、学院各执一份。
 \end{center}
+}
+
+\newpage
+\pagestyle{empty}
+
+{\zihao{-4}\songti
+开题答辩结果：\hspace{1em}通过\hspace{0.8em}（\hspace{1.5em}）\par
+\vspace{0.6cm}
+未通过\hspace{0.8em}（\hspace{1.5em}）\par
+\vspace{8.0cm}
+开题答辩小组组长签字：\hspace{3.5cm}\hspace{1cm}记录人签字：\hspace{3.5cm}\par
+\vspace{0.6cm}
+年\hspace{1cm}月\hspace{1cm}日
+}
 
 \end{document}

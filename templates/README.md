@@ -1,367 +1,106 @@
-# 江苏海洋大学毕业设计（论文）模板集 - 完整版
+# 江苏海洋大学工作手册模板说明
 
-本目录包含江苏海洋大学2026届毕业设计（论文）全套LaTeX模板，严格按照官方工作手册要求制作，实现像素级对齐。
+本目录收录工作手册中的 18 份配套模板，按 `表格类 / 报告类 / 评价类` 分类组织。所有模板均可独立编译，并统一通过 [styles/jouhandbook.sty](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/styles/jouhandbook.sty) 与 [styles/joufonts.sty](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/styles/joufonts.sty) 共享版式和字体策略。
 
-## 📁 目录结构
+## 目录结构
 
-```
+```text
 templates/
-├── forms/                  # 表格类模板
-│   ├── topic-selection.tex              # 选题、审题表
-│   ├── internship-registration.tex      # 实习登记表
-│   ├── task-book-science.tex            # 任务书（理工农医类）
-│   ├── task-book-humanities.tex         # 任务书（人文经管类）
-│   ├── proposal-defense-record.tex      # 开题答辩记录
-│   ├── midterm-check.tex                # 中期检查表
-│   └── defense-record.tex               # 答辩记录
-├── reports/                # 报告类模板
-│   ├── internship-diary.tex             # 实习日记
-│   ├── internship-report.tex            # 实习报告书
-│   ├── proposal-science.tex             # 开题报告（理工农医类）
-│   ├── proposal-humanities.tex          # 开题报告（人文经管类）
-│   └── translation.tex                  # 外文资料翻译
-├── evaluations/            # 评价类模板
-│   ├── thesis-evaluation.tex            # 论文评语
-│   ├── grading-science.tex              # 评分表（理工农医类）
-│   └── grading-humanities.tex           # 评分表（人文经管类）
-└── README.md               # 本文件
+├── forms/
+│   ├── preliminary-materials-cover.tex
+│   ├── topic-selection.tex
+│   ├── internship-registration.tex
+│   ├── task-book-science.tex
+│   ├── task-book-humanities.tex
+│   ├── proposal-defense-record.tex
+│   ├── midterm-check.tex
+│   ├── defense-record.tex
+│   ├── topic-summary.tex
+│   └── handbook-statistics.tex
+├── reports/
+│   ├── internship-diary.tex
+│   ├── internship-report.tex
+│   ├── proposal-science.tex
+│   ├── proposal-humanities.tex
+│   └── translation.tex
+└── evaluations/
+    ├── thesis-evaluation.tex
+    ├── grading-science.tex
+    └── grading-humanities.tex
 ```
 
-## 📋 模板清单
+## 模板清单
 
-### 一、选题与审题（1个）
+### 表格类
 
-#### 1. 毕业设计（论文）选题、审题表
-- **文件**: `forms/topic-selection.tex`
-- **用途**: 选题申报和系、学院审核
-- **填写时间**: 开题前
-- **关键内容**:
-  - 选题依据（性质、目的、意义）
-  - 主要研究内容和预期目标
-  - 研究方法、技术路线、可行性分析
-  - 主要参考文献
-  - 指导教师、系、学院三级审核意见
+- `preliminary-materials-cover.tex`：前期工作材料封面
+- `topic-selection.tex`：毕业设计（论文）选题、审题表
+- `internship-registration.tex`：毕业实习登记表
+- `task-book-science.tex`：任务书（理工农医类）
+- `task-book-humanities.tex`：任务书（人文经管类）
+- `proposal-defense-record.tex`：开题答辩记录
+- `midterm-check.tex`：中期检查表
+- `defense-record.tex`：答辩记录
+- `topic-summary.tex`：选题情况汇总表
+- `handbook-statistics.tex`：本科毕业实习与设计（论文）情况统计表
 
-### 二、实习相关（3个）
+### 报告类
 
-#### 2. 毕业实习日记
-- **文件**: `reports/internship-diary.tex`
-- **用途**: 记录每日实习内容
-- **填写时间**: 实习期间每天填写
-- **关键内容**:
-  - 日期、星期、天气
-  - 实习内容
-  - 收获与体会
-  - 指导教师签字
+- `internship-diary.tex`：毕业实习日记
+- `internship-report.tex`：毕业实习报告书
+- `proposal-science.tex`：开题报告（理工农医类）
+- `proposal-humanities.tex`：开题报告（人文经管类）
+- `translation.tex`：外文资料翻译
 
-#### 3. 毕业实习报告书
-- **文件**: `reports/internship-report.tex`
-- **用途**: 总结实习全过程
-- **填写时间**: 实习结束后
-- **关键内容**:
-  - 实习目的
-  - 实习单位简介
-  - 实习内容
-  - 实习收获与体会
-  - 存在的问题与建议
-  - 总结
+### 评价类
 
-#### 4. 毕业实习登记表
-- **文件**: `forms/internship-registration.tex`
-- **用途**: 实习前登记和审批
-- **填写时间**: 实习前
-- **关键内容**:
-  - 学生基本信息
-  - 实习单位信息
-  - 实习内容简述
-  - 学生承诺、家长意见、指导教师意见、学院审批
+- `thesis-evaluation.tex`：毕业设计（论文）评语
+- `grading-science.tex`：评分表（理工农医类）
+- `grading-humanities.tex`：评分表（人文经管类）
 
-### 三、任务书（2个）
+## 编译方式
 
-#### 5. 毕业设计（论文）任务书（理工农医类）
-- **文件**: `forms/task-book-science.tex`
-- **用途**: 明确设计/论文任务要求
-- **填写时间**: 开题前
-- **关键内容**:
-  - 主要内容及要求
-  - 技术指标或研究目标
-  - 设计（研究）方案及措施
-  - 进度安排
-  - 主要参考文献
-  - 应收集的资料及主要仪器设备
-
-#### 6. 毕业设计（论文）任务书（人文经管类）
-- **文件**: `forms/task-book-humanities.tex`
-- **用途**: 明确论文任务要求
-- **填写时间**: 开题前
-- **关键内容**:
-  - 主要内容及要求
-  - 研究的主要问题和预期目标
-  - 研究方法和手段
-  - 进度安排
-  - 主要参考文献
-  - 应收集的资料
-
-### 四、开题报告（3个）
-
-#### 7. 毕业设计（论文）开题报告（理工农医类）
-- **文件**: `reports/proposal-science.tex`
-- **用途**: 阐述设计/论文研究计划
-- **填写时间**: 开题阶段
-- **关键内容**:
-  - 选题的背景及意义
-  - 研究的主要内容
-  - 拟采用的研究方法、技术路线及可行性分析
-  - 研究工作的步骤与进度安排
-  - 主要参考文献
-  - 指导教师意见（对课题的深度、广度及工作量的意见和对结果的预测）、系意见
-
-#### 8. 毕业设计（论文）开题报告（人文经管类）
-- **文件**: `reports/proposal-humanities.tex`
-- **用途**: 阐述论文研究计划
-- **填写时间**: 开题阶段
-- **关键内容**:
-  - 选题的背景、意义及研究现状
-  - 研究的主要内容和拟解决的关键问题
-  - 研究方法和手段
-  - 论文提纲
-  - 研究工作的步骤与进度安排
-  - 主要参考文献
-  - 指导教师意见（对课题的深度、广度及工作量的意见和对结果的预测）、系意见
-
-#### 9. 毕业设计（论文）开题答辩记录
-- **文件**: `forms/proposal-defense-record.tex`
-- **用途**: 记录开题答辩过程
-- **填写时间**: 开题答辩时
-- **关键内容**:
-  - 开题答辩小组成员（姓名/职称/工作单位）
-  - 开题答辩情况简述
-  - 开题答辩结果（通过/未通过）
-  - 开题答辩小组组长签字、记录人签字
-
-### 五、中期检查与翻译（2个）
-
-#### 10. 毕业设计（论文）外文资料翻译
-- **文件**: `reports/translation.tex`
-- **用途**: 外文文献翻译
-- **填写时间**: 开题后至中期检查前
-- **关键内容**:
-  - 外文资料原文（不少于3000个外文印刷符号）
-  - 中文翻译（不少于2000汉字）
-  - 指导教师评语
-- **要求**: 外文资料应与毕业设计（论文）内容相关
-
-#### 11. 毕业设计（论文）中期检查表
-- **文件**: `forms/midterm-check.tex`
-- **用途**: 检查进度和质量
-- **填写时间**: 中期检查阶段
-- **关键内容**:
-  - 符合规范化的要求（任务书/开题报告 有/无，外文翻译/毕业实习质量 优良中差）
-  - 学习态度、出勤情况（优良中差）
-  - 工作进度（快/按计划进行/慢）
-  - 中期工作汇报及解答问题情况（优良中差）
-  - 中期成绩
-  - 毕业设计（论文）调整情况
-  - 系意见
-
-### 六、评价与答辩（4个）
-
-#### 12. 毕业设计（论文）说明书
-- **文件**: `../main.tex`（主模板，已完成）
-- **用途**: 毕业设计（论文）正文
-- **填写时间**: 全过程
-- **详见**: [主目录README.md](../README.md) 和 [USAGE.md](../USAGE.md)
-
-#### 13. 毕业设计（论文）评语
-- **文件**: `evaluations/thesis-evaluation.tex`
-- **用途**: 指导教师、评阅教师、答辩小组评价
-- **填写时间**: 答辩前后
-- **关键内容**:
-  - 指导教师评语 + 推荐成绩
-  - 评阅教师评语 + 推荐成绩
-  - 答辩小组评语 + 答辩成绩
-
-#### 14. 毕业设计（论文）答辩记录
-- **文件**: `forms/defense-record.tex`
-- **用途**: 记录答辩过程
-- **填写时间**: 答辩时
-- **关键内容**:
-  - 答辩小组成员
-  - 答辩中提出的问题及学生回答问题的简要情况
-  - 答辩小组组长签字、记录人
-
-#### 15. 毕业设计（论文）评分表（理工农医类）
-- **文件**: `evaluations/grading-science.tex`
-- **用途**: 综合评分
-- **填写时间**: 答辩后
-- **评分项目**（8大项，权重制）:
-  1. 毕业实习（0.05）
-  2. 开题情况（0.05）
-  3. 资料翻译（0.05）
-  4. 平时工作态度（0.05）
-  5. 课题完成质量（0.20）
-  6. 创新（0.10）
-  7. 设计（论文）撰写质量（0.10）
-  8. 答辩（0.40）
-- **评分方法**: 第1-4项由指导教师单独评分；第5-7项由指导教师和评阅教师分别评分（各占50%）；第8项由答辩小组评分
-- **成绩标准**: 优秀（90-100）、良好（80-89）、中等（70-79）、及格（60-69）、不及格（60以下）
-
-#### 16. 毕业设计（论文）评分表（人文经管类）
-- **文件**: `evaluations/grading-humanities.tex`
-- **用途**: 综合评分
-- **填写时间**: 答辩后
-- **评分项目**（8大项，权重制）:
-  1. 毕业实习（0.05）
-  2. 开题情况（0.05）
-  3. 资料翻译（0.05）
-  4. 平时工作态度（0.05）
-  5. 学术水平及创新性（0.10）
-  6. 论证能力（0.20）
-  7. 撰写质量（0.10）
-  8. 答辩（0.40）
-- **评分方法**: 同理工农医类
-- **成绩标准**: 同理工农医类
-
-## 🚀 使用方法
-
-### 编译单个模板
-
-每个模板都是独立的 LaTeX 文档，可单独编译：
+### 单个模板
 
 ```bash
-# 进入模板所在目录
 cd templates/forms
-
-# 编译（以选题审题表为例）
-xelatex topic-selection.tex
-
-# 或使用 latexmk
 latexmk -xelatex topic-selection.tex
 ```
 
+`reports/` 和 `evaluations/` 目录中的模板用法相同。
+
 ### 批量编译
 
-在 `templates/` 目录下创建 `Makefile`（可选）：
+在仓库根目录执行：
 
-```makefile
-TEX = xelatex
-FORMS = $(wildcard forms/*.tex)
-REPORTS = $(wildcard reports/*.tex)
-EVALUATIONS = $(wildcard evaluations/*.tex)
-ALL_TEX = $(FORMS) $(REPORTS) $(EVALUATIONS)
-
-all: $(ALL_TEX:.tex=.pdf)
-
-%.pdf: %.tex
-	$(TEX) $<
-
-clean:
-	find . -name "*.aux" -o -name "*.log" -o -name "*.out" -delete
-
-cleanall: clean
-	find . -name "*.pdf" -delete
+```bash
+for f in templates/{forms,reports,evaluations}/*.tex; do
+  (cd "$(dirname "$f")" && latexmk -xelatex "$(basename "$f")")
+done
 ```
 
-## ⚙️ 环境要求
+## 字体与跨平台策略
 
-所有模板使用与主模板相同的环境要求：
+模板默认不依赖系统商业字体，而是通过仓库自带的开源字体保证一致编译：
 
-- **TeX Live 2020+** 或 **MikTeX 2.9+**
-- **XeLaTeX** 编译器
-- **中文字体**: 宋体、黑体、楷体_GB2312、仿宋_GB2312
+- 西文衬线：`Tinos`
+- 西文等宽：`Courier Prime`
+- 中文正文：`Noto Serif CJK SC`
+- 中文黑体：`Noto Sans CJK SC`
+- 中文楷体：`LXGW WenKai GB`
+- 中文仿宋：`FandolFang`
 
-详见 [主目录README.md](../README.md#环境要求)
+如果本机已有合法的方正或微软字体授权，可将对应字体文件放入 [fonts/proprietary/](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/fonts/proprietary/) 以覆盖默认映射。具体文件名见 [fonts/README.md](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/fonts/README.md)。
 
-## ✨ 格式特性
+## 与测试的关系
 
-所有模板均遵循以下规范：
+这些模板受 [tests/test_pixel_perfect_alignment.py](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/tests/test_pixel_perfect_alignment.py) 约束。当前 E2E 会检查：
 
-### 页面设置
-- **纸张**: A4 (210mm × 297mm)
-- **页边距**: 上下左右均为 2.5cm
-- **行距**: 1.25倍行距（正文类文档）
+- 18 个模板的 `tex/pdf` 是否完整
+- LaTeX 表格列宽是否对应 Word XML 表格网格
+- 编译后 PDF 的页数、方向、分页锚点是否与手册基线一致
+- 字体资源和 PDF 嵌入字体是否符合当前模式
 
-### 字体和字号
-- **标题**: 三号黑体
-- **正文**: 小四号宋体
-- **表格**: 小四号或五号宋体
-- **英文**: Times New Roman
+## 说明
 
-### 表格格式
-- 使用精确的单元格边距和行高
-- 列宽精确控制
-- 与Word模板完全对齐
-
-### Logo使用
-- 所有模板使用 `jou-name-large.png` (9cm宽)
-- 路径: `../../figures/jou-name-large.png`（相对于templates子目录）
-
-## 📝 填写顺序建议
-
-按时间顺序，建议的填写流程：
-
-1. **实习前**: 实习登记表 → 实习日记（每日）→ 实习报告书
-2. **开题前**: 选题审题表 → 任务书
-3. **开题阶段**: 开题报告 → 开题答辩记录
-4. **中期**: 外文资料翻译 → 中期检查表
-5. **答辩前**: 毕业设计（论文）说明书
-6. **答辩**: 答辩记录 → 论文评语 → 评分表
-
-## 🔧 自定义修改
-
-### 修改学校信息
-
-如需更换学校logo，替换 `figures/` 目录下的图片文件即可。
-
-### 修改表格内容
-
-每个模板都有清晰的结构注释，可以根据需要：
-- 调整表格行数
-- 修改字段名称
-- 增删内容区域
-
-### 调整格式细节
-
-在模板导言区可修改：
-```latex
-% 表格精确配置
-\setlength{\tabcolsep}{6pt}         % 列间距
-\renewcommand{\arraystretch}{1.3}   % 行高倍数
-```
-
-## 📚 参考文档
-
-- [主目录README.md](../README.md) - 项目总览
-- [USAGE.md](../USAGE.md) - 详细使用指南
-- [TABLE-EXAMPLES.md](../TABLE-EXAMPLES.md) - 表格示例
-- [ASSETS.md](../ASSETS.md) - 图片资源说明
-
-## ❓ 常见问题
-
-### Q: 编译报错找不到图片？
-
-A: 确保相对路径正确。在 `templates/` 子目录编译时，logo路径为 `../../figures/jou-name-large.png`
-
-### Q: 如何修改表格大小？
-
-A: 调整 `\begin{tabular}` 中的列宽参数，例如 `L{2.5cm}` 表示左对齐、宽度2.5cm的列。
-
-### Q: 能否导出为Word格式？
-
-A: 可以先编译为PDF，然后使用 `pandoc` 或在线工具转换为Word（可能需要手动调整格式）。
-
-### Q: 某个模板不需要怎么办？
-
-A: 每个模板都是独立的，不使用的模板可以直接忽略，不影响其他模板。
-
-## 📄 许可证
-
-[LaTeX Project Public License v1.3c](https://www.latex-project.org/lppl.txt)
-
-## 🤝 贡献
-
-发现问题或有改进建议？请提交 [Issue](https://github.com/TsekaLuk/JOU-Undergraduate-Thesis-LaTeX-Template/issues)
-
----
-
-**注**: 所有模板均按照《江苏海洋大学2026届毕业实习与设计（论文）工作手册》官方要求制作，实现像素级对齐。如学校要求更新，请及时查看最新版本。
+当前仓库公开可复现的标准是“工作手册 WPS 渲染基线对齐”。如果你需要再往前推进到逐像素叠图回归，需要在同一渲染器和同一字体资源下增加图像 diff 流程。

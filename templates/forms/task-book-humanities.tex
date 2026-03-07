@@ -1,15 +1,10 @@
 % 江苏海洋大学毕业设计（论文）任务书（人文经管类）
-% 像素级对齐Word XML: Table 10 (6列网格)
-% 列宽: 1.46 | 1.25 | 2.53 | 2.17 | 4.21 | 3.29 cm = 14.91cm
+% 对齐参考：工作手册 PDF 第 23-26 页，Word XML Table 10
 
 \documentclass[a4paper,zihao=-4]{ctexart}
 
 \RequirePackage{geometry}
-\RequirePackage{graphicx}
-\RequirePackage{array}
-\RequirePackage{multirow}
-\RequirePackage{makecell}
-\RequirePackage{enumitem}
+\RequirePackage{../../styles/jouhandbook}
 
 \geometry{
     a4paper,
@@ -19,137 +14,67 @@
     right=2.5cm
 }
 
-% 像素级对齐: tabcolsep=0pt使列宽精确匹配Word XML
-\setlength{\tabcolsep}{0pt}
-\renewcommand{\arraystretch}{1.5}
-
-% 自定义列类型
-\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
-\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
-
 \begin{document}
-
 \pagestyle{empty}
 
-% 顶部学校logo和标题
 \begin{center}
-    \includegraphics[width=9cm]{../../figures/jou-name-large.png}\\[0.5cm]
-    {\heiti\zihao{3}\textbf{毕业设计（论文）任务书}}\\[0.3cm]
+    {\heiti\zihao{3}\textbf{毕业设计（论文）任务书}}\\[0.2cm]
     {\heiti\zihao{-4}（人文经管类）}
 \end{center}
 
-\vspace{0.5cm}
+\vspace{0.3cm}
 
-% ============================================================================
-% 封面信息表格 - Word XML Table 10 (6列网格)
-% 列宽: 1.46 | 1.25 | 2.53 | 2.17 | 4.21 | 3.29 cm = 14.91cm
-% ============================================================================
-
-\begin{table}[h]
-\centering
-\zihao{-4}\songti
-\begin{tabular}{|L{1.46cm}|L{1.25cm}|L{2.53cm}|L{2.17cm}|L{4.21cm}|L{3.29cm}|}
-\hline
-\multicolumn{2}{|L{2.71cm}|}{\hspace{3pt}\textbf{题\hspace{1em}目}} & \multicolumn{4}{L{10.2cm}|}{} \\
-\hline
-\multicolumn{2}{|L{2.71cm}|}{\hspace{3pt}\textbf{学\hspace{1em}院}} & \multicolumn{4}{L{10.2cm}|}{} \\
-\hline
-\multicolumn{2}{|L{2.71cm}|}{\hspace{3pt}\textbf{专业班级}} & \multicolumn{4}{L{10.2cm}|}{} \\
-\hline
-\multicolumn{2}{|L{2.71cm}|}{\hspace{3pt}\textbf{学生姓名}} & \multicolumn{2}{L{4.7cm}|}{} & \hspace{3pt}\textbf{学\hspace{1em}号} & \\
-\hline
-\end{tabular}
-\end{table}
-
-% ============================================================================
-% 内容表格 - Word XML Table 10 (6列网格)
-% 列宽: 1.46 | 1.25 | 2.53 | 2.17 | 4.21 | 3.29 cm = 14.91cm
-% ============================================================================
-
-\begin{table}[h]
-\centering
-\zihao{-4}\songti
-\begin{tabular}{|L{1.46cm}|L{1.25cm}|L{2.53cm}|L{2.17cm}|L{4.21cm}|L{3.29cm}|}
-\hline
-% 1. 毕业设计应达到的目的
-\multicolumn{6}{|L{14.91cm}|}{\hspace{3pt}\textbf{1.毕业设计（论文）应达到的目的}} \\
-\multicolumn{6}{|L{14.91cm}|}{
-\vspace{4cm}
-\hfill
-} \\
-\hline
-
-% 2. 研究内容和要求
-\multicolumn{6}{|L{14.91cm}|}{\hspace{3pt}\textbf{2.毕业设计（论文）的研究内容和要求}} \\
-\multicolumn{6}{|L{14.91cm}|}{
-\vspace{4cm}
-\hfill
-} \\
-\hline
-
-% 3. 研究方案和目标
-\multicolumn{6}{|L{14.91cm}|}{\hspace{3pt}\textbf{3.研究方案和目标}} \\
-\multicolumn{6}{|L{14.91cm}|}{
-\vspace{4cm}
-\hfill
-} \\
-\hline
-
-% 4. 毕业设计成果要求
-\multicolumn{6}{|L{14.91cm}|}{\hspace{3pt}\textbf{4.毕业设计（论文）成果要求}} \\
-\multicolumn{6}{|L{14.91cm}|}{
-\vspace{4cm}
-\hfill
-} \\
-\hline
-
-% 5. 主要参考文献
-\multicolumn{6}{|L{14.91cm}|}{\hspace{3pt}\textbf{5.主要参考文献}} \\
-\multicolumn{6}{|L{14.91cm}|}{
-\vspace{4cm}
-\hfill
-} \\
-\hline
-
-% 6. 毕业设计工作进度计划
-\multicolumn{6}{|L{14.91cm}|}{\hspace{3pt}\textbf{6.毕业设计（论文）工作进度计划}} \\
-\hline
-\multicolumn{2}{|L{2.71cm}|}{\hspace{3pt}\textbf{序号}} & \multicolumn{2}{L{4.7cm}|}{\hspace{3pt}\textbf{起\hspace{0.5em}迄\hspace{0.5em}日\hspace{0.5em}期}} & \multicolumn{2}{L{7.5cm}|}{\hspace{3pt}\textbf{工\hspace{0.5em}作\hspace{0.5em}内\hspace{0.5em}容}} \\
-\hline
-\multicolumn{2}{|L{2.71cm}|}{} & \multicolumn{2}{L{4.7cm}|}{} & \multicolumn{2}{L{7.5cm}|}{} \\
-\hline
-\multicolumn{2}{|L{2.71cm}|}{} & \multicolumn{2}{L{4.7cm}|}{} & \multicolumn{2}{L{7.5cm}|}{} \\
-\hline
-\multicolumn{2}{|L{2.71cm}|}{} & \multicolumn{2}{L{4.7cm}|}{} & \multicolumn{2}{L{7.5cm}|}{} \\
-\hline
-\multicolumn{2}{|L{2.71cm}|}{} & \multicolumn{2}{L{4.7cm}|}{} & \multicolumn{2}{L{7.5cm}|}{} \\
-\hline
-\multicolumn{2}{|L{2.71cm}|}{} & \multicolumn{2}{L{4.7cm}|}{} & \multicolumn{2}{L{7.5cm}|}{} \\
-\hline
-
-% 指导教师签名
-\multicolumn{6}{|L{14.91cm}|}{
-\hspace{3pt}\textbf{指导教师}\hspace{6cm}\textbf{日期：}\hspace{1cm}年\hspace{0.5cm}月\hspace{0.5cm}日
-} \\[0.8cm]
-\hline
-
-% 系意见
-\multicolumn{6}{|L{14.91cm}|}{
-\hspace{3pt}\textbf{系意见：}
-\vspace{2cm}
-
-\hfill 系主任签字：\underline{\hspace{4cm}}\hspace{1cm}年\hspace{0.5cm}月\hspace{0.5cm}日\hspace{3pt}
-} \\
-\hline
-
-\end{tabular}
-\end{table}
-
-\vfill
-
+{\zihao{-4}\songti
 \begin{center}
-    \zihao{5}\songti
-    \textbf{注：}本任务书一式三份，学生、指导教师、学院各执一份。
+\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{|L{1.46cm}|L{1.25cm}|L{2.53cm}|L{2.17cm}|L{4.21cm}|L{3.29cm}|}
+\hline
+\multicolumn{2}{|L{2.71cm}|}{题\hspace{1em}目} & \multicolumn{4}{L{10.20cm}|}{毕业设计（论文）题目（四号楷体\_GB2312下同）} \\
+\hline
+\multicolumn{2}{|L{2.71cm}|}{学\hspace{1em}院} & \multicolumn{4}{L{10.20cm}|}{商学院} \\
+\hline
+\multicolumn{2}{|L{2.71cm}|}{专业班级} & \multicolumn{4}{L{10.20cm}|}{国际经济与贸易\hspace{0.8em}国贸201} \\
+\hline
+\multicolumn{2}{|L{2.71cm}|}{学生姓名} & \multicolumn{2}{L{4.70cm}|}{扬帆起航} & 学\hspace{1em}号 & 2020000001 \\
+\hline
+\end{tabular}
 \end{center}
+}
+
+\newpage
+\pagestyle{empty}
+
+{\zihao{-4}\songti
+3.研究方案和目标\par
+\vspace{4.5cm}
+4.毕业设计（论文）成果要求\par
+\vspace{6.0cm}
+}
+
+\newpage
+\pagestyle{empty}
+
+{\zihao{-4}\songti
+5.主要参考文献\par
+要求按学术期刊（如江苏海洋大学学报）书写，例如：\par
+[1] Zhou Xianyong, Wu Qiulin, Jia Huiru, et al. Searchlight trapping reveals seasonal cross-ocean migration of fall armyworm over the South China Sea[J]. Journal of Integrative Agriculture, 2021, 20(03): 673-684.\par
+[2] 方学智, 刘敬喜, 杨敏, 等. 船舶与海洋工程概论[M]. 第2版. 北京: 清华大学出版社, 2019.\par
+[3] 李娜. 石油烃对海洋微藻氨基酸稳定同位素组成影响[D]. 大连: 大连海事大学, 2020.\par
+}
+
+\newpage
+\pagestyle{empty}
+
+{\zihao{-4}\songti
+6.毕业设计（论文）工作进度计划\par
+\vspace{5.0cm}
+序号\hspace{3em}起\hspace{0.5em}迄\hspace{0.5em}日\hspace{0.5em}期\hspace{4em}工\hspace{0.5em}作\hspace{0.5em}内\hspace{0.5em}容\par
+\vspace{5.0cm}
+指导教师\hspace{2cm}日\hspace{1em}期\hspace{2cm}年\hspace{0.7cm}月\hspace{0.7cm}日\par
+\vspace{1.0cm}
+系意见：\par
+\vspace{2.0cm}
+\hfill 系主任签字：\hspace{3.2cm}年\hspace{0.7cm}月\hspace{0.7cm}日
+}
 
 \end{document}
