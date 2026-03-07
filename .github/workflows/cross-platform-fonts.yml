@@ -10,6 +10,9 @@ jobs:
   thesis-build:
     name: ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
+    env:
+      PYTHONUTF8: "1"
+      PYTHONIOENCODING: utf-8
     strategy:
       fail-fast: false
       matrix:
@@ -42,6 +45,10 @@ jobs:
       - name: Install TeX Live
         uses: zauguin/install-texlive@v4
         with:
+          # Pin the frozen TeX Live repo so fresh CI installs do not break during annual mirror rollover.
+          texlive_version: 2025
+          repository: https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2025/tlnet-final
+          cache_version: 1
           package_file: .github/texlive.packages
 
       - name: Download bundled fonts
