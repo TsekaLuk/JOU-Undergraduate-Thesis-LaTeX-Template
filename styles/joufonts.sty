@@ -82,44 +82,37 @@
 }
 
 \newcommand{\jou@setupopensourcecjk}{%
-    % 像素级对齐微调说明:
-    % - Noto CJK 字体比 GB2312 编码字体略窄 (约2-3%)
-    % - 添加 Scale=1.02 补偿宽度差异,提升与 Word/WPS 渲染的对齐度
-    % - 如需绝对精确对齐,请使用 fonts/proprietary/ 商业字体覆盖
+    % 开源字体兜底方案（仅在系统无商业字体时使用）
+    % 注意：开源字体与商业字体字宽可能有 2-5% 差异
+    % 建议：确保系统安装了 SimSun/KaiTi/FangSong (Windows) 或 STSong/STKaiti/STFangsong (macOS)
     \setCJKmainfont[
         Path=\JOUOpenSourceFontDir/,
         UprightFont=NotoSerifCJKsc-Regular.otf,
-        BoldFont=NotoSerifCJKsc-Bold.otf,
-        Scale=1.02
+        BoldFont=NotoSerifCJKsc-Bold.otf
     ]{NotoSerifCJKsc-Regular.otf}%
     \setCJKsansfont[
         Path=\JOUOpenSourceFontDir/,
         UprightFont=NotoSansCJKsc-Regular.otf,
-        BoldFont=NotoSansCJKsc-Bold.otf,
-        Scale=1.02
+        BoldFont=NotoSansCJKsc-Bold.otf
     ]{NotoSansCJKsc-Regular.otf}%
     \setCJKfamilyfont{zhsong}[
         Path=\JOUOpenSourceFontDir/,
         UprightFont=NotoSerifCJKsc-Regular.otf,
-        BoldFont=NotoSerifCJKsc-Bold.otf,
-        Scale=1.02
+        BoldFont=NotoSerifCJKsc-Bold.otf
     ]{NotoSerifCJKsc-Regular.otf}%
     \setCJKfamilyfont{zhhei}[
         Path=\JOUOpenSourceFontDir/,
         UprightFont=NotoSansCJKsc-Regular.otf,
-        BoldFont=NotoSansCJKsc-Bold.otf,
-        Scale=1.02
+        BoldFont=NotoSansCJKsc-Bold.otf
     ]{NotoSansCJKsc-Regular.otf}%
     \setCJKfamilyfont{zhkai}[
         Path=\JOUOpenSourceFontDir/,
         UprightFont=LXGWWenKaiGB-Regular.ttf,
-        BoldFont=LXGWWenKaiGB-Medium.ttf,
-        Scale=1.01
+        BoldFont=LXGWWenKaiGB-Medium.ttf
     ]{LXGWWenKaiGB-Regular.ttf}%
     \setCJKfamilyfont{zhfs}[
         Path=\JOUOpenSourceFontDir/,
-        UprightFont=FandolFang-Regular.otf,
-        Scale=1.01
+        UprightFont=FandolFang-Regular.otf
     ]{FandolFang-Regular.otf}%
     \newCJKfontfamily\JOUXiaobiaoSong[
         Path=\JOUOpenSourceFontDir/,
@@ -233,18 +226,90 @@
     ]{NotoSerifCJKsc-Black.otf}%
 }
 
+% ============================================================================
+% 字体加载策略：优先商业字体，确保毕业论文标准化
+% ============================================================================
+% 优先级：
+% 1. fonts/proprietary/ 本地商业字体文件
+% 2. 系统安装的商业字体（Windows/macOS/Linux 自动检测）
+% 3. fonts/opensource/ 仓库开源字体（最后兜底）
+% ============================================================================
+
+% 检查仓库开源字体是否存在（兜底方案必须可用）
 \IfFileExists{\JOUOpenSourceFontDir/Tinos-Regular.ttf}{}{%
     \PackageError{joufonts}{Missing vendored fonts under fonts/opensource}{Run python3 scripts/download_fonts.py first.}
 }
 
+% 拉丁字体加载逻辑
 \IfFileExists{\JOUProprietaryFontDir/TimesNewRoman-Regular.ttf}{%
+    % 优先级1: 本地 proprietary 文件
     \jou@setupproprietarylatin
 }{%
-    \jou@setupopenlatin
+    % 优先级2: 尝试系统字体
+    \IfFontExistsTF{Times New Roman}{%
+        \renewcommand{\JOUFontMode}{system-licensed}%
+        \setmainfont{Times New Roman}%
+        \IfFontExistsTF{Arial}{%
+            \setsansfont{Arial}%
+        }{%
+            \setsansfont[Path=\JOUOpenSourceFontDir/,UprightFont=NotoSansCJKsc-Regular.otf,BoldFont=NotoSansCJKsc-Bold.otf]{NotoSansCJKsc-Regular.otf}%
+        }%
+        \IfFontExistsTF{Courier New}{%
+            \setmonofont{Courier New}%
+        }{%
+            \setmonofont[Path=\JOUOpenSourceFontDir/,UprightFont=CourierPrime-Regular.ttf,BoldFont=CourierPrime-Bold.ttf]{CourierPrime-Regular.ttf}%
+        }%
+    }{%
+        % 优先级3: 使用仓库开源字体（兜底）
+        \jou@setupopenlatin
+    }%
 }
 
-\IfFileExists{\JOUProprietaryFontDir/FangZhengXiaoBiaoSongJianTi.ttf}{%
+% CJK 字体加载逻辑
+\IfFileExists{\JOUProprietaryFontDir/SimSun.ttf}{%
+    % 优先级1: 本地 proprietary 文件
     \jou@setupproprietarycjk
 }{%
-    \jou@setupopensourcecjk
+    % 优先级2: 尝试系统字体（跨平台检测）
+    \newif\ifjou@systemcjkfound
+    \jou@systemcjkfoundfalse
+    % 检测 Windows 字体
+    \IfFontExistsTF{SimSun}{%
+        \jou@systemcjkfoundtrue
+        \renewcommand{\JOUFontMode}{system-licensed}%
+        \setCJKmainfont{SimSun}%
+        \IfFontExistsTF{SimHei}{\setCJKsansfont{SimHei}\setCJKfamilyfont{zhhei}{SimHei}}{\setCJKsansfont[Path=\JOUOpenSourceFontDir/,UprightFont=NotoSansCJKsc-Regular.otf]{NotoSansCJKsc-Regular.otf}\setCJKfamilyfont{zhhei}[Path=\JOUOpenSourceFontDir/,UprightFont=NotoSansCJKsc-Regular.otf]{NotoSansCJKsc-Regular.otf}}%
+        \setCJKfamilyfont{zhsong}{SimSun}%
+        \IfFontExistsTF{KaiTi}{\setCJKfamilyfont{zhkai}{KaiTi}}{\setCJKfamilyfont{zhkai}[Path=\JOUOpenSourceFontDir/,UprightFont=LXGWWenKaiGB-Regular.ttf]{LXGWWenKaiGB-Regular.ttf}}%
+        \IfFontExistsTF{FangSong}{\setCJKfamilyfont{zhfs}{FangSong}}{\setCJKfamilyfont{zhfs}[Path=\JOUOpenSourceFontDir/,UprightFont=FandolFang-Regular.otf]{FandolFang-Regular.otf}}%
+        \IfFontExistsTF{FZXiaoBiaoSong-B05}{\newCJKfontfamily\JOUXiaobiaoSong{FZXiaoBiaoSong-B05}}{\newCJKfontfamily\JOUXiaobiaoSong[Path=\JOUOpenSourceFontDir/,UprightFont=NotoSerifCJKsc-Black.otf]{NotoSerifCJKsc-Black.otf}}%
+        \IfFontExistsTF{STXingkai}{\newCJKfontfamily\JOUXingkai{STXingkai}}{\newCJKfontfamily\JOUXingkai[Path=\JOUOpenSourceFontDir/,UprightFont=LXGWWenKaiGB-Medium.ttf]{LXGWWenKaiGB-Medium.ttf}}%
+        \newCJKfontfamily\JOULishu[Path=\JOUOpenSourceFontDir/,UprightFont=NotoSerifCJKsc-Black.otf]{NotoSerifCJKsc-Black.otf}%
+    }{}%
+    % 检测 macOS 字体
+    \ifjou@systemcjkfound\else
+        \IfFontExistsTF{STSong}{%
+            \jou@systemcjkfoundtrue
+            \renewcommand{\JOUFontMode}{system-licensed}%
+            \setCJKmainfont{STSong}%
+            \IfFontExistsTF{STHeiti}{\setCJKsansfont{STHeiti}\setCJKfamilyfont{zhhei}{STHeiti}}{\setCJKsansfont[Path=\JOUOpenSourceFontDir/,UprightFont=NotoSansCJKsc-Regular.otf]{NotoSansCJKsc-Regular.otf}\setCJKfamilyfont{zhhei}[Path=\JOUOpenSourceFontDir/,UprightFont=NotoSansCJKsc-Regular.otf]{NotoSansCJKsc-Regular.otf}}%
+            \setCJKfamilyfont{zhsong}{STSong}%
+            \IfFontExistsTF{STKaiti}{\setCJKfamilyfont{zhkai}{STKaiti}}{\setCJKfamilyfont{zhkai}[Path=\JOUOpenSourceFontDir/,UprightFont=LXGWWenKaiGB-Regular.ttf]{LXGWWenKaiGB-Regular.ttf}}%
+            \IfFontExistsTF{STFangsong}{\setCJKfamilyfont{zhfs}{STFangsong}}{\setCJKfamilyfont{zhfs}[Path=\JOUOpenSourceFontDir/,UprightFont=FandolFang-Regular.otf]{FandolFang-Regular.otf}}%
+            \IfFontExistsTF{FZXiaoBiaoSong-B05}{\newCJKfontfamily\JOUXiaobiaoSong{FZXiaoBiaoSong-B05}}{\newCJKfontfamily\JOUXiaobiaoSong[Path=\JOUOpenSourceFontDir/,UprightFont=NotoSerifCJKsc-Black.otf]{NotoSerifCJKsc-Black.otf}}%
+            \IfFontExistsTF{STXingkai}{\newCJKfontfamily\JOUXingkai{STXingkai}}{\newCJKfontfamily\JOUXingkai[Path=\JOUOpenSourceFontDir/,UprightFont=LXGWWenKaiGB-Medium.ttf]{LXGWWenKaiGB-Medium.ttf}}%
+            \newCJKfontfamily\JOULishu[Path=\JOUOpenSourceFontDir/,UprightFont=NotoSerifCJKsc-Black.otf]{NotoSerifCJKsc-Black.otf}%
+        }{}%
+    \fi
+    % 优先级3: 使用仓库开源字体（兜底）
+    \ifjou@systemcjkfound\else
+        \jou@setupopensourcecjk
+    \fi
+}
+
+% 编译时输出字体模式信息
+\AtBeginDocument{%
+    \typeout{===============================================}%
+    \typeout{JOU Font Mode: \JOUFontMode}%
+    \typeout{===============================================}%
 }
