@@ -1,6 +1,15 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{joufonts}[2026/03/07 JOU shared font setup]
 
+% 严格字体检查选项
+% 用法: \usepackage[strictfonts]{joufonts}
+% 效果: 缺少商业字体时阻止编译
+\newif\ifjou@strictfontcheck
+\jou@strictfontcheckfalse
+\DeclareOption{strictfonts}{\jou@strictfontchecktrue}
+\DeclareOption*{\PackageWarning{joufonts}{Unknown option '\CurrentOption'}}
+\ProcessOptions\relax
+
 \RequirePackage{iftex}
 \ifXeTeX\else
     \PackageError{joufonts}{This template requires XeLaTeX}{Please compile with XeLaTeX.}
@@ -307,9 +316,82 @@
     \fi
 }
 
-% 编译时输出字体模式信息
+% 编译时字体模式检查和警告
 \AtBeginDocument{%
+    \typeout{}%
     \typeout{===============================================}%
     \typeout{JOU Font Mode: \JOUFontMode}%
     \typeout{===============================================}%
+    \typeout{}%
+    %
+    \def\JOUOSSMode{oss}%
+    \ifx\JOUFontMode\JOUOSSMode
+        % 商业字体完全缺失 - 发出严重警告
+        \typeout{}%
+        \typeout{!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!}%
+        \typeout{! 错误: 未检测到商业字体                  !}%
+        \typeout{!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!}%
+        \typeout{}%
+        \typeout{毕业论文需要标准化，必须使用商业字体！}%
+        \typeout{当前未找到任何商业字体（对齐度将降低至 80-85\%）}%
+        \typeout{}%
+        \typeout{解决方案:}%
+        \typeout{}%
+        \typeout{>>> 第一步：运行字体检测脚本}%
+        \typeout{}%
+        \typeout{    python3 scripts/check_fonts.py}%
+        \typeout{}%
+        \typeout{>>> 第二步：根据你的操作系统安装字体}%
+        \typeout{}%
+        \typeout{    Windows 用户:}%
+        \typeout{    - 检查 C:\string\Windows\string\Fonts 是否有宋体、楷体、仿宋}%
+        \typeout{    - 如缺失，安装 Microsoft Office (自带标准字体)}%
+        \typeout{}%
+        \typeout{    macOS 用户:}%
+        \typeout{    - 打开「字体册」应用}%
+        \typeout{    - 搜索 STSong, STKaiti, STFangsong}%
+        \typeout{    - 如缺失，从系统安装盘恢复字体}%
+        \typeout{}%
+        \typeout{    Linux 用户:}%
+        \typeout{    - Ubuntu/Debian: sudo apt install ttf-mscorefonts-installer}%
+        \typeout{    - Arch Linux:    yay -S ttf-ms-fonts}%
+        \typeout{    - 安装后运行:    fc-cache -fv}%
+        \typeout{}%
+        \typeout{>>> 第三步（可选）：手动下载字体}%
+        \typeout{}%
+        \typeout{    将以下字体文件放入 fonts/proprietary/:}%
+        \typeout{    - SimSun.ttf (宋体)}%
+        \typeout{    - SimHei.ttf (黑体)}%
+        \typeout{    - KaiTi_GB2312.ttf (楷体)}%
+        \typeout{    - FangSong_GB2312.ttf (仿宋)}%
+        \typeout{    - TimesNewRoman-Regular.ttf}%
+        \typeout{}%
+        \typeout{!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!}%
+        %
+        % 严格模式：阻止编译
+        \ifjou@strictfontcheck
+            \typeout{! 严格字体检查已启用，编译终止          !}%
+            \typeout{!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!}%
+            \typeout{}%
+            \PackageError{joufonts}{%
+                Commercial fonts required but not found!\MessageBreak
+                Strict font checking is enabled.\MessageBreak
+                \MessageBreak
+                Run: python3 scripts/check_fonts.py\MessageBreak
+                See above for installation instructions.%
+            }{%
+                Install system fonts or place font files in fonts/proprietary/\MessageBreak
+                to ensure proper alignment with official handbook.\MessageBreak
+                \MessageBreak
+                To disable strict checking (not recommended),\MessageBreak
+                remove 'strictfonts' option from documentclass.%
+            }%
+        % 宽松模式：警告但继续
+        \else
+            \typeout{! 警告模式：继续使用开源字体（对齐度降低）!}%
+            \typeout{! 提示：如需强制检查，添加 strictfonts 选项!}%
+            \typeout{!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!}%
+            \typeout{}%
+        \fi
+    \fi
 }
