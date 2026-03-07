@@ -1,0 +1,250 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{joufonts}[2026/03/07 JOU shared font setup]
+
+\RequirePackage{iftex}
+\ifXeTeX\else
+    \PackageError{joufonts}{This template requires XeLaTeX}{Please compile with XeLaTeX.}
+\fi
+
+\RequirePackage{fontspec}
+\RequirePackage{xeCJK}
+
+\defaultfontfeatures{Ligatures=TeX}
+
+\newcommand{\JOUOpenSourceFontDir}{fonts/opensource}
+\newcommand{\JOUProprietaryFontDir}{fonts/proprietary}
+
+\IfFileExists{fonts/opensource/Tinos-Regular.ttf}{%
+    \renewcommand{\JOUOpenSourceFontDir}{fonts/opensource}%
+    \renewcommand{\JOUProprietaryFontDir}{fonts/proprietary}%
+}{%
+    \IfFileExists{../../fonts/opensource/Tinos-Regular.ttf}{%
+        \renewcommand{\JOUOpenSourceFontDir}{../../fonts/opensource}%
+        \renewcommand{\JOUProprietaryFontDir}{../../fonts/proprietary}%
+    }{}
+}
+
+\newcommand{\JOUFontMode}{oss}
+
+\newcommand{\jou@setupopenlatin}{%
+    \setmainfont[
+        Path=\JOUOpenSourceFontDir/,
+        UprightFont=Tinos-Regular.ttf,
+        BoldFont=Tinos-Bold.ttf,
+        ItalicFont=Tinos-Italic.ttf,
+        BoldItalicFont=Tinos-BoldItalic.ttf
+    ]{Tinos-Regular.ttf}%
+    \setsansfont[
+        Path=\JOUOpenSourceFontDir/,
+        UprightFont=NotoSansCJKsc-Regular.otf,
+        BoldFont=NotoSansCJKsc-Bold.otf
+    ]{NotoSansCJKsc-Regular.otf}%
+    \setmonofont[
+        Path=\JOUOpenSourceFontDir/,
+        UprightFont=CourierPrime-Regular.ttf,
+        BoldFont=CourierPrime-Bold.ttf
+    ]{CourierPrime-Regular.ttf}%
+}
+
+\newcommand{\jou@setupproprietarylatin}{%
+    \renewcommand{\JOUFontMode}{licensed}%
+    \setmainfont[
+        Path=\JOUProprietaryFontDir/,
+        UprightFont=TimesNewRoman-Regular.ttf,
+        BoldFont=TimesNewRoman-Bold.ttf
+    ]{TimesNewRoman-Regular.ttf}%
+    \IfFileExists{\JOUProprietaryFontDir/Arial-Regular.ttf}{%
+        \setsansfont[
+            Path=\JOUProprietaryFontDir/,
+            UprightFont=Arial-Regular.ttf,
+            BoldFont=Arial-Bold.ttf
+        ]{Arial-Regular.ttf}%
+    }{%
+        \setsansfont[
+            Path=\JOUOpenSourceFontDir/,
+            UprightFont=NotoSansCJKsc-Regular.otf,
+            BoldFont=NotoSansCJKsc-Bold.otf
+        ]{NotoSansCJKsc-Regular.otf}%
+    }%
+    \IfFileExists{\JOUProprietaryFontDir/CourierNew-Regular.ttf}{%
+        \setmonofont[
+            Path=\JOUProprietaryFontDir/,
+            UprightFont=CourierNew-Regular.ttf,
+            BoldFont=CourierNew-Bold.ttf
+        ]{CourierNew-Regular.ttf}%
+    }{%
+        \setmonofont[
+            Path=\JOUOpenSourceFontDir/,
+            UprightFont=CourierPrime-Regular.ttf,
+            BoldFont=CourierPrime-Bold.ttf
+        ]{CourierPrime-Regular.ttf}%
+    }%
+}
+
+\newcommand{\jou@setupopensourcecjk}{%
+    % 像素级对齐微调说明:
+    % - Noto CJK 字体比 GB2312 编码字体略窄 (约2-3%)
+    % - 添加 Scale=1.02 补偿宽度差异,提升与 Word/WPS 渲染的对齐度
+    % - 如需绝对精确对齐,请使用 fonts/proprietary/ 商业字体覆盖
+    \setCJKmainfont[
+        Path=\JOUOpenSourceFontDir/,
+        UprightFont=NotoSerifCJKsc-Regular.otf,
+        BoldFont=NotoSerifCJKsc-Bold.otf,
+        Scale=1.02
+    ]{NotoSerifCJKsc-Regular.otf}%
+    \setCJKsansfont[
+        Path=\JOUOpenSourceFontDir/,
+        UprightFont=NotoSansCJKsc-Regular.otf,
+        BoldFont=NotoSansCJKsc-Bold.otf,
+        Scale=1.02
+    ]{NotoSansCJKsc-Regular.otf}%
+    \setCJKfamilyfont{zhsong}[
+        Path=\JOUOpenSourceFontDir/,
+        UprightFont=NotoSerifCJKsc-Regular.otf,
+        BoldFont=NotoSerifCJKsc-Bold.otf,
+        Scale=1.02
+    ]{NotoSerifCJKsc-Regular.otf}%
+    \setCJKfamilyfont{zhhei}[
+        Path=\JOUOpenSourceFontDir/,
+        UprightFont=NotoSansCJKsc-Regular.otf,
+        BoldFont=NotoSansCJKsc-Bold.otf,
+        Scale=1.02
+    ]{NotoSansCJKsc-Regular.otf}%
+    \setCJKfamilyfont{zhkai}[
+        Path=\JOUOpenSourceFontDir/,
+        UprightFont=LXGWWenKaiGB-Regular.ttf,
+        BoldFont=LXGWWenKaiGB-Medium.ttf,
+        Scale=1.01
+    ]{LXGWWenKaiGB-Regular.ttf}%
+    \setCJKfamilyfont{zhfs}[
+        Path=\JOUOpenSourceFontDir/,
+        UprightFont=FandolFang-Regular.otf,
+        Scale=1.01
+    ]{FandolFang-Regular.otf}%
+    \newCJKfontfamily\JOUXiaobiaoSong[
+        Path=\JOUOpenSourceFontDir/,
+        UprightFont=NotoSerifCJKsc-Black.otf
+    ]{NotoSerifCJKsc-Black.otf}%
+    \newCJKfontfamily\JOUXingkai[
+        Path=\JOUOpenSourceFontDir/,
+        UprightFont=LXGWWenKaiGB-Medium.ttf
+    ]{LXGWWenKaiGB-Medium.ttf}%
+    \newCJKfontfamily\JOULishu[
+        Path=\JOUOpenSourceFontDir/,
+        UprightFont=NotoSerifCJKsc-Black.otf
+    ]{NotoSerifCJKsc-Black.otf}%
+}
+
+\newcommand{\jou@setupproprietarycjk}{%
+    \renewcommand{\JOUFontMode}{licensed}%
+    \IfFileExists{\JOUProprietaryFontDir/SimSun.ttf}{%
+        \setCJKmainfont[
+            Path=\JOUProprietaryFontDir/,
+            UprightFont=SimSun.ttf
+        ]{SimSun.ttf}%
+    }{%
+        \setCJKmainfont[
+            Path=\JOUOpenSourceFontDir/,
+            UprightFont=NotoSerifCJKsc-Regular.otf,
+            BoldFont=NotoSerifCJKsc-Bold.otf
+        ]{NotoSerifCJKsc-Regular.otf}%
+    }%
+    \IfFileExists{\JOUProprietaryFontDir/SimHei.ttf}{%
+        \setCJKsansfont[
+            Path=\JOUProprietaryFontDir/,
+            UprightFont=SimHei.ttf
+        ]{SimHei.ttf}%
+        \setCJKfamilyfont{zhhei}[
+            Path=\JOUProprietaryFontDir/,
+            UprightFont=SimHei.ttf
+        ]{SimHei.ttf}%
+    }{%
+        \setCJKsansfont[
+            Path=\JOUOpenSourceFontDir/,
+            UprightFont=NotoSansCJKsc-Regular.otf,
+            BoldFont=NotoSansCJKsc-Bold.otf
+        ]{NotoSansCJKsc-Regular.otf}%
+        \setCJKfamilyfont{zhhei}[
+            Path=\JOUOpenSourceFontDir/,
+            UprightFont=NotoSansCJKsc-Regular.otf,
+            BoldFont=NotoSansCJKsc-Bold.otf
+        ]{NotoSansCJKsc-Regular.otf}%
+    }%
+    \IfFileExists{\JOUProprietaryFontDir/SimSun.ttf}{%
+        \setCJKfamilyfont{zhsong}[
+            Path=\JOUProprietaryFontDir/,
+            UprightFont=SimSun.ttf
+        ]{SimSun.ttf}%
+    }{%
+        \setCJKfamilyfont{zhsong}[
+            Path=\JOUOpenSourceFontDir/,
+            UprightFont=NotoSerifCJKsc-Regular.otf,
+            BoldFont=NotoSerifCJKsc-Bold.otf
+        ]{NotoSerifCJKsc-Regular.otf}%
+    }%
+    \IfFileExists{\JOUProprietaryFontDir/KaiTi_GB2312.ttf}{%
+        \setCJKfamilyfont{zhkai}[
+            Path=\JOUProprietaryFontDir/,
+            UprightFont=KaiTi_GB2312.ttf
+        ]{KaiTi_GB2312.ttf}%
+    }{%
+        \setCJKfamilyfont{zhkai}[
+            Path=\JOUOpenSourceFontDir/,
+            UprightFont=LXGWWenKaiGB-Regular.ttf,
+            BoldFont=LXGWWenKaiGB-Medium.ttf
+        ]{LXGWWenKaiGB-Regular.ttf}%
+    }%
+    \IfFileExists{\JOUProprietaryFontDir/FangSong_GB2312.ttf}{%
+        \setCJKfamilyfont{zhfs}[
+            Path=\JOUProprietaryFontDir/,
+            UprightFont=FangSong_GB2312.ttf
+        ]{FangSong_GB2312.ttf}%
+    }{%
+        \setCJKfamilyfont{zhfs}[
+            Path=\JOUOpenSourceFontDir/,
+            UprightFont=FandolFang-Regular.otf
+        ]{FandolFang-Regular.otf}%
+    }%
+    \IfFileExists{\JOUProprietaryFontDir/FangZhengXiaoBiaoSongJianTi.ttf}{%
+        \newCJKfontfamily\JOUXiaobiaoSong[
+            Path=\JOUProprietaryFontDir/,
+            UprightFont=FangZhengXiaoBiaoSongJianTi.ttf
+        ]{FangZhengXiaoBiaoSongJianTi.ttf}%
+    }{%
+        \newCJKfontfamily\JOUXiaobiaoSong[
+            Path=\JOUOpenSourceFontDir/,
+            UprightFont=NotoSerifCJKsc-Black.otf
+        ]{NotoSerifCJKsc-Black.otf}%
+    }%
+    \IfFileExists{\JOUProprietaryFontDir/STXingkai.ttf}{%
+        \newCJKfontfamily\JOUXingkai[
+            Path=\JOUProprietaryFontDir/,
+            UprightFont=STXingkai.ttf
+        ]{STXingkai.ttf}%
+    }{%
+        \newCJKfontfamily\JOUXingkai[
+            Path=\JOUOpenSourceFontDir/,
+            UprightFont=LXGWWenKaiGB-Medium.ttf
+        ]{LXGWWenKaiGB-Medium.ttf}%
+    }%
+    \newCJKfontfamily\JOULishu[
+        Path=\JOUOpenSourceFontDir/,
+        UprightFont=NotoSerifCJKsc-Black.otf
+    ]{NotoSerifCJKsc-Black.otf}%
+}
+
+\IfFileExists{\JOUOpenSourceFontDir/Tinos-Regular.ttf}{}{%
+    \PackageError{joufonts}{Missing vendored fonts under fonts/opensource}{Run python3 scripts/download_fonts.py first.}
+}
+
+\IfFileExists{\JOUProprietaryFontDir/TimesNewRoman-Regular.ttf}{%
+    \jou@setupproprietarylatin
+}{%
+    \jou@setupopenlatin
+}
+
+\IfFileExists{\JOUProprietaryFontDir/FangZhengXiaoBiaoSongJianTi.ttf}{%
+    \jou@setupproprietarycjk
+}{%
+    \jou@setupopensourcecjk
+}
