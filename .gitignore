@@ -1,0 +1,37 @@
+# LaTeX 编译产物
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.xdv
+*.nav
+*.snm
+*.vrb
+
+# BibTeX
+*.bib.bak
+
+# PDF 输出 (可选：如果需要跟踪PDF，删除此行)
+*.pdf
+
+# 操作系统文件
+.DS_Store
+Thumbs.db
+
+# 编辑器文件
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# 临时文件
+tmp/
+temp/

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <dcterms:created xsi:type="dcterms:W3CDTF">2020-10-19T00:28:00Z</dcterms:created>
+  <dc:creator>张宝元</dc:creator>
+  <cp:lastModifiedBy>陈立娟</cp:lastModifiedBy>
+  <cp:lastPrinted>2023-11-02T00:47:00Z</cp:lastPrinted>
+  <dcterms:modified xsi:type="dcterms:W3CDTF">2025-10-24T02:35:06Z</dcterms:modified>
+  <dc:title>淮海工学院毕业设计(论文)工作条例</dc:title>
+  <cp:revision>39</cp:revision>
+</cp:coreProperties>

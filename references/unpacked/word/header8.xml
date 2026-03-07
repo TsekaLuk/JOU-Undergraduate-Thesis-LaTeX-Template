@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<w:hdr xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup" xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" xmlns:wpsCustomData="http://www.wps.cn/officeDocument/2013/wpsCustomData" mc:Ignorable="w14 w15 wp14">
+  <w:p w14:paraId="19CD115F">
+    <w:pPr>
+      <w:pStyle w:val="12"/>
+      <w:rPr>
+        <w:rFonts w:hint="default" w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="楷体_GB2312" w:cs="Times New Roman"/>
+        <w:sz w:val="21"/>
+        <w:szCs w:val="21"/>
+      </w:rPr>
+    </w:pPr>
+    <w:r>
+      <w:rPr>
+        <w:rFonts w:hint="default" w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="楷体_GB2312" w:cs="Times New Roman"/>
+        <w:color w:val="0D0D0D" w:themeColor="text1" w:themeTint="F2"/>
+        <w:sz w:val="21"/>
+        <w:szCs w:val="21"/>
+        <w14:textFill>
+          <w14:solidFill>
+            <w14:schemeClr w14:val="tx1">
+              <w14:lumMod w14:val="95000"/>
+              <w14:lumOff w14:val="5000"/>
+            </w14:schemeClr>
+          </w14:solidFill>
+        </w14:textFill>
+      </w:rPr>
+      <w:t>江苏海洋大学二〇二</w:t>
+    </w:r>
+    <w:r>
+      <w:rPr>
+        <w:rFonts w:hint="eastAsia" w:eastAsia="楷体_GB2312" w:cs="Times New Roman"/>
+        <w:color w:val="0D0D0D" w:themeColor="text1" w:themeTint="F2"/>
+        <w:sz w:val="21"/>
+        <w:szCs w:val="21"/>
+        <w:lang w:val="en-US" w:eastAsia="zh-CN"/>
+        <w14:textFill>
+          <w14:solidFill>
+            <w14:schemeClr w14:val="tx1">
+              <w14:lumMod w14:val="95000"/>
+              <w14:lumOff w14:val="5000"/>
+            </w14:schemeClr>
+          </w14:solidFill>
+        </w14:textFill>
+      </w:rPr>
+      <w:t>六</w:t>
+    </w:r>
+    <w:r>
+      <w:rPr>
+        <w:rFonts w:hint="default" w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="楷体_GB2312" w:cs="Times New Roman"/>
+        <w:color w:val="0D0D0D" w:themeColor="text1" w:themeTint="F2"/>
+        <w:sz w:val="21"/>
+        <w:szCs w:val="21"/>
+        <w14:textFill>
+          <w14:solidFill>
+            <w14:schemeClr w14:val="tx1">
+              <w14:lumMod w14:val="95000"/>
+              <w14:lumOff w14:val="5000"/>
+            </w14:schemeClr>
+          </w14:solidFill>
+        </w14:textFill>
+      </w:rPr>
+      <w:t>届本科毕业设计（论文）</w:t>
+    </w:r>
+    <w:r>
+      <w:rPr>
+        <w:rFonts w:hint="eastAsia" w:eastAsia="楷体_GB2312" w:cs="Times New Roman"/>
+        <w:color w:val="0D0D0D" w:themeColor="text1" w:themeTint="F2"/>
+        <w:sz w:val="21"/>
+        <w:szCs w:val="21"/>
+        <w:lang w:val="en-US" w:eastAsia="zh-CN"/>
+        <w14:textFill>
+          <w14:solidFill>
+            <w14:schemeClr w14:val="tx1">
+              <w14:lumMod w14:val="95000"/>
+              <w14:lumOff w14:val="5000"/>
+            </w14:schemeClr>
+          </w14:solidFill>
+        </w14:textFill>
+      </w:rPr>
+      <w:t xml:space="preserve">     理工农医类</w:t>
+    </w:r>
+    <w:r>
+      <w:rPr>
+        <w:rFonts w:hint="default" w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:eastAsia="楷体_GB2312" w:cs="Times New Roman"/>
+        <w:color w:val="0D0D0D" w:themeColor="text1" w:themeTint="F2"/>
+        <w:sz w:val="21"/>
+        <w:szCs w:val="21"/>
+        <w14:textFill>
+          <w14:solidFill>
+            <w14:schemeClr w14:val="tx1">
+              <w14:lumMod w14:val="95000"/>
+              <w14:lumOff w14:val="5000"/>
+            </w14:schemeClr>
+          </w14:solidFill>
+        </w14:textFill>
+      </w:rPr>
+      <w:t xml:space="preserve">         第  页 共  页</w:t>
+    </w:r>
+  </w:p>
+  <w:p w14:paraId="4C81B18E">
+    <w:pPr>
+      <w:pStyle w:val="12"/>
+      <w:pBdr>
+        <w:bottom w:val="none" w:color="auto" w:sz="0" w:space="0"/>
+      </w:pBdr>
+    </w:pPr>
+  </w:p>
+</w:hdr>

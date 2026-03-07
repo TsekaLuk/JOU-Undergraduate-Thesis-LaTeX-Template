@@ -1,0 +1,76 @@
+\documentclass{styles/jouthesis}
+
+% 论文基本信息
+\title{论文中文题目}
+\entitle{English Title of the Thesis}
+\author{学生姓名}
+\studentid{学号}
+\major{学院名称}
+\class{专业班级}
+\supervisor{指导教师（职称）}
+\date{\the\year{}年\the\month{}月}
+
+\begin{document}
+
+% 封面（包含原创性声明和版权授权书）
+\makecover
+
+% 中文摘要
+\begin{cnabstract}
+    这里填写中文摘要内容。摘要应简明扼要地概括论文的主要内容、研究方法、主要结论等。字数一般在300字左右。
+
+    \cnkeywords{关键词1；关键词2；关键词3；关键词4}
+\end{cnabstract}
+
+% 英文摘要
+\begin{enabstract}
+    Write your English abstract here. The abstract should briefly summarize the main content, research methods, and key findings of your thesis. It should typically be around 200-300 words.
+
+    \enkeywords{Keyword1; Keyword2; Keyword3; Keyword4}
+\end{enabstract}
+
+% 目录
+\tableofcontents
+\clearpage
+
+% 图表清单（可选，如有较多图表时使用）
+% \listoffigures
+% \clearpage
+% \listoftables
+% \clearpage
+
+% 正文章节
+\mainmatter
+\include{contents/chapters/chapter1}
+\include{contents/chapters/chapter2}
+\include{contents/chapters/chapter3}
+% 添加更多章节...
+
+% 结论与展望
+\chapter*{结论与展望}
+\addcontentsline{toc}{chapter}{结论与展望}
+这里填写结论与展望的内容。
+
+% 致谢
+\chapter*{致\hspace{1em}谢}
+\addcontentsline{toc}{chapter}{致谢}
+\include{contents/acknowledgements}
+
+% 参考文献
+\clearpage
+\phantomsection
+\addcontentsline{toc}{chapter}{参考文献}
+\begin{center}
+    \heiti\zihao{-3}参\hspace{0.5em}考\hspace{0.5em}文\hspace{0.5em}献
+\end{center}
+\vspace{\baselineskip}
+
+% 使用国标参考文献格式
+\bibliographystyle{gbt7714-numerical}
+\bibliography{references/refs}
+
+% 附录（可选）
+\appendix
+\include{contents/appendices/appendixA}
+
+\end{document}

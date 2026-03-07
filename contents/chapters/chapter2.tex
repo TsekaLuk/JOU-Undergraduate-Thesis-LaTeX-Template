@@ -1,0 +1,66 @@
+\chapter{相关理论与技术}
+
+\section{基本概念}
+
+介绍论文中涉及的基本概念和定义。本节阐述研究所需的理论基础，为后续研究奠定理论支撑。
+
+\section{相关技术}
+
+详细介绍论文中使用的相关技术。对每种技术的原理、特点和应用场景进行系统性阐述。
+
+\subsection{技术A}
+
+技术A的详细描述。包括该技术的基本原理、发展历程、主要特点以及在本研究中的应用价值。
+
+\subsection{技术B}
+
+技术B的详细描述。分析该技术与技术A的关系，以及两者在本研究中如何协同工作。
+
+\section{示例：插入图片}
+
+图片应放在\texttt{figures/}目录下。图片和表格中的文字使用五号楷体。示例：
+
+\begin{figure}[htbp]
+    \centering
+    % \includegraphics[width=0.6\textwidth]{figures/example.png}
+    \caption{示例图片标题}
+    \label{fig:example}
+\end{figure}
+
+可以使用图\ref{fig:example}来引用图片（注意：正文中引用时不需要"\texttt{}"符号）。
+
+\section{示例：插入表格}
+
+表格使用三线表格式，标题位于表格上方。
+
+\begin{table}[htbp]
+    \centering
+    \caption{示例表格标题}
+    \label{tab:example}
+    \begin{tabular}{ccc}
+        \toprule
+        列1 & 列2 & 列3 \\
+        \midrule
+        数据1 & 数据2 & 数据3 \\
+        数据4 & 数据5 & 数据6 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+可以使用表\ref{tab:example}来引用表格。
+
+\section{示例：数学公式}
+
+行内公式示例：$E=mc^2$，公式与正文在同一行内。
+
+行间公式需要单独占一行并居中显示：
+\begin{equation}
+    \int_{a}^{b} f(x) \, dx = F(b) - F(a)
+    \label{eq:example}
+\end{equation}
+
+可以使用式(\ref{eq:example})来引用公式。注意公式编号格式为"(章节号-序号)"。
+
+\section{本章小结}
+
+本章对××××进行了系统性阐述，为后续研究提供了理论基础和技术支撑。
