@@ -22,6 +22,7 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).parent.parent
 CLASS_FILE = PROJECT_ROOT / "styles" / "jouthesis.cls"
+BODY_SAMPLE_FILE = PROJECT_ROOT / "samples" / "body-sample.tex"
 MAIN_PDF = PROJECT_ROOT / "main.pdf"
 MAIN_NLS = PROJECT_ROOT / "main.nls"
 
@@ -49,6 +50,7 @@ def main() -> int:
         "amsthm": r"RequirePackage\{amsthm\}",
         "mathtools": r"RequirePackage\{mathtools\}",
         "bm": r"RequirePackage\{bm\}",
+        "jouheadings": r"RequirePackage\{styles/jouheadings\}",
         "algorithm": r"RequirePackage\{algorithm\}",
         "algpseudocode": r"RequirePackage\{algpseudocode\}",
         "listings": r"RequirePackage\{listings\}",
@@ -68,6 +70,20 @@ def main() -> int:
     for name, pattern in required_patterns.items():
         if not re.search(pattern, cls):
             failures.append(f"类文件缺少学术能力定义：{name}")
+
+    if not BODY_SAMPLE_FILE.exists():
+        failures.append("缺少 samples/body-sample.tex，无法验证正文样页与正文标题系统复用。")
+    else:
+        body_sample = BODY_SAMPLE_FILE.read_text(encoding="utf-8")
+        shared_heading_patterns = {
+            "shared-chapter-line": r"\\JOUChapterHeadingLine",
+            "shared-section-line": r"\\JOUSectionHeadingLine",
+            "shared-subsection-line": r"\\JOUSubsectionHeadingLine",
+            "shared-header-text": r"\\JOUHeadingBodyHeaderLeftInline",
+        }
+        for name, pattern in shared_heading_patterns.items():
+            if not re.search(pattern, body_sample):
+                failures.append(f"正文样页未复用统一标题系统：{name}")
 
     if not MAIN_PDF.exists():
         failures.append("缺少 main.pdf，无法验证学术功能示例")

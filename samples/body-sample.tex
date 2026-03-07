@@ -7,6 +7,7 @@
 \usepackage{array}
 \usepackage{etoolbox}
 \usepackage{styles/joufonts}
+\usepackage{styles/jouheadings}
 
 \geometry{
     a4paper,
@@ -33,7 +34,7 @@
         \makebox[\textwidth][c]{%
             \kaishu\zihao{5}%
             \begin{tabular*}{\samplecontentwidth}{@{}l@{\extracolsep{\fill}}c r@{}}
-                江苏海洋大学二{\songti 〇}二六届本科毕业设计（论文） & 理工农医类 & 第\hspace{1.6em}页\hspace{1.2em}共\hspace{1.6em}页
+                \JOUHeadingBodyHeaderLeftInline & 理工农医类 & \JOUHeadingBodyHeaderRightPlaceholder
             \end{tabular*}%
         }%
     }
@@ -45,18 +46,6 @@
 \pagestyle{fancy}
 \samplebodypagestyle
 
-\newcommand{\samplechapterline}[2]{%
-    {\heiti\zihao{-3}\noindent\makebox[1.5em][l]{#1}#2\par}%
-}
-
-\newcommand{\samplesectionline}[2]{%
-    {\heiti\zihao{4}\noindent\makebox[2.75em][l]{#1}#2\par}%
-}
-
-\newcommand{\samplesubsectionline}[2]{%
-    {\heiti\zihao{-4}\noindent\makebox[4.15em][l]{#1}#2\par}%
-}
-
 \newcommand{\samplebodytext}[1]{%
     {\songti\zihao{-4}\noindent #1\par}%
 }
@@ -67,24 +56,24 @@
 
 \vspace*{0.03cm}
 \noindent\hspace*{\samplexoffset}\begin{minipage}[t]{\samplecontentwidth}
-\samplechapterline{1}{绪论（一级标题）}
+\JOUChapterHeadingLine{1}{绪论（一级标题）}
 \vspace{0.16cm}
 \samplebodytext{\hspace*{2em}×××××××××××××正文×××××××××××××××××××××××××××××…………}
 \vspace{0.16cm}
 
-\samplesectionline{1.1}{××××××（二级标题）}
+\JOUSectionHeadingLine{1.1}{××××××（二级标题）}
 \vspace{0.10cm}
 \samplebodytext{\hspace*{2em}×××××××××××××正文×××××××××××××××××××××××…………}
 \vspace{0.10cm}
 
-\samplesubsectionline{1.1.1}{××××（三级标题）}
+\JOUSubsectionHeadingLine{1.1.1}{××××（三级标题）}
 \vspace{0.10cm}
 \samplebodytext{\hspace*{2em}××××××××××××正文××××××××××××××××××××…………}
 \vspace{0.06cm}
 \samplebodytext{\hspace*{2em}…………}
 \vspace{1.08cm}
 
-\samplechapterline{2}{×××××（一级标题）}
+\JOUChapterHeadingLine{2}{×××××（一级标题）}
 \vspace{0.18cm}
 \samplebodytext{\hspace*{2em}×××××××××××××正文×××××××××××××××××××××××××××××…………}
 \vspace{0.42cm}

@@ -54,6 +54,7 @@
 \RequirePackage{indentfirst}   % 首行缩进
 \RequirePackage{lastpage}      % 总页数引用
 \RequirePackage{styles/joufonts} % 统一字体配置
+\RequirePackage{styles/jouheadings} % 标题/页眉/目录统一规范
 \RequirePackage[absolute,overlay]{textpos} % 摘要等页面的绝对定位
 \RequirePackage{hyperref}      % 超链接
 \RequirePackage{bookmark}      % PDF书签
@@ -101,7 +102,7 @@
 
 \newcommand{\jou@bodystyle}{
     \fancyhf{}
-    \fancyhead[L]{\zihao{5}\kaishu 江苏海洋大学二零二六届本科毕业设计（论文）}
+    \fancyhead[L]{\zihao{5}\kaishu \JOUHeadingBodyHeaderLeftInline}
     \fancyhead[C]{\zihao{5}\kaishu \@thesiscategory}
     \fancyhead[R]{\zihao{5}\kaishu 第\thepage 页\ 共 \pageref*{LastPage} 页}
     \renewcommand{\headrulewidth}{0.4pt}
@@ -118,45 +119,9 @@
     \fancypagestyle{plain}{\jou@bodystyle}
 }
 
-% 章节标题格式 - 严格按照要求
-\renewcommand{\thechapter}{\arabic{chapter}}
-\renewcommand{\thesection}{\thechapter.\arabic{section}}
-\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
-\ctexset{
-    % 一级标题: 小三号黑体，段前段后0.5行
-    chapter={
-        format={\heiti\zihao{-3}\raggedright},
-        name={,},
-        number={\arabic{chapter}},
-        aftername=\hspace{1em},
-        beforeskip=0.5\baselineskip,
-        afterskip=0.5\baselineskip
-    },
-    % 二级标题: 小四号黑体，段前段后0.5行间距
-    section={
-        format={\heiti\zihao{-4}},
-        beforeskip=0.5\baselineskip,
-        afterskip=0.5\baselineskip,
-        indent=0pt
-    },
-    % 三级标题: 小四号黑体，段前段后无间距
-    subsection={
-        format={\heiti\zihao{-4}},
-        beforeskip=0pt,
-        afterskip=0pt,
-        indent=0pt
-    }
-}
-
-% 正文格式: 小四号宋体，首行缩进2字符
-\ctexset{
-    punct=quanjiao,
-    space=auto,
-    autoindent=true
-}
-
-% 首行缩进2字符
-\setlength{\parindent}{2em}
+% 标题、段落与目录规范统一交由 jouheadings 维护
+\JOUApplyBodySectioning
+\JOUApplyBodyTextLayout
 
 % 图表标题格式: 五号楷体_GB2312
 \DeclareCaptionFont{kaiti5}{\zihao{5}\kaishu}
@@ -269,39 +234,7 @@
 }
 \bookmarksetup{numbered=true,open=true}
 
-% 智能引用名称
-\crefname{figure}{图}{图}
-\Crefname{figure}{图}{图}
-\crefname{table}{表}{表}
-\Crefname{table}{表}{表}
-\crefname{equation}{式}{式}
-\Crefname{equation}{式}{式}
-\crefname{algorithm}{算法}{算法}
-\Crefname{algorithm}{算法}{算法}
-\crefname{theorem}{定理}{定理}
-\Crefname{theorem}{定理}{定理}
-\crefname{lemma}{引理}{引理}
-\Crefname{lemma}{引理}{引理}
-\crefname{proposition}{命题}{命题}
-\Crefname{proposition}{命题}{命题}
-\crefname{corollary}{推论}{推论}
-\Crefname{corollary}{推论}{推论}
-\crefname{definition}{定义}{定义}
-\Crefname{definition}{定义}{定义}
-\crefname{example}{例}{例}
-\Crefname{example}{例}{例}
-\crefname{remark}{注}{注}
-\Crefname{remark}{注}{注}
-\crefname{chapter}{第}{第}
-\Crefname{chapter}{第}{第}
-\crefname{section}{节}{节}
-\Crefname{section}{节}{节}
-\crefname{subsection}{小节}{小节}
-\Crefname{subsection}{小节}{小节}
-\crefname{lstlisting}{代码}{代码}
-\Crefname{lstlisting}{代码}{代码}
-\crefname{listing}{代码}{代码}
-\Crefname{listing}{代码}{代码}
+\JOUApplyBodyReferenceNames
 
 % 便捷引用命令
 \newcommand{\figref}[1]{\cref{#1}}
@@ -315,13 +248,6 @@
 \else
     \newcommand{\upcite}[1]{\textsuperscript{\cite{#1}}}
 \fi
-\crefformat{chapter}{第#2#1#3章}
-\Crefformat{chapter}{第#2#1#3章}
-\crefformat{section}{#2#1#3节}
-\Crefformat{section}{#2#1#3节}
-\crefformat{subsection}{#2#1#3小节}
-\Crefformat{subsection}{#2#1#3小节}
-
 \newcommand{\JOUCoverHeader}{figures/jou-cover-header-clean.png}
 \newcommand{\jou@coverrule}[1]{%
     \makebox[0pt][l]{\raisebox{-0.52ex}{\rule{#1}{0.35pt}}}%
@@ -514,13 +440,6 @@
 }
 
 % 目录格式
-\renewcommand{\contentsname}{目\hspace{2em}录}
-\setcounter{tocdepth}{1}
-\titlecontents{chapter}[0pt]{\songti\zihao{-4}}
-    {\thecontentslabel\hspace{1em}}{}
-    {\titlerule*[0.5pc]{.}\contentspage}
-\titlecontents{section}[2em]{\songti\zihao{-4}}
-    {\thecontentslabel\hspace{1em}}{}
-    {\titlerule*[0.5pc]{.}\contentspage}
+\JOUApplyBodyTocLayout
 
 \endinput
