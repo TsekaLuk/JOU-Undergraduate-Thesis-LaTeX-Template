@@ -1,0 +1,95 @@
+% 江苏海洋大学毕业实习日记
+% Jiangsu Ocean University Internship Diary
+
+\documentclass[a4paper,zihao=-4]{ctexart}
+
+% 必要的宏包
+\RequirePackage{geometry}
+\RequirePackage{graphicx}
+\RequirePackage{array}
+\RequirePackage{tabularx}
+\RequirePackage{multirow}
+\RequirePackage{makecell}
+
+% 页面设置
+\geometry{
+    a4paper,
+    top=2.5cm,
+    bottom=2.5cm,
+    left=2.5cm,
+    right=2.5cm
+}
+
+% 表格精确配置
+\setlength{\tabcolsep}{6pt}
+\renewcommand{\arraystretch}{1.3}
+
+% 自定义列类型
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+
+\begin{document}
+
+\pagestyle{empty}
+
+% 顶部学校logo和标题
+\begin{center}
+    \includegraphics[width=9cm]{../../figures/jou-name-large.png}\\[0.5cm]
+    {\heiti\zihao{3}\textbf{毕业实习日记}}
+\end{center}
+
+\vspace{0.5cm}
+
+% 基本信息表格
+\begin{table}[h]
+\centering
+\zihao{-4}\songti
+\begin{tabular}{|L{2cm}|L{4cm}|L{2cm}|L{3cm}|L{1.5cm}|L{1.5cm}|}
+\hline
+\textbf{姓名} & \hspace{3cm} & \textbf{学号} & \hspace{2.5cm} & \textbf{班级} & \hspace{1cm} \\
+\hline
+\textbf{学院} & \multicolumn{3}{L{9cm}|}{\hspace{8cm}} & \textbf{专业} & \hspace{1cm} \\
+\hline
+\multicolumn{2}{|L{6cm}|}{\textbf{实习单位}} & \multicolumn{4}{L{9cm}|}{\hspace{8cm}} \\
+\hline
+\multicolumn{2}{|L{6cm}|}{\textbf{实习岗位}} & \multicolumn{4}{L{9cm}|}{\hspace{8cm}} \\
+\hline
+\end{tabular}
+\end{table}
+
+\vspace{0.5cm}
+
+% 日记内容表格（可复制此页用于多天记录）
+\begin{table}[h]
+\centering
+\zihao{-4}\songti
+\begin{tabular}{|L{15cm}|}
+\hline
+\textbf{日期：}\underline{\hspace{3cm}} \hspace{2cm} \textbf{星期：}\underline{\hspace{2cm}} \hspace{2cm} \textbf{天气：}\underline{\hspace{2cm}} \\[0.3cm]
+\hline
+\multicolumn{1}{|L{15cm}|}{\textbf{实习内容：}} \\
+\multicolumn{1}{|L{15cm}|}{
+\vspace{8cm}
+\hfill
+} \\
+\hline
+\multicolumn{1}{|L{15cm}|}{\textbf{收获与体会：}} \\
+\multicolumn{1}{|L{15cm}|}{
+\vspace{6cm}
+\hfill
+} \\
+\hline
+\multicolumn{1}{|L{15cm}|}{\textbf{指导教师签字：}\hspace{10cm}} \\[0.5cm]
+\hline
+\end{tabular}
+\end{table}
+
+\vfill
+
+\begin{center}
+    \zihao{5}\songti
+    \textbf{注：}1. 实习期间每天填写一篇实习日记；2. 实习日记应真实记录当天实习内容、收获与体会。
+\end{center}
+
+\end{document}

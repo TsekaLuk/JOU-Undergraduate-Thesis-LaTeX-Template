@@ -1,0 +1,151 @@
+% 江苏海洋大学毕业设计（论文）任务书（人文经管类）
+% Jiangsu Ocean University Thesis Task Book (Humanities/Economics/Management)
+
+\documentclass[a4paper,zihao=-4]{ctexart}
+
+% 必要的宏包
+\RequirePackage{geometry}
+\RequirePackage{graphicx}
+\RequirePackage{array}
+\RequirePackage{tabularx}
+\RequirePackage{multirow}
+\RequirePackage{makecell}
+
+% 页面设置
+\geometry{
+    a4paper,
+    top=2.5cm,
+    bottom=2.5cm,
+    left=2.5cm,
+    right=2.5cm
+}
+
+% 表格精确配置
+\setlength{\tabcolsep}{6pt}
+\renewcommand{\arraystretch}{1.3}
+
+% 自定义列类型
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+
+\begin{document}
+
+\pagestyle{empty}
+
+% 顶部学校logo和标题
+\begin{center}
+    \includegraphics[width=9cm]{../../figures/jou-name-large.png}\\[0.5cm]
+    {\heiti\zihao{3}\textbf{毕业设计（论文）任务书}}\\[0.3cm]
+    {\heiti\zihao{-4}（人文经管类）}
+\end{center}
+
+\vspace{0.5cm}
+
+% 基本信息表格
+\begin{table}[h]
+\centering
+\zihao{-4}\songti
+\begin{tabular}{|L{2.5cm}|L{4cm}|L{2.5cm}|L{6cm}|}
+\hline
+\textbf{学生姓名} & & \textbf{学号} & \\
+\hline
+\textbf{学院} & & \textbf{专业} & \\
+\hline
+\textbf{指导教师} & & \textbf{职称} & \\
+\hline
+\multicolumn{4}{|L{15cm}|}{\textbf{毕业设计（论文）题目：}} \\
+\multicolumn{4}{|L{15cm}|}{\vspace{1cm}} \\
+\hline
+\end{tabular}
+\end{table}
+
+\vspace{0.3cm}
+
+% 任务内容表格
+\begin{table}[h]
+\centering
+\zihao{-4}\songti
+\begin{tabular}{|L{15cm}|}
+\hline
+\textbf{一、毕业论文的主要内容及要求：} \\
+\multicolumn{1}{|L{15cm}|}{
+\vspace{6cm}
+\hfill
+} \\
+\hline
+\textbf{二、研究的主要问题和预期目标：} \\
+\multicolumn{1}{|L{15cm}|}{
+\vspace{4cm}
+\hfill
+} \\
+\hline
+\textbf{三、研究方法和手段：} \\
+\multicolumn{1}{|L{15cm}|}{
+\vspace{5cm}
+\hfill
+} \\
+\hline
+\end{tabular}
+\end{table}
+
+\newpage
+
+% 第二页
+\begin{table}[h]
+\centering
+\zihao{-4}\songti
+\begin{tabular}{|L{15cm}|}
+\hline
+\textbf{四、进度安排：} \\
+\multicolumn{1}{|L{15cm}|}{
+\begin{itemize}
+    \item 第\hspace{1cm}周至第\hspace{1cm}周：\hspace{8cm}
+    \item 第\hspace{1cm}周至第\hspace{1cm}周：\hspace{8cm}
+    \item 第\hspace{1cm}周至第\hspace{1cm}周：\hspace{8cm}
+    \item 第\hspace{1cm}周至第\hspace{1cm}周：\hspace{8cm}
+    \item 第\hspace{1cm}周至第\hspace{1cm}周：\hspace{8cm}
+\end{itemize}
+\vspace{2cm}
+} \\
+\hline
+\textbf{五、主要参考文献：} \\
+\multicolumn{1}{|L{15cm}|}{
+\vspace{5cm}
+\hfill
+} \\
+\hline
+\textbf{六、应收集的资料：} \\
+\multicolumn{1}{|L{15cm}|}{
+\vspace{4cm}
+\hfill
+} \\
+\hline
+\end{tabular}
+\end{table}
+
+\vspace{0.5cm}
+
+% 签字部分
+\begin{table}[h]
+\centering
+\zihao{-4}\songti
+\begin{tabular}{|L{15cm}|}
+\hline
+\textbf{指导教师签名：}\hspace{8cm}\textbf{日期：}\underline{\hspace{3cm}} \\[0.8cm]
+\hline
+\textbf{系（教研室）主任签名：}\hspace{6cm}\textbf{日期：}\underline{\hspace{3cm}} \\[0.8cm]
+\hline
+\textbf{学院院长签名（盖章）：}\hspace{5cm}\textbf{日期：}\underline{\hspace{3cm}} \\[0.8cm]
+\hline
+\end{tabular}
+\end{table}
+
+\vfill
+
+\begin{center}
+    \zihao{5}\songti
+    \textbf{注：}本任务书一式三份，学生、指导教师、学院各执一份。
+\end{center}
+
+\end{document}

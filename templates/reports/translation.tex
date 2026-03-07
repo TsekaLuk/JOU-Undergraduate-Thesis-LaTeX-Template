@@ -1,0 +1,119 @@
+% 江苏海洋大学毕业设计（论文）外文资料翻译
+% Jiangsu Ocean University Foreign Material Translation
+
+\documentclass[a4paper,zihao=-4]{ctexart}
+
+% 必要的宏包
+\RequirePackage{geometry}
+\RequirePackage{graphicx}
+\RequirePackage{array}
+\RequirePackage{setspace}
+\RequirePackage{indentfirst}
+
+% 页面设置
+\geometry{
+    a4paper,
+    top=2.5cm,
+    bottom=2.5cm,
+    left=2.5cm,
+    right=2.5cm
+}
+
+% 行距设置 - 1.25倍行距
+\linespread{1.25}
+
+% 首行缩进2字符
+\setlength{\parindent}{2em}
+
+% 自定义列类型
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+
+\begin{document}
+
+\pagestyle{empty}
+
+% 封面
+\begin{center}
+    \includegraphics[width=9cm]{../../figures/jou-name-large.png}\\[0.5cm]
+    {\heiti\zihao{3}\textbf{毕业设计（论文）外文资料翻译}}
+\end{center}
+
+\vspace{0.5cm}
+
+% 基本信息表格
+\begin{table}[h]
+\centering
+\zihao{-4}\songti
+\begin{tabular}{|L{2.5cm}|L{4cm}|L{2.5cm}|L{6cm}|}
+\hline
+\textbf{学生姓名} & & \textbf{学号} & \\
+\hline
+\textbf{学院} & & \textbf{专业班级} & \\
+\hline
+\textbf{指导教师} & & \textbf{职称} & \\
+\hline
+\multicolumn{4}{|L{15cm}|}{\textbf{毕业设计（论文）题目：}} \\
+\multicolumn{4}{|L{15cm}|}{\vspace{1cm}} \\
+\hline
+\end{tabular}
+\end{table}
+
+\clearpage
+\pagestyle{plain}
+\setcounter{page}{1}
+
+% 外文资料原文部分
+\section*{外文资料原文}
+
+\subsection*{文献题目：}
+
+\subsection*{作者：}
+
+\subsection*{出处：}
+
+\vspace{1cm}
+
+% 原文内容
+（此处粘贴外文资料原文，字数不少于3000个外文印刷符号或译成中文不少于2000汉字）
+
+\clearpage
+
+% 中文翻译部分
+\section*{中文翻译}
+
+\vspace{1cm}
+
+（此处填写翻译后的中文内容）
+
+\clearpage
+
+% 评语页
+\begin{table}[h]
+\centering
+\zihao{-4}\songti
+\begin{tabular}{|L{15cm}|}
+\hline
+\textbf{指导教师评语：} \\
+\multicolumn{1}{|L{15cm}|}{
+\vspace{6cm}
+\hfill
+} \\
+\multicolumn{1}{|L{15cm}|}{
+\hfill 指导教师签名：\underline{\hspace{4cm}} \hspace{1cm} 日期：\underline{\hspace{3cm}}
+} \\[0.5cm]
+\hline
+\end{tabular}
+\end{table}
+
+\vfill
+
+\begin{center}
+    \zihao{5}\songti
+    \textbf{注：}1. 外文资料应与毕业设计（论文）内容相关；\\
+    2. 外文资料字数不少于3000个外文印刷符号或译成中文不少于2000汉字；\\
+    3. 翻译应准确、通顺，符合专业术语规范。
+\end{center}
+
+\end{document}

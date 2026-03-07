@@ -1,0 +1,165 @@
+% 江苏海洋大学毕业设计（论文）开题答辩记录
+% Jiangsu Ocean University Thesis Proposal Defense Record
+
+\documentclass[a4paper,zihao=-4]{ctexart}
+
+% 必要的宏包
+\RequirePackage{geometry}
+\RequirePackage{graphicx}
+\RequirePackage{array}
+\RequirePackage{tabularx}
+\RequirePackage{multirow}
+\RequirePackage{makecell}
+
+% 页面设置
+\geometry{
+    a4paper,
+    top=2.5cm,
+    bottom=2.5cm,
+    left=2.5cm,
+    right=2.5cm
+}
+
+% 表格精确配置
+\setlength{\tabcolsep}{6pt}
+\renewcommand{\arraystretch}{1.5}
+
+% 自定义列类型
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+
+\begin{document}
+
+\pagestyle{empty}
+
+% 顶部学校logo和标题
+\begin{center}
+    \includegraphics[width=9cm]{../../figures/jou-name-large.png}\\[0.5cm]
+    {\heiti\zihao{3}\textbf{毕业设计（论文）开题答辩记录}}
+\end{center}
+
+\vspace{0.5cm}
+
+% 基本信息表格
+\begin{table}[h]
+\centering
+\zihao{-4}\songti
+\begin{tabular}{|L{2.5cm}|L{4cm}|L{2.5cm}|L{6cm}|}
+\hline
+\textbf{学生姓名} & & \textbf{学号} & \\
+\hline
+\textbf{学院} & & \textbf{专业班级} & \\
+\hline
+\multicolumn{4}{|L{15cm}|}{\textbf{毕业设计（论文）题目：}} \\
+\multicolumn{4}{|L{15cm}|}{\vspace{1cm}} \\
+\hline
+\textbf{答辩时间} & \multicolumn{3}{L{12cm}|}{} \\
+\hline
+\textbf{答辩地点} & \multicolumn{3}{L{12cm}|}{} \\
+\hline
+\end{tabular}
+\end{table}
+
+\vspace{0.3cm}
+
+% 答辩小组成员表格
+\begin{table}[h]
+\centering
+\zihao{-4}\songti
+\begin{tabular}{|L{15cm}|}
+\hline
+\textbf{答辩小组成员：} \\[0.3cm]
+\begin{tabular}{llll}
+组长：\underline{\hspace{3cm}}（职称：\underline{\hspace{2cm}}）& 成员：\underline{\hspace{3cm}}（职称：\underline{\hspace{2cm}}）\\[0.5cm]
+成员：\underline{\hspace{3cm}}（职称：\underline{\hspace{2cm}}）& 成员：\underline{\hspace{3cm}}（职称：\underline{\hspace{2cm}}）\\[0.5cm]
+成员：\underline{\hspace{3cm}}（职称：\underline{\hspace{2cm}}）& 记录：\underline{\hspace{3cm}}\\[0.3cm]
+\end{tabular} \\
+\hline
+\end{tabular}
+\end{table}
+
+\vspace{0.3cm}
+
+% 答辩记录表格
+\begin{table}[h]
+\centering
+\zihao{-4}\songti
+\begin{tabular}{|L{15cm}|}
+\hline
+\textbf{答辩小组提出的主要问题：} \\
+\multicolumn{1}{|L{15cm}|}{
+\vspace{6cm}
+\hfill
+} \\
+\hline
+\textbf{学生回答问题情况：} \\
+\multicolumn{1}{|L{15cm}|}{
+\vspace{6cm}
+\hfill
+} \\
+\hline
+\end{tabular}
+\end{table}
+
+\newpage
+
+% 第二页 - 答辩意见
+\begin{table}[h]
+\centering
+\zihao{-4}\songti
+\begin{tabular}{|L{15cm}|}
+\hline
+\textbf{答辩小组意见及建议：} \\
+\multicolumn{1}{|L{15cm}|}{
+\vspace{8cm}
+\hfill
+} \\
+\multicolumn{1}{|L{15cm}|}{
+\hfill 答辩小组组长签名：\underline{\hspace{4cm}} \hspace{1cm} 日期：\underline{\hspace{3cm}}
+} \\[0.5cm]
+\hline
+\multicolumn{1}{|L{15cm}|}{\textbf{答辩结论：}} \\
+\multicolumn{1}{|L{15cm}|}{
+\begin{itemize}
+    \item[$\square$] 通过，可以进入下一阶段工作
+    \item[$\square$] 基本通过，需按答辩小组意见修改后，方可进入下一阶段工作
+    \item[$\square$] 不通过，需重新开题
+\end{itemize}
+\vspace{2cm}
+} \\
+\multicolumn{1}{|L{15cm}|}{
+\hfill 答辩小组组长签名：\underline{\hspace{4cm}} \hspace{1cm} 日期：\underline{\hspace{3cm}}
+} \\[0.5cm]
+\hline
+\end{tabular}
+\end{table}
+
+\vspace{0.5cm}
+
+% 学院意见
+\begin{table}[h]
+\centering
+\zihao{-4}\songti
+\begin{tabular}{|L{15cm}|}
+\hline
+\textbf{学院审核意见：} \\
+\multicolumn{1}{|L{15cm}|}{
+\vspace{4cm}
+\hfill
+} \\
+\multicolumn{1}{|L{15cm}|}{
+\hfill 院长签名（盖章）：\underline{\hspace{4cm}} \hspace{1cm} 日期：\underline{\hspace{3cm}}
+} \\[0.5cm]
+\hline
+\end{tabular}
+\end{table}
+
+\vfill
+
+\begin{center}
+    \zihao{5}\songti
+    \textbf{注：}本记录表一式两份，学生、学院各执一份。
+\end{center}
+
+\end{document}

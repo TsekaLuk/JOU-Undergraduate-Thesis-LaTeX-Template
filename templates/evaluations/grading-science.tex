@@ -1,0 +1,147 @@
+% 江苏海洋大学毕业设计（论文）评分表（理工农医类）
+% Jiangsu Ocean University Thesis Grading Sheet (Science/Engineering/Agriculture/Medicine)
+
+\documentclass[a4paper,zihao=-4]{ctexart}
+
+% 必要的宏包
+\RequirePackage{geometry}
+\RequirePackage{graphicx}
+\RequirePackage{array}
+\RequirePackage{tabularx}
+\RequirePackage{multirow}
+\RequirePackage{makecell}
+\RequirePackage{booktabs}
+
+% 页面设置
+\geometry{
+    a4paper,
+    top=2.5cm,
+    bottom=2.5cm,
+    left=2.5cm,
+    right=2.5cm
+}
+
+% 表格精确配置
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.3}
+
+% 自定义列类型
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+
+\begin{document}
+
+\pagestyle{empty}
+
+% 顶部学校logo和标题
+\begin{center}
+    \includegraphics[width=9cm]{../../figures/jou-name-large.png}\\[0.5cm]
+    {\heiti\zihao{3}\textbf{毕业设计（论文）评分表}}\\[0.3cm]
+    {\heiti\zihao{-4}（理工农医类）}
+\end{center}
+
+\vspace{0.3cm}
+
+% 基本信息表格
+\begin{table}[h]
+\centering
+\zihao{-4}\songti
+\begin{tabular}{|L{2cm}|L{3.5cm}|L{2cm}|L{3cm}|L{1.5cm}|L{2cm}|}
+\hline
+\textbf{姓名} & & \textbf{学号} & & \textbf{班级} & \\
+\hline
+\textbf{学院} & \multicolumn{3}{L{8.5cm}|}{} & \textbf{专业} & \\
+\hline
+\multicolumn{2}{|L{5.5cm}|}{\textbf{指导教师}} & \multicolumn{2}{L{5cm}|}{} & \textbf{职称} & \\
+\hline
+\multicolumn{6}{|L{15cm}|}{\textbf{毕业设计（论文）题目：}} \\
+\multicolumn{6}{|L{15cm}|}{\vspace{0.8cm}} \\
+\hline
+\end{tabular}
+\end{table}
+
+\vspace{0.2cm}
+
+% 评分标准表格
+\begin{table}[h]
+\centering
+\zihao{5}\songti
+\begin{tabular}{|C{2cm}|C{3.5cm}|L{6.5cm}|C{1.5cm}|C{1.5cm}|}
+\hline
+\textbf{序号} & \textbf{评价项目} & \textbf{评价要素} & \textbf{满分} & \textbf{得分} \\
+\hline
+\multirow{4}{*}{1} & \multirow{4}{*}{选题质量（15分）} & 选题符合专业培养目标，体现学科特点 & 5 & \\
+\cline{3-5}
+& & 选题具有一定的理论意义或实用价值 & 5 & \\
+\cline{3-5}
+& & 题目难度适中，工作量饱满 & 5 & \\
+\cline{3-5}
+& & \textbf{小计} & \textbf{15} & \\
+\hline
+\multirow{5}{*}{2} & \multirow{5}{*}{研究能力（25分）} & 查阅文献资料能力强，综述有深度 & 5 & \\
+\cline{3-5}
+& & 研究方案合理，技术路线清晰 & 5 & \\
+\cline{3-5}
+& & 有较强的实验（设计）能力和分析能力 & 8 & \\
+\cline{3-5}
+& & 数据真实可靠，分析处理合理 & 7 & \\
+\cline{3-5}
+& & \textbf{小计} & \textbf{25} & \\
+\hline
+\multirow{6}{*}{3} & \multirow{6}{*}{论文质量（40分）} & 论文结构合理，层次清晰，逻辑严密 & 8 & \\
+\cline{3-5}
+& & 理论分析正确，实验数据准确 & 10 & \\
+\cline{3-5}
+& & 论述充分，结论正确 & 8 & \\
+\cline{3-5}
+& & 文字通顺，图表规范，格式符合要求 & 7 & \\
+\cline{3-5}
+& & 参考文献引用恰当，注释规范 & 7 & \\
+\cline{3-5}
+& & \textbf{小计} & \textbf{40} & \\
+\hline
+\multirow{3}{*}{4} & \multirow{3}{*}{创新性（10分）} & 选题新颖或有新的见解 & 5 & \\
+\cline{3-5}
+& & 研究方法有创新或有实际应用价值 & 5 & \\
+\cline{3-5}
+& & \textbf{小计} & \textbf{10} & \\
+\hline
+\multirow{3}{*}{5} & \multirow{3}{*}{答辩表现（10分）} & 陈述清晰，思路清楚，重点突出 & 5 & \\
+\cline{3-5}
+& & 回答问题正确，反应敏捷 & 5 & \\
+\cline{3-5}
+& & \textbf{小计} & \textbf{10} & \\
+\hline
+\multicolumn{3}{|r|}{\textbf{总分}} & \textbf{100} & \\
+\hline
+\end{tabular}
+\end{table}
+
+\vspace{0.3cm}
+
+% 成绩评定
+\begin{table}[h]
+\centering
+\zihao{-4}\songti
+\begin{tabular}{|L{15cm}|}
+\hline
+\textbf{综合成绩评定：} \\[0.3cm]
+指导教师建议成绩：\underline{\hspace{2cm}} \hspace{1cm}
+评阅教师建议成绩：\underline{\hspace{2cm}} \hspace{1cm}
+答辩小组建议成绩：\underline{\hspace{2cm}} \\[0.5cm]
+最终成绩：\underline{\hspace{3cm}}（优秀/良好/中等/及格/不及格） \\[0.5cm]
+\hfill 答辩委员会主任签名：\underline{\hspace{4cm}} \hspace{1cm} 日期：\underline{\hspace{3cm}} \\[0.3cm]
+\hline
+\end{tabular}
+\end{table}
+
+\vfill
+
+\begin{center}
+    \zihao{5}\songti
+    \textbf{成绩评定标准：}优秀（90-100分）、良好（80-89分）、中等（70-79分）、及格（60-69分）、不及格（60分以下） \\
+    \textbf{注：}优秀率不超过15\%，优良率不超过60\%。
+\end{center}
+
+\end{document}

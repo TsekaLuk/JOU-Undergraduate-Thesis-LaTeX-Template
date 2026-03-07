@@ -1,0 +1,134 @@
+% 江苏海洋大学毕业实习报告书
+% Jiangsu Ocean University Internship Report
+
+\documentclass[a4paper,zihao=-4]{ctexart}
+
+% 必要的宏包
+\RequirePackage{geometry}
+\RequirePackage{graphicx}
+\RequirePackage{array}
+\RequirePackage{tabularx}
+\RequirePackage{multirow}
+\RequirePackage{setspace}
+\RequirePackage{indentfirst}
+
+% 页面设置
+\geometry{
+    a4paper,
+    top=2.5cm,
+    bottom=2.5cm,
+    left=2.5cm,
+    right=2.5cm
+}
+
+% 行距设置 - 1.25倍行距
+\linespread{1.25}
+
+% 首行缩进2字符
+\setlength{\parindent}{2em}
+
+% 自定义列类型
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+
+\begin{document}
+
+\pagestyle{empty}
+
+% 封面
+\begin{titlepage}
+\centering
+\vspace*{2cm}
+
+\includegraphics[width=13cm]{../../figures/jou-logo-full.png}\\[3cm]
+
+{\heiti\zihao{2}\textbf{毕业实习报告书}}\\[4cm]
+
+{\kaishu\zihao{4}
+\begin{tabular}{rl}
+学\\hspace{2em}院： & \underline{\makebox[8cm][c]{}} \\[0.8cm]
+专业班级： & \underline{\makebox[8cm][c]{}} \\[0.8cm]
+学生姓名： & \underline{\makebox[8cm][c]{}} \\[0.8cm]
+学\\hspace{2em}号： & \underline{\makebox[8cm][c]{}} \\[0.8cm]
+实习单位： & \underline{\makebox[8cm][c]{}} \\[0.8cm]
+实习时间： & \underline{\makebox[8cm][c]{}} \\[0.8cm]
+\end{tabular}
+}
+
+\vfill
+{\songti\zihao{4} \the\year{}年\the\month{}月}
+\end{titlepage}
+
+\clearpage
+\pagestyle{plain}
+\setcounter{page}{1}
+
+% 报告正文部分
+\section*{一、实习目的}
+\addcontentsline{toc}{section}{一、实习目的}
+
+\vspace{1cm}
+
+（填写实习的主要目的和意义）
+
+\vspace{5cm}
+
+\section*{二、实习单位简介}
+\addcontentsline{toc}{section}{二、实习单位简介}
+
+\vspace{1cm}
+
+（介绍实习单位的基本情况、主营业务、组织结构等）
+
+\vspace{5cm}
+
+\section*{三、实习内容}
+\addcontentsline{toc}{section}{三、实习内容}
+
+\vspace{1cm}
+
+（详细描述实习期间的主要工作内容、参与的项目、完成的任务等）
+
+\clearpage
+
+\section*{四、实习收获与体会}
+\addcontentsline{toc}{section}{四、实习收获与体会}
+
+\vspace{1cm}
+
+（总结实习期间的主要收获、专业能力提升、职业素养培养等方面的体会）
+
+\vspace{6cm}
+
+\section*{五、存在的问题与建议}
+\addcontentsline{toc}{section}{五、存在的问题与建议}
+
+\vspace{1cm}
+
+（分析实习过程中遇到的问题，提出改进建议）
+
+\vspace{6cm}
+
+\section*{六、总结}
+\addcontentsline{toc}{section}{六、总结}
+
+\vspace{1cm}
+
+（对整个实习过程进行总结，展望未来发展方向）
+
+\clearpage
+
+% 签名页
+\vspace*{5cm}
+
+\begin{flushright}
+    \zihao{-4}\songti
+    学生签名：\underline{\hspace{4cm}}\\[1cm]
+    日\hspace{2em}期：\underline{\hspace{4cm}}\\[3cm]
+
+    指导教师签名：\underline{\hspace{4cm}}\\[1cm]
+    日\hspace{2em}期：\underline{\hspace{4cm}}
+\end{flushright}
+
+\end{document}

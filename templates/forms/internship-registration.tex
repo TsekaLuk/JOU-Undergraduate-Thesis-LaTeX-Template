@@ -1,0 +1,116 @@
+% 江苏海洋大学毕业实习登记表
+% Jiangsu Ocean University Internship Registration Form
+
+\documentclass[a4paper,zihao=-4]{ctexart}
+
+% 必要的宏包
+\RequirePackage{geometry}
+\RequirePackage{graphicx}
+\RequirePackage{array}
+\RequirePackage{tabularx}
+\RequirePackage{multirow}
+\RequirePackage{makecell}
+
+% 页面设置
+\geometry{
+    a4paper,
+    top=2.5cm,
+    bottom=2.5cm,
+    left=2.5cm,
+    right=2.5cm
+}
+
+% 表格精确配置
+\setlength{\tabcolsep}{6pt}
+\renewcommand{\arraystretch}{1.5}
+
+% 自定义列类型
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+
+\begin{document}
+
+\pagestyle{empty}
+
+% 顶部学校logo和标题
+\begin{center}
+    \includegraphics[width=9cm]{../../figures/jou-name-large.png}\\[0.5cm]
+    {\heiti\zihao{3}\textbf{毕业实习登记表}}
+\end{center}
+
+\vspace{0.5cm}
+
+% 主表格
+\begin{table}[h]
+\centering
+\zihao{-4}\songti
+\begin{tabular}{|L{3cm}|L{4.5cm}|L{3cm}|L{4.5cm}|}
+\hline
+\textbf{姓名} & & \textbf{学号} & \\
+\hline
+\textbf{专业} & & \textbf{班级} & \\
+\hline
+\textbf{学院} & \multicolumn{3}{L{12cm}|}{} \\
+\hline
+\textbf{联系电话} & & \textbf{电子邮箱} & \\
+\hline
+\multicolumn{4}{|L{15cm}|}{\textbf{实习单位信息}} \\
+\hline
+\textbf{单位名称} & \multicolumn{3}{L{12cm}|}{} \\
+\hline
+\textbf{单位地址} & \multicolumn{3}{L{12cm}|}{} \\
+\hline
+\textbf{单位联系人} & & \textbf{联系电话} & \\
+\hline
+\textbf{实习岗位} & & \textbf{实习部门} & \\
+\hline
+\textbf{实习起止时间} & \multicolumn{3}{L{12cm}|}{自\hspace{3cm}至\hspace{3cm}} \\
+\hline
+\multicolumn{4}{|L{15cm}|}{\textbf{实习内容简述：}} \\
+\multicolumn{4}{|L{15cm}|}{
+\vspace{4cm}
+\hfill
+} \\
+\hline
+\end{tabular}
+\end{table}
+
+\vspace{0.5cm}
+
+% 签字确认部分
+\begin{table}[h]
+\centering
+\zihao{-4}\songti
+\begin{tabular}{|L{15cm}|}
+\hline
+\textbf{学生承诺：} \\[0.3cm]
+本人承诺在实习期间遵守实习单位的各项规章制度，服从实习单位和学校的管理，注意人身安全和财产安全，认真完成实习任务。 \\[1cm]
+学生签名：\underline{\hspace{4cm}} \hspace{2cm} 日期：\underline{\hspace{3cm}} \\[0.5cm]
+\hline
+\textbf{家长意见：} \\
+\vspace{2cm}
+\hfill \\
+家长签名：\underline{\hspace{4cm}} \hspace{2cm} 日期：\underline{\hspace{3cm}} \\[0.5cm]
+\hline
+\textbf{指导教师意见：} \\
+\vspace{2cm}
+\hfill \\
+指导教师签名：\underline{\hspace{4cm}} \hspace{2cm} 日期：\underline{\hspace{3cm}} \\[0.5cm]
+\hline
+\textbf{学院审批意见：} \\
+\vspace{2cm}
+\hfill \\
+院长签名（盖章）：\underline{\hspace{4cm}} \hspace{2cm} 日期：\underline{\hspace{3cm}} \\[0.5cm]
+\hline
+\end{tabular}
+\end{table}
+
+\vfill
+
+\begin{center}
+    \zihao{5}\songti
+    \textbf{注：}本表一式两份，学生、学院各执一份。实习前填写并经审批后方可外出实习。
+\end{center}
+
+\end{document}
