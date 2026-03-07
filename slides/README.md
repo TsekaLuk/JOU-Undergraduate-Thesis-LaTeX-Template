@@ -48,6 +48,81 @@ cd frontend && npm install && npm run dev
 
 ---
 
+## 🔑 API-KEY 配置（重要！）
+
+### 必需步骤
+
+banana-slides 需要 LLM API 才能生成 PPT。完成安装后，**必须配置 API-KEY**：
+
+```bash
+cd slides/banana-slides
+nano .env  # 或使用其他编辑器
+```
+
+### 配置选项
+
+#### 方案 A: Google Gemini（推荐）
+
+**优点**：免费额度充足，性能好，配置简单
+
+```bash
+# 在 .env 文件中添加
+GOOGLE_API_KEY=your_gemini_api_key_here
+```
+
+**获取 API Key**:
+1. 访问 https://makersuite.google.com/app/apikey
+2. 登录 Google 账号
+3. 点击「Create API key」
+4. 复制密钥到 `.env` 文件
+
+---
+
+#### 方案 B: OpenAI
+
+```bash
+# 在 .env 文件中添加
+OPENAI_API_KEY=sk-your_openai_api_key_here
+OPENAI_MODEL=gpt-4  # 可选，默认 gpt-3.5-turbo
+```
+
+**获取 API Key**: https://platform.openai.com/api-keys
+
+---
+
+#### 方案 C: 国内 LLM（智谱 AI / 通义千问等）
+
+```bash
+# 在 .env 文件中添加
+LAZYLLM_API_KEY=your_api_key_here
+LAZYLLM_PROVIDER=zhipu  # 或 qwen, wenxin, etc.
+```
+
+---
+
+### 配置后重启服务
+
+```bash
+# Docker 方式
+cd banana-slides
+docker-compose restart
+
+# 手动方式
+# 重新运行启动脚本或手动重启服务
+```
+
+### 验证配置
+
+```bash
+# 检查环境变量
+cat .env | grep API_KEY
+
+# 测试服务
+curl http://localhost:5000/health
+```
+
+---
+
 ## 📂 目录结构
 
 ```
