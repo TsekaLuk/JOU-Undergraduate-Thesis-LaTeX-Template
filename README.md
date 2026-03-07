@@ -11,12 +11,13 @@
 [![XeLaTeX](https://img.shields.io/badge/Engine-XeLaTeX-orange.svg)](#)
 [![Templates](https://img.shields.io/badge/Templates-15%20Forms-purple.svg)](#-模板全景)
 [![Tests](https://img.shields.io/badge/E2E%20Tests-4%2F4%20Passed-brightgreen.svg)](#-质量保证)
+[![Paper2Slide](https://img.shields.io/badge/Paper2Slide-AI%20PPT-ff69b4.svg)](slides/README.md)
 
 ---
 
 **严格依据《江苏海洋大学2026届毕业实习与设计（论文）工作手册》制作**
 
-**像素级对齐 Word 官方模板 | 15 个配套表单 + 论文正文 | E2E 自动化验证**
+**像素级对齐 Word 官方模板 | 15 个配套表单 + 论文正文 | E2E 自动化验证 | AI 生成答辩 PPT**
 
 </div>
 
@@ -45,6 +46,7 @@
 - **全流程覆盖** — 选题 → 实习 → 任务书 → 开题 → 中期 → 翻译 → 答辩 → 评分，16 份文档一站齐备
 - **独立编译** — 每个模板均为完整 `.tex` 文件，`xelatex` 一键生成 PDF
 - **自动化验证** — E2E 测试自动对比 LaTeX 列宽与 Word XML 参数，4/4 测试通过
+- **🎨 Paper2Slide** — 集成 banana-slides，一键将论文内容转为专业答辩PPT（开题/中期/答辩三种场景）
 
 ---
 
@@ -196,6 +198,26 @@ done
 \supervisor{指导教师（职称）}
 ```
 
+### 5. 🎨 生成演示文稿（NEW!）
+
+**一键将论文转为答辩PPT**，集成 [banana-slides](https://github.com/Anionex/banana-slides) 实现AI辅助生成：
+
+```bash
+cd slides/
+
+# 生成全部三个PPT Markdown（开题、中期、答辩）
+make all
+
+# 或单独生成
+make proposal  # 开题报告PPT
+make midterm   # 中期汇报PPT
+make defense   # 答辩PPT
+```
+
+**下一步**：访问 `http://localhost:3000` 上传生成的 `.md` 文件到 banana-slides，选择风格模板，生成专业 PPTX。
+
+详见 [slides/README.md](slides/README.md)
+
 ---
 
 ## 项目结构
@@ -225,6 +247,19 @@ JOU-Undergraduate-Thesis-LaTeX-Template/
 │   ├── forms/                      #   表格类（7个）
 │   ├── reports/                    #   报告类（5个）
 │   └── evaluations/                #   评价类（3个）
+├── slides/                         # 论文转PPT工具（NEW!）
+│   ├── README.md                   #   Paper2Slide 使用指南
+│   ├── Makefile                    #   自动化生成工作流
+│   ├── extractors/                 #   LaTeX内容提取脚本
+│   │   ├── tex2markdown.py         #     通用转换器
+│   │   ├── extract_proposal.py     #     开题报告提取器
+│   │   ├── extract_midterm.py      #     中期检查提取器
+│   │   └── extract_defense.py      #     答辩PPT提取器
+│   ├── templates/                  #   Markdown模板
+│   │   ├── proposal_template.md    #     开题报告模板
+│   │   ├── midterm_template.md     #     中期汇报模板
+│   │   └── defense_template.md     #     答辩PPT模板
+│   └── outputs/                    #   生成的Markdown和PPT
 └── tests/
     ├── test_pixel_perfect_alignment.py   # E2E 像素级对齐测试
     └── all_table_structures.json         # Word XML 表格参考数据
@@ -340,6 +375,7 @@ python3 tests/test_pixel_perfect_alignment.py
 | [TABLE-EXAMPLES.md](TABLE-EXAMPLES.md) | 表格使用示例：三线表、跨行列、定宽列 |
 | [ASSETS.md](ASSETS.md) | 图片资源说明：logo 使用与尺寸规范 |
 | [templates/README.md](templates/README.md) | 模板详细说明：每个表单的用途与填写指引 |
+| [slides/README.md](slides/README.md) | **Paper2Slide 指南**：论文转PPT自动化流程（NEW!）|
 
 ---
 
