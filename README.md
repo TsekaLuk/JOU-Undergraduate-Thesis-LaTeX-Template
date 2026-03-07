@@ -1,6 +1,8 @@
 <div align="center">
 
-# JOU-Undergraduate-Thesis-LaTeX-Template
+<img src="figures/jou-logo-full.png" alt="江苏海洋大学校徽" width="200"/>
+
+# JOU Undergraduate Thesis LaTeX Template
 
 **江苏海洋大学本科生毕业设计（论文）LaTeX 模板**
 
@@ -9,184 +11,164 @@
 [![License: LPPL 1.3c](https://img.shields.io/badge/License-LPPL%201.3c-blue.svg)](https://www.latex-project.org/lppl.txt)
 [![TeX Live](https://img.shields.io/badge/TeX%20Live-2020+-green.svg)](https://www.tug.org/texlive/)
 [![XeLaTeX](https://img.shields.io/badge/Engine-XeLaTeX-orange.svg)](#)
-[![Templates](https://img.shields.io/badge/Templates-15%20Forms-purple.svg)](#-模板全景)
-[![Tests](https://img.shields.io/badge/E2E%20Tests-4%2F4%20Passed-brightgreen.svg)](#-质量保证)
-[![Paper2Slide](https://img.shields.io/badge/Paper2Slide-AI%20PPT-ff69b4.svg)](slides/README.md)
+[![CTAN](https://img.shields.io/badge/CTAN-Ready-success.svg)](#)
 
----
-
-**严格依据《江苏海洋大学2026届毕业实习与设计（论文）工作手册》制作**
-
-**像素级对齐 Word 官方模板 | 15 个配套表单 + 论文正文 | E2E 自动化验证 | AI 生成答辩 PPT**
+[English](README_EN.md) | 简体中文
 
 </div>
 
 ---
 
-## 亮点速览
+## Overview
 
-```
-                    Word XML 精确提取
-                          |
-      ┌───────────────────┼───────────────────┐
-      v                   v                   v
-  表格网格结构        页面布局参数         字体字号规范
-  (28张表格)         (A4 + 2.5cm边距)     (宋体/黑体/楷体)
-      |                   |                   |
-      └───────────────────┼───────────────────┘
-                          v
-              15 个 LaTeX 模板 + 论文正文
-                          |
-                          v
-              E2E TDD 自动化测试验证
-              (126列 × 21张表格 全部通过)
-```
+This LaTeX template provides a complete solution for Jiangsu Ocean University undergraduate thesis, strictly following the *2026 Graduation Internship and Thesis Work Manual*. It includes **16 document templates** (thesis + 15 auxiliary forms) with **pixel-perfect alignment** to official Word templates.
 
-- **像素级对齐** — 从 Word 文档 XML 中精确提取全部28张表格的网格结构（`w:tblGrid` → `w:gridCol`），列宽误差 < 0.01cm
-- **全流程覆盖** — 选题 → 实习 → 任务书 → 开题 → 中期 → 翻译 → 答辩 → 评分，16 份文档一站齐备
-- **独立编译** — 每个模板均为完整 `.tex` 文件，`xelatex` 一键生成 PDF
-- **自动化验证** — E2E 测试自动对比 LaTeX 列宽与 Word XML 参数，4/4 测试通过
-- **🎨 Paper2Slide** — 集成 banana-slides，一键将论文内容转为专业答辩PPT（开题/中期/答辩三种场景）
+### Key Features
+
+- ✅ **Pixel-Perfect Alignment** — Extracted from Word XML (`w:tblGrid` → `w:gridCol`), column width error < 0.01cm
+- ✅ **Complete Workflow** — Covers all stages: topic selection → internship → proposal → midterm → defense → grading
+- ✅ **15 Auxiliary Forms** — Independent `.tex` files for all required forms
+- ✅ **Automated Testing** — E2E tests verify 126 columns across 21 tables (4/4 PASS)
+- ✅ **AI Presentation Generator** — Integrated [banana-slides](https://github.com/Anionex/banana-slides) for automatic PPT generation
 
 ---
 
-## 模板全景
+## Preview
 
-<table>
-<tr>
-<td width="33%" valign="top">
+<div align="center">
 
-### 表格类（7个）
+### Thesis Cover Page
+*Coming soon: Cover page screenshot*
 
-| 模板 | 文件 |
-|------|------|
-| 选题审题表 | `topic-selection` |
-| 实习登记表 | `internship-registration` |
-| 任务书（理工） | `task-book-science` |
-| 任务书（人文） | `task-book-humanities` |
-| 开题答辩记录 | `proposal-defense-record` |
-| 中期检查表 | `midterm-check` |
-| 答辩记录 | `defense-record` |
+### Form Templates
+*Coming soon: Form templates gallery*
 
-</td>
-<td width="33%" valign="top">
+### Compilation Workflow
+*Coming soon: Workflow diagram*
 
-### 报告类（5个）
-
-| 模板 | 文件 |
-|------|------|
-| 实习日记 | `internship-diary` |
-| 实习报告书 | `internship-report` |
-| 开题报告（理工） | `proposal-science` |
-| 开题报告（人文） | `proposal-humanities` |
-| 外文资料翻译 | `translation` |
-
-</td>
-<td width="34%" valign="top">
-
-### 评价类（3个）
-
-| 模板 | 文件 |
-|------|------|
-| 论文评语 | `thesis-evaluation` |
-| 评分表（理工） | `grading-science` |
-| 评分表（人文） | `grading-humanities` |
-
-### 论文正文（1个）
-
-| 模板 | 文件 |
-|------|------|
-| 毕业论文说明书 | `main.tex` |
-
-</td>
-</tr>
-</table>
-
-### 建议填写顺序
-
-```
-实习登记表 → 实习日记 → 实习报告书
-    ↓
-选题审题表 → 任务书
-    ↓
-开题报告 → 开题答辩记录
-    ↓
-外文资料翻译 → 中期检查表
-    ↓
-毕业论文说明书
-    ↓
-论文评语 → 答辩记录 → 评分表
-```
+</div>
 
 ---
 
-## 快速开始
+## Templates Overview
 
-### 1. 安装 TeX 环境
+This template package includes **16 documents** covering the entire thesis workflow:
+
+### Thesis Main Document
+
+| Document | File |
+|----------|------|
+| Thesis Manuscript | `main.tex` |
+
+### Form Templates (15)
 
 <details>
-<summary><b>macOS</b></summary>
+<summary><b>Forms (7 templates)</b></summary>
+
+| Template | File | Purpose |
+|----------|------|---------|
+| Topic Selection Form | `topic-selection.tex` | Topic proposal and approval |
+| Internship Registration | `internship-registration.tex` | Internship registration |
+| Task Book (Science) | `task-book-science.tex` | Task assignment (Sci/Eng/Med/Agr) |
+| Task Book (Humanities) | `task-book-humanities.tex` | Task assignment (Hum/Econ/Mgmt) |
+| Proposal Defense Record | `proposal-defense-record.tex` | Proposal defense minutes |
+| Midterm Check Form | `midterm-check.tex` | Progress evaluation |
+| Defense Record | `defense-record.tex` | Final defense minutes |
+
+</details>
+
+<details>
+<summary><b>Reports (5 templates)</b></summary>
+
+| Template | File | Purpose |
+|----------|------|---------|
+| Internship Diary | `internship-diary.tex` | Daily internship log |
+| Internship Report | `internship-report.tex` | Internship summary report |
+| Proposal Report (Science) | `proposal-science.tex` | Research proposal (Sci/Eng/Med/Agr) |
+| Proposal Report (Humanities) | `proposal-humanities.tex` | Research proposal (Hum/Econ/Mgmt) |
+| Translation | `translation.tex` | Foreign literature translation |
+
+</details>
+
+<details>
+<summary><b>Evaluations (3 templates)</b></summary>
+
+| Template | File | Purpose |
+|----------|------|---------|
+| Thesis Evaluation | `thesis-evaluation.tex` | Advisor/reviewer comments |
+| Grading Form (Science) | `grading-science.tex` | Final grading (Sci/Eng/Med/Agr) |
+| Grading Form (Humanities) | `grading-humanities.tex` | Final grading (Hum/Econ/Mgmt) |
+
+</details>
+
+---
+
+## Quick Start
+
+### Prerequisites
+
+- **TeX Distribution**: TeX Live 2020+ or MikTeX 2.9+
+- **Compiler**: XeLaTeX (required for Chinese support)
+- **Fonts**: SimSun, SimHei, KaiTi_GB2312, FangSong_GB2312, Times New Roman
+
+### Installation
+
+#### macOS
 
 ```bash
-# 安装 MacTeX（推荐完整版）
 brew install --cask mactex
-
-# 或 BasicTeX（轻量版，需手动补包）
-brew install --cask basictex
-sudo tlmgr update --self
-sudo tlmgr install ctex zhnumber xecjk enumitem makecell multirow
 ```
 
-</details>
+#### Windows
 
-<details>
-<summary><b>Windows</b></summary>
+Download and install [TeX Live](https://www.tug.org/texlive/) or [MikTeX](https://miktex.org/).
 
-下载安装 [TeX Live](https://www.tug.org/texlive/) 完整版，已包含所需宏包和字体。
-
-</details>
-
-<details>
-<summary><b>Linux</b></summary>
+#### Linux
 
 ```bash
-# Ubuntu / Debian
+# Ubuntu/Debian
 sudo apt-get install texlive-full
-# 或最小安装
+
+# Or minimal installation
 sudo apt-get install texlive-xetex texlive-lang-chinese
 ```
 
-</details>
+### Compilation
 
-### 2. 编译论文正文
+#### Compile Thesis
 
 ```bash
-# 方式一：Makefile（推荐）
+# Method 1: Using Makefile (recommended)
 make
 
-# 方式二：手动编译
-xelatex main.tex && bibtex main && xelatex main.tex && xelatex main.tex
+# Method 2: Manual compilation
+xelatex main.tex
+bibtex main
+xelatex main.tex
+xelatex main.tex
 
-# 方式三：latexmk
+# Method 3: Using latexmk
 latexmk -xelatex main.tex
 ```
 
-### 3. 编译配套模板
+#### Compile Individual Forms
 
 ```bash
-# 编译单个模板
 cd templates/forms
 xelatex topic-selection.tex
+```
 
-# 批量编译全部模板
-for f in templates/forms/*.tex templates/reports/*.tex templates/evaluations/*.tex; do
+#### Batch Compile All Templates
+
+```bash
+for f in templates/{forms,reports,evaluations}/*.tex; do
   (cd "$(dirname "$f")" && xelatex "$(basename "$f")")
 done
 ```
 
-### 4. 填写论文信息
+### Configuration
 
-编辑 `main.tex` 头部：
+Edit metadata in `main.tex`:
 
 ```latex
 \title{论文中文题目}
@@ -198,209 +180,210 @@ done
 \supervisor{指导教师（职称）}
 ```
 
-### 5. 🎨 生成演示文稿（NEW!）
+---
 
-**一键将论文转为答辩PPT**，集成 [banana-slides](https://github.com/Anionex/banana-slides) 实现AI辅助生成：
+## Advanced Features
+
+### AI Presentation Generator (NEW!)
+
+Automatically convert your thesis to professional PowerPoint presentations for proposal/midterm/defense using [banana-slides](https://github.com/Anionex/banana-slides).
 
 ```bash
 cd slides/
-
-# 生成全部三个PPT Markdown（开题、中期、答辩）
-make all
-
-# 或单独生成
-make proposal  # 开题报告PPT
-make midterm   # 中期汇报PPT
-make defense   # 答辩PPT
+make all  # Generate all three presentations
 ```
 
-**下一步**：访问 `http://localhost:3000` 上传生成的 `.md` 文件到 banana-slides，选择风格模板，生成专业 PPTX。
-
-详见 [slides/README.md](slides/README.md)
+See [slides/README.md](slides/README.md) for details.
 
 ---
 
-## 项目结构
+## Project Structure
 
 ```
 JOU-Undergraduate-Thesis-LaTeX-Template/
-├── main.tex                        # 论文主文件（编译入口）
-├── Makefile                        # 编译自动化
+├── main.tex                        # Thesis main file
+├── Makefile                        # Build automation
+├── LICENSE                         # LPPL 1.3c license
 ├── styles/
-│   └── jouthesis.cls               # 论文样式类（核心格式定义）
+│   └── jouthesis.cls               # Document class (core formatting)
 ├── contents/
-│   ├── chapters/                   # 正文章节
-│   │   ├── chapter1.tex            #   第1章
-│   │   ├── chapter2.tex            #   第2章（含图表公式示例）
-│   │   └── chapter3.tex            #   第3章
-│   ├── appendices/
-│   │   └── appendixA.tex           # 附录
-│   └── acknowledgements.tex        # 致谢
-├── figures/                        # 图片资源
-│   ├── jou-logo-full.png           #   校徽（封面用, 1237×873px）
-│   ├── jou-name-large.png          #   横版校名（表单用, 798×160px）
-│   ├── jou-name-small.png          #   横版校名（小, 433×99px）
-│   └── jou-name-large-rgba.png     #   透明背景版本
+│   ├── chapters/                   # Thesis chapters
+│   ├── appendices/                 # Appendices
+│   └── acknowledgements.tex        # Acknowledgements
+├── figures/                        # Images and logos
 ├── references/
-│   └── refs.bib                    # 参考文献（BibTeX）
-├── templates/                      # 配套模板集（15个）
-│   ├── forms/                      #   表格类（7个）
-│   ├── reports/                    #   报告类（5个）
-│   └── evaluations/                #   评价类（3个）
-├── slides/                         # 论文转PPT工具（NEW!）
-│   ├── README.md                   #   Paper2Slide 使用指南
-│   ├── Makefile                    #   自动化生成工作流
-│   ├── extractors/                 #   LaTeX内容提取脚本
-│   │   ├── tex2markdown.py         #     通用转换器
-│   │   ├── extract_proposal.py     #     开题报告提取器
-│   │   ├── extract_midterm.py      #     中期检查提取器
-│   │   └── extract_defense.py      #     答辩PPT提取器
-│   ├── templates/                  #   Markdown模板
-│   │   ├── proposal_template.md    #     开题报告模板
-│   │   ├── midterm_template.md     #     中期汇报模板
-│   │   └── defense_template.md     #     答辩PPT模板
-│   └── outputs/                    #   生成的Markdown和PPT
+│   └── refs.bib                    # BibTeX bibliography
+├── templates/                      # 15 auxiliary form templates
+│   ├── forms/                      # 7 form templates
+│   ├── reports/                    # 5 report templates
+│   └── evaluations/                # 3 evaluation templates
+├── slides/                         # Paper-to-Slide toolkit
+│   ├── extractors/                 # Content extraction scripts
+│   ├── templates/                  # Markdown templates
+│   └── Makefile                    # Automated workflow
 └── tests/
-    ├── test_pixel_perfect_alignment.py   # E2E 像素级对齐测试
-    └── all_table_structures.json         # Word XML 表格参考数据
+    ├── test_pixel_perfect_alignment.py
+    └── all_table_structures.json
 ```
 
 ---
 
-## 格式规范
+## Format Specifications
 
-本模板严格按照《江苏海洋大学2026届毕业实习与设计（论文）工作手册》制作。
+### Page Layout
 
-### 页面设置
+| Parameter | Specification |
+|-----------|---------------|
+| Paper Size | A4 (210mm × 297mm) |
+| Margins | 2.5cm (top/bottom/left/right) |
+| Line Spacing | 1.25 |
+| Header | 5pt KaiTi_GB2312, "江苏海洋大学本科生毕业论文" |
+| Footer | 5pt, centered page number |
 
-| 参数 | 规格 |
-|------|------|
-| 纸张 | A4 (210mm × 297mm) |
-| 页边距 | 上下左右均 2.5cm |
-| 行距 | 1.25倍行距 |
-| 页眉 | 五号楷体_GB2312，"江苏海洋大学本科生毕业论文" |
-| 页脚 | 五号字，页码居中 |
+### Typography
 
-### 字体字号
-
-| 元素 | 字体 | 字号 |
-|------|------|------|
-| 一级标题 | 黑体 | 小三号，段前段后0.5行 |
-| 二级标题 | 黑体 | 四号 |
-| 三级标题 | 黑体 | 小四号 |
-| 正文 | 宋体 | 小四号，首行缩进2字符 |
-| 英文/数字 | Times New Roman | 同正文 |
-| 图表标题 | 楷体_GB2312 | 五号 |
-| 表单标题 | 黑体 | 三号 |
-| 表单正文 | 宋体 | 小四号 |
-
-### 必需字体
-
-- 宋体 (SimSun)
-- 黑体 (SimHei)
-- 楷体_GB2312 (KaiTi_GB2312)
-- 仿宋_GB2312 (FangSong_GB2312)
-- Times New Roman
+| Element | Font | Size |
+|---------|------|------|
+| Chapter Title | SimHei (Heiti) | 15pt (小三号) |
+| Section Title | SimHei (Heiti) | 14pt (四号) |
+| Subsection Title | SimHei (Heiti) | 12pt (小四号) |
+| Body Text | SimSun (Songti) | 12pt (小四号) |
+| English/Numbers | Times New Roman | 12pt |
+| Figure/Table Caption | KaiTi_GB2312 | 10.5pt (五号) |
 
 ---
 
-## 质量保证
+## Quality Assurance
 
-### E2E 像素级对齐测试
+### Automated Testing
+
+Run E2E tests to verify pixel-perfect alignment:
 
 ```bash
-cd JOU-Undergraduate-Thesis-LaTeX-Template
 python3 tests/test_pixel_perfect_alignment.py
 ```
 
-测试覆盖 4 个维度：
+**Test Coverage** (4/4 PASS):
+- ✅ Table column widths (126 columns × 21 tables vs Word XML)
+- ✅ Page layout consistency (A4 + 2.5cm margins)
+- ✅ Template completeness (15 `.tex` + 15 `.pdf`)
+- ✅ Font/size consistency
 
-| 测试项 | 内容 | 状态 |
-|--------|------|------|
-| 表格列宽对齐 | 21张表格 × 126列，逐列对比 Word XML 参数 | PASS |
-| 页面设置一致性 | A4纸 + 2.5cm边距 + `tabcolsep=0pt` | PASS |
-| 模板完整性 | 15个 `.tex` + 15个 `.pdf` 全部存在 | PASS |
-| 字体字号一致性 | 宋体 + 小四号表格 / 黑体 + 三号标题 | PASS |
+### Manual Verification
 
-### 内容一致性验证
-
-所有模板的预设文本（字段名称、节标题、脚注说明、复选框选项）已与 Word 官方工作手册逐字核对，确保一致。
+All template text (field names, headers, footers, checkboxes) has been manually verified against the official Word handbook for content consistency.
 
 ---
 
-## 常见问题
+## Documentation
+
+| Document | Description |
+|----------|-------------|
+| [USAGE.md](USAGE.md) | Detailed usage guide: chapters, figures, tables, equations, references |
+| [TABLE-EXAMPLES.md](TABLE-EXAMPLES.md) | Table examples: three-line tables, merged cells, fixed-width columns |
+| [ASSETS.md](ASSETS.md) | Image assets guide: logo usage and specifications |
+| [templates/README.md](templates/README.md) | Form template documentation: purpose and filling instructions |
+| [slides/README.md](slides/README.md) | Paper-to-Slide guide: automated PPT generation workflow |
+
+---
+
+## Troubleshooting
 
 <details>
-<summary><b>编译报错"字体未找到"</b></summary>
+<summary><b>Font not found error</b></summary>
 
-确保系统已安装楷体_GB2312和仿宋_GB2312。Windows 一般自带，macOS/Linux 需手动安装或使用 `fontconfig` 配置。
+Ensure KaiTi_GB2312 and FangSong_GB2312 are installed. Windows includes them by default. macOS/Linux users need to install manually or configure via `fontconfig`.
 
 </details>
 
 <details>
-<summary><b>参考文献不显示</b></summary>
+<summary><b>Bibliography not showing</b></summary>
 
-按顺序运行 4 次编译：`xelatex` → `bibtex` → `xelatex` → `xelatex`，或使用 `make` / `latexmk -xelatex`。
-
-</details>
-
-<details>
-<summary><b>中文显示乱码</b></summary>
-
-必须使用 `xelatex` 编译，不要用 `pdflatex`。
+Run the compilation sequence 4 times: `xelatex` → `bibtex` → `xelatex` → `xelatex`, or use `make` / `latexmk -xelatex`.
 
 </details>
 
 <details>
-<summary><b>模板编译找不到图片</b></summary>
+<summary><b>Chinese text displays as gibberish</b></summary>
 
-在 `templates/` 子目录编译时，logo 路径为 `../../figures/jou-name-large.png`（相对路径）。请确保从正确目录运行 `xelatex`。
+Must use `xelatex` compiler, not `pdflatex`.
 
 </details>
 
 <details>
-<summary><b>如何只使用部分模板？</b></summary>
+<summary><b>Template cannot find images</b></summary>
 
-每个模板都是独立的 `.tex` 文件，互不依赖。不需要的模板直接忽略即可。
+When compiling from `templates/` subdirectory, logo path is `../../figures/jou-name-large.png` (relative path). Ensure you run `xelatex` from the correct directory.
 
 </details>
 
 ---
 
-## 相关文档
+## Contributing
 
-| 文档 | 说明 |
-|------|------|
-| [USAGE.md](USAGE.md) | 详细使用指南：章节、图表、公式、参考文献 |
-| [TABLE-EXAMPLES.md](TABLE-EXAMPLES.md) | 表格使用示例：三线表、跨行列、定宽列 |
-| [ASSETS.md](ASSETS.md) | 图片资源说明：logo 使用与尺寸规范 |
-| [templates/README.md](templates/README.md) | 模板详细说明：每个表单的用途与填写指引 |
-| [slides/README.md](slides/README.md) | **Paper2Slide 指南**：论文转PPT自动化流程（NEW!）|
+Contributions are welcome! Please:
 
----
-
-## 贡献
-
-欢迎提交 Issue 和 Pull Request！
-
-1. Fork 本仓库
-2. 创建分支 `git checkout -b feature/your-feature`
-3. 提交更改 `git commit -m 'feat: add your feature'`
-4. 推送分支 `git push origin feature/your-feature`
-5. 创建 Pull Request
+1. Fork this repository
+2. Create a feature branch (`git checkout -b feature/your-feature`)
+3. Commit your changes (`git commit -m 'feat: add your feature'`)
+4. Push to the branch (`git push origin feature/your-feature`)
+5. Create a Pull Request
 
 ---
 
-## 许可证
+## License
 
-本项目采用 [LaTeX Project Public License v1.3c](https://www.latex-project.org/lppl.txt) 发布。修改后的版本须更改名称。
+This work is licensed under the [LaTeX Project Public License v1.3c](https://www.latex-project.org/lppl.txt).
+
+**Current Maintainer**: [TsekaLuk](https://github.com/TsekaLuk)
+
+This work consists of:
+- Main thesis template: `main.tex`, `styles/jouthesis.cls`
+- Auxiliary form templates: `templates/forms/*.tex`, `templates/reports/*.tex`, `templates/evaluations/*.tex`
+- Paper-to-Slide toolkit: `slides/`
+
+Modified versions must use a different name.
+
+---
+
+## Citation
+
+If you use this template in your thesis, please consider citing:
+
+```bibtex
+@software{jou_thesis_template,
+  author = {TsekaLuk},
+  title = {JOU Undergraduate Thesis LaTeX Template},
+  year = {2026},
+  url = {https://github.com/TsekaLuk/JOU-Undergraduate-Thesis-LaTeX-Template},
+  version = {1.0}
+}
+```
+
+---
+
+## Acknowledgements
+
+- Official Word templates provided by Jiangsu Ocean University
+- Inspired by [THU Thesis](https://github.com/tuna/thuthesis), [USTC Thesis](https://github.com/ustctug/ustcthesis)
+- [banana-slides](https://github.com/Anionex/banana-slides) for AI presentation generation
 
 ---
 
 <div align="center">
 
-**如果这个模板对你有帮助，请给个 Star 支持一下！**
+**⭐ If this template helps you, please give it a Star! ⭐**
 
-*严格依据官方工作手册制作，像素级对齐 Word 模板*
+*Strictly following official guidelines | Pixel-perfect alignment | E2E tested*
+
+Made with ❤️ for JOU students
 
 </div>
+
+---
+
+## Sources
+
+- [Overleaf Thesis Templates](https://www.overleaf.com/latex/templates/tagged/thesis)
+- [Overleaf Gallery](https://www.overleaf.com/gallery/tagged/thesis)
+- [Overleaf LibGuides](https://overleaf.libguides.com/Thesis)
