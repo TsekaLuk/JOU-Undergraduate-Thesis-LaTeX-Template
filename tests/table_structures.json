@@ -1,0 +1,74 @@
+{
+  "实习登记表": {
+    "rows": 8,
+    "cols": 2,
+    "widths_dxa": [
+      1652,
+      6694
+    ],
+    "widths_cm": [
+      2.91,
+      11.81
+    ],
+    "total_cm": 14.72
+  },
+  "任务书（理工）": {
+    "rows": 23,
+    "cols": 1,
+    "widths_dxa": [
+      5000
+    ],
+    "widths_cm": [
+      8.82
+    ],
+    "total_cm": 8.82
+  },
+  "任务书（人文）": {
+    "rows": 5,
+    "cols": 2,
+    "widths_dxa": [
+      1886,
+      5484
+    ],
+    "widths_cm": [
+      3.33,
+      9.67
+    ],
+    "total_cm": 13.0
+  },
+  "开题报告（理工）": {
+    "rows": 9,
+    "cols": 1,
+    "widths_dxa": [
+      5000
+    ],
+    "widths_cm": [
+      8.82
+    ],
+    "total_cm": 8.82
+  },
+  "开题报告（人文）": {
+    "rows": 11,
+    "cols": 1,
+    "widths_dxa": [
+      5000
+    ],
+    "widths_cm": [
+      8.82
+    ],
+    "total_cm": 8.82
+  },
+  "答辩记录": {
+    "rows": 6,
+    "cols": 2,
+    "widths_dxa": [
+      1886,
+      5484
+    ],
+    "widths_cm": [
+      3.33,
+      9.67
+    ],
+    "total_cm": 13.0
+  }
+}
