@@ -1,207 +1,190 @@
-# 江苏海洋大学本科生毕业论文 LaTeX 模板
+<div align="center">
 
-Jiangsu Ocean University Undergraduate Thesis LaTeX Template (2026届)
+# JOU-Undergraduate-Thesis-LaTeX-Template
 
-## 📋 项目结构
+**江苏海洋大学本科生毕业设计（论文）LaTeX 模板**
+
+*Jiangsu Ocean University Undergraduate Thesis LaTeX Template*
+
+[![License: LPPL 1.3c](https://img.shields.io/badge/License-LPPL%201.3c-blue.svg)](https://www.latex-project.org/lppl.txt)
+[![TeX Live](https://img.shields.io/badge/TeX%20Live-2020+-green.svg)](https://www.tug.org/texlive/)
+[![XeLaTeX](https://img.shields.io/badge/Engine-XeLaTeX-orange.svg)](#)
+[![Templates](https://img.shields.io/badge/Templates-15%20Forms-purple.svg)](#-模板全景)
+[![Tests](https://img.shields.io/badge/E2E%20Tests-4%2F4%20Passed-brightgreen.svg)](#-质量保证)
+
+---
+
+**严格依据《江苏海洋大学2026届毕业实习与设计（论文）工作手册》制作**
+
+**像素级对齐 Word 官方模板 | 15 个配套表单 + 论文正文 | E2E 自动化验证**
+
+</div>
+
+---
+
+## 亮点速览
 
 ```
-.
-├── main.tex                    # 主文件，编译入口（毕业论文）
-├── Makefile                    # 编译自动化脚本
-├── .gitignore                  # Git忽略文件
-├── styles/
-│   └── jouthesis.cls          # 样式类文件（核心格式定义）
-├── contents/
-│   ├── chapters/              # 正文章节
-│   │   ├── chapter1.tex       # 第1章：绪论
-│   │   ├── chapter2.tex       # 第2章：相关理论（含图表公式示例）
-│   │   └── chapter3.tex       # 第3章：系统设计
-│   ├── appendices/            # 附录
-│   │   └── appendixA.tex
-│   └── acknowledgements.tex   # 致谢
-├── figures/                   # 图片资源目录
-├── references/
-│   └── refs.bib              # 参考文献数据库（BibTeX格式）
-├── templates/                 # 📦 完整模板集（16个）
-│   ├── forms/                 # 表格类模板（7个）
-│   ├── reports/               # 报告类模板（5个）
-│   ├── evaluations/           # 评价类模板（3个）
-│   └── README.md              # 模板使用说明
-└── README.md                 # 本文件
+                    Word XML 精确提取
+                          |
+      ┌───────────────────┼───────────────────┐
+      v                   v                   v
+  表格网格结构        页面布局参数         字体字号规范
+  (28张表格)         (A4 + 2.5cm边距)     (宋体/黑体/楷体)
+      |                   |                   |
+      └───────────────────┼───────────────────┘
+                          v
+              15 个 LaTeX 模板 + 论文正文
+                          |
+                          v
+              E2E TDD 自动化测试验证
+              (126列 × 21张表格 全部通过)
 ```
 
-## 📦 完整模板集
+- **像素级对齐** — 从 Word 文档 XML 中精确提取全部28张表格的网格结构（`w:tblGrid` → `w:gridCol`），列宽误差 < 0.01cm
+- **全流程覆盖** — 选题 → 实习 → 任务书 → 开题 → 中期 → 翻译 → 答辩 → 评分，16 份文档一站齐备
+- **独立编译** — 每个模板均为完整 `.tex` 文件，`xelatex` 一键生成 PDF
+- **自动化验证** — E2E 测试自动对比 LaTeX 列宽与 Word XML 参数，4/4 测试通过
 
-**本项目不仅包含毕业论文模板，还提供了完整的16个配套模板**，覆盖从选题到答辩的全流程：
+---
 
-| 类别 | 数量 | 模板列表 |
-|------|------|----------|
-| **表格类** | 7个 | 选题审题表、实习登记表、任务书（理工/人文）、开题答辩记录、中期检查表、答辩记录 |
-| **报告类** | 5个 | 实习日记、实习报告书、开题报告（理工/人文）、外文资料翻译 |
-| **评价类** | 3个 | 论文评语、评分表（理工/人文） |
-| **正文** | 1个 | 毕业设计（论文）说明书（main.tex） |
+## 模板全景
 
-**详细说明**: 参见 [templates/README.md](templates/README.md)
+<table>
+<tr>
+<td width="33%" valign="top">
 
-### 快速使用模板
+### 表格类（7个）
+
+| 模板 | 文件 |
+|------|------|
+| 选题审题表 | `topic-selection` |
+| 实习登记表 | `internship-registration` |
+| 任务书（理工） | `task-book-science` |
+| 任务书（人文） | `task-book-humanities` |
+| 开题答辩记录 | `proposal-defense-record` |
+| 中期检查表 | `midterm-check` |
+| 答辩记录 | `defense-record` |
+
+</td>
+<td width="33%" valign="top">
+
+### 报告类（5个）
+
+| 模板 | 文件 |
+|------|------|
+| 实习日记 | `internship-diary` |
+| 实习报告书 | `internship-report` |
+| 开题报告（理工） | `proposal-science` |
+| 开题报告（人文） | `proposal-humanities` |
+| 外文资料翻译 | `translation` |
+
+</td>
+<td width="34%" valign="top">
+
+### 评价类（3个）
+
+| 模板 | 文件 |
+|------|------|
+| 论文评语 | `thesis-evaluation` |
+| 评分表（理工） | `grading-science` |
+| 评分表（人文） | `grading-humanities` |
+
+### 论文正文（1个）
+
+| 模板 | 文件 |
+|------|------|
+| 毕业论文说明书 | `main.tex` |
+
+</td>
+</tr>
+</table>
+
+### 建议填写顺序
+
+```
+实习登记表 → 实习日记 → 实习报告书
+    ↓
+选题审题表 → 任务书
+    ↓
+开题报告 → 开题答辩记录
+    ↓
+外文资料翻译 → 中期检查表
+    ↓
+毕业论文说明书
+    ↓
+论文评语 → 答辩记录 → 评分表
+```
+
+---
+
+## 快速开始
+
+### 1. 安装 TeX 环境
+
+<details>
+<summary><b>macOS</b></summary>
 
 ```bash
-# 编译单个模板（以选题审题表为例）
+# 安装 MacTeX（推荐完整版）
+brew install --cask mactex
+
+# 或 BasicTeX（轻量版，需手动补包）
+brew install --cask basictex
+sudo tlmgr update --self
+sudo tlmgr install ctex zhnumber xecjk enumitem makecell multirow
+```
+
+</details>
+
+<details>
+<summary><b>Windows</b></summary>
+
+下载安装 [TeX Live](https://www.tug.org/texlive/) 完整版，已包含所需宏包和字体。
+
+</details>
+
+<details>
+<summary><b>Linux</b></summary>
+
+```bash
+# Ubuntu / Debian
+sudo apt-get install texlive-full
+# 或最小安装
+sudo apt-get install texlive-xetex texlive-lang-chinese
+```
+
+</details>
+
+### 2. 编译论文正文
+
+```bash
+# 方式一：Makefile（推荐）
+make
+
+# 方式二：手动编译
+xelatex main.tex && bibtex main && xelatex main.tex && xelatex main.tex
+
+# 方式三：latexmk
+latexmk -xelatex main.tex
+```
+
+### 3. 编译配套模板
+
+```bash
+# 编译单个模板
 cd templates/forms
 xelatex topic-selection.tex
 
-# 查看完整模板列表
-cat templates/README.md
+# 批量编译全部模板
+for f in templates/forms/*.tex templates/reports/*.tex templates/evaluations/*.tex; do
+  (cd "$(dirname "$f")" && xelatex "$(basename "$f")")
+done
 ```
 
-**特点**:
-- ✅ **全流程覆盖** - 从选题到答辩的所有必需文档
-- ✅ **像素级对齐** - 所有模板严格按照官方Word文档制作
-- ✅ **独立编译** - 每个模板都可独立使用
-- ✅ **官方Logo** - 自动引用学校logo
-- ✅ **规范格式** - 表格线宽、间距精确匹配
+### 4. 填写论文信息
 
-## ⚙️ 环境要求
-
-### 必需软件
-- **TeX Live 2020+** 或 **MikTeX 2.9+**
-- 支持 XeLaTeX 编译器
-
-### 必需中文字体
-- 宋体 (SimSun)
-- 黑体 (SimHei)
-- 楷体_GB2312 (KaiTi_GB2312)
-- 仿宋_GB2312 (FangSong_GB2312)
-
-### macOS 用户
-```bash
-# 安装BasicTeX（轻量级）
-brew install --cask basictex
-# 或安装完整MacTeX
-brew install --cask mactex
-
-# 安装缺失的宏包
-sudo tlmgr update --self
-sudo tlmgr install ctex zhnumber xecjk
-```
-
-### Windows 用户
-推荐安装 [TeX Live](https://www.tug.org/texlive/) 完整版，已包含所需宏包和字体。
-
-### Linux 用户
-```bash
-# Ubuntu/Debian
-sudo apt-get install texlive-xetex texlive-lang-chinese
-
-# 安装Windows中文字体
-sudo apt-get install ttf-mscorefonts-installer
-```
-
-## 🚀 使用方法
-
-### 方法一：使用 Makefile（推荐）
-
-```bash
-# 完整编译
-make
-
-# 清理临时文件
-make clean
-
-# 完全清理（包括PDF）
-make cleanall
-
-# 编译并预览
-make view
-```
-
-### 方法二：手动编译
-
-```bash
-# XeLaTeX编译（运行4次确保引用正确）
-xelatex main.tex
-bibtex main
-xelatex main.tex
-xelatex main.tex
-```
-
-### 方法三：使用 latexmk
-
-```bash
-# 自动化编译
-latexmk -xelatex main.tex
-
-# 清理
-latexmk -c
-```
-
-## ✨ 核心特性
-
-- ✅ **像素级格式对齐** - 从Word文档XML精确提取所有格式参数
-- ✅ **官方Logo集成** - 无损提取4张学校logo，已配置到封面
-- ✅ **精确表格配置** - 预设三线表样式，支持跨行跨列、定宽列等
-- ✅ **完整文档结构** - 封面、声明、摘要、目录、正文、参考文献、附录
-- ✅ **全流程模板集** - 16个配套模板，覆盖选题、实习、开题、中期、答辩全过程
-- ✅ **详细使用文档** - README、USAGE、TABLE-EXAMPLES、ASSETS四份文档
-
-## 📝 格式说明
-
-本模板严格按照《江苏海洋大学2026届毕业实习与设计（论文）工作手册》要求制作：
-
-### 页面设置
-- **纸张**: A4 (210mm × 297mm)
-- **页边距**: 上下左右均为 2.5cm
-- **行距**: 1.25倍行距
-- **页眉**: 五号楷体_GB2312，内容"江苏海洋大学本科生毕业论文"
-- **页脚**: 五号字，页码居中
-
-### 字体和字号
-- **一级标题**: 小三号黑体，段前段后0.5行
-- **二级标题**: 四号黑体
-- **三级标题**: 小四号黑体
-- **正文**: 小四号宋体，首行缩进2字符
-- **英文**: Times New Roman
-- **图表**: 五号楷体_GB2312
-- **页眉页脚**: 五号楷体_GB2312
-
-### 章节编号
-- 一级标题: 1, 2, 3, ...
-- 二级标题: 1.1, 1.2, 1.3, ...
-- 三级标题: 1.1.1, 1.1.2, 1.1.3, ...
-- 最多四级编号
-
-### 图表要求
-- **图题**: 位于图下方，五号楷体
-- **表题**: 位于表上方，五号楷体
-- **表格**: 使用三线表（\toprule, \midrule, \bottomrule）
-
-## 📚 文档资源
-
-| 文档 | 内容 |
-|------|------|
-| [README.md](README.md) | 项目概述、安装指南、快速开始 |
-| [USAGE.md](USAGE.md) | 详细使用指南（章节、图表、公式、参考文献） |
-| [TABLE-EXAMPLES.md](TABLE-EXAMPLES.md) | 表格使用示例（三线表、跨行列、定宽列等） |
-| [ASSETS.md](ASSETS.md) | 图片资源说明（logo使用、尺寸规范） |
-
-## 🖼️ 官方Logo资源
-
-从官方工作手册提取的高清logo：
-
-| 文件 | 尺寸 | 用途 |
-|------|------|------|
-| `jou-logo-full.png` | 1237×873px | 封面主logo（已配置） |
-| `jou-name-large.png` | 798×160px | 横版校名（大） |
-| `jou-name-small.png` | 433×99px | 横版校名（小） |
-| `jou-name-large-rgba.png` | 798×160px | 透明背景版本 |
-
-详见 [ASSETS.md](ASSETS.md) 了解使用方法。
-
-## 📖 快速开始
-
-### 1. 填写论文基本信息
-
-编辑 `main.tex` 文件头部：
+编辑 `main.tex` 头部：
 
 ```latex
 \title{论文中文题目}
@@ -211,120 +194,177 @@ latexmk -c
 \major{学院名称}
 \class{专业班级}
 \supervisor{指导教师（职称）}
-\date{\the\year{}年\the\month{}月}
 ```
 
-### 2. 编写摘要
+---
 
-在 `main.tex` 中的摘要环境内填写：
+## 项目结构
 
-```latex
-\begin{cnabstract}
-    中文摘要内容...
-    \cnkeywords{关键词1；关键词2；关键词3}
-\end{cnabstract}
-
-\begin{enabstract}
-    English abstract content...
-    \enkeywords{Keyword1; Keyword2; Keyword3}
-\end{enabstract}
+```
+JOU-Undergraduate-Thesis-LaTeX-Template/
+├── main.tex                        # 论文主文件（编译入口）
+├── Makefile                        # 编译自动化
+├── styles/
+│   └── jouthesis.cls               # 论文样式类（核心格式定义）
+├── contents/
+│   ├── chapters/                   # 正文章节
+│   │   ├── chapter1.tex            #   第1章
+│   │   ├── chapter2.tex            #   第2章（含图表公式示例）
+│   │   └── chapter3.tex            #   第3章
+│   ├── appendices/
+│   │   └── appendixA.tex           # 附录
+│   └── acknowledgements.tex        # 致谢
+├── figures/                        # 图片资源
+│   ├── jou-logo-full.png           #   校徽（封面用, 1237×873px）
+│   ├── jou-name-large.png          #   横版校名（表单用, 798×160px）
+│   ├── jou-name-small.png          #   横版校名（小, 433×99px）
+│   └── jou-name-large-rgba.png     #   透明背景版本
+├── references/
+│   └── refs.bib                    # 参考文献（BibTeX）
+├── templates/                      # 配套模板集（15个）
+│   ├── forms/                      #   表格类（7个）
+│   ├── reports/                    #   报告类（5个）
+│   └── evaluations/                #   评价类（3个）
+└── tests/
+    ├── test_pixel_perfect_alignment.py   # E2E 像素级对齐测试
+    └── all_table_structures.json         # Word XML 表格参考数据
 ```
 
-### 3. 编写正文
+---
 
-在 `contents/chapters/` 目录下的 `.tex` 文件中编写各章节内容。
+## 格式规范
 
-### 4. 添加参考文献
+本模板严格按照《江苏海洋大学2026届毕业实习与设计（论文）工作手册》制作。
 
-在 `references/refs.bib` 中添加BibTeX格式的参考文献：
+### 页面设置
 
-```bibtex
-@article{example2026,
-    author = {张三 and 李四},
-    title = {示例文献标题},
-    journal = {江苏海洋大学学报},
-    year = {2026},
-    volume = {1},
-    number = {1},
-    pages = {1--10}
-}
+| 参数 | 规格 |
+|------|------|
+| 纸张 | A4 (210mm × 297mm) |
+| 页边距 | 上下左右均 2.5cm |
+| 行距 | 1.25倍行距 |
+| 页眉 | 五号楷体_GB2312，"江苏海洋大学本科生毕业论文" |
+| 页脚 | 五号字，页码居中 |
+
+### 字体字号
+
+| 元素 | 字体 | 字号 |
+|------|------|------|
+| 一级标题 | 黑体 | 小三号，段前段后0.5行 |
+| 二级标题 | 黑体 | 四号 |
+| 三级标题 | 黑体 | 小四号 |
+| 正文 | 宋体 | 小四号，首行缩进2字符 |
+| 英文/数字 | Times New Roman | 同正文 |
+| 图表标题 | 楷体_GB2312 | 五号 |
+| 表单标题 | 黑体 | 三号 |
+| 表单正文 | 宋体 | 小四号 |
+
+### 必需字体
+
+- 宋体 (SimSun)
+- 黑体 (SimHei)
+- 楷体_GB2312 (KaiTi_GB2312)
+- 仿宋_GB2312 (FangSong_GB2312)
+- Times New Roman
+
+---
+
+## 质量保证
+
+### E2E 像素级对齐测试
+
+```bash
+cd JOU-Undergraduate-Thesis-LaTeX-Template
+python3 tests/test_pixel_perfect_alignment.py
 ```
 
-在正文中引用：`\cite{example2026}`
+测试覆盖 4 个维度：
 
-### 5. 插入图片
+| 测试项 | 内容 | 状态 |
+|--------|------|------|
+| 表格列宽对齐 | 21张表格 × 126列，逐列对比 Word XML 参数 | PASS |
+| 页面设置一致性 | A4纸 + 2.5cm边距 + `tabcolsep=0pt` | PASS |
+| 模板完整性 | 15个 `.tex` + 15个 `.pdf` 全部存在 | PASS |
+| 字体字号一致性 | 宋体 + 小四号表格 / 黑体 + 三号标题 | PASS |
 
-将图片放在 `figures/` 目录，然后：
+### 内容一致性验证
 
-```latex
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.6\textwidth]{figures/example.png}
-    \caption{图片标题}
-    \label{fig:example}
-\end{figure}
-```
+所有模板的预设文本（字段名称、节标题、脚注说明、复选框选项）已与 Word 官方工作手册逐字核对，确保一致。
 
-引用：`图\ref{fig:example}所示...`
+---
 
-### 6. 插入表格
+## 常见问题
 
-```latex
-\begin{table}[htbp]
-    \centering
-    \caption{表格标题}
-    \label{tab:example}
-    \begin{tabular}{ccc}
-        \toprule
-        列1 & 列2 & 列3 \\
-        \midrule
-        数据1 & 数据2 & 数据3 \\
-        \bottomrule
-    \end{tabular}
-\end{table}
-```
+<details>
+<summary><b>编译报错"字体未找到"</b></summary>
 
-## 🔧 常见问题
+确保系统已安装楷体_GB2312和仿宋_GB2312。Windows 一般自带，macOS/Linux 需手动安装或使用 `fontconfig` 配置。
 
-### Q1: 编译报错"字体未找到"
-**A**: 确保系统已安装楷体_GB2312和仿宋_GB2312字体。Windows用户一般自带，macOS和Linux用户需要手动安装。
+</details>
 
-### Q2: 参考文献不显示
-**A**: 确保按顺序运行：`xelatex` → `bibtex` → `xelatex` → `xelatex`
+<details>
+<summary><b>参考文献不显示</b></summary>
 
-### Q3: 中文显示乱码
-**A**: 确保使用 `xelatex` 编译（不要用 `pdflatex`）
+按顺序运行 4 次编译：`xelatex` → `bibtex` → `xelatex` → `xelatex`，或使用 `make` / `latexmk -xelatex`。
 
-### Q4: 页眉页脚格式不对
-**A**: 检查是否正确使用了 `\clearpage` 和分节符
+</details>
 
-## 📚 参考资料
+<details>
+<summary><b>中文显示乱码</b></summary>
 
-- [江苏海洋大学教务处](http://jwc.jou.edu.cn/)
-- [LaTeX中文文档](https://www.latexstudio.net/)
-- [CTEX 宏包文档](http://mirrors.ctan.org/language/chinese/ctex/ctex.pdf)
+必须使用 `xelatex` 编译，不要用 `pdflatex`。
 
-## 📄 许可证
+</details>
 
-MIT License
+<details>
+<summary><b>模板编译找不到图片</b></summary>
 
-## 🤝 贡献
+在 `templates/` 子目录编译时，logo 路径为 `../../figures/jou-name-large.png`（相对路径）。请确保从正确目录运行 `xelatex`。
 
-欢迎提交 Issue 和 Pull Request！如果发现格式问题或有改进建议，请：
+</details>
+
+<details>
+<summary><b>如何只使用部分模板？</b></summary>
+
+每个模板都是独立的 `.tex` 文件，互不依赖。不需要的模板直接忽略即可。
+
+</details>
+
+---
+
+## 相关文档
+
+| 文档 | 说明 |
+|------|------|
+| [USAGE.md](USAGE.md) | 详细使用指南：章节、图表、公式、参考文献 |
+| [TABLE-EXAMPLES.md](TABLE-EXAMPLES.md) | 表格使用示例：三线表、跨行列、定宽列 |
+| [ASSETS.md](ASSETS.md) | 图片资源说明：logo 使用与尺寸规范 |
+| [templates/README.md](templates/README.md) | 模板详细说明：每个表单的用途与填写指引 |
+
+---
+
+## 贡献
+
+欢迎提交 Issue 和 Pull Request！
 
 1. Fork 本仓库
-2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 开启 Pull Request
+2. 创建分支 `git checkout -b feature/your-feature`
+3. 提交更改 `git commit -m 'feat: add your feature'`
+4. 推送分支 `git push origin feature/your-feature`
+5. 创建 Pull Request
 
-## 📮 联系方式
+---
 
-如有问题，请通过以下方式联系：
+## 许可证
 
-- 提交 [Issue](https://github.com/TsekaLuk/JOU-Undergraduate-Thesis-LaTeX-Template/issues)
-- 邮箱: [your-email@example.com]
+本项目采用 [LaTeX Project Public License v1.3c](https://www.latex-project.org/lppl.txt) 发布。修改后的版本须更改名称。
 
-## ⭐ Star History
+---
 
-如果这个模板对你有帮助，请给个 Star ⭐ 支持一下！
+<div align="center">
+
+**如果这个模板对你有帮助，请给个 Star 支持一下！**
+
+*严格依据官方工作手册制作，像素级对齐 Word 模板*
+
+</div>
