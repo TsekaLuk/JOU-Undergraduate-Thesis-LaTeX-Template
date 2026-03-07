@@ -12,12 +12,17 @@
 \RequirePackage{amsmath}       % 数学公式
 \RequirePackage{amssymb}       % 数学符号
 \RequirePackage{booktabs}      % 三线表
+\RequirePackage{tabularx}      % 可伸缩表格
+\RequirePackage{array}         % 增强表格功能
+\RequirePackage{multirow}      % 跨行单元格
+\RequirePackage{makecell}      % 单元格内换行
 \RequirePackage{longtable}     % 跨页表格
 \RequirePackage{caption}       % 图表标题
 \RequirePackage{subcaption}    % 子图
 \RequirePackage{hyperref}      % 超链接
 \RequirePackage{xcolor}        % 颜色
 \RequirePackage{enumerate}     % 列表
+\RequirePackage{enumitem}      % 增强列表功能
 \RequirePackage{setspace}      % 行距
 \RequirePackage{indentfirst}   % 首行缩进
 
@@ -96,6 +101,32 @@
 \captionsetup[table]{position=top}
 \captionsetup[figure]{position=bottom}
 
+% 表格精确配置 - 像素级对齐
+% 三线表线宽设置（匹配Word默认）
+\setlength{\heavyrulewidth}{1.2pt}  % 粗线（上下边框）
+\setlength{\lightrulewidth}{0.6pt}  % 细线（中线）
+\setlength{\aboverulesep}{0pt}      % 线上间距
+\setlength{\belowrulesep}{0pt}      % 线下间距
+\setlength{\arrayrulewidth}{0.6pt}  % 竖线宽度
+
+% 表格单元格内边距（匹配Word默认）
+\setlength{\tabcolsep}{6pt}         % 列间距
+\renewcommand{\arraystretch}{1.2}   % 行高倍数
+
+% 表格列类型定义
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}  % 左对齐定宽列
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}    % 居中定宽列
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}   % 右对齐定宽列
+
+% 列表配置 - 精确间距
+\setlist{
+    nosep,                % 紧凑列表
+    topsep=0pt,           % 列表前后间距
+    partopsep=0pt,
+    itemsep=0pt,          % 列表项间距
+    parsep=0pt
+}
+
 % 超链接设置
 \hypersetup{
     colorlinks=true,
@@ -119,10 +150,10 @@
         \centering
         \vspace*{1cm}
 
-        % 学校logo（如果有的话，请放在figures目录）
-        % \includegraphics[width=9cm]{figures/jou-logo.png}\\[1cm]
+        % 学校logo和校名（从Word文档提取）
+        % image4: 校名校标组合图，宽度5.229英寸 ≈ 13.28cm
+        \includegraphics[width=13.28cm]{figures/jou-logo-full.png}\\[2cm]
 
-        {\heiti\zihao{-1} 江苏海洋大学}\\[0.5cm]
         {\heiti\zihao{2} \textbf{本科毕业设计（论文）}}\\[3cm]
 
         % 中文标题: 二号楷体加粗
