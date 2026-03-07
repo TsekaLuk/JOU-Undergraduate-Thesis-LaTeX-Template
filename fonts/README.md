@@ -1,119 +1,25 @@
 # Fonts
 
-## 字体加载策略（优先商业字体）
+## 目标
 
-**毕业论文需要标准化，优先使用商业字体**
+这个模板的默认字体策略是“规范四字体优先”，不是“追某一份 WPS PDF 的私有字库”。
 
-模板自动按以下优先级加载字体：
+论文排版首先要满足学校常见学术字体语义：
 
-1. **优先级 1 - 本地商业字体文件**
-   `fonts/proprietary/` 目录中的字体文件（手动放入）
+- `楷体_GB2312`
+- `宋体`
+- `黑体`
+- `Times New Roman`
 
-2. **优先级 2 - 系统商业字体**
-   操作系统已安装的标准字体（跨平台自动检测）
-   - Windows: SimSun, SimHei, KaiTi, FangSong, Times New Roman, Arial
-   - macOS: STSong, STHeiti, STKaiti, STFangsong, Times New Roman, Arial
-   - Linux: 需手动安装 Windows 字体或使用 wine-fonts
+WPS 字体仍然支持，但只是兼容兜底，不是默认优先级。
 
-3. **优先级 3 - 开源字体（应急方案）**
-   `fonts/opensource/` 仓库内置字体
-   - ⚠️ **仅作临时应急**，对齐度降低至 80-85%
-   - ⚠️ **编译时会输出醒目警告**，提示安装商业字体
-   - ⚠️ **不推荐用于最终提交**
+## 字体优先级
 
----
+### 1. `fonts/proprietary/` 本地正式字体
 
-## 字体自动选择（用户友好）
+如果你已经拥有合法字体文件，把它们放在 `fonts/proprietary/`，模板会优先使用。
 
-### 默认模式（智能选择 + 简洁提示）
-
-模板会**自动选择最佳可用字体**，不会阻止编译：
-
-**有商业字体时**：
-```
-===============================================
-Font Mode: system-licensed
-Status: Using system commercial fonts (Excellent)
-===============================================
-```
-
-**无商业字体时**：
-```
-===============================================
-Font Mode: oss
-Status: Using open source fonts (Good for preview)
-===============================================
-
-TIP: For best alignment with the official handbook,
-     install commercial fonts on your system.
-     Check: python3 scripts/check_fonts.py
-```
-
-开源字体完全可用于：
-- ✅ 日常编辑和预览
-- ✅ 排版调整和内容修改
-- ✅ 与导师讨论初稿
-
-### 严格模式（最终提交检查）
-
-**仅在最终提交前**启用，确保使用商业字体：
-
-```latex
-% main.tex
-\documentclass[strictfonts]{jouthesis}
-```
-
-此时缺少商业字体会终止编译并提示安装。
-
----
-
-## 推荐配置（确保最佳对齐）
-
-### Windows 用户
-
-系统已预装所需中文字体，只需确保安装了 Times New Roman 和 Arial（Office 自带）。
-
-### macOS 用户
-
-系统已预装华文字库（STSong, STKaiti 等）和 Times New Roman。
-
-### Linux 用户
-
-安装 Windows 字体包以获得最佳对齐：
-
-```bash
-# Ubuntu / Debian
-sudo apt install ttf-mscorefonts-installer
-
-# Arch Linux
-yay -S ttf-ms-fonts
-
-# 或手动安装（需获得字体授权）
-sudo mkdir -p /usr/share/fonts/truetype/msfonts
-sudo cp SimSun.ttf SimHei.ttf KaiTi.ttf FangSong.ttf /usr/share/fonts/truetype/msfonts/
-sudo fc-cache -fv
-```
-
----
-
-## Open-source font mapping (仅供参考)
-
-| Handbook font | Default bundled replacement |
-| --- | --- |
-| Times New Roman | Tinos |
-| Arial | Noto Sans CJK SC |
-| Courier New | Courier Prime |
-| 宋体 / 华文中宋 | Noto Serif CJK SC |
-| 黑体 | Noto Sans CJK SC |
-| 楷体 / 楷体_GB2312 / 华文楷体 | LXGW WenKai GB |
-| 仿宋_GB2312 / 华文仿宋 | FandolFang |
-| 方正小标宋简体 | Noto Serif CJK SC Black |
-| 华文行楷 | LXGW WenKai GB Medium |
-| 隶书 | Noto Serif CJK SC Black |
-
-## Proprietary override files
-
-If you have a valid font license, place files with these exact names under `fonts/proprietary/`:
+推荐文件名：
 
 - `TimesNewRoman-Regular.ttf`
 - `TimesNewRoman-Bold.ttf`
@@ -128,4 +34,110 @@ If you have a valid font license, place files with these exact names under `font
 - `FangZhengXiaoBiaoSongJianTi.ttf`
 - `STXingkai.ttf`
 
-When the proprietary files are present, the template automatically switches to `licensed` font mode for the corresponding families.
+### 2. 系统标准学术字体
+
+模板会优先探测系统上的标准字体：
+
+- Windows:
+  - `C:/Windows/Fonts/times.ttf`
+  - `C:/Windows/Fonts/simsun.ttc`
+  - `C:/Windows/Fonts/simhei.ttf`
+  - `C:/Windows/Fonts/simkai.ttf`
+  - `C:/Windows/Fonts/simfang.ttf`
+- 系统字体名:
+  - `Times New Roman`
+  - `SimSun`
+  - `SimHei`
+  - `KaiTi_GB2312` / `KaiTi`
+  - `FangSong_GB2312` / `FangSong`
+- macOS:
+  - `STSong`
+  - `STHeiti`
+  - `STKaiti`
+  - `STFangsong`
+
+### 3. WPS 兼容字体
+
+当标准学术字体不可用时，模板才会尝试：
+
+- WPS 安装目录中的内置字体
+- 系统已安装的 `HY...` / `FZ...` 字体
+
+这层的目标是“兼容可用”，不是“默认优先”。
+
+### 4. `fonts/opensource/` 开源兜底
+
+仓库自带开源字体用于跨平台稳定编译：
+
+- `Tinos`
+- `Courier Prime`
+- `Noto Serif CJK SC`
+- `Noto Sans CJK SC`
+- `LXGW WenKai GB`
+- `FandolFang`
+
+这层适合：
+
+- 日常编辑
+- CI 编译
+- Linux/macOS/Windows 一致预览
+
+但它不是理想的最终提交字体层。
+
+## 模式说明
+
+### `licensed`
+
+使用 `fonts/proprietary/` 中的正式字体。  
+这是最稳的高质量交付模式。
+
+### `system-licensed`
+
+使用系统已有的标准学术字体。  
+这是最推荐的日常模式，尤其适合 Windows 用户。
+
+### `wps-compat`
+
+标准学术字体不完整时，使用 WPS 兼容字体。  
+可用，但不是模板默认目标。
+
+### `oss`
+
+只使用仓库内置开源字体。  
+适合预览、开发、CI，不建议作为最终提交的理想模式。
+
+## Windows 用户建议
+
+Windows 是最容易命中标准四字体的平台。
+
+推荐顺序：
+
+1. 直接使用系统 / Office 自带字体
+2. 如果客户机路径特殊，配置 `styles/joufontspaths.local.tex`
+3. 如果标准字体不完整，再让模板回退到 WPS 兼容字体
+
+## 检查命令
+
+```bash
+python3 scripts/check_fonts.py
+```
+
+这个脚本会告诉你当前落在哪个模式，并指出缺的标准字体。
+
+## 开源映射
+
+| 标准字体 | 开源兜底 |
+| --- | --- |
+| Times New Roman | Tinos |
+| Courier New | Courier Prime |
+| 宋体 | Noto Serif CJK SC |
+| 黑体 | Noto Sans CJK SC |
+| 楷体 / 楷体_GB2312 | LXGW WenKai GB |
+| 仿宋 / 仿宋_GB2312 | FandolFang |
+| 方正小标宋简体 | Noto Serif CJK SC Black |
+| 行楷 | LXGW WenKai GB Medium |
+
+## 说明
+
+公共仓库不会分发商业字体文件。  
+如果你有合法授权，把字体放进 `fonts/proprietary/` 即可，模板会自动接管。

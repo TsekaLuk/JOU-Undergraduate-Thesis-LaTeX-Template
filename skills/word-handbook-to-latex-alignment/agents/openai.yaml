@@ -1,0 +1,4 @@
+interface:
+  display_name: "Word Handbook Alignment"
+  short_description: "Align Word/WPS thesis handbooks to LaTeX with E2E checks"
+  default_prompt: "Use $word-handbook-to-latex-alignment to align a university thesis handbook or Word template to LaTeX and encode the result in tests."

@@ -7,6 +7,7 @@
 import platform
 import subprocess
 import sys
+import os
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).parent.parent
@@ -19,30 +20,61 @@ WPS_FONT_DIRS = [
     Path("/usr/share/fonts/wps-office"),
 ]
 
+WINDOWS_FONT_DIRS = [
+    Path("C:/Windows/Fonts"),
+    Path("C:/WINDOWS/Fonts"),
+]
+
+for env_name in ("WINDIR", "SystemRoot"):
+    value = os.environ.get(env_name)
+    if value:
+        WINDOWS_FONT_DIRS.insert(0, Path(value) / "Fonts")
+
+for env_name in ("ProgramFiles", "ProgramFiles(x86)", "LOCALAPPDATA"):
+    value = os.environ.get(env_name)
+    if not value:
+        continue
+    base = Path(value)
+    WPS_FONT_DIRS.extend(
+        [
+            base / "WPS Office" / "office6" / "fonts",
+            base / "Kingsoft" / "WPS Office" / "office6" / "fonts",
+        ]
+    )
+
+WPS_FONT_DIRS.extend(
+    [
+        Path("C:/Program Files/WPS Office/office6/fonts"),
+        Path("C:/Program Files (x86)/WPS Office/office6/fonts"),
+        Path("C:/Program Files/Kingsoft/WPS Office/office6/fonts"),
+        Path("C:/Program Files (x86)/Kingsoft/WPS Office/office6/fonts"),
+    ]
+)
+
 # 必需的字体定义
 REQUIRED_FONTS = {
-    "WPS 实际字体 (最优先)": {
+    "拉丁字体（标准学术）": {
+        "Times New Roman": ["Times New Roman", "TimesNewRoman-Regular.ttf"],
+        "Arial": ["Arial", "Arial-Regular.ttf"],
+        "Courier New": ["Courier New", "CourierNew-Regular.ttf"],
+    },
+    "中文字体（标准学术）": {
+        "宋体": ["SimSun", "STSong", "SimSun.ttf"],
+        "黑体": ["SimHei", "STHeiti", "SimHei.ttf"],
+        "楷体": ["KaiTi_GB2312", "STKaiti", "KaiTi_GB2312.ttf"],
+        "仿宋": ["FangSong", "STFangsong", "FangSong_GB2312.ttf"],
+    },
+    "特殊字体": {
+        "方正小标宋-通用": ["FZXiaoBiaoSong-B05", "FangZhengXiaoBiaoSongJianTi.ttf"],
+        "华文行楷": ["STXingkai", "STXingkai.ttf"],
+    },
+    "WPS 兼容字体（可选）": {
         "汉仪楷体": ["HYKaiTiKW", "HYKaiTiKW.ttf"],
         "汉仪书宋二": ["HYShuSongErKW", "HYShuSongErKW.ttf"],
         "汉仪中黑": ["HYZhongHeiKW", "HYZhongHeiKW.ttf"],
         "方正小标宋": ["FZXBSJW--GB1-0", "FZXBSJW--GB1-0.ttf"],
         "方正仿宋": ["FZFSK--GBK1-0", "FZFSK--GBK1-0.ttf"],
     },
-    "拉丁字体": {
-        "Times New Roman": ["Times New Roman", "TimesNewRoman-Regular.ttf"],
-        "Arial": ["Arial", "Arial-Regular.ttf"],
-        "Courier New": ["Courier New", "CourierNew-Regular.ttf"],
-    },
-    "中文字体 (通用)": {
-        "宋体": ["SimSun", "STSong", "SimSun.ttf"],
-        "黑体": ["SimHei", "STHeiti", "SimHei.ttf"],
-        "楷体": ["KaiTi", "STKaiti", "KaiTi_GB2312.ttf"],
-        "仿宋": ["FangSong", "STFangsong", "FangSong_GB2312.ttf"],
-    },
-    "特殊字体": {
-        "方正小标宋-通用": ["FZXiaoBiaoSong-B05", "FangZhengXiaoBiaoSongJianTi.ttf"],
-        "华文行楷": ["STXingkai", "STXingkai.ttf"],
-    }
 }
 
 # 开源字体兜底方案
@@ -53,6 +85,18 @@ OPENSOURCE_FONTS = {
     "Noto Sans CJK SC": "NotoSansCJKsc-Regular.otf",
     "LXGW WenKai GB": "LXGWWenKaiGB-Regular.ttf",
     "FandolFang": "FandolFang-Regular.otf",
+}
+
+WINDOWS_FONT_FILES = {
+    "Times New Roman": ["times.ttf", "timesbd.ttf", "timesi.ttf", "timesbi.ttf"],
+    "Arial": ["arial.ttf", "arialbd.ttf"],
+    "Courier New": ["cour.ttf", "courbd.ttf"],
+    "宋体": ["simsun.ttc"],
+    "黑体": ["simhei.ttf"],
+    "楷体": ["simkai.ttf"],
+    "仿宋": ["simfang.ttf"],
+    "方正小标宋-通用": ["FZXBSJW.TTF"],
+    "华文行楷": ["STXINGKA.TTF"],
 }
 
 
@@ -86,12 +130,14 @@ def check_system_font(font_name: str) -> bool:
                     text=True,
                     check=True
                 )
-                return font_name in result.stdout
+                if font_name in result.stdout:
+                    return True
+                return check_windows_font_files(font_name)
             except FileNotFoundError:
-                # 如果 fc-list 不可用，假设标准 Windows 字体存在
-                windows_fonts = ["SimSun", "SimHei", "KaiTi", "FangSong", "Times New Roman", "Arial"]
-                return font_name in windows_fonts
+                return check_windows_font_files(font_name)
     except Exception:
+        if system == "Windows":
+            return check_windows_font_files(font_name)
         return False
 
     return False
@@ -117,6 +163,27 @@ def check_wps_bundled_font(candidates: list[str]) -> tuple[bool, str]:
             if (font_dir / candidate).exists():
                 return True, str(font_dir / candidate)
     return False, ""
+
+
+def check_windows_font_files(font_name: str) -> bool:
+    """Windows 下检查 C:\\Windows\\Fonts 中的字体文件"""
+    candidates = WINDOWS_FONT_FILES.get(font_name, [])
+    for font_dir in WINDOWS_FONT_DIRS:
+        for candidate in candidates:
+            if (font_dir / candidate).exists():
+                return True
+    return False
+
+
+def find_windows_font_file(font_name: str) -> str:
+    """返回 Windows 字体文件路径"""
+    candidates = WINDOWS_FONT_FILES.get(font_name, [])
+    for font_dir in WINDOWS_FONT_DIRS:
+        for candidate in candidates:
+            path = font_dir / candidate
+            if path.exists():
+                return str(path)
+    return ""
 
 
 def print_section(title: str):
@@ -152,24 +219,27 @@ def main():
     print_section("字体加载优先级检测")
 
     # 优先级 1: 本地 proprietary 文件
-    print("【优先级 1】fonts/proprietary/ 本地商业字体")
+    print("【优先级 1】fonts/proprietary/ 本地标准字体")
     prop_found = False
     for category, fonts in REQUIRED_FONTS.items():
         for font_name, font_files in fonts.items():
-            # 检查文件名（第三个元素是文件名）
-            if len(font_files) > 2:
-                local_file = font_files[2]
-                exists, _ = check_local_font(local_file)
-                if exists:
+            local_file = next(
+                (candidate for candidate in reversed(font_files) if "." in candidate),
+                "",
+            )
+            if local_file:
+                exists, source = check_local_font(local_file)
+                if exists and source == "proprietary":
                     prop_found = True
                     print_font_status(f"{font_name} ({local_file})", "✓ 已找到", "green")
 
     if not prop_found:
-        print_font_status("无本地商业字体", "跳过此优先级", "yellow")
+        print_font_status("无本地标准字体", "跳过此优先级", "yellow")
 
     # 优先级 2: 系统字体
-    print("\n【优先级 2】系统安装的商业字体")
+    print("\n【优先级 2】系统安装的标准学术字体")
     system_found = False
+    standard_system_found = False
     for category, fonts in REQUIRED_FONTS.items():
         print(f"\n  {category}:")
         for font_name, font_files in fonts.items():
@@ -181,9 +251,11 @@ def main():
                     found = True
                     found_name = sys_name
                     system_found = True
+                    if category != "WPS 兼容字体（可选）":
+                        standard_system_found = True
                     break
 
-            if not found and category == "WPS 实际字体 (最优先)":
+            if not found and category == "WPS 兼容字体（可选）":
                 bundled, bundled_path = check_wps_bundled_font(
                     {
                         "汉仪楷体": ["HYKaiTiJ.ttf"],
@@ -198,11 +270,21 @@ def main():
                     found_name = bundled_path
                     system_found = True
 
+            if not found and platform.system() == "Windows":
+                win_font_path = find_windows_font_file(font_name)
+                if win_font_path:
+                    found = True
+                    found_name = win_font_path
+                    system_found = True
+                    if category != "WPS 兼容字体（可选）":
+                        standard_system_found = True
+
             if found:
                 print_font_status(f"  {font_name}", f"✓ {found_name}", "green")
             else:
                 print_font_status(f"  {font_name}", "✗ 未找到", "red")
-                missing_fonts.append(font_name)
+                if category != "WPS 兼容字体（可选）":
+                    missing_fonts.append(font_name)
 
     # 优先级 3: 开源字体兜底
     print("\n【优先级 3】fonts/opensource/ 开源字体兜底")
@@ -218,9 +300,9 @@ def main():
     # 确定字体模式
     print_section("字体模式诊断")
 
-    # 检查是否有 WPS 实际字体
+    # 检查是否有 WPS 兼容字体
     wps_fonts_found = []
-    for font_name, font_files in REQUIRED_FONTS.get("WPS 实际字体 (最优先)", {}).items():
+    for font_name, font_files in REQUIRED_FONTS.get("WPS 兼容字体（可选）", {}).items():
         for sys_name in font_files[:2]:
             if check_system_font(sys_name):
                 wps_fonts_found.append(font_name)
@@ -239,33 +321,32 @@ def main():
                 wps_fonts_found.append(font_name)
 
     if prop_found:
-        font_mode = "licensed (本地商业字体)"
+        font_mode = "licensed (本地标准字体)"
         print_font_status("字体模式", font_mode, "green")
-        print("\n  ✓ 使用 fonts/proprietary/ 中的商业字体")
-        print("  ✓ 最高对齐度 (98-99%)")
-    elif len(wps_fonts_found) >= 3:  # 至少有3个WPS字体
-        font_mode = "wps-exact (WPS 实际字体)"
+        print("\n  ✓ 使用 fonts/proprietary/ 中的标准学术字体")
+        print("  ✓ 最适合最终提交与跨平台复现")
+    elif standard_system_found and not missing_fonts:
+        font_mode = "system-licensed (系统标准字体)"
         print_font_status("字体模式", font_mode, "green")
-        print(f"\n  ✓ 检测到 WPS 实际字体: {', '.join(wps_fonts_found)}")
-        print("  ✓ 像素级对齐 (99%+)")
-        print("  ✓ 与官方手册 PDF 完全一致")
-    elif system_found and not missing_fonts:
-        font_mode = "system-licensed (系统商业字体)"
+        print("\n  ✓ 使用系统安装的标准学术字体")
+        print("  ✓ 符合楷体_GB2312 / 宋体 / 黑体 / Times New Roman 优先策略")
+    elif len(wps_fonts_found) >= 3:  # 至少有3个WPS兼容字体
+        font_mode = "wps-compat (WPS 兼容字体)"
         print_font_status("字体模式", font_mode, "green")
-        print("\n  ✓ 使用系统安装的商业字体")
-        print("  ✓ 高对齐度 (95-98%)")
+        print(f"\n  ✓ 检测到 WPS 兼容字体: {', '.join(wps_fonts_found)}")
+        print("  ✓ 可作为标准学术字体缺失时的兼容兜底")
     elif system_found and missing_fonts:
-        font_mode = "mixed (部分系统字体 + 开源兜底)"
+        font_mode = "mixed (部分标准字体 + 开源兜底)"
         print_font_status("字体模式", font_mode, "yellow")
-        print(f"\n  ⚠ 缺少以下系统字体: {', '.join(missing_fonts)}")
-        print("  ⚠ 部分字体将使用开源替代")
-        print("  ⚠ 对齐度降低 (85-90%)")
+        print(f"\n  ⚠ 缺少以下标准字体: {', '.join(missing_fonts)}")
+        print("  ⚠ 部分内容将使用开源替代")
+        print("  ⚠ 适合预览，不是理想的最终交付状态")
     else:
-        font_mode = "oss (纯开源字体)"
+        font_mode = "oss (开源兜底字体)"
         print_font_status("字体模式", font_mode, "yellow" if all_oss_found else "red")
         if all_oss_found:
-            print("\n  ⚠ 系统无商业字体，使用开源替代")
-            print("  ⚠ 对齐度较低 (80-85%)")
+            print("\n  ⚠ 系统无标准学术字体，使用开源替代")
+            print("  ⚠ 适合预览和开发，不建议直接作为最终交付")
         else:
             print("\n  ✗ 开源字体兜底方案不完整")
             print("  ✗ 请运行: make fonts")
@@ -274,13 +355,16 @@ def main():
     print_section("改进建议")
 
     if missing_fonts:
-        print("为获得最佳对齐效果，建议安装缺失的商业字体:\n")
+        print("为获得最佳学术排版效果，建议补齐缺失的标准字体:\n")
 
         system = platform.system()
         if system == "Windows":
             print("  Windows 用户:")
-            print("  - 系统应已预装中文字体（宋体、黑体、楷体、仿宋）")
-            print("  - 如缺失，请从 C:\\Windows\\Fonts 检查或重新安装 Office")
+            print("  - 优先使用系统自带或 Office 自带的 Times New Roman / SimSun / SimHei / KaiTi / FangSong")
+            print("  - 安装 WPS 可作为兼容兜底，模板会自动探测常见安装目录")
+            print("  - 系统字体目录默认检查: C:\\Windows\\Fonts")
+            print("  - WPS 字体目录默认检查: Program Files / Program Files (x86) / LOCALAPPDATA")
+            print("  - 若安装路径特殊，可在 styles/joufontspaths.local.tex 中覆盖字体目录")
         elif system == "Darwin":
             print("  macOS 用户:")
             print("  - 系统已预装华文字库（STSong, STHeiti, STKaiti, STFangsong）")
@@ -293,11 +377,14 @@ def main():
 
         print("\n  或者，将字体文件手动放入 fonts/proprietary/:")
         for font in missing_fonts:
-            if font in REQUIRED_FONTS.get("拉丁字体", {}):
-                filename = REQUIRED_FONTS["拉丁字体"][font][2]
+            if font in REQUIRED_FONTS.get("拉丁字体（标准学术）", {}):
+                filename = REQUIRED_FONTS["拉丁字体（标准学术）"][font][1]
                 print(f"    - {filename}")
-            elif font in REQUIRED_FONTS.get("中文字体", {}):
-                filename = REQUIRED_FONTS["中文字体"][font][2]
+            elif font in REQUIRED_FONTS.get("中文字体（标准学术）", {}):
+                filename = REQUIRED_FONTS["中文字体（标准学术）"][font][2]
+                print(f"    - {filename}")
+            elif font in REQUIRED_FONTS.get("特殊字体", {}):
+                filename = REQUIRED_FONTS["特殊字体"][font][1]
                 print(f"    - {filename}")
     else:
         print("  ✓ 字体配置完善，无需额外操作")

@@ -176,7 +176,7 @@ def main() -> int:
         if not commercial_latin:
             failures.append("已检测到商业字体模式，但 PDF 未嵌入 Times New Roman 族字形。")
         if not commercial_cjk:
-            failures.append("已检测到商业字体模式，但 PDF 未嵌入楷体/宋体等中文标准字形。")
+            failures.append("已检测到商业字体模式，但 PDF 未嵌入楷体_GB2312/宋体/黑体等中文标准字形。")
     else:
         expected_fonts = ["Tinos", "NotoSerifCJKsc", "LXGWWenKaiGB", "CourierPrime"]
         for font_name in expected_fonts:

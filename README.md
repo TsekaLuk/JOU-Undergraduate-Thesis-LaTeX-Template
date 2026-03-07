@@ -28,22 +28,61 @@
 - 18 份工作手册配套模板
 - 1 套基于 WPS 导出 PDF 的 E2E 对齐测试
 - 1 套内置开源字体方案，保证 Linux、macOS、Windows 一致编译
+- 1 套三系统 CI 矩阵，持续校验 Windows / macOS / Linux 的论文构建与字体契约
 
-项目默认不依赖系统自带商业字体。仓库通过 `fonts/opensource/` 提供可再分发的开源字体，并允许在 `fonts/proprietary/` 中放入用户自备、已获授权的商业字体做本地高保真覆盖。
+项目的默认字体策略现在收敛为“学术规范四字体优先”：
+
+- `楷体_GB2312`
+- `宋体`
+- `黑体`
+- `Times New Roman`
+
+仓库通过 `fonts/opensource/` 提供可再分发的开源兜底字体，并允许在 `fonts/proprietary/` 中放入用户自备、已获授权的标准字体文件。WPS 字体仍被支持，但只作为兼容兜底，不再作为默认优先路径。
 
 ## 核心特性
 
-- `WPS 基线对齐`：以工作手册的 WPS 导出 PDF 为基线，校验分页锚点、表格网格、页面方向和产物页数。
+- `学术规范优先`：封面和正文优先命中 `楷体_GB2312 / 宋体 / 黑体 / Times New Roman`，更适合真实论文写作与交付。
+- `手册基线校验`：以工作手册导出 PDF 为基线，校验分页锚点、表格网格、页面方向和产物页数。
 - `跨平台一致编译`：默认使用仓库内置字体，不要求用户先手动安装 `楷体_GB2312`、`仿宋_GB2312` 或 `Times New Roman`。
 - `模板全量覆盖`：论文正文之外，补齐了手册中的 18 份表单/报告/评分模板。
-- `可选商业字体覆盖`：若本机已有合法字体授权，可把字体文件放入 `fonts/proprietary/`，模板会自动优先使用。
+- `可选标准字体覆盖`：若本机已有合法字体授权，可把字体文件放入 `fonts/proprietary/`，模板会自动优先使用。
 - `E2E 可执行标准`：源码契约、PDF 产物、论文专项检查都写进测试，不再靠人工口头确认。
 
-## 封面对齐示意
+## 预览
 
-下图是“工作手册封面样页内容区”与“模板封面”的叠图产物，用于快速观察封面版式是否贴近参考样页。生成命令为 `make cover-diff`，产物位于 `docs/assets/`。
+README 的展示面按“先看质感，再看完整度，再看覆盖面”来组织。所有预览图都可通过 `make readme-images` 重新生成。
 
-![封面对齐叠图](docs/assets/thesis-cover-overlay-focus.png)
+### 论文封面：参考样页 vs 当前模板
+
+![论文封面对比](docs/images/cover-compare.png)
+
+### 论文主模板画廊
+
+下面这张图展示当前模板的核心论文页面：封面、中文摘要、英文摘要、目录、正文首页、参考文献。
+
+![论文模板画廊](docs/images/thesis-gallery.png)
+
+### 关键版式细节：摘要与正文对比
+
+README 不只放“成品图”，也保留关键页的横向对比，方便快速判断版式是否贴近手册。
+
+![中文摘要对比](docs/images/abstract-compare.png)
+
+![正文页对比](docs/images/body-compare.png)
+
+### 配套表单画廊
+
+下图展示 6 个代表性配套模板：选题审题表、任务书、开题报告（理工农医类）、中期检查表、评语表、答辩记录。
+
+![表单模板画廊](docs/images/forms-gallery.png)
+
+### 技术验证产物
+
+用于排查残余字体或几何偏差的 overlay / diff / checker 产物保留在 `docs/assets/`，可通过 `make cover-diff` 重生成，不作为 README 首屏展示图。
+
+- `docs/assets/thesis-cover-overlay-focus.png`
+- `docs/assets/thesis-cover-diff-focus.png`
+- `docs/assets/thesis-cover-checker-focus.png`
 
 ## 模板清单
 
@@ -127,6 +166,12 @@ latexmk -xelatex topic-selection.tex
 make test
 ```
 
+### 生成 README 预览图
+
+```bash
+make readme-images
+```
+
 等价于：
 
 ```bash
@@ -136,21 +181,25 @@ python3 tests/test_thesis_alignment.py
 
 ## 字体策略
 
-**毕业论文优先使用标准商业字体**，模板自动按以下优先级加载：
+**毕业论文优先使用标准学术字体**，模板自动按以下优先级加载：
 
 ### 字体加载优先级
 
-1. **📁 本地商业字体** (`fonts/proprietary/`) — **对齐度 98-99%**
-   - 手动放入的商业字体文件
-   - 适合需要绝对精确对齐的场景
+1. **📁 本地标准字体** (`fonts/proprietary/`)
+   - 手动放入的正式字体文件
+   - 最适合最终提交与本机高保真交付
 
-2. **💻 系统商业字体** — **对齐度 95-98%**
-   - Windows: SimSun, SimHei, KaiTi, FangSong, Times New Roman, Arial
-   - macOS: STSong, STHeiti, STKaiti, STFangsong, Times New Roman, Arial
-   - Linux: 需安装 Windows 字体包
+2. **💻 系统标准学术字体**
+   - Windows: 直接探测 `C:/Windows/Fonts` 中的 `times/simsun/simhei/simkai/simfang`
+   - macOS: 优先探测系统 `STSong/STHeiti/STKaiti/STFangsong`
+   - Linux: 优先探测系统已安装的 `Times New Roman / SimSun / SimHei / KaiTi / FangSong`
 
-3. **🆓 开源字体兜底** (`fonts/opensource/`) — **对齐度 80-85%**
-   - 仅在前两者都不可用时使用
+3. **🧩 WPS 兼容字体**
+   - 仅在标准学术字体不完整时使用
+   - 包括 WPS 安装目录和系统中的 `HY... / FZ...` 字体
+
+4. **🆓 开源字体兜底** (`fonts/opensource/`)
+   - 仅在前三者都不可用时使用
    - Tinos, Noto CJK, LXGW WenKai, FandolFang
 
 ### 检查字体状态
@@ -161,25 +210,32 @@ python3 scripts/check_fonts.py
 
 该脚本会自动检测你的系统字体配置，并给出改进建议。
 
+对 Windows 用户，脚本会额外检查：
+- `C:/Windows/Fonts`
+- `Program Files` / `Program Files (x86)` 下的 WPS 安装目录
+- `LOCALAPPDATA` 下的 WPS 字体目录
+
+若客户机器使用了非标准安装路径，可使用 [styles/joufontspaths.local.example.tex](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/styles/joufontspaths.local.example.tex) 定义本地覆盖文件。
+
 ### 编译输出示例
 
-**有商业字体时**（最佳）：
+**有标准学术字体时**（最佳）：
 ```
 ===============================================
 Font Mode: system-licensed
-Status: Using system commercial fonts (Excellent)
+Status: Using system academic standard fonts (Excellent)
 ===============================================
 ```
 
-**无商业字体时**（开源字体fallback）：
+**无标准字体时**（开源字体 fallback）：
 ```
 ===============================================
 Font Mode: oss
-Status: Using open source fonts (Good for preview)
+Status: Using open source academic fallback fonts (Preview)
 ===============================================
 
-TIP: For best alignment with the official handbook,
-     install commercial fonts on your system.
+TIP: For best academic output, prefer KaiTi_GB2312,
+     SimSun, SimHei, and Times New Roman.
      Check: python3 scripts/check_fonts.py
 ```
 
@@ -187,7 +243,7 @@ TIP: For best alignment with the official handbook,
 
 **最终提交检查**（可选）:
 
-如需确保使用商业字体，可启用严格模式：
+如需确保使用标准正式字体，可启用严格模式：
 
 ```latex
 \documentclass[strictfonts]{jouthesis}  % 最终提交前检查
@@ -195,15 +251,14 @@ TIP: For best alignment with the official handbook,
 
 ### 字体映射表
 
-| 手册/Word 字体 | 优先使用 | 开源兜底 |
+| 学术标准字体 | 优先使用 | 开源兜底 |
 |------|------|------|
-| Times New Roman | 系统 Times New Roman | Tinos |
-| Arial | 系统 Arial | Noto Sans CJK SC |
-| Courier New | 系统 Courier New | Courier Prime |
-| 宋体 / 华文中宋 | SimSun / STSong | Noto Serif CJK SC |
+| Times New Roman | 系统 / 本地 Times New Roman | Tinos |
+| Courier New | 系统 / 本地 Courier New | Courier Prime |
+| 宋体 | SimSun / STSong | Noto Serif CJK SC |
 | 黑体 | SimHei / STHeiti | Noto Sans CJK SC |
-| 楷体 / 楷体_GB2312 | KaiTi / STKaiti | LXGW WenKai GB |
-| 仿宋_GB2312 / 华文仿宋 | FangSong / STFangsong | FandolFang |
+| 楷体 / 楷体_GB2312 | KaiTi_GB2312 / KaiTi / STKaiti | LXGW WenKai GB |
+| 仿宋 / 仿宋_GB2312 | FangSong / STFangsong | FandolFang |
 | 方正小标宋简体 | FZXiaoBiaoSong-B05 | Noto Serif CJK SC Black |
 | 华文行楷 | STXingkai | LXGW WenKai GB Medium |
 
@@ -256,7 +311,7 @@ JOU-Undergraduate-Thesis-LaTeX-Template/
 
 ### 编译时报“字体未找到”
 
-先执行 `make fonts`。默认模式不要求系统安装商业字体。
+先执行 `make fonts`。默认模式不要求系统预装标准正式字体。
 
 ### 想用本机的方正或微软字体
 

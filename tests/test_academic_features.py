@@ -93,17 +93,23 @@ def main() -> int:
         has_latin_commercial = all(
             marker in fonts for marker in ["TimesNewRoman", "CourierNew"]
         )
-        has_cjk_commercial = (
-            ("SimSun" in fonts and "KaiTi_GB2312" in fonts)
-            or ("STSong" in fonts and "STKaiti" in fonts)
-            or (
-                ("FZShuSong" in fonts or "HYShuSongErKW" in fonts)
-                and ("HYKaiTi" in fonts or "HYc1gj" in fonts)
-                and ("HYZhongJianHei" in fonts or "HYZhongHeiKW" in fonts)
-            )
+        has_song_family = any(
+            marker in fonts
+            for marker in ["SimSun", "STSong", "FZShuSong", "FZSSK", "HYShuSongErKW"]
+        )
+        has_kai_family = any(
+            marker in fonts
+            for marker in ["KaiTi_GB2312", "KaiTi", "STKaiti", "HYKaiTi", "HYc1gj"]
+        )
+        has_hei_family = any(
+            marker in fonts
+            for marker in ["SimHei", "STHeiti", "HYZhongJianHei", "HYZhongHeiKW"]
+        )
+        has_cjk_commercial = has_song_family and has_kai_family and (
+            has_hei_family or "FZShuSong" in fonts or "HYShuSongErKW" in fonts
         )
         if not has_oss_stack and not (has_latin_commercial and has_cjk_commercial):
-            failures.append("main.pdf 未嵌入可接受的字体栈（开源兜底或系统商用字体均未满足）")
+            failures.append("main.pdf 未嵌入可接受的字体栈（开源兜底或标准学术字体均未满足）")
 
     if not MAIN_NLS.exists():
         failures.append("缺少 main.nls，说明符号表索引尚未生成")

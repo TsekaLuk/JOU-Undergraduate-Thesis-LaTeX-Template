@@ -440,7 +440,7 @@ def main() -> int:
     spec = load_spec()
     word_tables = load_word_table_structures()
 
-    print_header("江苏海洋大学模板对齐 E2E TDD（WPS 基线）")
+    print_header("江苏海洋大学模板对齐 E2E TDD（手册基线）")
     print(f"参考 DOCX: {spec['reference']['docx']}")
     print(f"参考 PDF : {spec['reference']['pdf']}")
     print(f"模板数量 : {len(spec['templates'])}")
@@ -470,7 +470,7 @@ def main() -> int:
 
     print(f"\n  结果: {passed_count}/{len(tests)} 通过")
     if passed_count == len(tests):
-        print("\n  所有 WPS 基线 E2E 测试通过。")
+        print("\n  所有手册基线 E2E 测试通过。")
         return 0
 
     print(f"\n  仍有 {len(tests) - passed_count} 项失败，需要继续收敛模板版式。")

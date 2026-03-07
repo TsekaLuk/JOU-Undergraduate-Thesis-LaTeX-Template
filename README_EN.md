@@ -26,16 +26,57 @@ The repository currently includes:
 - 18 handbook templates for forms, reports, and grading sheets
 - WPS-PDF-based end-to-end alignment checks
 - A bundled open-source font stack for consistent builds on Linux, macOS, and Windows
+- A three-OS CI matrix that keeps Windows, macOS, and Linux thesis builds under regression checks
 
-The public repository does not redistribute commercial Foundertype or Microsoft fonts. Instead, it ships a default open-source font layer in `fonts/opensource/` and supports optional user-provided licensed overrides in `fonts/proprietary/`.
+The font strategy is now standards-first for academic writing:
+
+- `KaiTi_GB2312`
+- `SimSun`
+- `SimHei`
+- `Times New Roman`
+
+The public repository does not redistribute commercial Foundertype or Microsoft fonts. Instead, it ships an open-source fallback layer in `fonts/opensource/`, supports user-provided licensed overrides in `fonts/proprietary/`, and treats WPS fonts as a compatibility fallback rather than the default target.
 
 ## Highlights
 
-- `WPS baseline alignment`: page anchors, page count, orientation, and Word XML table grids are checked against the handbook export.
+- `Academic standards first`: the thesis prioritizes `KaiTi_GB2312 / SimSun / SimHei / Times New Roman` for real submission workflows.
+- `Handbook baseline checks`: page anchors, page count, orientation, and Word XML table grids are checked against the handbook export.
 - `Cross-platform builds`: the default setup does not require preinstalled `KaiTi_GB2312`, `FangSong_GB2312`, or `Times New Roman`.
 - `Complete template set`: thesis + 18 auxiliary templates.
 - `Optional licensed mode`: users with valid local font licenses can override the default font stack for higher fidelity.
 - `Executable QA`: layout expectations are written into E2E tests instead of being left as informal guidance.
+
+## Preview
+
+The preview section is organized as a product page: first visual quality, then thesis completeness, then handbook coverage. Regenerate everything with `make readme-images`.
+
+### Thesis cover: reference vs current template
+
+![Thesis cover comparison](docs/images/cover-compare.png)
+
+### Thesis template gallery
+
+This gallery shows the current thesis workflow pages: cover, Chinese abstract, English abstract, table of contents, body page, and references.
+
+![Thesis template gallery](docs/images/thesis-gallery.png)
+
+### Detail checks: abstract and body comparison
+
+The main hero image is not enough on its own, so the README also keeps focused comparisons for the abstract and body pages.
+
+![Chinese abstract comparison](docs/images/abstract-compare.png)
+
+![Body page comparison](docs/images/body-compare.png)
+
+### Representative handbook forms
+
+The gallery below shows six representative templates: topic selection, task book, science proposal, midterm check, thesis evaluation, and defense record.
+
+![Forms gallery](docs/images/forms-gallery.png)
+
+### Technical comparison artifacts
+
+Overlay, diff, and checkerboard assets stay in `docs/assets/` for debugging residual font or geometry drift. Regenerate them with `make cover-diff`.
 
 ## Quick Start
 
@@ -100,18 +141,31 @@ latexmk -xelatex topic-selection.tex
 make test
 ```
 
+### Generate README preview images
+
+```bash
+make readme-images
+```
+
 ## Font strategy
 
-### Default open-source mapping
+### Font priority
 
-| Handbook / Word font | Bundled fallback |
+1. Local licensed standard fonts under `fonts/proprietary/`
+2. System-standard academic fonts on Windows/macOS/Linux
+3. WPS compatibility fonts
+4. Bundled open-source fallback fonts
+
+### Open-source fallback mapping
+
+| Standard academic font | Bundled fallback |
 |------|------|
 | Times New Roman | Tinos |
 | Courier New | Courier Prime |
-| SimSun / STSong-like serif Chinese | Noto Serif CJK SC |
-| Hei / sans Chinese | Noto Sans CJK SC |
-| KaiTi / KaiTi_GB2312 | LXGW WenKai GB |
-| FangSong_GB2312 | FandolFang |
+| SimSun / STSong | Noto Serif CJK SC |
+| SimHei / STHeiti | Noto Sans CJK SC |
+| KaiTi / KaiTi_GB2312 / STKaiti | LXGW WenKai GB |
+| FangSong / FangSong_GB2312 / STFangsong | FandolFang |
 | FangZheng XiaoBiaoSong | Noto Serif CJK SC Black |
 | Xingkai styles | LXGW WenKai GB Medium |
 
@@ -166,7 +220,14 @@ JOU-Undergraduate-Thesis-LaTeX-Template/
 
 ### Missing font errors
 
-Run `make fonts` first. The default mode should not require any system-installed commercial fonts.
+Run `make fonts` first. The default mode should not require any system-installed licensed standard fonts.
+
+On Windows, the project now probes:
+- `C:/Windows/Fonts`
+- common `WPS Office/office6/fonts` install locations
+- WPS font folders under `LOCALAPPDATA`
+
+If the client machine uses a non-standard install path, use [styles/joufontspaths.local.example.tex](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/styles/joufontspaths.local.example.tex) as the local override template.
 
 ### I want to use local Foundertype or Microsoft fonts
 

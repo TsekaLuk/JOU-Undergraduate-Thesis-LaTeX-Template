@@ -97,7 +97,7 @@
 
 \newcommand{\jou@bodystyle}{
     \fancyhf{}
-    \fancyhead[L]{\zihao{5}\kaishu 江苏海洋大学二〇二六届本科毕业设计（论文）}
+    \fancyhead[L]{\zihao{5}\kaishu 江苏海洋大学二零二六届本科毕业设计（论文）}
     \fancyhead[C]{\zihao{5}\kaishu \@thesiscategory}
     \fancyhead[R]{\zihao{5}\kaishu 第\thepage 页\ 共 \pageref*{LastPage} 页}
     \renewcommand{\headrulewidth}{0.4pt}
@@ -349,7 +349,7 @@
         {\makebox[0pt][c]{\hspace*{0.17cm}\JOUCoverKai\zihao{2}\scalebox{0.965}[1]{\@title}}\par}
         \vspace{0.53cm}
 
-        {\makebox[0pt][c]{\hspace*{0.14cm}\fontspec{Times New Roman Bold}\fontsize{21.5pt}{28pt}\selectfont \scalebox{0.960}[1]{\@entitle}}\par}
+        {\makebox[0pt][c]{\hspace*{0.14cm}\rmfamily\bfseries\fontsize{21.5pt}{28pt}\selectfont \scalebox{0.960}[1]{\@entitle}}\par}
         \vspace{3.92cm}
 
         {\JOUCoverKai\zihao{4}

@@ -4,11 +4,18 @@ MAIN = main
 TEX = xelatex
 BIB = bibtex
 INDEX = makeindex
+THESIS_DEPS = $(MAIN).tex \
+	$(wildcard styles/*.sty) \
+	$(wildcard styles/*.cls) \
+	$(wildcard contents/*.tex) \
+	$(wildcard contents/chapters/*.tex) \
+	$(wildcard contents/appendices/*.tex) \
+	$(wildcard references/*.bib)
 
 # 编译选项
 TEXFLAGS = -interaction=nonstopmode -halt-on-error
 
-.PHONY: all fonts clean cleanall view help wordcount test cover-diff
+.PHONY: all fonts clean cleanall view help wordcount test cover-diff readme-images
 
 # 默认目标：完整编译
 all: fonts $(MAIN).pdf
@@ -19,7 +26,7 @@ fonts:
 	python3 scripts/download_fonts.py
 
 # 编译PDF（完整流程）
-$(MAIN).pdf: $(MAIN).tex
+$(MAIN).pdf: $(THESIS_DEPS)
 	@echo "==> 第1次编译..."
 	$(TEX) $(TEXFLAGS) $(MAIN)
 	@echo "==> 处理参考文献..."
@@ -69,6 +76,10 @@ wordcount:
 cover-diff: $(MAIN).pdf
 	python3 scripts/generate_cover_diff.py
 
+# 生成 README 预览图片（横向对比图 + 表单画廊）
+readme-images: $(MAIN).pdf
+	python3 scripts/generate_readme_images.py
+
 # 帮助信息
 help:
 	@echo "江苏海洋大学毕业论文 LaTeX 模板 - Makefile 使用说明"
@@ -81,6 +92,7 @@ help:
 	@echo "  make cleanall - 完全清理（包括PDF）"
 	@echo "  make view     - 编译并预览PDF"
 	@echo "  make cover-diff - 生成封面对比 overlay/diff/checker 产物"
+	@echo "  make readme-images - 生成 README 用的横向对比图和表单画廊"
 	@echo "  make wordcount- 统计论文字数"
 	@echo "  make test     - 运行 E2E 测试"
 	@echo "  make help     - 显示此帮助信息"
@@ -93,6 +105,7 @@ help:
 	@echo "  5. xelatex main.tex  (第3次编译，确保引用正确)"
 
 test:
+	python3 tests/test_cross_platform_font_support.py
 	python3 tests/test_pixel_perfect_alignment.py
 	python3 tests/test_thesis_alignment.py
 	python3 tests/test_cover_alignment.py
