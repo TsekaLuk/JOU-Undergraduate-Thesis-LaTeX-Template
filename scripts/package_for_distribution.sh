@@ -7,6 +7,9 @@ PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 VERSION=$(grep "ProvidesClass{jouthesis}" "$PROJECT_ROOT/styles/jouthesis.cls" | sed -n 's/.*\[\([0-9]\{4\}\/[0-9]\{2\}\/[0-9]\{2\}\).*/\1/p' | tr '/' '-')
 DIST_DIR="$PROJECT_ROOT/dist"
 TEMP_DIR="$PROJECT_ROOT/tmp/packaging"
+REPO_URL="$(git -C "$PROJECT_ROOT" remote get-url origin 2>/dev/null || echo "https://github.com/TsekaLuk/JOU-Undergraduate-Thesis-LaTeX-Template.git")"
+MAINTAINER_NAME="${CTAN_MAINTAINER_NAME:-$(git -C "$PROJECT_ROOT" config user.name 2>/dev/null || echo '[Your Name]')}"
+MAINTAINER_EMAIL="${CTAN_MAINTAINER_EMAIL:-$(git -C "$PROJECT_ROOT" config user.email 2>/dev/null || echo 'your.email@example.com')}"
 
 echo "=========================================="
 echo "JOU 本科论文模板打包脚本"
@@ -38,12 +41,16 @@ cp -r "$PROJECT_ROOT"/styles "$OVERLEAF_DIR/"
 cp -r "$PROJECT_ROOT"/contents "$OVERLEAF_DIR/"
 cp -r "$PROJECT_ROOT"/figures "$OVERLEAF_DIR/"
 cp -r "$PROJECT_ROOT"/fonts "$OVERLEAF_DIR/"
-cp -r "$PROJECT_ROOT"/references "$OVERLEAF_DIR/"
+mkdir -p "$OVERLEAF_DIR"/references
+cp "$PROJECT_ROOT"/references/refs.bib "$OVERLEAF_DIR"/references/
 
 # 只保留 opensource 字体（Overleaf 不能使用 proprietary）
 rm -rf "$OVERLEAF_DIR"/fonts/proprietary
 mkdir -p "$OVERLEAF_DIR"/fonts/proprietary
 echo "# 说明：Overleaf 环境请使用 fonts/opensource/ 中的字体" > "$OVERLEAF_DIR"/fonts/proprietary/README.md
+
+# 清理编译残留，避免上传无关中间文件
+find "$OVERLEAF_DIR"/contents -type f \( -name '*.aux' -o -name '*.log' -o -name '*.bbl' -o -name '*.blg' \) -delete
 
 # 创建 latexmkrc（Overleaf 专用配置）
 cat > "$OVERLEAF_DIR/.latexmkrc" <<'EOF'
@@ -83,9 +90,14 @@ cp "$PROJECT_ROOT"/README_EN.md "$CTAN_DIR/doc/"
 cp "$PROJECT_ROOT"/LICENSE "$CTAN_DIR/doc/"
 cp "$PROJECT_ROOT"/docs/guides/usage.md "$CTAN_DIR/doc/USAGE.md"
 cp "$PROJECT_ROOT"/main.tex "$CTAN_DIR/doc/examples/"
-cp -r "$PROJECT_ROOT"/contents "$CTAN_DIR/doc/examples/"
-cp -r "$PROJECT_ROOT"/references "$CTAN_DIR/doc/examples/"
-cp -r "$PROJECT_ROOT"/figures "$CTAN_DIR/doc/figures/"
+mkdir -p "$CTAN_DIR/doc/examples/contents/chapters"
+mkdir -p "$CTAN_DIR/doc/examples/contents/appendices"
+cp "$PROJECT_ROOT"/contents/acknowledgements.tex "$CTAN_DIR/doc/examples/contents/"
+cp "$PROJECT_ROOT"/contents/chapters/*.tex "$CTAN_DIR/doc/examples/contents/chapters/"
+cp "$PROJECT_ROOT"/contents/appendices/*.tex "$CTAN_DIR/doc/examples/contents/appendices/"
+mkdir -p "$CTAN_DIR/doc/examples/references"
+cp "$PROJECT_ROOT"/references/refs.bib "$CTAN_DIR/doc/examples/references/"
+cp "$PROJECT_ROOT"/figures/* "$CTAN_DIR/doc/figures/"
 
 # 创建 README（CTAN 特殊格式）
 cat > "$CTAN_DIR/README" <<EOF
@@ -113,9 +125,9 @@ Documentation:
 - USAGE.md: User guide
 
 For more information, visit:
-https://github.com/username/JOU-Undergraduate-Thesis-LaTeX-Template
+${REPO_URL}
 
-Maintainer: [Your Name]
+Maintainer: ${MAINTAINER_NAME}
 EOF
 
 # 打包 CTAN TDS zip
@@ -252,7 +264,7 @@ cat > "$DIST_DIR/UPLOAD-CHECKLIST.md" <<EOF
 #### 必填字段
 - **Package name**: jouthesis
 - **Version**: ${VERSION}
-- **Author**: [Your Name] <your.email@example.com>
+- **Author**: ${MAINTAINER_NAME} <${MAINTAINER_EMAIL}>
 - **License**: LPPL 1.3c
 - **Summary**: LaTeX template for Jiangsu Ocean University undergraduate thesis
 - **Announcement**: [发布说明]
@@ -348,8 +360,8 @@ python3 scripts/generate_cover_diff.py
 ## 联系方式
 
 如有问题，请联系：
-- GitHub Issues: https://github.com/username/JOU-Undergraduate-Thesis-LaTeX-Template/issues
-- Email: your.email@example.com
+- GitHub Issues: ${REPO_URL%.git}/issues
+- Email: ${MAINTAINER_EMAIL}
 
 EOF
 
