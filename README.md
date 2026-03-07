@@ -155,37 +155,36 @@ python3 scripts/check_fonts.py
 
 该脚本会自动检测你的系统字体配置，并给出改进建议。
 
-### 字体缺失警告
+### 编译输出示例
 
-**重要**: 如果系统缺少商业字体，编译时会输出醒目警告：
-
+**有商业字体时**（最佳）：
 ```
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-! 错误: 未检测到商业字体                  !
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-毕业论文需要标准化，必须使用商业字体！
-当前未找到任何商业字体（对齐度将降低至 80-85%）
-
->>> 第一步：运行字体检测脚本
-    python3 scripts/check_fonts.py
-
->>> 第二步：根据你的操作系统安装字体
-    [平台特定安装命令...]
+===============================================
+Font Mode: system-licensed
+Status: Using system commercial fonts (Excellent)
+===============================================
 ```
 
-**严格模式**（推荐用于最终提交）:
+**无商业字体时**（开源字体fallback）：
+```
+===============================================
+Font Mode: oss
+Status: Using open source fonts (Good for preview)
+===============================================
 
-在 `main.tex` 中启用严格字体检查，缺少商业字体时直接阻止编译：
+TIP: For best alignment with the official handbook,
+     install commercial fonts on your system.
+     Check: python3 scripts/check_fonts.py
+```
+
+模板会**自动选择最佳可用字体**，开源字体完全可用于日常预览和开发。
+
+**最终提交检查**（可选）:
+
+如需确保使用商业字体，可启用严格模式：
 
 ```latex
-\documentclass[strictfonts]{jouthesis}  % 添加 strictfonts 选项
-```
-
-或在 `styles/joufonts.sty` 引用处：
-
-```latex
-\RequirePackage[strictfonts]{styles/joufonts}  % 强制检查商业字体
+\documentclass[strictfonts]{jouthesis}  % 最终提交前检查
 ```
 
 ### 字体映射表
