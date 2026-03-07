@@ -52,51 +52,92 @@ cd frontend && npm install && npm run dev
 
 ### 必需步骤
 
-banana-slides 需要 LLM API 才能生成 PPT。完成安装后，**必须配置 API-KEY**：
+banana-slides 需要 LLM API 才能生成 PPT。完成安装后，**必须配置 API-KEY**。
+
+**根据官方文档，推荐使用 Google Gemini**（图片生成质量最优，且有免费额度）。
 
 ```bash
 cd slides/banana-slides
 nano .env  # 或使用其他编辑器
 ```
 
-### 配置选项
+### 推荐配置：Google Gemini
 
-#### 方案 A: Google Gemini（推荐）
+**优点**：
+- ✅ 官方推荐，图片生成质量最好
+- ✅ 支持 2K 高分辨率（文字更清晰）
+- ✅ 免费额度充足（每月免费调用）
+- ✅ 配置简单，无需复杂设置
 
-**优点**：免费额度充足，性能好，配置简单
+#### 配置步骤
+
+**1. 获取 Gemini API Key**
+
+访问 https://makersuite.google.com/app/apikey （或 https://aistudio.google.com/app/apikey）
+
+- 登录 Google 账号
+- 点击「Create API key」
+- 复制生成的 API 密钥
+
+**2. 编辑 .env 文件**
 
 ```bash
-# 在 .env 文件中添加
+# 必填配置
+AI_PROVIDER_FORMAT=gemini
 GOOGLE_API_KEY=your_gemini_api_key_here
+
+# API 端点（默认）
+GOOGLE_API_BASE=https://generativelanguage.googleapis.com
+
+# 可选：如果官方 API 访问不稳定，可使用 AIHubMix 代理
+# GOOGLE_API_BASE=https://aihubmix.com/gemini
+
+# 模型配置（可选，使用默认值即可）
+# TEXT_MODEL=gemini-2.0-flash-exp
+# IMAGE_MODEL=gemini-2.0-flash-exp
 ```
 
-**获取 API Key**:
-1. 访问 https://makersuite.google.com/app/apikey
-2. 登录 Google 账号
-3. 点击「Create API key」
-4. 复制密钥到 `.env` 文件
+**3. 可选：配置百度智能云（用于导出可编辑 PPTX）**
+
+如果需要导出可编辑的 PPTX 文件，需额外配置：
+
+```bash
+BAIDU_API_KEY=your_baidu_api_key
+BAIDU_SECRET_KEY=your_baidu_secret_key
+```
+
+获取方式：https://console.bce.baidu.com/ai/
 
 ---
 
-#### 方案 B: OpenAI
+### 其他可选配置（高级用户）
+
+⚠️ **注意**：其他 LLM 提供商虽然支持，但图片生成质量和分辨率可能不如 Gemini。
+
+<details>
+<summary>点击展开：OpenAI / 国内 LLM 配置</summary>
+
+#### OpenAI（文本生成支持，图片生成效果较差）
 
 ```bash
-# 在 .env 文件中添加
+AI_PROVIDER_FORMAT=openai
 OPENAI_API_KEY=sk-your_openai_api_key_here
-OPENAI_MODEL=gpt-4  # 可选，默认 gpt-3.5-turbo
 ```
 
-**获取 API Key**: https://platform.openai.com/api-keys
-
----
-
-#### 方案 C: 国内 LLM（智谱 AI / 通义千问等）
+#### 国内 LLM（通过 Lazyllm）
 
 ```bash
-# 在 .env 文件中添加
-LAZYLLM_API_KEY=your_api_key_here
-LAZYLLM_PROVIDER=zhipu  # 或 qwen, wenxin, etc.
+AI_PROVIDER_FORMAT=lazyllm
+
+# 选择一个厂商配置
+DEEPSEEK_API_KEY=your_key      # DeepSeek
+QWEN_API_KEY=your_key          # 阿里通义千问
+GLM_API_KEY=your_key           # 智谱 AI
+DOUBAO_API_KEY=your_key        # 字节豆包
+SILICONFLOW_API_KEY=your_key   # 硅基流动
 ```
+
+</details>
 
 ---
 
@@ -108,17 +149,24 @@ cd banana-slides
 docker-compose restart
 
 # 手动方式
-# 重新运行启动脚本或手动重启服务
+# 停止服务（如果正在运行）
+kill $(cat backend.pid frontend.pid)
+# 重新启动
+./setup_banana_slides.sh
 ```
 
 ### 验证配置
 
 ```bash
 # 检查环境变量
-cat .env | grep API_KEY
+cat .env | grep -E "AI_PROVIDER_FORMAT|GOOGLE_API_KEY"
 
-# 测试服务
+# 测试服务健康状态
 curl http://localhost:5000/health
+
+# 访问前端验证
+open http://localhost:3000  # macOS
+# 或在浏览器打开 http://localhost:3000
 ```
 
 ---
