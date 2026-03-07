@@ -1,6 +1,8 @@
 # LaTeX Makefile for JOU Undergraduate Thesis
 
 MAIN = main
+BODY_SAMPLE_TEX = samples/body-sample.tex
+BODY_SAMPLE_PDF = body-sample.pdf
 TEX = xelatex
 BIB = bibtex
 INDEX = makeindex
@@ -11,6 +13,10 @@ THESIS_DEPS = $(MAIN).tex \
 	$(wildcard contents/chapters/*.tex) \
 	$(wildcard contents/appendices/*.tex) \
 	$(wildcard references/*.bib)
+BODY_SAMPLE_DEPS = $(BODY_SAMPLE_TEX) \
+	$(wildcard styles/*.sty) \
+	$(wildcard fonts/opensource/*) \
+	$(wildcard fonts/proprietary/*)
 
 # 编译选项
 TEXFLAGS = -interaction=nonstopmode -halt-on-error
@@ -18,7 +24,7 @@ TEXFLAGS = -interaction=nonstopmode -halt-on-error
 .PHONY: all fonts clean cleanall view help wordcount test cover-diff readme-images
 
 # 默认目标：完整编译
-all: fonts $(MAIN).pdf
+all: fonts $(MAIN).pdf $(BODY_SAMPLE_PDF)
 
 # 下载仓库自带的开源字体
 fonts:
@@ -39,18 +45,26 @@ $(MAIN).pdf: $(THESIS_DEPS)
 	$(TEX) $(TEXFLAGS) $(MAIN)
 	@echo "==> 编译完成! 生成文件: $(MAIN).pdf"
 
+$(BODY_SAMPLE_PDF): $(BODY_SAMPLE_DEPS)
+	@echo "==> 编译正文样页基线..."
+	$(TEX) $(TEXFLAGS) samples/body-sample.tex
+	@echo "==> 第2次编译正文样页基线..."
+	$(TEX) $(TEXFLAGS) samples/body-sample.tex
+	@echo "==> 正文样页生成完成: $(BODY_SAMPLE_PDF)"
+
 # 清理临时文件
 clean:
 	@echo "==> 清理临时文件..."
 	rm -f *.aux *.bbl *.blg *.log *.out *.toc *.lof *.lot *.loa *.lol
 	rm -f *.fls *.fdb_latexmk *.synctex.gz *.xdv *.nav *.snm *.vrb *.nlo *.nls *.ilg *.ind *.idx
+	rm -f body-sample.aux body-sample.log body-sample.out body-sample.fls body-sample.fdb_latexmk body-sample.xdv
 	rm -f contents/*.aux contents/chapters/*.aux contents/appendices/*.aux
 	@echo "==> 清理完成!"
 
 # 完全清理（包括PDF）
 cleanall: clean
 	@echo "==> 删除PDF文件..."
-	rm -f $(MAIN).pdf
+	rm -f $(MAIN).pdf $(BODY_SAMPLE_PDF)
 	@echo "==> 完全清理完成!"
 
 # 编译并预览
@@ -77,7 +91,7 @@ cover-diff: $(MAIN).pdf
 	python3 scripts/generate_cover_diff.py
 
 # 生成 README 预览图片（横向对比图 + 表单画廊）
-readme-images: $(MAIN).pdf
+readme-images: $(MAIN).pdf $(BODY_SAMPLE_PDF)
 	python3 scripts/generate_readme_images.py
 
 # 帮助信息
@@ -87,6 +101,7 @@ help:
 	@echo "可用命令:"
 	@echo "  make          - 完整编译论文（默认）"
 	@echo "  make all      - 完整编译论文"
+	@echo "  make body-sample.pdf - 编译正文样页基线页"
 	@echo "  make fonts    - 下载/校验仓库内置字体"
 	@echo "  make clean    - 清理临时文件"
 	@echo "  make cleanall - 完全清理（包括PDF）"
@@ -105,8 +120,10 @@ help:
 	@echo "  5. xelatex main.tex  (第3次编译，确保引用正确)"
 
 test:
+	$(MAKE) $(BODY_SAMPLE_PDF)
 	python3 tests/test_cross_platform_font_support.py
 	python3 tests/test_pixel_perfect_alignment.py
 	python3 tests/test_thesis_alignment.py
+	python3 tests/test_body_sample_alignment.py
 	python3 tests/test_cover_alignment.py
 	python3 tests/test_academic_features.py

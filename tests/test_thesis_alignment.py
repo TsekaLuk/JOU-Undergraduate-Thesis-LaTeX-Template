@@ -9,11 +9,15 @@ using page anchors instead of hard-coded page numbers.
 import re
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
+
+from PIL import Image
 
 
 PROJECT_ROOT = Path(__file__).parent.parent
 MAIN_PDF = PROJECT_ROOT / "main.pdf"
+RENDER_DPI = 160
 
 
 def normalize(text: str) -> str:
@@ -52,6 +56,100 @@ def pdffonts(pdf: Path) -> str:
         capture_output=True,
     )
     return completed.stdout
+
+
+def render_page(pdf: Path, page: int) -> Image.Image:
+    with tempfile.TemporaryDirectory() as temp_dir:
+        prefix = Path(temp_dir) / "page"
+        subprocess.run(
+            [
+                "pdftoppm",
+                "-f",
+                str(page),
+                "-l",
+                str(page),
+                "-r",
+                str(RENDER_DPI),
+                "-png",
+                str(pdf),
+                str(prefix),
+            ],
+            check=True,
+            text=True,
+            capture_output=True,
+        )
+        candidates = sorted(Path(temp_dir).glob("page-*.png"))
+        if not candidates:
+            raise RuntimeError(f"无法渲染第 {page} 页为 PNG")
+        return Image.open(candidates[0]).convert("L").copy()
+
+
+def group_positions(values: list[int]) -> list[tuple[int, int]]:
+    if not values:
+        return []
+    groups: list[tuple[int, int]] = []
+    start = values[0]
+    prev = values[0]
+    for value in values[1:]:
+        if value == prev + 1:
+            prev = value
+            continue
+        groups.append((start, prev))
+        start = value
+        prev = value
+    groups.append((start, prev))
+    return groups
+
+
+def assert_abstract_frame(failures: list[str], pdf: Path, page: int, label: str) -> None:
+    image = render_page(pdf, page)
+    width, height = image.size
+    threshold = 205
+
+    vertical_hits = [
+        x for x in range(width)
+        if sum(1 for y in range(height) if image.getpixel((x, y)) < threshold) >= 1200
+    ]
+    horizontal_hits = [
+        y for y in range(height)
+        if sum(1 for x in range(width) if image.getpixel((x, y)) < threshold) >= 800
+    ]
+
+    vertical_groups = group_positions(vertical_hits)
+    horizontal_groups = group_positions(horizontal_hits)
+
+    if len(vertical_groups) < 2:
+        failures.append(f"{label} 缺少可识别的左右外框线。")
+        return
+    if len(horizontal_groups) < 2:
+        failures.append(f"{label} 缺少可识别的上下外框线。")
+        return
+
+    left = vertical_groups[0]
+    right = vertical_groups[-1]
+    top = horizontal_groups[0]
+    bottom = horizontal_groups[-1]
+
+    left_center = (left[0] + left[1]) / 2
+    right_center = (right[0] + right[1]) / 2
+    top_center = (top[0] + top[1]) / 2
+    bottom_center = (bottom[0] + bottom[1]) / 2
+
+    if not (170 <= left_center <= 230):
+        failures.append(f"{label} 左边框位置异常，当前约为 x={left_center:.1f}。")
+    if not (1090 <= right_center <= 1160):
+        failures.append(f"{label} 右边框位置异常，当前约为 x={right_center:.1f}。")
+    if not (200 <= top_center <= 290):
+        failures.append(f"{label} 上边框位置异常，当前约为 y={top_center:.1f}。")
+    if not (1600 <= bottom_center <= 1785):
+        failures.append(f"{label} 下边框位置异常，当前约为 y={bottom_center:.1f}。")
+
+    frame_width = right_center - left_center
+    frame_height = bottom_center - top_center
+    if not (880 <= frame_width <= 980):
+        failures.append(f"{label} 外框宽度异常，当前约为 {frame_width:.1f}px。")
+    if not (1320 <= frame_height <= 1540):
+        failures.append(f"{label} 外框高度异常，当前约为 {frame_height:.1f}px。")
 
 
 def find_page(pages: dict[int, str], *patterns: str) -> int | None:
@@ -148,6 +246,11 @@ def main() -> int:
         and en_abstract_page != cn_abstract_page + 1
     ):
         failures.append("外文摘要页应紧跟中文摘要页。")
+
+    if cn_abstract_page is not None:
+        assert_abstract_frame(failures, MAIN_PDF, cn_abstract_page, "中文摘要页")
+    if en_abstract_page is not None:
+        assert_abstract_frame(failures, MAIN_PDF, en_abstract_page, "外文摘要页")
 
     if toc_page is not None:
         if "第1章" in pages[toc_page]:

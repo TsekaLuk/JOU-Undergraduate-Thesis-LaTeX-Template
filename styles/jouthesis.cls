@@ -54,6 +54,7 @@
 \RequirePackage{indentfirst}   % 首行缩进
 \RequirePackage{lastpage}      % 总页数引用
 \RequirePackage{styles/joufonts} % 统一字体配置
+\RequirePackage[absolute,overlay]{textpos} % 摘要等页面的绝对定位
 \RequirePackage{hyperref}      % 超链接
 \RequirePackage{bookmark}      % PDF书签
 \RequirePackage[capitalize,nameinlink,noabbrev]{cleveref} % 智能引用
@@ -72,6 +73,9 @@
     headsep=0.5cm,
     footskip=1cm
 }
+\setlength{\TPHorizModule}{1cm}
+\setlength{\TPVertModule}{1cm}
+\textblockorigin{0cm}{0cm}
 
 % 行距设置 - 1.25倍行距
 \linespread{1.25}
@@ -332,6 +336,14 @@
 \newcommand{\jou@coverlabelstudent}{\makebox[3.57cm][l]{学\hspace{0.37cm}生\hspace{0.37cm}姓\hspace{0.37cm}名：}}
 \newcommand{\jou@coverlabelsupervisor}{\makebox[3.57cm][l]{指\hspace{0.37cm}导\hspace{0.37cm}教\hspace{0.37cm}师：}}
 \newcommand{\jou@coverlabelid}{\makebox[2.72cm][l]{学\hspace{0.55cm}号：}}
+\newcommand{\jou@coverdatexoffset}{0.58cm}
+\newcommand{\jou@coverdateyoffset}{0.00cm}
+\newcommand{\jou@coverdateformat}{%
+    \makebox[\textwidth][c]{%
+        \hspace*{\jou@coverdatexoffset}%
+        \raisebox{\jou@coverdateyoffset}{\JOUCoverHei\zihao{3}\@coverdate}%
+    }%
+}
 
 % 封面命令
 \newcommand{\makecover}{
@@ -370,8 +382,8 @@
             \end{tabular}}\par
         }
 
-        \vspace{1.15cm}
-        {\JOUCoverKai\zihao{3} \@coverdate\par}
+        \vspace{1.51cm}
+        {\jou@coverdateformat\par}
     \end{titlepage}
 
     % 原创性声明页
@@ -405,18 +417,66 @@
     \clearpage
 }
 
+% 摘要页固定内容区 - 与手册样页对齐，但不复制说明注释
+\newlength{\jou@abstractframewidth}
+\setlength{\jou@abstractframewidth}{15.08cm}
+\newlength{\jou@abstractframeheight}
+\setlength{\jou@abstractframeheight}{22.90cm}
+\newlength{\jou@abstractinnerwidth}
+\setlength{\jou@abstractinnerwidth}{13.95cm}
+\newlength{\jou@abstracttitlewidth}
+\setlength{\jou@abstracttitlewidth}{16.00cm}
+\newlength{\jou@abstractframeleft}
+\setlength{\jou@abstractframeleft}{2.13cm}
+\newlength{\jou@abstractframetop}
+\setlength{\jou@abstractframetop}{3.86cm}
+\newlength{\jou@abstracttitletop}
+\setlength{\jou@abstracttitletop}{2.55cm}
+\newlength{\jou@abstracttitleleft}
+\setlength{\jou@abstracttitleleft}{1.66cm}
+
+\newcommand{\jou@abstracttitleblock}[1]{%
+    \begin{textblock*}{\jou@abstracttitlewidth}(\jou@abstracttitleleft,\jou@abstracttitletop)
+        \centering\heiti\zihao{4}\textbf{#1}
+    \end{textblock*}%
+}
+
+\newcommand{\jou@abstractframebegin}[2]{%
+    \begin{textblock*}{\jou@abstractframewidth}(\jou@abstractframeleft,\jou@abstractframetop)
+    \begin{tabular}{|@{}p{\jou@abstractframewidth}@{}|}
+        \hline
+        \begin{minipage}[t][\jou@abstractframeheight][t]{\jou@abstractframewidth}
+            \centering
+            \vspace*{0.70cm}
+            {#2\par}
+            \vspace{0.92cm}
+            \begin{minipage}[t]{\jou@abstractinnerwidth}
+                \raggedright
+                #1%
+}
+
+\newcommand{\jou@abstractframeend}{%
+                \par
+                \vfill
+            \end{minipage}
+        \end{minipage}\\
+        \hline
+    \end{tabular}%
+    \end{textblock*}%
+}
+
 % 中文摘要环境
 \newenvironment{cnabstract}{
     \clearpage
     \thispagestyle{frontmatterstyle}
-    \vspace*{\baselineskip}
-    {\centering\heiti\zihao{4}\textbf{毕业设计（论文）中文摘要}\par}
-    \vspace{\baselineskip}
-    {\centering\songti\zihao{4}\@title\par}
-    \vspace{\baselineskip}
-    \noindent{\heiti\zihao{-4}\textbf{摘\hspace{1em}要：}}
-    \zihao{-4}\songti
+    \mbox{}%
+    \jou@abstracttitleblock{毕业设计（论文）中文摘要}
+    \jou@abstractframebegin
+        {\noindent{\heiti\zihao{-4}\textbf{摘\hspace{1em}要：}}\zihao{-4}\songti}
+        {\songti\bfseries\zihao{-4}\@title}
 }{
+    \jou@abstractframeend
+    \null
     \clearpage
 }
 
@@ -424,26 +484,26 @@
 \newenvironment{enabstract}{
     \clearpage
     \thispagestyle{frontmatterstyle}
-    \vspace*{\baselineskip}
-    {\centering\heiti\zihao{4}\textbf{毕业设计（论文）外文摘要}\par}
-    \vspace{\baselineskip}
-    {\centering\zihao{4}\textbf{\@entitle}\par}
-    \vspace{\baselineskip}
-    \noindent{\zihao{-4}\textbf{Abstract: }}
-    \zihao{-4}
+    \mbox{}%
+    \jou@abstracttitleblock{毕业设计（论文）外文摘要}
+    \jou@abstractframebegin
+        {\noindent{\rmfamily\bfseries\zihao{-4}Abstract: }\rmfamily\zihao{-4}}
+        {\rmfamily\bfseries\zihao{-4}\@entitle}
 }{
+    \jou@abstractframeend
+    \null
     \clearpage
 }
 
 % 关键词命令
 \newcommand{\cnkeywords}[1]{
-    \vspace{\baselineskip}
+    \par\vspace{0.82cm}
     \noindent{\heiti\zihao{-4}\textbf{关键词：}}{\zihao{-4}\songti #1}
 }
 
 \newcommand{\enkeywords}[1]{
-    \vspace{\baselineskip}
-    \noindent{\zihao{-4}\textbf{Keywords: }}{\zihao{-4}#1}
+    \par\vspace{0.82cm}
+    \noindent{\rmfamily\bfseries\zihao{-4}Keywords: }{\rmfamily\zihao{-4}#1}
 }
 
 \newcommand{\printsymbols}{

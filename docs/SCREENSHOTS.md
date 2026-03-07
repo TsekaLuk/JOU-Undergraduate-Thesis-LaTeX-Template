@@ -44,8 +44,8 @@ make cover-diff
 README 预览使用以下页面基线：
 
 - 封面：工作手册 PDF 第 39 页 vs `main.pdf` 第 1 页
-- 中文摘要：工作手册 PDF 第 41 页 vs `main.pdf` 第 3 页
-- 正文首页：工作手册 PDF 第 45 页 vs `main.pdf` 第 6 页
+- 中文摘要：工作手册 PDF 第 41 页 vs `main.pdf` 第 3 页（README 使用摘要内容区裁剪，不包含手册注释区）
+- 正文样页：工作手册 PDF 第 45 页 vs `body-sample.pdf` 第 1 页
 - 论文画廊：`main.pdf` 第 1 / 3 / 4 / 5 / 7 / 14 页
 - 表单画廊：`topic-selection.pdf`、`task-book-science.pdf`、`proposal-science.pdf`、`midterm-check.pdf`、`thesis-evaluation.pdf`、`defense-record.pdf`
 

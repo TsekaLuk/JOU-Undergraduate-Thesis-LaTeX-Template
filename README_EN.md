@@ -62,7 +62,8 @@ This gallery shows the current thesis workflow pages: cover, Chinese abstract, E
 
 ### Detail checks: abstract and body comparison
 
-The main hero image is not enough on its own, so the README also keeps focused comparisons for the abstract and body pages.
+The main hero image is not enough on its own, so the README also keeps focused comparisons for the abstract and body pages. For the body sample, the comparison uses a dedicated `body-sample.pdf` artifact instead of a real thesis chapter page, so the right-hand side matches the handbook sample semantics.
+The abstract comparison is cropped to the title, frame, and abstract content area so the handbook note block does not dilute the README demo.
 
 ![Chinese abstract comparison](docs/images/abstract-compare.png)
 

@@ -1,0 +1,117 @@
+\documentclass[a4paper,zihao=-4]{ctexart}
+
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{indentfirst}
+\usepackage{setspace}
+\usepackage{array}
+\usepackage{etoolbox}
+\usepackage{styles/joufonts}
+
+\geometry{
+    a4paper,
+    top=2.5cm,
+    bottom=2.5cm,
+    left=2.5cm,
+    right=2.5cm,
+    headheight=0.8cm,
+    headsep=0.5cm,
+    footskip=1cm
+}
+
+\linespread{1.25}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0pt}
+\newlength{\samplecontentwidth}
+\setlength{\samplecontentwidth}{14.63cm}
+\newlength{\samplexoffset}
+\setlength{\samplexoffset}{0.68cm}
+
+\newcommand{\samplebodypagestyle}{%
+    \fancyhf{}
+    \fancyhead[C]{%
+        \makebox[\textwidth][c]{%
+            \kaishu\zihao{5}%
+            \begin{tabular*}{\samplecontentwidth}{@{}l@{\extracolsep{\fill}}c r@{}}
+                江苏海洋大学二{\songti 〇}二六届本科毕业设计（论文） & 理工农医类 & 第\hspace{1.6em}页\hspace{1.2em}共\hspace{1.6em}页
+            \end{tabular*}%
+        }%
+    }
+    \fancyfoot[C]{\zihao{5}\thepage}
+    \renewcommand{\headrulewidth}{0.4pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
+
+\pagestyle{fancy}
+\samplebodypagestyle
+
+\newcommand{\samplechapterline}[2]{%
+    {\heiti\zihao{-3}\noindent\makebox[1.5em][l]{#1}#2\par}%
+}
+
+\newcommand{\samplesectionline}[2]{%
+    {\heiti\zihao{4}\noindent\makebox[2.75em][l]{#1}#2\par}%
+}
+
+\newcommand{\samplesubsectionline}[2]{%
+    {\heiti\zihao{-4}\noindent\makebox[4.15em][l]{#1}#2\par}%
+}
+
+\newcommand{\samplebodytext}[1]{%
+    {\songti\zihao{-4}\noindent #1\par}%
+}
+
+\begin{document}
+\setcounter{page}{42}
+\thispagestyle{fancy}
+
+\vspace*{0.03cm}
+\noindent\hspace*{\samplexoffset}\begin{minipage}[t]{\samplecontentwidth}
+\samplechapterline{1}{绪论（一级标题）}
+\vspace{0.16cm}
+\samplebodytext{\hspace*{2em}×××××××××××××正文×××××××××××××××××××××××××××××…………}
+\vspace{0.16cm}
+
+\samplesectionline{1.1}{××××××（二级标题）}
+\vspace{0.10cm}
+\samplebodytext{\hspace*{2em}×××××××××××××正文×××××××××××××××××××××××…………}
+\vspace{0.10cm}
+
+\samplesubsectionline{1.1.1}{××××（三级标题）}
+\vspace{0.10cm}
+\samplebodytext{\hspace*{2em}××××××××××××正文××××××××××××××××××××…………}
+\vspace{0.06cm}
+\samplebodytext{\hspace*{2em}…………}
+\vspace{1.08cm}
+
+\samplechapterline{2}{×××××（一级标题）}
+\vspace{0.18cm}
+\samplebodytext{\hspace*{2em}×××××××××××××正文×××××××××××××××××××××××××××××…………}
+\vspace{0.42cm}
+
+{\songti\zihao{5}\noindent\mbox{*注：}\par}
+\vspace{0.12cm}
+{\songti\zihao{5}
+\noindent\hspace*{2em}1. 本页为正文式样，本注释不是正文的部分，只是本式样的说明解释；\par
+\noindent\hspace*{2em}2．标题编号方法应采用分级阿拉伯数字编号方法，第一级为“1”“2”“3”等，\par
+\noindent 第二级为“2.1”“2.2”“2.3”等，第三级为“2.2.1”“2.2.2”“2.2.3”等，但分级阿拉伯数字\par
+\noindent 的编号一般不超过四级，两级之间用下角圆点隔开，每一级的末尾不加标点，编\par
+\noindent 号与标题内容间空一个汉字空格，标题应顶格；四级以下时可以先使用\par
+\noindent {\fontspec{Arial Unicode MS}⑴⑵⑶……后①②③……}编制小标题，格式同正文；\par
+\noindent\hspace*{2em}3. 一级标题为小三号黑体，缩放、间距、位置标准，无首行缩进，无左右\par
+\noindent 缩进，行间距 1.25 倍多倍行距，段前、段后各 0.5 行间距；\par
+\noindent\hspace*{2em}4. 二级标题为四号黑体，缩放、间距、位置标准，无首行缩进，无左右缩\par
+\noindent 进，行间距 1.25 倍多倍行距，段前、段后无间距；\par
+\noindent\hspace*{2em}5. 三级以下标题为小四号黑体，缩放、间距、位置标准，无首行缩进，无\par
+\noindent 左右缩进，行间距 1.25 倍多倍行距，段前、段后无间距；\par
+\noindent\hspace*{2em}6. 正文在标题下另起段不空行，为小四号，中文用宋体，英文用 Times New\par
+\noindent Roman，缩放、间距、位置标准，无左右缩进，首行缩进 2 字符（两个汉字），\par
+\noindent 无悬挂式缩进，段前、段后间距无，行间距为 1.25 倍多倍行距；\par
+\noindent\hspace*{2em}7. 正文中表格与插图的中文一律用五号楷体\_GB2312，英文用五号 Times\par
+\noindent New Roman；表格用三线表；\par
+\noindent\hspace*{2em}8. 页眉字号为五号，中文用楷体\_GB2312，英文用 Times New Roman；\par
+\noindent\hspace*{2em}9. 正文每一章开始，应另起一页。分页时请用插入分页符方式。\par
+}
+\end{minipage}
+
+\end{document}

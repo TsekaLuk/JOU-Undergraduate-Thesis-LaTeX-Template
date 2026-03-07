@@ -23,6 +23,7 @@ from PIL import Image, ImageChops, ImageDraw, ImageFont, ImageOps
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 REFERENCE_PDF = PROJECT_ROOT / "references" / "江苏海洋大学2026届毕业实习与设计（论文）工作手册.pdf"
 CURRENT_PDF = PROJECT_ROOT / "main.pdf"
+BODY_SAMPLE_PDF = PROJECT_ROOT / "body-sample.pdf"
 OUTPUT_DIR = PROJECT_ROOT / "docs" / "images"
 TEMP_DIR = PROJECT_ROOT / "tmp" / "readme-images"
 RESAMPLING = getattr(Image, "Resampling", Image)
@@ -76,18 +77,18 @@ COMPARE_SPECS = (
         title="Chinese Abstract",
         reference_page=41,
         current_page=3,
-        crop_box=(120, 140, 1120, 760),
+        crop_box=(170, 210, 1140, 820),
         reference_label="Reference (WPS PDF)",
         current_label="Current LaTeX PDF",
     ),
     CompareSpec(
         name="body-compare",
-        title="Body Page",
+        title="Body Sample Page",
         reference_page=45,
-        current_page=7,
-        crop_box=(80, 90, 1135, 900),
+        current_page=1,
+        crop_box=(80, 90, 1135, 1500),
         reference_label="Reference (WPS PDF)",
-        current_label="Current LaTeX PDF",
+        current_label="Current LaTeX Sample PDF",
     ),
 )
 
@@ -102,8 +103,8 @@ FORM_SPECS = (
 
 THESIS_GALLERY_SPECS = (
     GallerySpec("Cover", CURRENT_PDF, 1, (150, 260, 1080, 1510)),
-    GallerySpec("Chinese Abstract", CURRENT_PDF, 3, (120, 110, 1120, 760)),
-    GallerySpec("English Abstract", CURRENT_PDF, 4, (120, 110, 1120, 760)),
+    GallerySpec("Chinese Abstract", CURRENT_PDF, 3, (150, 140, 1160, 980)),
+    GallerySpec("English Abstract", CURRENT_PDF, 4, (150, 140, 1160, 980)),
     GallerySpec("Table of Contents", CURRENT_PDF, 5, (70, 70, 1140, 930)),
     GallerySpec("Body Page", CURRENT_PDF, 7, (70, 70, 1140, 930)),
     GallerySpec("References", CURRENT_PDF, 14, (70, 70, 1140, 930)),
@@ -213,7 +214,8 @@ def draw_centered_text(draw: ImageDraw.ImageDraw, box: tuple[int, int, int, int]
 
 def compose_compare(spec: CompareSpec) -> Path:
     left_image = prepare_image(REFERENCE_PDF, spec.reference_page, spec.crop_box, CONTENT_BOX)
-    right_image = prepare_image(CURRENT_PDF, spec.current_page, spec.crop_box, CONTENT_BOX)
+    current_pdf = BODY_SAMPLE_PDF if spec.name == "body-compare" else CURRENT_PDF
+    right_image = prepare_image(current_pdf, spec.current_page, spec.crop_box, CONTENT_BOX)
 
     margin = 36
     gap = 28
