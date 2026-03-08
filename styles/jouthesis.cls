@@ -291,10 +291,12 @@
 \newcommand{\jou@coverlabelid}{\makebox[2.72cm][l]{学\hspace{0.55cm}号：}}
 \newcommand{\jou@coverdatexoffset}{0.58cm}
 \newcommand{\jou@coverdateyoffset}{0.00cm}
+\newcommand{\jou@coverheavierhei}{\JOUCoverHei\bfseries}
+\newcommand{\jou@coverheavierkai}{\JOUCoverKai\bfseries}
 \newcommand{\jou@coverdateformat}{%
     \makebox[\textwidth][c]{%
         \hspace*{\jou@coverdatexoffset}%
-        \raisebox{\jou@coverdateyoffset}{\JOUCoverHei\zihao{3}\@coverdate}%
+        \raisebox{\jou@coverdateyoffset}{\jou@coverheavierhei\zihao{3}\@coverdate}%
     }%
 }
 
@@ -308,10 +310,10 @@
         \includegraphics[width=11.05cm]{\JOUCoverHeader}\par
         \vspace{0.48cm}
 
-        {\makebox[0pt][c]{\hspace*{-0.12cm}\JOUCoverHei\zihao{2}本\hspace{0.42em}科\hspace{0.42em}毕\hspace{0.42em}业\hspace{0.42em}设\hspace{0.42em}计\hspace{0.42em}（论\hspace{0.42em}文）}\par}
+        {\makebox[0pt][c]{\hspace*{-0.12cm}\jou@coverheavierhei\zihao{2}本\hspace{0.42em}科\hspace{0.42em}毕\hspace{0.42em}业\hspace{0.42em}设\hspace{0.42em}计\hspace{0.42em}（论\hspace{0.42em}文）}\par}
         \vspace{3.56cm}
 
-        {\makebox[0pt][c]{\hspace*{0.17cm}\JOUCoverKai\zihao{2}\scalebox{0.965}[1]{\@title}}\par}
+        {\makebox[0pt][c]{\hspace*{0.17cm}\jou@coverheavierkai\zihao{2}\scalebox{0.965}[1]{\@title}}\par}
         \vspace{0.53cm}
 
         {\makebox[0pt][c]{\hspace*{0.14cm}\rmfamily\bfseries\fontsize{21.5pt}{28pt}\selectfont \scalebox{0.960}[1]{\@entitle}}\par}
@@ -319,18 +321,18 @@
 
         {\JOUCoverKai\zihao{4}
             \makebox[0pt][c]{\hspace*{0.16cm}\begin{tabular}{@{}p{3.57cm}p{3.43cm}p{2.72cm}p{3.10cm}@{}}
-                {\JOUCoverKai \jou@coverlabelacademy} &
+                {\jou@coverheavierkai \jou@coverlabelacademy} &
                 \multicolumn{3}{@{}l@{}}{\jou@coverunderline{9.25cm}{\@major}}
                 \jou@coverrowspace
-                {\JOUCoverKai \jou@coverlabelclass} &
+                {\jou@coverheavierkai \jou@coverlabelclass} &
                 \multicolumn{3}{@{}l@{}}{\jou@coverunderline{9.25cm}{\@class}}
                 \jou@coverrowspace
-                {\JOUCoverKai \jou@coverlabelstudent} &
+                {\jou@coverheavierkai \jou@coverlabelstudent} &
                 \jou@coverunderline{3.15cm}{\@author} &
-                {\JOUCoverKai \jou@coverlabelid} &
+                {\jou@coverheavierkai \jou@coverlabelid} &
                 \jou@coverunderline{3.10cm}{\@studentid}
                 \jou@coverrowspace
-                {\JOUCoverKai \jou@coverlabelsupervisor} &
+                {\jou@coverheavierkai \jou@coverlabelsupervisor} &
                 \multicolumn{3}{@{}l@{}}{\jou@coverunderline{9.25cm}{\@supervisor}}\\
             \end{tabular}}\par
         }

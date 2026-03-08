@@ -28,6 +28,8 @@
 \newcommand{\JOUProprietaryFontDir}{fonts/proprietary}
 \newcommand{\JOUWPSFontDir}{}
 \newcommand{\JOUWindowsFontDir}{}
+\newcommand{\JOUCoverHeiFakeBold}{1.4}
+\newcommand{\JOUCoverKaiFakeBold}{2.6}
 \newif\ifjou@bundledfontsavailable
 \jou@bundledfontsavailablefalse
 \newif\ifjou@communitypackage
@@ -573,7 +575,7 @@
     \newCJKfontfamily\JOUCoverHei[
         Path=\JOUWPSFontDir/,
         UprightFont=HYZhongJianHeiJ.ttf,
-        BoldFont=HYZhongJianHeiJ.ttf
+        AutoFakeBold=\JOUCoverHeiFakeBold
     ]{HYZhongJianHeiJ.ttf}%
     \setCJKfamilyfont{zhkai}[
         Path=\JOUWPSFontDir/,
@@ -585,8 +587,7 @@
     \newCJKfontfamily\JOUCoverKai[
         Path=\JOUWPSFontDir/,
         UprightFont=HYKaiTiJ.ttf,
-        BoldFont=HYKaiTiJ.ttf,
-        AutoFakeBold=1.5
+        AutoFakeBold=\JOUCoverKaiFakeBold
     ]{HYKaiTiJ.ttf}%
     \setCJKfamilyfont{zhfs}[
         Path=\JOUWPSFontDir/,
@@ -640,7 +641,7 @@
         \newCJKfontfamily\JOUCoverHei[
             Path=\JOUWindowsFontDir/,
             UprightFont=simhei.ttf,
-            BoldFont=simhei.ttf
+            AutoFakeBold=\JOUCoverHeiFakeBold
         ]{simhei.ttf}%
     }{%
         \jou@useopensourcehei
@@ -656,8 +657,7 @@
         \newCJKfontfamily\JOUCoverKai[
             Path=\JOUWindowsFontDir/,
             UprightFont=simkai.ttf,
-            BoldFont=simkai.ttf,
-            AutoFakeBold=2.2
+            AutoFakeBold=\JOUCoverKaiFakeBold
         ]{simkai.ttf}%
     }{%
         \jou@useopensourcekai
@@ -719,7 +719,8 @@
             ]{SimHei.ttf}%
             \setCJKfamilyfont{joucoverhei}[
                 Path=\JOUProprietaryFontDir/,
-                UprightFont=SimHei.ttf
+                UprightFont=SimHei.ttf,
+                AutoFakeBold=\JOUCoverHeiFakeBold
             ]{SimHei.ttf}%
             \renewcommand{\JOUCoverHei}{\CJKfamily{joucoverhei}}%
         }{}%
@@ -728,8 +729,7 @@
             \setCJKfamilyfont{joucoverkai}[
                 Path=\JOUProprietaryFontDir/,
                 UprightFont=KaiTi_GB2312.ttf,
-                BoldFont=KaiTi_GB2312.ttf,
-                AutoFakeBold=2.2
+                AutoFakeBold=\JOUCoverKaiFakeBold
             ]{KaiTi_GB2312.ttf}%
             \setCJKfamilyfont{zhkai}[
                 Path=\JOUProprietaryFontDir/,
@@ -890,7 +890,9 @@
             \IfFontExistsTF{SimHei}{%
                 \setCJKsansfont[BoldFont=SimHei]{SimHei}%
                 \setCJKfamilyfont{zhhei}[BoldFont=SimHei]{SimHei}%
-                \newCJKfontfamily\JOUCoverHei[BoldFont=SimHei]{SimHei}%
+                \newCJKfontfamily\JOUCoverHei[
+                    AutoFakeBold=\JOUCoverHeiFakeBold
+                ]{SimHei}%
             }{%
                 \jou@usefallbackhei
             }%
@@ -900,7 +902,7 @@
                     ItalicFont=KaiTi_GB2312,
                     BoldItalicFont=KaiTi_GB2312
                 ]{KaiTi_GB2312}%
-                \newCJKfontfamily\JOUCoverKai{KaiTi_GB2312}[AutoFakeBold=2.2]%
+                \newCJKfontfamily\JOUCoverKai{KaiTi_GB2312}[AutoFakeBold=\JOUCoverKaiFakeBold]%
             }{%
                 \IfFontExistsTF{KaiTi}{%
                     \setCJKfamilyfont{zhkai}[
@@ -908,7 +910,7 @@
                         ItalicFont=KaiTi,
                         BoldItalicFont=KaiTi
                     ]{KaiTi}%
-                    \newCJKfontfamily\JOUCoverKai{KaiTi}[AutoFakeBold=2.2]%
+                    \newCJKfontfamily\JOUCoverKai{KaiTi}[AutoFakeBold=\JOUCoverKaiFakeBold]%
                 }{%
                     \jou@usefallbackkai
                 }%
@@ -966,7 +968,9 @@
             \IfFontExistsTF{STHeiti}{%
                 \setCJKsansfont[BoldFont=STHeiti]{STHeiti}%
                 \setCJKfamilyfont{zhhei}[BoldFont=STHeiti]{STHeiti}%
-                \newCJKfontfamily\JOUCoverHei[BoldFont=STHeiti]{STHeiti}%
+                \newCJKfontfamily\JOUCoverHei[
+                    AutoFakeBold=\JOUCoverHeiFakeBold
+                ]{STHeiti}%
             }{%
                 \jou@usefallbackhei
             }%
@@ -976,7 +980,7 @@
                     ItalicFont=STKaiti,
                     BoldItalicFont=STKaiti
                 ]{STKaiti}%
-                \newCJKfontfamily\JOUCoverKai{STKaiti}[AutoFakeBold=2.2]%
+                \newCJKfontfamily\JOUCoverKai{STKaiti}[AutoFakeBold=\JOUCoverKaiFakeBold]%
             }{%
                 \jou@usefallbackkai
             }%
@@ -1029,12 +1033,16 @@
             \IfFontExistsTF{HYZhongHeiKW}{%
                 \setCJKsansfont[BoldFont=HYZhongHeiKW]{HYZhongHeiKW}%
                 \setCJKfamilyfont{zhhei}[BoldFont=HYZhongHeiKW]{HYZhongHeiKW}%
-                \newCJKfontfamily\JOUCoverHei[BoldFont=HYZhongHeiKW]{HYZhongHeiKW}%
+                \newCJKfontfamily\JOUCoverHei[
+                    AutoFakeBold=\JOUCoverHeiFakeBold
+                ]{HYZhongHeiKW}%
             }{%
                 \IfFontExistsTF{HYZhongJianHeiJ}{%
                     \setCJKsansfont[BoldFont=HYZhongJianHeiJ]{HYZhongJianHeiJ}%
                     \setCJKfamilyfont{zhhei}[BoldFont=HYZhongJianHeiJ]{HYZhongJianHeiJ}%
-                    \newCJKfontfamily\JOUCoverHei[BoldFont=HYZhongJianHeiJ]{HYZhongJianHeiJ}%
+                    \newCJKfontfamily\JOUCoverHei[
+                        AutoFakeBold=\JOUCoverHeiFakeBold
+                    ]{HYZhongJianHeiJ}%
                 }{%
                     \jou@usefallbackhei
                 }%
@@ -1044,7 +1052,7 @@
                 ItalicFont=HYKaiTiKW,
                 BoldItalicFont=HYKaiTiKW
             ]{HYKaiTiKW}%
-            \newCJKfontfamily\JOUCoverKai{HYKaiTiKW}[AutoFakeBold=2.2]%
+            \newCJKfontfamily\JOUCoverKai{HYKaiTiKW}[AutoFakeBold=\JOUCoverKaiFakeBold]%
             \IfFontExistsTF{FZFSK--GBK1-0}{%
                 \setCJKfamilyfont{zhfs}[
                     BoldFont=FZFSK--GBK1-0,
