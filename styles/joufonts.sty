@@ -6,7 +6,10 @@
 % 效果: 缺少商业字体时阻止编译
 \newif\ifjou@strictfontcheck
 \jou@strictfontcheckfalse
+\newif\ifjou@preferwps
+\jou@preferwpsfalse
 \DeclareOption{strictfonts}{\jou@strictfontchecktrue}
+\DeclareOption{preferwps}{\jou@preferwpstrue}
 \DeclareOption*{\PackageWarning{joufonts}{Unknown option '\CurrentOption'}}
 \ProcessOptions\relax
 
@@ -15,6 +18,7 @@
     \PackageError{joufonts}{This template requires XeLaTeX}{Please compile with XeLaTeX.}
 \fi
 
+\RequirePackage{etoolbox}
 \RequirePackage{fontspec}
 \RequirePackage{xeCJK}
 
@@ -269,6 +273,11 @@
         UprightFont=NotoSerifCJKsc-Regular.otf,
         BoldFont=NotoSerifCJKsc-Bold.otf
     ]{NotoSerifCJKsc-Regular.otf}%
+    \setCJKmonofont[
+        Path=\JOUOpenSourceFontDir/,
+        UprightFont=NotoSerifCJKsc-Regular.otf,
+        BoldFont=NotoSerifCJKsc-Bold.otf
+    ]{NotoSerifCJKsc-Regular.otf}%
 }
 
 \newcommand{\jou@useopensourcexiaobiaosong}{%
@@ -294,10 +303,22 @@
 
 \newcommand{\jou@usetexlivesong}{%
     \setCJKmainfont[
-        UprightFont=FandolSong-Regular.otf
+        UprightFont=FandolSong-Regular.otf,
+        BoldFont=FandolSong-Regular.otf,
+        ItalicFont=FandolSong-Regular.otf,
+        BoldItalicFont=FandolSong-Regular.otf
     ]{FandolSong-Regular.otf}%
     \setCJKfamilyfont{zhsong}[
-        UprightFont=FandolSong-Regular.otf
+        UprightFont=FandolSong-Regular.otf,
+        BoldFont=FandolSong-Regular.otf,
+        ItalicFont=FandolSong-Regular.otf,
+        BoldItalicFont=FandolSong-Regular.otf
+    ]{FandolSong-Regular.otf}%
+    \setCJKmonofont[
+        UprightFont=FandolSong-Regular.otf,
+        BoldFont=FandolSong-Regular.otf,
+        ItalicFont=FandolSong-Regular.otf,
+        BoldItalicFont=FandolSong-Regular.otf
     ]{FandolSong-Regular.otf}%
 }
 
@@ -428,11 +449,24 @@
     \IfFileExists{\JOUProprietaryFontDir/SimSun.ttf}{%
         \setCJKmainfont[
             Path=\JOUProprietaryFontDir/,
-            UprightFont=SimSun.ttf
+            UprightFont=SimSun.ttf,
+            BoldFont=SimSun.ttf,
+            ItalicFont=SimSun.ttf,
+            BoldItalicFont=SimSun.ttf
         ]{SimSun.ttf}%
         \setCJKfamilyfont{zhsong}[
             Path=\JOUProprietaryFontDir/,
-            UprightFont=SimSun.ttf
+            UprightFont=SimSun.ttf,
+            BoldFont=SimSun.ttf,
+            ItalicFont=SimSun.ttf,
+            BoldItalicFont=SimSun.ttf
+        ]{SimSun.ttf}%
+        \setCJKmonofont[
+            Path=\JOUProprietaryFontDir/,
+            UprightFont=SimSun.ttf,
+            BoldFont=SimSun.ttf,
+            ItalicFont=SimSun.ttf,
+            BoldItalicFont=SimSun.ttf
         ]{SimSun.ttf}%
     }{%
         \jou@useopensourcesong
@@ -440,15 +474,18 @@
     \IfFileExists{\JOUProprietaryFontDir/SimHei.ttf}{%
         \setCJKsansfont[
             Path=\JOUProprietaryFontDir/,
-            UprightFont=SimHei.ttf
+            UprightFont=SimHei.ttf,
+            BoldFont=SimHei.ttf
         ]{SimHei.ttf}%
         \setCJKfamilyfont{zhhei}[
             Path=\JOUProprietaryFontDir/,
-            UprightFont=SimHei.ttf
+            UprightFont=SimHei.ttf,
+            BoldFont=SimHei.ttf
         ]{SimHei.ttf}%
         \newCJKfontfamily\JOUCoverHei[
             Path=\JOUProprietaryFontDir/,
-            UprightFont=SimHei.ttf
+            UprightFont=SimHei.ttf,
+            BoldFont=SimHei.ttf
         ]{SimHei.ttf}%
     }{%
         \jou@useopensourcehei
@@ -456,7 +493,10 @@
     \IfFileExists{\JOUProprietaryFontDir/KaiTi_GB2312.ttf}{%
         \setCJKfamilyfont{zhkai}[
             Path=\JOUProprietaryFontDir/,
-            UprightFont=KaiTi_GB2312.ttf
+            UprightFont=KaiTi_GB2312.ttf,
+            BoldFont=KaiTi_GB2312.ttf,
+            ItalicFont=KaiTi_GB2312.ttf,
+            BoldItalicFont=KaiTi_GB2312.ttf
         ]{KaiTi_GB2312.ttf}%
         \newCJKfontfamily\JOUCoverKai[
             Path=\JOUProprietaryFontDir/,
@@ -470,7 +510,10 @@
     \IfFileExists{\JOUProprietaryFontDir/FangSong_GB2312.ttf}{%
         \setCJKfamilyfont{zhfs}[
             Path=\JOUProprietaryFontDir/,
-            UprightFont=FangSong_GB2312.ttf
+            UprightFont=FangSong_GB2312.ttf,
+            BoldFont=FangSong_GB2312.ttf,
+            ItalicFont=FangSong_GB2312.ttf,
+            BoldItalicFont=FangSong_GB2312.ttf
         ]{FangSong_GB2312.ttf}%
     }{%
         \jou@useopensourcefang
@@ -498,27 +541,46 @@
     \renewcommand{\JOUFontMode}{wps-compat}%
     \setCJKmainfont[
         Path=\JOUWPSFontDir/,
-        UprightFont=FZSSK.ttf
+        UprightFont=FZSSK.ttf,
+        BoldFont=FZSSK.ttf,
+        ItalicFont=FZSSK.ttf,
+        BoldItalicFont=FZSSK.ttf
     ]{FZSSK.ttf}%
     \setCJKfamilyfont{zhsong}[
         Path=\JOUWPSFontDir/,
-        UprightFont=FZSSK.ttf
+        UprightFont=FZSSK.ttf,
+        BoldFont=FZSSK.ttf,
+        ItalicFont=FZSSK.ttf,
+        BoldItalicFont=FZSSK.ttf
+    ]{FZSSK.ttf}%
+    \setCJKmonofont[
+        Path=\JOUWPSFontDir/,
+        UprightFont=FZSSK.ttf,
+        BoldFont=FZSSK.ttf,
+        ItalicFont=FZSSK.ttf,
+        BoldItalicFont=FZSSK.ttf
     ]{FZSSK.ttf}%
     \setCJKsansfont[
         Path=\JOUWPSFontDir/,
-        UprightFont=HYZhongJianHeiJ.ttf
+        UprightFont=HYZhongJianHeiJ.ttf,
+        BoldFont=HYZhongJianHeiJ.ttf
     ]{HYZhongJianHeiJ.ttf}%
     \setCJKfamilyfont{zhhei}[
         Path=\JOUWPSFontDir/,
-        UprightFont=HYZhongJianHeiJ.ttf
+        UprightFont=HYZhongJianHeiJ.ttf,
+        BoldFont=HYZhongJianHeiJ.ttf
     ]{HYZhongJianHeiJ.ttf}%
     \newCJKfontfamily\JOUCoverHei[
         Path=\JOUWPSFontDir/,
-        UprightFont=HYZhongJianHeiJ.ttf
+        UprightFont=HYZhongJianHeiJ.ttf,
+        BoldFont=HYZhongJianHeiJ.ttf
     ]{HYZhongJianHeiJ.ttf}%
     \setCJKfamilyfont{zhkai}[
         Path=\JOUWPSFontDir/,
-        UprightFont=HYKaiTiJ.ttf
+        UprightFont=HYKaiTiJ.ttf,
+        BoldFont=HYKaiTiJ.ttf,
+        ItalicFont=HYKaiTiJ.ttf,
+        BoldItalicFont=HYKaiTiJ.ttf
     ]{HYKaiTiJ.ttf}%
     \newCJKfontfamily\JOUCoverKai[
         Path=\JOUWPSFontDir/,
@@ -528,7 +590,10 @@
     ]{HYKaiTiJ.ttf}%
     \setCJKfamilyfont{zhfs}[
         Path=\JOUWPSFontDir/,
-        UprightFont=FZFSK.ttf
+        UprightFont=FZFSK.ttf,
+        BoldFont=FZFSK.ttf,
+        ItalicFont=FZFSK.ttf,
+        BoldItalicFont=FZFSK.ttf
     ]{FZFSK.ttf}%
     \newCJKfontfamily\JOUXiaobiaoSong[
         Path=\JOUWPSFontDir/,
@@ -542,24 +607,40 @@
     \renewcommand{\JOUFontMode}{system-licensed}%
     \setCJKmainfont[
         Path=\JOUWindowsFontDir/,
-        UprightFont=simsun.ttc
+        UprightFont=simsun.ttc,
+        BoldFont=simsun.ttc,
+        ItalicFont=simsun.ttc,
+        BoldItalicFont=simsun.ttc
     ]{simsun.ttc}%
     \setCJKfamilyfont{zhsong}[
         Path=\JOUWindowsFontDir/,
-        UprightFont=simsun.ttc
+        UprightFont=simsun.ttc,
+        BoldFont=simsun.ttc,
+        ItalicFont=simsun.ttc,
+        BoldItalicFont=simsun.ttc
+    ]{simsun.ttc}%
+    \setCJKmonofont[
+        Path=\JOUWindowsFontDir/,
+        UprightFont=simsun.ttc,
+        BoldFont=simsun.ttc,
+        ItalicFont=simsun.ttc,
+        BoldItalicFont=simsun.ttc
     ]{simsun.ttc}%
     \IfFileExists{\JOUWindowsFontDir/simhei.ttf}{%
         \setCJKsansfont[
             Path=\JOUWindowsFontDir/,
-            UprightFont=simhei.ttf
+            UprightFont=simhei.ttf,
+            BoldFont=simhei.ttf
         ]{simhei.ttf}%
         \setCJKfamilyfont{zhhei}[
             Path=\JOUWindowsFontDir/,
-            UprightFont=simhei.ttf
+            UprightFont=simhei.ttf,
+            BoldFont=simhei.ttf
         ]{simhei.ttf}%
         \newCJKfontfamily\JOUCoverHei[
             Path=\JOUWindowsFontDir/,
-            UprightFont=simhei.ttf
+            UprightFont=simhei.ttf,
+            BoldFont=simhei.ttf
         ]{simhei.ttf}%
     }{%
         \jou@useopensourcehei
@@ -567,7 +648,10 @@
     \IfFileExists{\JOUWindowsFontDir/simkai.ttf}{%
         \setCJKfamilyfont{zhkai}[
             Path=\JOUWindowsFontDir/,
-            UprightFont=simkai.ttf
+            UprightFont=simkai.ttf,
+            BoldFont=simkai.ttf,
+            ItalicFont=simkai.ttf,
+            BoldItalicFont=simkai.ttf
         ]{simkai.ttf}%
         \newCJKfontfamily\JOUCoverKai[
             Path=\JOUWindowsFontDir/,
@@ -581,7 +665,10 @@
     \IfFileExists{\JOUWindowsFontDir/simfang.ttf}{%
         \setCJKfamilyfont{zhfs}[
             Path=\JOUWindowsFontDir/,
-            UprightFont=simfang.ttf
+            UprightFont=simfang.ttf,
+            BoldFont=simfang.ttf,
+            ItalicFont=simfang.ttf,
+            BoldItalicFont=simfang.ttf
         ]{simfang.ttf}%
     }{%
         \jou@useopensourcefang
@@ -606,62 +693,66 @@
 }
 
 \newcommand{\jou@applyprivatecjkoverrides}{%
-    \IfFileExists{\JOUProprietaryFontDir/SimSun.ttf}{%
-        \typeout{JOU: Applying local SimSun override from \JOUProprietaryFontDir}%
-        \setCJKmainfont[
-            Path=\JOUProprietaryFontDir/,
-            UprightFont=SimSun.ttf
-        ]{SimSun.ttf}%
-        \setCJKfamilyfont{zhsong}[
-            Path=\JOUProprietaryFontDir/,
-            UprightFont=SimSun.ttf
-        ]{SimSun.ttf}%
-    }{}%
-    \IfFileExists{\JOUProprietaryFontDir/SimHei.ttf}{%
-        \typeout{JOU: Applying local SimHei override from \JOUProprietaryFontDir}%
-        \setCJKsansfont[
-            Path=\JOUProprietaryFontDir/,
-            UprightFont=SimHei.ttf
-        ]{SimHei.ttf}%
-        \setCJKfamilyfont{zhhei}[
-            Path=\JOUProprietaryFontDir/,
-            UprightFont=SimHei.ttf
-        ]{SimHei.ttf}%
-        \setCJKfamilyfont{joucoverhei}[
-            Path=\JOUProprietaryFontDir/,
-            UprightFont=SimHei.ttf
-        ]{SimHei.ttf}%
-        \renewcommand{\JOUCoverHei}{\CJKfamily{joucoverhei}}%
-    }{}%
-    \IfFileExists{\JOUProprietaryFontDir/KaiTi_GB2312.ttf}{%
-        \typeout{JOU: Applying local KaiTi_GB2312 override from \JOUProprietaryFontDir}%
-        \setCJKfamilyfont{joucoverkai}[
-            Path=\JOUProprietaryFontDir/,
-            UprightFont=KaiTi_GB2312.ttf,
-            BoldFont=KaiTi_GB2312.ttf,
-            AutoFakeBold=2.2
-        ]{KaiTi_GB2312.ttf}%
-        \setCJKfamilyfont{zhkai}[
-            Path=\JOUProprietaryFontDir/,
-            UprightFont=KaiTi_GB2312.ttf
-        ]{KaiTi_GB2312.ttf}%
-        \renewcommand{\JOUCoverKai}{\CJKfamily{joucoverkai}}%
-    }{}%
-    \IfFileExists{\JOUProprietaryFontDir/FangSong_GB2312.ttf}{%
-        \typeout{JOU: Applying local FangSong_GB2312 override from \JOUProprietaryFontDir}%
-        \setCJKfamilyfont{zhfs}[
-            Path=\JOUProprietaryFontDir/,
-            UprightFont=FangSong_GB2312.ttf
-        ]{FangSong_GB2312.ttf}%
-    }{}%
-    \IfFileExists{\JOUProprietaryFontDir/FangZhengXiaoBiaoSongJianTi.ttf}{%
-        \typeout{JOU: Applying local FangZhengXiaoBiaoSongJianTi override from \JOUProprietaryFontDir}%
-        \setCJKfamilyfont{jouxiaobiaosong}[
-            Path=\JOUProprietaryFontDir/,
-            UprightFont=FangZhengXiaoBiaoSongJianTi.ttf
-        ]{FangZhengXiaoBiaoSongJianTi.ttf}%
-        \renewcommand{\JOUXiaobiaoSong}{\CJKfamily{jouxiaobiaosong}}%
-    }{}%
+    \ifdefstring{\JOUFontMode}{wps-compat}{%
+        \typeout{JOU: Skipping local CJK overrides to preserve WPS-compatible font matching}%
+    }{%
+        \IfFileExists{\JOUProprietaryFontDir/SimSun.ttf}{%
+            \typeout{JOU: Applying local SimSun override from \JOUProprietaryFontDir}%
+            \setCJKmainfont[
+                Path=\JOUProprietaryFontDir/,
+                UprightFont=SimSun.ttf
+            ]{SimSun.ttf}%
+            \setCJKfamilyfont{zhsong}[
+                Path=\JOUProprietaryFontDir/,
+                UprightFont=SimSun.ttf
+            ]{SimSun.ttf}%
+        }{}%
+        \IfFileExists{\JOUProprietaryFontDir/SimHei.ttf}{%
+            \typeout{JOU: Applying local SimHei override from \JOUProprietaryFontDir}%
+            \setCJKsansfont[
+                Path=\JOUProprietaryFontDir/,
+                UprightFont=SimHei.ttf
+            ]{SimHei.ttf}%
+            \setCJKfamilyfont{zhhei}[
+                Path=\JOUProprietaryFontDir/,
+                UprightFont=SimHei.ttf
+            ]{SimHei.ttf}%
+            \setCJKfamilyfont{joucoverhei}[
+                Path=\JOUProprietaryFontDir/,
+                UprightFont=SimHei.ttf
+            ]{SimHei.ttf}%
+            \renewcommand{\JOUCoverHei}{\CJKfamily{joucoverhei}}%
+        }{}%
+        \IfFileExists{\JOUProprietaryFontDir/KaiTi_GB2312.ttf}{%
+            \typeout{JOU: Applying local KaiTi_GB2312 override from \JOUProprietaryFontDir}%
+            \setCJKfamilyfont{joucoverkai}[
+                Path=\JOUProprietaryFontDir/,
+                UprightFont=KaiTi_GB2312.ttf,
+                BoldFont=KaiTi_GB2312.ttf,
+                AutoFakeBold=2.2
+            ]{KaiTi_GB2312.ttf}%
+            \setCJKfamilyfont{zhkai}[
+                Path=\JOUProprietaryFontDir/,
+                UprightFont=KaiTi_GB2312.ttf
+            ]{KaiTi_GB2312.ttf}%
+            \renewcommand{\JOUCoverKai}{\CJKfamily{joucoverkai}}%
+        }{}%
+        \IfFileExists{\JOUProprietaryFontDir/FangSong_GB2312.ttf}{%
+            \typeout{JOU: Applying local FangSong_GB2312 override from \JOUProprietaryFontDir}%
+            \setCJKfamilyfont{zhfs}[
+                Path=\JOUProprietaryFontDir/,
+                UprightFont=FangSong_GB2312.ttf
+            ]{FangSong_GB2312.ttf}%
+        }{}%
+        \IfFileExists{\JOUProprietaryFontDir/FangZhengXiaoBiaoSongJianTi.ttf}{%
+            \typeout{JOU: Applying local FangZhengXiaoBiaoSongJianTi override from \JOUProprietaryFontDir}%
+            \setCJKfamilyfont{jouxiaobiaosong}[
+                Path=\JOUProprietaryFontDir/,
+                UprightFont=FangZhengXiaoBiaoSongJianTi.ttf
+            ]{FangZhengXiaoBiaoSongJianTi.ttf}%
+            \renewcommand{\JOUXiaobiaoSong}{\CJKfamily{jouxiaobiaosong}}%
+        }{}%
+    }%
 }
 
 % ============================================================================
@@ -769,33 +860,72 @@
     \fi
 
     \ifjou@cjkconfigured\else
+        \ifjou@preferwps
+            \IfFileExists{\JOUWPSFontDir/HYKaiTiJ.ttf}{%
+                \typeout{JOU: preferwps enabled, using WPS bundled compatibility fonts from \JOUWPSFontDir}%
+                \jou@setupwpsbundledcjk
+                \jou@cjkconfiguredtrue
+            }{}%
+        \fi
+    \fi
+
+    \ifjou@cjkconfigured\else
         \IfFontExistsTF{SimSun}{%
             \renewcommand{\JOUFontMode}{system-licensed}%
-            \setCJKmainfont{SimSun}%
-            \setCJKfamilyfont{zhsong}{SimSun}%
+            \setCJKmainfont[
+                BoldFont=SimSun,
+                ItalicFont=SimSun,
+                BoldItalicFont=SimSun
+            ]{SimSun}%
+            \setCJKfamilyfont{zhsong}[
+                BoldFont=SimSun,
+                ItalicFont=SimSun,
+                BoldItalicFont=SimSun
+            ]{SimSun}%
+            \setCJKmonofont[
+                BoldFont=SimSun,
+                ItalicFont=SimSun,
+                BoldItalicFont=SimSun
+            ]{SimSun}%
             \IfFontExistsTF{SimHei}{%
-                \setCJKsansfont{SimHei}%
-                \setCJKfamilyfont{zhhei}{SimHei}%
-                \newCJKfontfamily\JOUCoverHei{SimHei}%
+                \setCJKsansfont[BoldFont=SimHei]{SimHei}%
+                \setCJKfamilyfont{zhhei}[BoldFont=SimHei]{SimHei}%
+                \newCJKfontfamily\JOUCoverHei[BoldFont=SimHei]{SimHei}%
             }{%
                 \jou@usefallbackhei
             }%
             \IfFontExistsTF{KaiTi_GB2312}{%
-                \setCJKfamilyfont{zhkai}{KaiTi_GB2312}%
+                \setCJKfamilyfont{zhkai}[
+                    BoldFont=KaiTi_GB2312,
+                    ItalicFont=KaiTi_GB2312,
+                    BoldItalicFont=KaiTi_GB2312
+                ]{KaiTi_GB2312}%
                 \newCJKfontfamily\JOUCoverKai{KaiTi_GB2312}[AutoFakeBold=2.2]%
             }{%
                 \IfFontExistsTF{KaiTi}{%
-                    \setCJKfamilyfont{zhkai}{KaiTi}%
+                    \setCJKfamilyfont{zhkai}[
+                        BoldFont=KaiTi,
+                        ItalicFont=KaiTi,
+                        BoldItalicFont=KaiTi
+                    ]{KaiTi}%
                     \newCJKfontfamily\JOUCoverKai{KaiTi}[AutoFakeBold=2.2]%
                 }{%
                     \jou@usefallbackkai
                 }%
             }%
             \IfFontExistsTF{FangSong_GB2312}{%
-                \setCJKfamilyfont{zhfs}{FangSong_GB2312}%
+                \setCJKfamilyfont{zhfs}[
+                    BoldFont=FangSong_GB2312,
+                    ItalicFont=FangSong_GB2312,
+                    BoldItalicFont=FangSong_GB2312
+                ]{FangSong_GB2312}%
             }{%
                 \IfFontExistsTF{FangSong}{%
-                    \setCJKfamilyfont{zhfs}{FangSong}%
+                    \setCJKfamilyfont{zhfs}[
+                        BoldFont=FangSong,
+                        ItalicFont=FangSong,
+                        BoldItalicFont=FangSong
+                    ]{FangSong}%
                 }{%
                     \jou@usefallbackfang
                 }%
@@ -818,23 +948,44 @@
     \ifjou@cjkconfigured\else
         \IfFontExistsTF{STSong}{%
             \renewcommand{\JOUFontMode}{system-licensed}%
-            \setCJKmainfont{STSong}%
-            \setCJKfamilyfont{zhsong}{STSong}%
+            \setCJKmainfont[
+                BoldFont=STSong,
+                ItalicFont=STSong,
+                BoldItalicFont=STSong
+            ]{STSong}%
+            \setCJKfamilyfont{zhsong}[
+                BoldFont=STSong,
+                ItalicFont=STSong,
+                BoldItalicFont=STSong
+            ]{STSong}%
+            \setCJKmonofont[
+                BoldFont=STSong,
+                ItalicFont=STSong,
+                BoldItalicFont=STSong
+            ]{STSong}%
             \IfFontExistsTF{STHeiti}{%
-                \setCJKsansfont{STHeiti}%
-                \setCJKfamilyfont{zhhei}{STHeiti}%
-                \newCJKfontfamily\JOUCoverHei{STHeiti}%
+                \setCJKsansfont[BoldFont=STHeiti]{STHeiti}%
+                \setCJKfamilyfont{zhhei}[BoldFont=STHeiti]{STHeiti}%
+                \newCJKfontfamily\JOUCoverHei[BoldFont=STHeiti]{STHeiti}%
             }{%
                 \jou@usefallbackhei
             }%
             \IfFontExistsTF{STKaiti}{%
-                \setCJKfamilyfont{zhkai}{STKaiti}%
+                \setCJKfamilyfont{zhkai}[
+                    BoldFont=STKaiti,
+                    ItalicFont=STKaiti,
+                    BoldItalicFont=STKaiti
+                ]{STKaiti}%
                 \newCJKfontfamily\JOUCoverKai{STKaiti}[AutoFakeBold=2.2]%
             }{%
                 \jou@usefallbackkai
             }%
             \IfFontExistsTF{STFangsong}{%
-                \setCJKfamilyfont{zhfs}{STFangsong}%
+                \setCJKfamilyfont{zhfs}[
+                    BoldFont=STFangsong,
+                    ItalicFont=STFangsong,
+                    BoldItalicFont=STFangsong
+                ]{STFangsong}%
             }{%
                 \jou@usefallbackfang
             }%
@@ -857,28 +1008,49 @@
         \IfFontExistsTF{HYKaiTiKW}{%
             \renewcommand{\JOUFontMode}{wps-compat}%
             \IfFontExistsTF{HYShuSongErKW}{%
-                \setCJKmainfont{HYShuSongErKW}%
-                \setCJKfamilyfont{zhsong}{HYShuSongErKW}%
+                \setCJKmainfont[
+                    BoldFont=HYShuSongErKW,
+                    ItalicFont=HYShuSongErKW,
+                    BoldItalicFont=HYShuSongErKW
+                ]{HYShuSongErKW}%
+                \setCJKfamilyfont{zhsong}[
+                    BoldFont=HYShuSongErKW,
+                    ItalicFont=HYShuSongErKW,
+                    BoldItalicFont=HYShuSongErKW
+                ]{HYShuSongErKW}%
+                \setCJKmonofont[
+                    BoldFont=HYShuSongErKW,
+                    ItalicFont=HYShuSongErKW,
+                    BoldItalicFont=HYShuSongErKW
+                ]{HYShuSongErKW}%
             }{%
                 \jou@usefallbacksong
             }%
             \IfFontExistsTF{HYZhongHeiKW}{%
-                \setCJKsansfont{HYZhongHeiKW}%
-                \setCJKfamilyfont{zhhei}{HYZhongHeiKW}%
-                \newCJKfontfamily\JOUCoverHei{HYZhongHeiKW}%
+                \setCJKsansfont[BoldFont=HYZhongHeiKW]{HYZhongHeiKW}%
+                \setCJKfamilyfont{zhhei}[BoldFont=HYZhongHeiKW]{HYZhongHeiKW}%
+                \newCJKfontfamily\JOUCoverHei[BoldFont=HYZhongHeiKW]{HYZhongHeiKW}%
             }{%
                 \IfFontExistsTF{HYZhongJianHeiJ}{%
-                    \setCJKsansfont{HYZhongJianHeiJ}%
-                    \setCJKfamilyfont{zhhei}{HYZhongJianHeiJ}%
-                    \newCJKfontfamily\JOUCoverHei{HYZhongJianHeiJ}%
+                    \setCJKsansfont[BoldFont=HYZhongJianHeiJ]{HYZhongJianHeiJ}%
+                    \setCJKfamilyfont{zhhei}[BoldFont=HYZhongJianHeiJ]{HYZhongJianHeiJ}%
+                    \newCJKfontfamily\JOUCoverHei[BoldFont=HYZhongJianHeiJ]{HYZhongJianHeiJ}%
                 }{%
                     \jou@usefallbackhei
                 }%
             }%
-            \setCJKfamilyfont{zhkai}{HYKaiTiKW}%
+            \setCJKfamilyfont{zhkai}[
+                BoldFont=HYKaiTiKW,
+                ItalicFont=HYKaiTiKW,
+                BoldItalicFont=HYKaiTiKW
+            ]{HYKaiTiKW}%
             \newCJKfontfamily\JOUCoverKai{HYKaiTiKW}[AutoFakeBold=2.2]%
             \IfFontExistsTF{FZFSK--GBK1-0}{%
-                \setCJKfamilyfont{zhfs}{FZFSK--GBK1-0}%
+                \setCJKfamilyfont{zhfs}[
+                    BoldFont=FZFSK--GBK1-0,
+                    ItalicFont=FZFSK--GBK1-0,
+                    BoldItalicFont=FZFSK--GBK1-0
+                ]{FZFSK--GBK1-0}%
             }{%
                 \jou@usefallbackfang
             }%

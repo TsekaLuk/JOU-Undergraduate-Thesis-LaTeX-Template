@@ -249,6 +249,42 @@ class FormatComplianceTest:
         else:
             self.failed += 1
             return False
+
+    def test_abstract_font_rules(self):
+        """测试摘要页字体规则"""
+        print("\n" + "="*60)
+        print("测试7: 摘要页字体规则")
+        print("="*60)
+
+        with open('styles/jouthesis.cls', 'r', encoding='utf-8') as f:
+            thesis_cls = f.read()
+
+        all_passed = True
+
+        if '\\RequirePackage[preferwps]{styles/joufonts}' in thesis_cls:
+            print("✅ 主模板默认启用 preferwps 字体路由")
+        else:
+            print("❌ 主模板未启用 preferwps 字体路由")
+            all_passed = False
+
+        if r'{\heiti\zihao{4}\@title}' in thesis_cls:
+            print("✅ 中文摘要题名使用四号黑体")
+        else:
+            print("❌ 中文摘要题名不是四号黑体")
+            all_passed = False
+
+        if r'{\noindent{\heiti\zihao{-4}摘\hspace{1em}要：}\zihao{-4}\songti}' in thesis_cls:
+            print("✅ 中文摘要标签与正文字体分离正确")
+        else:
+            print("❌ 中文摘要标签/正文字体规则不符合预期")
+            all_passed = False
+
+        if all_passed:
+            self.passed += 1
+            return True
+        else:
+            self.failed += 1
+            return False
     
     def run_all_tests(self):
         """运行所有测试"""
@@ -262,13 +298,14 @@ class FormatComplianceTest:
         self.test_table_packages()
         self.test_template_completeness()
         self.test_logo_integration()
+        self.test_abstract_font_rules()
         
         # 总结
         print("\n" + "="*60)
         print("测试总结")
         print("="*60)
-        print(f"✅ 通过: {self.passed}/6")
-        print(f"❌ 失败: {self.failed}/6")
+        print(f"✅ 通过: {self.passed}/7")
+        print(f"❌ 失败: {self.failed}/7")
         
         if self.failed == 0:
             print("\n🎉 所有测试通过！模板完全符合格式规范！")

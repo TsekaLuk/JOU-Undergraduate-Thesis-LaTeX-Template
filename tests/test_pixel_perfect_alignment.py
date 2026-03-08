@@ -415,7 +415,7 @@ def test_font_stack_contract(spec: dict) -> bool:
         or ("STSong" in font_output and "STKaiti" in font_output)
     )
     uses_wps_stack = (
-        ("FZShuSong" in font_output or "HYShuSongErKW" in font_output)
+        ("FZShuSong" in font_output or "HYShuSongErKW" in font_output or "FZSSK" in font_output)
         and ("HYKaiTi" in font_output or "HYc1gj" in font_output)
         and ("HYZhongJianHei" in font_output or "HYZhongHeiKW" in font_output)
     )

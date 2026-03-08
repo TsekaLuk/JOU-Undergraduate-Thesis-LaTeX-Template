@@ -41,7 +41,7 @@ def main() -> int:
             failures.append(f"模板入口缺少固定空格控制标记：{marker}")
 
     required_style_markers = [
-        r"\RequirePackage[strictfonts]{../../styles/joufonts}",
+        r"\RequirePackage[strictfonts,preferwps]{../../styles/joufonts}",
         r"\renewcommand{\thefigure}{\thesection-\arabic{figure}}",
         r"\renewcommand{\thetable}{\thesection-\arabic{table}}",
         r"\setlength{\JOUExcellentReferenceHangIndent}{1.57em}",
@@ -72,8 +72,10 @@ def main() -> int:
         ).stdout
         if "TimesNewRoman" not in fonts:
             failures.append("成品 PDF 未嵌入 Times New Roman 族字形。")
-        if not any(name in fonts for name in ["KaiTi_GB2312", "STKaiti", "HYKaiTi"]):
-            failures.append("成品 PDF 未嵌入可接受的楷体族字形。")
+        if not any(name in fonts for name in ["HYKaiTi", "HYc1gj"]):
+            failures.append("成品 PDF 未嵌入 WPS 楷体族字形。")
+        if not any(name in fonts for name in ["HYZhong", "HYZhongJianHei", "HYZhongHei"]):
+            failures.append("成品 PDF 未嵌入 WPS 黑体族字形。")
 
     print("校优摘要模板合规检查")
     print("=" * 72)

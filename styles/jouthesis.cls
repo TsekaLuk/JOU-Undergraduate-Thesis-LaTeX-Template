@@ -53,7 +53,7 @@
 \RequirePackage{setspace}      % 行距
 \RequirePackage{indentfirst}   % 首行缩进
 \RequirePackage{lastpage}      % 总页数引用
-\RequirePackage{styles/joufonts} % 统一字体配置
+\RequirePackage[preferwps]{styles/joufonts} % 统一字体配置
 \RequirePackage{styles/jouheadings} % 标题/页眉/目录统一规范
 \RequirePackage[absolute,overlay]{textpos} % 摘要等页面的绝对定位
 \RequirePackage{hyperref}      % 超链接
@@ -155,23 +155,50 @@
 \newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}   % 右对齐定宽列
 
 % 定理类环境
-\theoremstyle{plain}
+\newtheoremstyle{jouthm}%
+    {0.6\baselineskip}%
+    {0.6\baselineskip}%
+    {\normalfont\songti}%
+    {2em}%
+    {\normalfont\heiti}%
+    {：}%
+    {0.5em}%
+    {}
+\newtheoremstyle{joudef}%
+    {0.6\baselineskip}%
+    {0.6\baselineskip}%
+    {\normalfont\songti}%
+    {2em}%
+    {\normalfont\heiti}%
+    {：}%
+    {0.5em}%
+    {}
+\newtheoremstyle{jouremark}%
+    {0.6\baselineskip}%
+    {0.6\baselineskip}%
+    {\normalfont\songti}%
+    {2em}%
+    {\normalfont\heiti}%
+    {：}%
+    {0.5em}%
+    {}
+\theoremstyle{jouthm}
 \newtheorem{theorem}{定理}[chapter]
 \newtheorem{lemma}[theorem]{引理}
 \newtheorem{proposition}[theorem]{命题}
 \newtheorem{corollary}[theorem]{推论}
-\theoremstyle{definition}
+\theoremstyle{joudef}
 \newtheorem{definition}[theorem]{定义}
 \newtheorem{example}[theorem]{例}
-\theoremstyle{remark}
+\theoremstyle{jouremark}
 \newtheorem{remark}[theorem]{注}
 
 % 伪代码环境
 \floatname{algorithm}{算法}
 \@addtoreset{algorithm}{chapter}
 \renewcommand{\thealgorithm}{\thechapter.\arabic{algorithm}}
-\algrenewcommand\algorithmicrequire{\textbf{输入:}}
-\algrenewcommand\algorithmicensure{\textbf{输出:}}
+\algrenewcommand\algorithmicrequire{{\heiti 输入:}}
+\algrenewcommand\algorithmicensure{{\heiti 输出:}}
 \algrenewcommand\algorithmiccomment[1]{\hfill$\triangleright$~#1}
 
 % 代码环境
@@ -316,8 +343,8 @@
     \clearpage
     \thispagestyle{frontmatterstyle}
     \vspace*{1.8cm}
-    {\centering\heiti\zihao{3}\textbf{江苏海洋大学}\\[0.5cm]}
-    {\centering\heiti\zihao{3}\textbf{毕业设计（论文）原创性声明}\\[1cm]}
+    {\centering\heiti\zihao{3}江苏海洋大学\\[0.5cm]}
+    {\centering\heiti\zihao{3}毕业设计（论文）原创性声明\\[1cm]}
 
     {\zihao{-4}\songti
     本人郑重声明：所呈交的毕业设计（论文），是本人在导师的指导下，独立进行研究工作所取得的成果。除文中已经注明引用的内容外，本论文不包含任何其他个人或集体已经发表或撰写过的作品成果。对本文的研究做出重要贡献的个人和集体，均已在文中以明确方式标明。本人完全意识到本声明的法律结果由本人承担。
@@ -327,8 +354,8 @@
     作者签名：\underline{\hspace{4cm}} \hfill 日期：\underline{\hspace{3cm}}
 
     \vspace{2cm}
-    {\centering\heiti\zihao{3}\textbf{江苏海洋大学}\\[0.5cm]}
-    {\centering\heiti\zihao{3}\textbf{毕业设计（论文）版权使用授权书}\\[1cm]}
+    {\centering\heiti\zihao{3}江苏海洋大学\\[0.5cm]}
+    {\centering\heiti\zihao{3}毕业设计（论文）版权使用授权书\\[1cm]}
 
     {\zihao{-4}\songti
     本毕业设计（论文）作者同意学校保留并向国家有关部门或机构送交论文的复印件和电子版，允许论文被查阅和借阅。本人授权江苏海洋大学可以将本毕业设计（论文）的全部或部分内容编入有关数据库进行检索，可以采用影印、缩印或扫描等复制手段保存和汇编本毕业设计（论文）。
@@ -363,7 +390,7 @@
 
 \newcommand{\jou@abstracttitleblock}[1]{%
     \begin{textblock*}{\jou@abstracttitlewidth}(\jou@abstracttitleleft,\jou@abstracttitletop)
-        \centering\heiti\zihao{4}\textbf{#1}
+        \centering\heiti\zihao{4}#1
     \end{textblock*}%
 }
 
@@ -398,8 +425,8 @@
     \mbox{}%
     \jou@abstracttitleblock{毕业设计（论文）中文摘要}
     \jou@abstractframebegin
-        {\noindent{\heiti\zihao{-4}\textbf{摘\hspace{1em}要：}}\zihao{-4}\songti}
-        {\songti\bfseries\zihao{-4}\@title}
+        {\noindent{\heiti\zihao{-4}摘\hspace{1em}要：}\zihao{-4}\songti}
+        {\heiti\zihao{4}\@title}
 }{
     \jou@abstractframeend
     \null
@@ -424,7 +451,7 @@
 % 关键词命令
 \newcommand{\cnkeywords}[1]{
     \par\vspace{0.82cm}
-    \noindent{\heiti\zihao{-4}\textbf{关键词：}}{\zihao{-4}\songti #1}
+    \noindent{\heiti\zihao{-4}关键词：}{\zihao{-4}\songti #1}
 }
 
 \newcommand{\enkeywords}[1]{
