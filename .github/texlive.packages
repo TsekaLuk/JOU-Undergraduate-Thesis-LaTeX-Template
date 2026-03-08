@@ -10,6 +10,7 @@ threeparttable
 tablefootnote
 xifthen
 ifmtarg
+textpos
 caption
 siunitx
 nomencl

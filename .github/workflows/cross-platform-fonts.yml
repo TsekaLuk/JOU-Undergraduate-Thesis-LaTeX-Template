@@ -69,7 +69,7 @@ jobs:
           # Pin the frozen TeX Live repo so fresh CI installs do not break during annual mirror rollover.
           texlive_version: 2025
           repository: https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2025/tlnet-final
-          cache_version: 2
+          cache_version: 3
           package_file: .github/texlive.packages
 
       - name: Download bundled fonts
