@@ -9,8 +9,8 @@ multirow
 threeparttable
 tablefootnote
 xifthen
+ifmtarg
 caption
-subcaption
 siunitx
 nomencl
 enumitem

@@ -4,7 +4,28 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - "README.md"
+      - "README_EN.md"
+      - "docs/**"
+      - "contents/excellent-abstract/**"
+      - "styles/jouexcellentabstract.sty"
+      - "templates/reports/excellent-thesis-abstract.tex"
+      - "templates/reports/excellent-thesis-abstract.pdf"
   pull_request:
+    paths-ignore:
+      - "README.md"
+      - "README_EN.md"
+      - "docs/**"
+      - "contents/excellent-abstract/**"
+      - "styles/jouexcellentabstract.sty"
+      - "templates/reports/excellent-thesis-abstract.tex"
+      - "templates/reports/excellent-thesis-abstract.pdf"
+  workflow_dispatch:
+
+concurrency:
+  group: thesis-build-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   thesis-build:
@@ -16,7 +37,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: ${{ fromJSON(github.event_name == 'workflow_dispatch' && '["ubuntu-latest","macos-latest","windows-latest"]' || '["ubuntu-latest"]') }}
 
     steps:
       - name: Checkout
@@ -48,7 +69,7 @@ jobs:
           # Pin the frozen TeX Live repo so fresh CI installs do not break during annual mirror rollover.
           texlive_version: 2025
           repository: https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2025/tlnet-final
-          cache_version: 1
+          cache_version: 2
           package_file: .github/texlive.packages
 
       - name: Download bundled fonts
