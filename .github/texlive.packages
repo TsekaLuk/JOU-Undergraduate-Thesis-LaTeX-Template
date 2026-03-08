@@ -8,6 +8,7 @@ makecell
 multirow
 threeparttable
 tablefootnote
+xifthen
 caption
 subcaption
 siunitx
