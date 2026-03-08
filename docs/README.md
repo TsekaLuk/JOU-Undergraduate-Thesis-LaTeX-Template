@@ -18,6 +18,7 @@
 - [pixel-perfect-report.md](reports/pixel-perfect-report.md): 像素级对齐验证报告
 - [body-text-alignment-report.md](reports/body-text-alignment-report.md): 正文排版对齐报告
 - [cover-alignment-analysis.md](reports/cover-alignment-analysis.md): 封面对齐分析
+- [excellent-thesis-abstract-compliance.md](reports/excellent-thesis-abstract-compliance.md): 校优摘要模板逐条对照报告
 - [font-alignment-issues.md](reports/font-alignment-issues.md): 字体对齐问题诊断
 - [font-warning-example.md](reports/font-warning-example.md): 字体警告示例
 - [ux-improvement.md](reports/ux-improvement.md): 字体与提示 UX 调整记录

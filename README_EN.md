@@ -24,6 +24,7 @@ The repository currently includes:
 
 - `main.tex` for the thesis body
 - 18 handbook templates for forms, reports, and grading sheets
+- 1 dedicated template for the school-level excellent thesis abstract submission
 - WPS-PDF-based end-to-end alignment checks
 - A bundled open-source font stack for consistent builds on Linux, macOS, and Windows
 - A three-OS CI matrix that keeps Windows, macOS, and Linux thesis builds under regression checks
@@ -49,7 +50,7 @@ If you are starting real thesis writing or need the latest fixes, use the GitHub
 - `Academic standards first`: the thesis prioritizes `KaiTi_GB2312 / SimSun / SimHei / Times New Roman` for real submission workflows.
 - `Handbook baseline checks`: page anchors, page count, orientation, and Word XML table grids are checked against the handbook export.
 - `Cross-platform builds`: the default setup does not require preinstalled `KaiTi_GB2312`, `FangSong_GB2312`, or `Times New Roman`.
-- `Complete template set`: thesis + 18 auxiliary templates.
+- `Complete template set`: thesis + 18 handbook templates + 1 excellent-abstract template.
 - `Optional licensed mode`: users with valid local font licenses can override the default font stack for higher fidelity.
 - `Executable QA`: layout expectations are written into E2E tests instead of being left as informal guidance.
 
@@ -66,6 +67,14 @@ The preview section is organized as a product page: first visual quality, then t
 This gallery shows the current thesis workflow pages: cover, Chinese abstract, English abstract, table of contents, body page, and references.
 
 ![Thesis template gallery](docs/images/thesis-gallery.png)
+
+### Excellent thesis abstract template
+
+This dedicated template follows the official school-level excellent thesis abstract notice as a separate submission artifact: the title, author line, supervisor line, and Chinese abstract stay full width on page 1, the body and references switch to a balanced two-column layout, and the English title plus abstract return to full width at the end.
+
+![Excellent thesis abstract gallery](docs/images/excellent-abstract-gallery.png)
+
+Rule-by-rule notes are documented in [docs/reports/excellent-thesis-abstract-compliance.md](docs/reports/excellent-thesis-abstract-compliance.md).
 
 ### Detail checks: abstract and body comparison
 

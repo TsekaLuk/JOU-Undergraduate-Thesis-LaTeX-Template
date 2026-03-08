@@ -22,6 +22,7 @@ templates/
 │   ├── internship-report.tex
 │   ├── proposal-science.tex
 │   ├── proposal-humanities.tex
+│   ├── excellent-thesis-abstract.tex
 │   └── translation.tex
 └── evaluations/
     ├── thesis-evaluation.tex
@@ -50,6 +51,7 @@ templates/
 - `internship-report.tex`：毕业实习报告书
 - `proposal-science.tex`：开题报告（理工农医类）
 - `proposal-humanities.tex`：开题报告（人文经管类）
+- `excellent-thesis-abstract.tex`：校级优秀毕业实习与设计（论文）摘要
 - `translation.tex`：外文资料翻译
 
 ### 评价类
@@ -68,6 +70,14 @@ latexmk -xelatex topic-selection.tex
 ```
 
 `reports/` 和 `evaluations/` 目录中的模板用法相同。
+
+校优摘要模板需要参考文献流程，建议在 `templates/reports/` 目录执行：
+
+```bash
+latexmk -xelatex -bibtex excellent-thesis-abstract.tex
+```
+
+该模板按 `references/江苏海洋大学本科校级优秀毕业实习与设计（论文）摘要格式说明.doc` 独立实现，同时复用 `contents/shared/metadata.tex` 中的题名、作者、学院、专业和导师元数据。逐条对照见 [docs/reports/excellent-thesis-abstract-compliance.md](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/docs/reports/excellent-thesis-abstract-compliance.md)。
 
 ### 批量编译
 
@@ -96,10 +106,12 @@ done
 
 这些模板受 [tests/test_pixel_perfect_alignment.py](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/tests/test_pixel_perfect_alignment.py) 约束。当前 E2E 会检查：
 
-- 18 个模板的 `tex/pdf` 是否完整
+- 18 个工作手册模板的 `tex/pdf` 是否完整
 - LaTeX 表格列宽是否对应 Word XML 表格网格
 - 编译后 PDF 的页数、方向、分页锚点是否与手册基线一致
 - 字体资源和 PDF 嵌入字体是否符合当前模式
+
+校优摘要模板是额外的专项申报模板，不纳入当前工作手册基线 E2E 统计，但可独立编译。
 
 ## 说明
 

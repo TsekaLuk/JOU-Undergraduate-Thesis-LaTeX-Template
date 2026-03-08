@@ -3,6 +3,9 @@
 MAIN = main
 BODY_SAMPLE_TEX = samples/body-sample.tex
 BODY_SAMPLE_PDF = body-sample.pdf
+EXCELLENT_ABSTRACT_DIR = templates/reports
+EXCELLENT_ABSTRACT_TEX = $(EXCELLENT_ABSTRACT_DIR)/excellent-thesis-abstract.tex
+EXCELLENT_ABSTRACT_PDF = $(EXCELLENT_ABSTRACT_DIR)/excellent-thesis-abstract.pdf
 TEX = xelatex
 BIB = bibtex
 INDEX = makeindex
@@ -15,6 +18,13 @@ THESIS_DEPS = $(MAIN).tex \
 	$(wildcard references/*.bib)
 BODY_SAMPLE_DEPS = $(BODY_SAMPLE_TEX) \
 	$(wildcard styles/*.sty) \
+	$(wildcard fonts/opensource/*) \
+	$(wildcard fonts/proprietary/*)
+EXCELLENT_ABSTRACT_DEPS = $(EXCELLENT_ABSTRACT_TEX) \
+	$(wildcard styles/*.sty) \
+	$(wildcard contents/shared/*.tex) \
+	$(wildcard contents/excellent-abstract/*.tex) \
+	$(wildcard references/*.bib) \
 	$(wildcard fonts/opensource/*) \
 	$(wildcard fonts/proprietary/*)
 
@@ -51,6 +61,11 @@ $(BODY_SAMPLE_PDF): $(BODY_SAMPLE_DEPS)
 	@echo "==> 第2次编译正文样页基线..."
 	$(TEX) $(TEXFLAGS) samples/body-sample.tex
 	@echo "==> 正文样页生成完成: $(BODY_SAMPLE_PDF)"
+
+$(EXCELLENT_ABSTRACT_PDF): $(EXCELLENT_ABSTRACT_DEPS)
+	@echo "==> 编译校优摘要模板..."
+	cd $(EXCELLENT_ABSTRACT_DIR) && latexmk -xelatex -bibtex $(TEXFLAGS) excellent-thesis-abstract.tex
+	@echo "==> 校优摘要生成完成: $(EXCELLENT_ABSTRACT_PDF)"
 
 # 清理临时文件
 clean:
@@ -91,7 +106,7 @@ cover-diff: $(MAIN).pdf
 	python3 scripts/generate_cover_diff.py
 
 # 生成 README 预览图片（横向对比图 + 表单画廊）
-readme-images: $(MAIN).pdf $(BODY_SAMPLE_PDF)
+readme-images: $(MAIN).pdf $(BODY_SAMPLE_PDF) $(EXCELLENT_ABSTRACT_PDF)
 	python3 scripts/generate_readme_images.py
 
 # 帮助信息
@@ -107,7 +122,7 @@ help:
 	@echo "  make cleanall - 完全清理（包括PDF）"
 	@echo "  make view     - 编译并预览PDF"
 	@echo "  make cover-diff - 生成封面对比 overlay/diff/checker 产物"
-	@echo "  make readme-images - 生成 README 用的横向对比图和表单画廊"
+	@echo "  make readme-images - 生成 README 用的横向对比图、校优摘要预览图和表单画廊"
 	@echo "  make wordcount- 统计论文字数"
 	@echo "  make test     - 运行 E2E 测试"
 	@echo "  make help     - 显示此帮助信息"
@@ -127,3 +142,4 @@ test:
 	python3 tests/test_body_sample_alignment.py
 	python3 tests/test_cover_alignment.py
 	python3 tests/test_academic_features.py
+	python3 tests/test_format_compliance.py

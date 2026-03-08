@@ -103,14 +103,14 @@ class FormatComplianceTest:
         print("测试3: 字体字号")
         print("="*60)
         
-        with open('styles/jouthesis.cls', 'r', encoding='utf-8') as f:
+        with open('styles/jouheadings.sty', 'r', encoding='utf-8') as f:
             content = f.read()
         
         # 验证章节标题字号
         tests = [
-            (r'chapter.*zihao\{-3\}', "一级标题", "小三号黑体"),
-            (r'section.*zihao\{4\}', "二级标题", "四号黑体"),
-            (r'subsection.*zihao\{-4\}', "三级标题", "小四号黑体"),
+            (r'chapter=\{.*?format=\{\\heiti\\zihao\{-3\}', "一级标题", "小三号黑体"),
+            (r'section=\{.*?format=\{\\heiti\\zihao\{-4\}', "二级标题", "小四号黑体"),
+            (r'subsection=\{.*?format=\{\\heiti\\zihao\{-4\}', "三级标题", "小四号黑体"),
         ]
         
         all_passed = True
@@ -167,9 +167,9 @@ class FormatComplianceTest:
             return False
     
     def test_template_completeness(self):
-        """测试模板完整性（16个模板）"""
+        """测试模板完整性（17个模板）"""
         print("\n" + "="*60)
-        print("测试5: 模板完整性（16个必需模板）")
+        print("测试5: 模板完整性（17个必需模板）")
         print("="*60)
         
         required_templates = {
@@ -184,6 +184,7 @@ class FormatComplianceTest:
             'reports/internship-report.tex': '实习报告',
             'reports/proposal-science.tex': '开题报告（理工）',
             'reports/proposal-humanities.tex': '开题报告（人文）',
+            'reports/excellent-thesis-abstract.tex': '校优摘要',
             'reports/translation.tex': '外文翻译',
             'evaluations/thesis-evaluation.tex': '论文评语',
             'evaluations/grading-science.tex': '评分表（理工）',
@@ -200,8 +201,8 @@ class FormatComplianceTest:
                 all_exist = False
         
         if all_exist:
-            print(f"\n✅ 所有15个配套模板完整")
-            print(f"✅ 加上主模板(main.tex)，共16个模板")
+            print(f"\n✅ 所有16个配套模板完整")
+            print(f"✅ 加上主模板(main.tex)，共17个模板")
             self.passed += 1
             return True
         else:
@@ -211,7 +212,7 @@ class FormatComplianceTest:
     def test_logo_integration(self):
         """测试Logo集成"""
         print("\n" + "="*60)
-        print("测试6: 学校Logo集成")
+        print("测试6: 学校视觉资源集成")
         print("="*60)
         
         # 检查logo文件
@@ -220,6 +221,7 @@ class FormatComplianceTest:
             'jou-name-large.png': '大横版校名 (798×160px)',
             'jou-name-small.png': '小横版校名 (433×99px)',
             'jou-name-large-rgba.png': '透明背景版 (798×160px)',
+            'jou-cover-header-clean.png': '论文封面页眉组合图',
         }
         
         all_exist = True
@@ -235,10 +237,10 @@ class FormatComplianceTest:
         with open('styles/jouthesis.cls', 'r', encoding='utf-8') as f:
             content = f.read()
         
-        if 'jou-logo-full.png' in content:
-            print("✅ 封面logo已配置")
+        if '\\newcommand{\\JOUCoverHeader}{figures/jou-cover-header-clean.png}' in content:
+            print("✅ 封面页眉资源已配置")
         else:
-            print("❌ 封面logo未配置")
+            print("❌ 封面页眉资源未配置")
             all_exist = False
         
         if all_exist:

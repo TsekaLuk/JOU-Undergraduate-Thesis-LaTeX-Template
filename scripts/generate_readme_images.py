@@ -7,6 +7,7 @@ Outputs:
 - docs/images/abstract-compare.png
 - docs/images/body-compare.png
 - docs/images/thesis-gallery.png
+- docs/images/excellent-abstract-gallery.png
 - docs/images/forms-gallery.png
 """
 
@@ -24,6 +25,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 REFERENCE_PDF = PROJECT_ROOT / "references" / "江苏海洋大学2026届毕业实习与设计（论文）工作手册.pdf"
 CURRENT_PDF = PROJECT_ROOT / "main.pdf"
 BODY_SAMPLE_PDF = PROJECT_ROOT / "body-sample.pdf"
+EXCELLENT_ABSTRACT_PDF = PROJECT_ROOT / "templates" / "reports" / "excellent-thesis-abstract.pdf"
 OUTPUT_DIR = PROJECT_ROOT / "docs" / "images"
 TEMP_DIR = PROJECT_ROOT / "tmp" / "readme-images"
 RESAMPLING = getattr(Image, "Resampling", Image)
@@ -31,6 +33,7 @@ DPI = 140
 CONTENT_BOX = (760, 1080)
 FORM_CONTENT_BOX = (500, 700)
 GALLERY_TILE_BOX = (360, 470)
+EXCELLENT_TILE_BOX = (420, 610)
 
 
 @dataclass(frozen=True)
@@ -108,6 +111,11 @@ THESIS_GALLERY_SPECS = (
     GallerySpec("Table of Contents", CURRENT_PDF, 5, (70, 70, 1140, 930)),
     GallerySpec("Body Page", CURRENT_PDF, 7, (70, 70, 1140, 930)),
     GallerySpec("References", CURRENT_PDF, 14, (70, 70, 1140, 930)),
+)
+
+EXCELLENT_GALLERY_SPECS = (
+    GallerySpec("Page 1", EXCELLENT_ABSTRACT_PDF, 1, (65, 55, 1135, 1545)),
+    GallerySpec("Page 2", EXCELLENT_ABSTRACT_PDF, 2, (65, 55, 1135, 1545)),
 )
 
 
@@ -315,6 +323,16 @@ def compose_thesis_gallery() -> Path:
     )
 
 
+def compose_excellent_gallery() -> Path:
+    return compose_gallery(
+        title="Excellent Thesis Abstract Template",
+        specs=EXCELLENT_GALLERY_SPECS,
+        output_name="excellent-abstract-gallery.png",
+        columns=2,
+        content_box=EXCELLENT_TILE_BOX,
+    )
+
+
 def main() -> int:
     if not REFERENCE_PDF.exists():
         print(f"Missing reference PDF: {REFERENCE_PDF}", file=sys.stderr)
@@ -322,12 +340,16 @@ def main() -> int:
     if not CURRENT_PDF.exists():
         print(f"Missing thesis PDF: {CURRENT_PDF}", file=sys.stderr)
         return 1
+    if not EXCELLENT_ABSTRACT_PDF.exists():
+        print(f"Missing excellent abstract PDF: {EXCELLENT_ABSTRACT_PDF}", file=sys.stderr)
+        return 1
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     TEMP_DIR.mkdir(parents=True, exist_ok=True)
 
     generated = [compose_compare(spec) for spec in COMPARE_SPECS]
     generated.append(compose_thesis_gallery())
+    generated.append(compose_excellent_gallery())
     generated.append(compose_forms_gallery())
 
     print("README preview images generated:")

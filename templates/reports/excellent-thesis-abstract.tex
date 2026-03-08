@@ -1,0 +1,63 @@
+% 江苏海洋大学本科校级优秀毕业实习与设计（论文）摘要模板
+% 编译方式：在 templates/reports/ 目录运行 latexmk -xelatex -bibtex excellent-thesis-abstract.tex
+
+\documentclass[a4paper,zihao=-4,twoside]{ctexart}
+
+\RequirePackage{../../styles/jouexcellentabstract}
+
+\input{../../contents/shared/metadata.tex}
+\input{../../contents/excellent-abstract/keywords.tex}
+
+\begin{document}
+\pagestyle{jouexcellent}
+
+\thispagestyle{jouexcellent}
+\vspace*{-0.6cm}
+\begin{center}
+    {\JOUExcellentTitleFont\heiti\textbf{\JOUSharedTitleCN}\par}
+    \vspace{0.35cm}
+    {\JOUExcellentBodyFont\kaishu
+    \JOUSharedAuthorName\hspace{1.5em}\JOUSharedSupervisorName\textsuperscript{\JOUSharedSupervisorMarker}\par}
+    {\JOUExcellentBodyFont\kaishu
+    （\JOUSharedCollege\hspace{1.5em}\JOUSharedProgram）\par}
+\end{center}
+
+\vspace{0.35cm}
+
+{\JOUExcellentBodyFont\kaishu
+\JOUExcellentInsetBlock{\noindent{\heiti 摘\hspace{1em}要：}\input{../../contents/excellent-abstract/cn-abstract.tex}}
+\JOUExcellentInsetBlock{\noindent{\heiti 关键词：}\JOUExcellentCnKeywords}}
+
+\vspace{0.45cm}
+
+\JOUExcellentFirstPageNote
+\begin{multicols}{2}
+\JOUExcellentBodyFont\songti
+\input{../../contents/excellent-abstract/body.tex}
+\end{multicols}
+
+\vspace{0.3\baselineskip}
+\begin{center}
+    {\JOUExcellentSubsectionFont\heiti\textbf{参考文献}\par}
+\end{center}
+
+\begin{multicols}{2}
+\JOUExcellentReferenceFont\songti
+
+\bibliographystyle{gbt7714-numerical}
+\bibliography{../../references/refs}
+
+\vspace{0.5\baselineskip}
+\noindent{\JOUExcellentReferenceFont\heiti 作者简介：}{\JOUExcellentBioFont\kaishu \JOUSharedAuthorBio\par}
+\end{multicols}
+
+\vspace{0.75\baselineskip}
+\begin{center}
+    {\rmfamily\bfseries\JOUExcellentTitleFont \JOUSharedTitleEN\par}
+\end{center}
+
+{\rmfamily\JOUExcellentHeaderFont
+\noindent\textbf{Abstract: }\input{../../contents/excellent-abstract/en-abstract.tex}\par
+\noindent\textbf{Keywords: }\JOUExcellentEnKeywords\par}
+
+\end{document}
