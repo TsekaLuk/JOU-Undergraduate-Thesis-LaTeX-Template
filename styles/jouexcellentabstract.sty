@@ -1,8 +1,9 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{jouexcellentabstract}[2026/03/08 JOU excellent thesis abstract helpers]
 
-\RequirePackage{../../styles/joufonts}
+\RequirePackage[strictfonts]{../../styles/joufonts}
 \RequirePackage{etoolbox}
+\RequirePackage{calc}
 \RequirePackage{geometry}
 \RequirePackage{fancyhdr}
 \RequirePackage{titlesec}
@@ -51,10 +52,27 @@
 \newcommand{\JOUExcellentBioFont}{\fontsize{7.5pt}{9.375pt}\selectfont}
 \newlength{\JOUExcellentAbstractInset}
 \setlength{\JOUExcellentAbstractInset}{1.5em}
+\newlength{\JOUExcellentBodyDoubleSpace}
+\newlength{\JOUExcellentBodyTripleSpace}
+\newlength{\JOUExcellentSectionLabelSep}
+\newlength{\JOUExcellentSubsectionLabelSep}
+\newlength{\JOUExcellentSubsubsectionLabelSep}
+\newlength{\JOUExcellentCaptionLabelSep}
+\newlength{\JOUExcellentReferenceHangIndent}
+\setlength{\JOUExcellentReferenceHangIndent}{1.57em}
+\settowidth{\JOUExcellentBodyDoubleSpace}{{\JOUExcellentBodyFont\heiti\space\space}}
+\settowidth{\JOUExcellentBodyTripleSpace}{{\JOUExcellentBodyFont\kaishu\space\space\space}}
+\settowidth{\JOUExcellentSectionLabelSep}{{\JOUExcellentSectionFont\heiti\space\space}}
+\settowidth{\JOUExcellentSubsectionLabelSep}{{\JOUExcellentSubsectionFont\heiti\space\space}}
+\settowidth{\JOUExcellentSubsubsectionLabelSep}{{\JOUExcellentBodyFont\kaishu\space\space}}
+\settowidth{\JOUExcellentCaptionLabelSep}{{\fontsize{9pt}{11.25pt}\selectfont\kaishu\bfseries\space\space}}
 
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 \newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
 \newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+
+\newcommand{\JOUExcellentDoubleEnSpace}{\hspace*{\JOUExcellentBodyDoubleSpace}}
+\newcommand{\JOUExcellentTripleEnSpace}{\hspace*{\JOUExcellentBodyTripleSpace}}
 
 \newcommand{\JOUExcellentApplyPageStyle}{%
     \fancyhf{}
@@ -80,31 +98,32 @@
 \renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
 
 \titleformat{\section}[block]
-    {\normalfont\bfseries\JOUExcellentSectionFont\heiti}
+    {\normalfont\JOUExcellentSectionFont\heiti}
     {\thesection}
-    {0.9em}
+    {\JOUExcellentSectionLabelSep}
     {}
 \titlespacing*{\section}{0pt}{0.5\baselineskip}{0.5\baselineskip}
 
 \titleformat{\subsection}[block]
-    {\normalfont\bfseries\JOUExcellentSubsectionFont\heiti}
+    {\normalfont\JOUExcellentSubsectionFont\heiti}
     {\thesubsection}
-    {0.8em}
+    {\JOUExcellentSubsectionLabelSep}
     {}
 \titlespacing*{\subsection}{0pt}{0pt}{0pt}
 
 \titleformat{\subsubsection}[runin]
     {\normalfont\JOUExcellentBodyFont\kaishu}
     {\thesubsubsection}
-    {0.8em}
+    {\JOUExcellentSubsubsectionLabelSep}
     {}
-    [\hspace{1em}]
+    [\hspace*{\JOUExcellentSubsubsectionLabelSep}]
 \titlespacing*{\subsubsection}{0pt}{0pt}{0pt}
 
-\DeclareCaptionFont{jouexcellentcaption}{\fontsize{9pt}{11.25pt}\selectfont\kaishu\bfseries}
+\DeclareCaptionFont{jouexcellentcaption}{\fontsize{9pt}{11.25pt}\selectfont\JOUCoverKai}
+\DeclareCaptionLabelSeparator{jouexcellenttwospace}{\hspace*{\JOUExcellentCaptionLabelSep}}
 \captionsetup{
     font=jouexcellentcaption,
-    labelsep=space,
+    labelsep=jouexcellenttwospace,
     skip=6pt
 }
 \captionsetup[table]{position=top}
@@ -118,19 +137,25 @@
 }
 
 \makeatletter
+\@addtoreset{figure}{section}
+\@addtoreset{table}{section}
+\renewcommand{\thefigure}{\thesection-\arabic{figure}}
+\renewcommand{\thetable}{\thesection-\arabic{table}}
+\newcommand{\JOUExcellentBibLabel}[1]{#1\hspace{0.5em}}
 \renewenvironment{thebibliography}[1]
     {%
         \JOUExcellentReferenceFont\songti
         \list{\@biblabel{\@arabic\c@enumiv}}{%
-            \settowidth\labelwidth{\@biblabel{#1}}%
-            \leftmargin\labelwidth
-            \advance\leftmargin\labelsep
-            \setlength{\labelsep}{0.5em}%
+            \setlength{\leftmargin}{\JOUExcellentReferenceHangIndent}%
+            \setlength{\itemindent}{-\JOUExcellentReferenceHangIndent}%
+            \setlength{\labelwidth}{0pt}%
+            \setlength{\labelsep}{0pt}%
             \setlength{\itemsep}{0pt}%
             \setlength{\parsep}{0pt}%
             \setlength{\topsep}{0pt}%
             \setlength{\partopsep}{0pt}%
             \setlength{\listparindent}{0pt}%
+            \let\makelabel\JOUExcellentBibLabel
         }%
         \sloppy
         \clubpenalty4000

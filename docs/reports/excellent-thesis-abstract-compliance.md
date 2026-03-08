@@ -1,61 +1,106 @@
-# 校优摘要模板对照报告
+# 校优摘要模板合规复核
 
-## 基线来源
+## 基线
 
-- 官方说明：`references/江苏海洋大学本科校级优秀毕业实习与设计（论文）摘要格式说明.doc`
-- 模板入口：`templates/reports/excellent-thesis-abstract.tex`
-- 共享元数据：`contents/shared/metadata.tex`
-- 版式实现：`styles/jouexcellentabstract.sty`
+- 官方来源：[references/江苏海洋大学本科校级优秀毕业实习与设计（论文）摘要格式说明.doc](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/references/江苏海洋大学本科校级优秀毕业实习与设计（论文）摘要格式说明.doc)
+- 模板入口：[templates/reports/excellent-thesis-abstract.tex](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/templates/reports/excellent-thesis-abstract.tex)
+- 版式实现：[styles/jouexcellentabstract.sty](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/styles/jouexcellentabstract.sty)
+- 共享字体策略：[styles/joufonts.sty](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/styles/joufonts.sty)
+- 最近复核成品：[templates/reports/excellent-thesis-abstract.pdf](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/templates/reports/excellent-thesis-abstract.pdf)
 
-## 官方意图判断
+## 结论
 
-官方 `.doc` 的前两页是“校级优秀毕业实习与设计（论文）摘要”成稿式样，第 3 页起的“格式说明”是写作与排版要求，不属于最终提交摘要正文。当前模板按这个意图实现，只生成摘要成稿，不把说明页一起编进 PDF。
+这份模板现在已经把此前明确发现的 4 个硬差异修掉了：
+- 图表编号改为节号绑定，成品为 `图 1-1`、`表 2-1`
+- 校优模板默认启用 `strictfonts`，没有官方字体就拒绝编译，不再静默回退开源字体
+- 首部与标题相关空格改为按英文空格宽度测量的固定间距
+- 参考文献列表改为 1.57 字符悬挂缩进
 
-## 逐条对照
+但如果严格按“Word 参数逐项字面一致”理解，仍有 3 项属于“等价实现”而不是“字面逐项复制”：
+- 页面设置通过 `geometry + twoside + inner/outer` 实现对称页边距
+- 双栏通过 `multicols` 和物理栏距实现，不直接使用“22.34 字符”这个 Word 单位
+- 页眉距页顶通过 `geometry/headheight/headsep` 组合实现，不是 Word 的原始参数界面
 
-1. 摘要应是论文完成后提炼出的独立短文，约 3000 字，控制在 5 页内。  
-   模板不把正文内容硬编码在类文件里，而是将中文摘要、正文、英文摘要拆到 `contents/excellent-abstract/`。这保证申报稿可以按“短、精、完整”的摘要逻辑单独改写，而不是直接复用主论文章节。示例稿当前为 2 页，满足版面上限。
+## 逐条状态
 
-2. 页面为 A4 纵向，对称页边距：上 3cm、下 2cm、左 1.7cm、右 2cm，装订线在左。  
-   `styles/jouexcellentabstract.sty` 用 `geometry` 设置 `a4paper, top=3cm, bottom=2cm, inner=1.7cm, outer=2cm`，并在入口文档启用 `twoside`。Word 的“对称页边距 + 左装订线”在 LaTeX 中对应 `inner/outer + twoside`，这里是等价实现。
+1. `摘要约 3000 字、5 页以内`
+状态：`结构承载，内容由作者负责`
+说明：模板只提供结构，不会强制生成 3000 字内容或自动截断到 5 页；当前示例稿为 2 页。
 
-3. 中文题目为 16 号黑体居中，段前 1 行、段后 0.5 行，1.25 倍行距。  
-   标题使用 `\JOUExcellentTitleFont`（16pt）与黑体加粗居中，正文全局 `\setstretch{1.25}`。段前后距按模板中的 `\vspace` 控制，和样页视觉一致。
+2. `A4、上 3cm、下 2cm、左 1.7cm、右 2cm、左装订线、对称页边距`
+状态：`等价实现`
+说明：模板使用 `twoside + inner=1.7cm + outer=2cm + top=3cm + bottom=2cm`，对应官方意图。
+位置：[jouexcellentabstract.sty](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/styles/jouexcellentabstract.sty#L22)
 
-4. 作者与指导教师位于题目下一行，9.5 号楷体居中，指导教师带上标标记；学院与专业另起一行。  
-   当前模板首部使用 9.5pt 楷体居中排版，作者和导师在同一行，导师后跟 `\textsuperscript{\JOUSharedSupervisorMarker}`，学院与专业放在下一行。共享字段来自 `contents/shared/metadata.tex`，可和主论文共用，减少重复录入。
+3. `中文题目 16 号黑体居中，1.25 倍行距`
+状态：`已落实`
+说明：入口文档使用 16pt 黑体居中，行距由样式文件统一设置为 1.25。
+位置：[excellent-thesis-abstract.tex](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/templates/reports/excellent-thesis-abstract.tex#L16)
+[jouexcellentabstract.sty](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/styles/jouexcellentabstract.sty#L36)
 
-5. 中文摘要与关键词为 9.5 号，标签黑体，正文楷体，左右缩进 1.5 个字符。  
-   模板通过 `\JOUExcellentInsetBlock` 将中文摘要和关键词包成左右各 `1.5em` 的内缩块，标签使用黑体，正文使用 9.5pt 楷体。关键词按 `；` 分隔，末尾不加标点。
+4. `作者/导师同行，学院/专业同行，三英文空格，导师上标`
+状态：`已落实`
+说明：当前使用按正文楷体测量得到的三英文空格宽度，不再是弹性 `\hspace` 近似值。
+位置：[excellent-thesis-abstract.tex](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/templates/reports/excellent-thesis-abstract.tex#L19)
+[jouexcellentabstract.sty](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/styles/jouexcellentabstract.sty#L55)
 
-6. 正文与参考文献采用双栏，栏宽相等，栏间距 2.02 字符。  
-   模板采用 `multicols` 实现双栏，并将 `\columnsep` 设为 `2.02em`。在 LaTeX 中，“字符”不是稳定的版心单位，因此这里按等宽物理版面落实为等栏宽 + 2.02em 栏间距，是对官方规则的等价实现。英文摘要不在双栏区内，结束后回到全宽，这与样页意图一致。
+5. `摘  要 / 关键词 为 9.5 号，标签黑体，正文楷体，左右缩进 1.5 字符`
+状态：`已落实`
+说明：摘要块和关键词块都使用 9.5pt 楷体，标签为黑体；“摘  要”内部空隙改为按两英文空格宽度测量后的固定间距；左右内缩 1.5em。
+位置：[excellent-thesis-abstract.tex](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/templates/reports/excellent-thesis-abstract.tex#L27)
+[jouexcellentabstract.sty](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/styles/jouexcellentabstract.sty#L52)
+[jouexcellentabstract.sty](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/styles/jouexcellentabstract.sty#L113)
 
-7. 正文采用阿拉伯数字分级编号，第一页左下角用文本框放指导教师情况简介。  
-   `styles/jouexcellentabstract.sty` 定义了 1 / 1.1 / 1.1.1 的编号规则；三级标题采用 run-in 形式并在标题后留出两个英文空格的阅读节奏。首页左下角说明通过 `textpos` 绝对定位实现，不用脚注。
+6. `正文与参考文献双栏，等栏宽，栏距 2.02 字符`
+状态：`等价实现`
+说明：模板使用 `multicols` 双栏，并将栏距设为 `2.02em`；这是 LaTeX 下对官方双栏意图的物理版面实现。
+位置：[jouexcellentabstract.sty](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/styles/jouexcellentabstract.sty#L38)
+[excellent-thesis-abstract.tex](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/templates/reports/excellent-thesis-abstract.tex#L34)
 
-8. 一级标题 13 号黑体，二级标题 11 号黑体，三级以下 9.5 号楷体，三级标题后正文不另起段。  
-   `\section`、`\subsection`、`\subsubsection` 分别对应 13pt 黑体、11pt 黑体、9.5pt 楷体；其中三级标题用 `runin` 形式，正文直接接排，符合样页结构。
+7. `阿拉伯数字分级编号，编号与标题间两个英文空格；首页左下角教师简介`
+状态：`已落实`
+说明：一级、二级、三级标题的编号与标题间距都改为按两英文空格宽度测量的固定值；首页教师简介继续用 `textpos` 绝对定位实现。
+位置：[jouexcellentabstract.sty](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/styles/jouexcellentabstract.sty#L58)
+[jouexcellentabstract.sty](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/styles/jouexcellentabstract.sty#L82)
+[jouexcellentabstract.sty](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/styles/jouexcellentabstract.sty#L146)
 
-9. 图表尽量控制在单栏内，图表标题用小五号楷体加粗，并在正文中有“如图（表）*-*所示”提示。  
-   模板在 `caption` 中设置图表标题为 9pt 楷体加粗，小五号等价；表格环境、图题和示例正文都按这个规则编排。特别大的图表仍可按单独浮动体处理，不强制压进单栏。
+8. `一级标题 13 号黑体，二级标题 11 号黑体，三级以下 9.5 号楷体，三级标题后正文不另起段`
+状态：`已落实`
+说明：三级标题仍为 run-in，并把标题后正文间距也改成两英文空格宽度。
+位置：[jouexcellentabstract.sty](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/styles/jouexcellentabstract.sty#L82)
 
-10. 页眉居中，距页顶 2.3cm，10.5 号黑体。  
-   页眉由 `fancyhdr` 实现，内容居中，字号为 10.5pt 黑体。其纵向位置通过 `geometry` 的页边距与 `headheight/headsep` 协同确定，视觉上和官方样页一致。
+9. `图表尽量单栏；图表标题小五号楷体加粗；文中提示如图（表）*-*所示`
+状态：`已落实`
+说明：图表编号现在按节重置，示例正文已渲染为 `如图 1-1 所示`、`表 2-1`；图表标题字体改为使用带加粗能力的楷体族。
+位置：[jouexcellentabstract.sty](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/styles/jouexcellentabstract.sty#L104)
+[jouexcellentabstract.sty](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/styles/jouexcellentabstract.sty#L120)
+[body.tex](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/contents/excellent-abstract/body.tex#L7)
 
-11. 参考文献按《江苏海洋大学学报》格式书写，按出现顺序编号，数量不超过 6 条。  
-   模板使用 `gbt7714-numerical` 作为参考文献样式，编号制和样页一致。条目数量属于内容约束，不应硬编码进类文件；当前示例稿只放了 3 条。
+10. `页眉居中，距页顶 2.3cm，10.5 号黑体`
+状态：`等价实现`
+说明：页眉内容、字号、居中方式已落实；纵向位置通过 `geometry + fancyhdr` 控制。
+位置：[jouexcellentabstract.sty](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/styles/jouexcellentabstract.sty#L59)
 
-12. “参考文献”标题为 11 号黑体居中；正文小五号，悬挂缩进；后接作者简介。  
-   模板将“参考文献”标题改为独立的 11pt 黑体居中块，参考文献列表本身使用 9pt 宋体并保留编号后的悬挂式列表缩进；作者简介紧接在参考文献之后，标签黑体小五，内容六号楷体。
+11. `参考文献按学报格式，顺序编号，数量不超过 6`
+状态：`结构已落实，数量由内容负责`
+说明：样式使用 `gbt7714-numerical`，数量限制不在模板中硬编码。
+位置：[excellent-thesis-abstract.tex](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/templates/reports/excellent-thesis-abstract.tex#L47)
 
-13. 外文标题为 16 号 Times New Roman 加粗居中，英文摘要和关键词为 10.5 号 Times New Roman，标签加粗。  
-   模板在双栏内容结束后切回全宽，英文标题使用 16pt 加粗西文字体居中，`Abstract` / `Keywords` 标签加粗，正文为 10.5pt Times 风格字体，关键词使用 `; ` 分隔。
+12. `参考文献标题 11 号黑体居中；正文小五号；悬挂缩进 1.57 字符；后接作者简介`
+状态：`已落实`
+说明：参考文献列表改为显式 1.57em 悬挂缩进，标题和作者简介继续保持独立块。
+位置：[excellent-thesis-abstract.tex](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/templates/reports/excellent-thesis-abstract.tex#L40)
+[jouexcellentabstract.sty](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/styles/jouexcellentabstract.sty#L50)
+[jouexcellentabstract.sty](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/styles/jouexcellentabstract.sty#L124)
 
-## 当前结论
+13. `英文标题 16 号 Times New Roman 加粗居中；英文摘要/关键词 10.5 号 Times New Roman；标签加粗`
+状态：`已落实`
+说明：校优模板现在默认启用严格字体校验，缺少官方字体将直接报错，因此不再默默使用开源替代字体冒充正式稿。
+位置：[excellent-thesis-abstract.tex](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/templates/reports/excellent-thesis-abstract.tex#L55)
+[jouexcellentabstract.sty](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/styles/jouexcellentabstract.sty#L4)
+[joufonts.sty](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/styles/joufonts.sty#L948)
 
-- 已直接落实的规则：3、4、5、7、8、9、11、12、13
-- 采用 LaTeX 等价实现的规则：2、6、10
-- 内容层面由写作者负责而模板只提供结构承载的规则：1
+## 当前口径
 
-整体上，当前模板已经符合“校级优秀毕业实习与设计（论文）摘要”独立申报稿的官方结构、版式和使用意图。README 中展示的 `docs/images/excellent-abstract-gallery.png` 可用于快速人工复核成品观感。
+- 如果按“成稿结构、编号、字体约束、空格规则、参考文献缩进”来验收，这份模板现在可按正式申报稿口径使用。
+- 如果按“Word 对话框中的每个参数值和实现路径都逐字逐项复制”来验收，规则 2、6、10 仍应视为 LaTeX 等价实现，而不是 Word 原生命令复刻。

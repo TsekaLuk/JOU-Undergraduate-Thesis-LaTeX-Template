@@ -70,7 +70,7 @@ This gallery shows the current thesis workflow pages: cover, Chinese abstract, E
 
 ### Excellent thesis abstract template
 
-This dedicated template follows the official school-level excellent thesis abstract notice as a separate submission artifact: the title, author line, supervisor line, and Chinese abstract stay full width on page 1, the body and references switch to a balanced two-column layout, and the English title plus abstract return to full width at the end.
+This dedicated template follows the official school-level excellent thesis abstract notice as a separate submission artifact: the title, author line, supervisor line, and Chinese abstract stay full width on page 1, the body and references switch to a balanced two-column layout, and the English title plus abstract return to full width at the end. This entrypoint now enables strict font checks by default, so missing official submission fonts fail fast instead of silently falling back to open-source substitutes.
 
 ![Excellent thesis abstract gallery](docs/images/excellent-abstract-gallery.png)
 

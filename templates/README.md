@@ -77,7 +77,7 @@ latexmk -xelatex topic-selection.tex
 latexmk -xelatex -bibtex excellent-thesis-abstract.tex
 ```
 
-该模板按 `references/江苏海洋大学本科校级优秀毕业实习与设计（论文）摘要格式说明.doc` 独立实现，同时复用 `contents/shared/metadata.tex` 中的题名、作者、学院、专业和导师元数据。逐条对照见 [docs/reports/excellent-thesis-abstract-compliance.md](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/docs/reports/excellent-thesis-abstract-compliance.md)。
+该模板按 `references/江苏海洋大学本科校级优秀毕业实习与设计（论文）摘要格式说明.doc` 独立实现，同时复用 `contents/shared/metadata.tex` 中的题名、作者、学院、专业和导师元数据。该入口默认启用严格字体检查，缺少正式申报所需字体会直接停止编译。逐条对照见 [docs/reports/excellent-thesis-abstract-compliance.md](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/docs/reports/excellent-thesis-abstract-compliance.md)。
 
 ### 批量编译
 
