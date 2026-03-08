@@ -115,8 +115,8 @@ def main() -> int:
         print("FAIL - 缺少 main.pdf，请先编译论文模板")
         return 1
     if not REFERENCE_PDF.exists():
-        print("FAIL - 缺少参考手册 PDF")
-        return 1
+        print("SKIP - 缺少参考手册 PDF，跳过封面视觉回归检查")
+        return 0
 
     with tempfile.TemporaryDirectory(prefix="jou-cover-") as tmp_dir:
         tmp = Path(tmp_dir)
