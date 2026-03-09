@@ -267,13 +267,13 @@ class FormatComplianceTest:
             print("❌ 主模板未启用 preferwps 字体路由")
             all_passed = False
 
-        if r'{\heiti\zihao{4}\@title}' in thesis_cls:
+        if r'{\JOUAbstractHei\bfseries\zihao{4}\@title}' in thesis_cls:
             print("✅ 中文摘要题名使用四号黑体")
         else:
             print("❌ 中文摘要题名不是四号黑体")
             all_passed = False
 
-        if r'{\noindent{\heiti\zihao{-4}摘\hspace{1em}要：}\zihao{-4}\songti}' in thesis_cls:
+        if r'{\noindent{\JOUAbstractHei\bfseries\zihao{-4}摘\hspace{1em}要：}\zihao{-4}\songti}' in thesis_cls:
             print("✅ 中文摘要标签与正文字体分离正确")
         else:
             print("❌ 中文摘要标签/正文字体规则不符合预期")

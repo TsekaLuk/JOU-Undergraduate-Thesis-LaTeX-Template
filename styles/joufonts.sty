@@ -31,6 +31,7 @@
 \newcommand{\JOUReferenceCoverDir}{}
 \newcommand{\JOUCoverHeiFakeBold}{1.4}
 \newcommand{\JOUCoverKaiFakeBold}{2.6}
+\newcommand{\JOUAbstractHeiFakeBold}{2.8}
 \newif\ifjou@bundledfontsavailable
 \jou@bundledfontsavailablefalse
 \newif\ifjou@communitypackage
@@ -773,6 +774,36 @@
     }{}%
 }
 
+\newcommand{\jou@setupabstractheifamily}{%
+    \IfFileExists{\JOUWPSFontDir/HYQiHei-55J.ttf}{%
+        \setCJKfamilyfont{jouabstracthei}[
+            Path=\JOUWPSFontDir/,
+            UprightFont=HYQiHei-55J.ttf,
+            AutoFakeBold=\JOUAbstractHeiFakeBold
+        ]{HYQiHei-55J.ttf}%
+        \gdef\JOUAbstractHei{\CJKfamily{jouabstracthei}}%
+    }{%
+        \IfFileExists{\JOUWPSFontDir/HYZhongJianHeiJ.ttf}{%
+            \setCJKfamilyfont{jouabstracthei}[
+                Path=\JOUWPSFontDir/,
+                UprightFont=HYZhongJianHeiJ.ttf,
+                AutoFakeBold=\JOUAbstractHeiFakeBold
+            ]{HYZhongJianHeiJ.ttf}%
+            \gdef\JOUAbstractHei{\CJKfamily{jouabstracthei}}%
+        }{%
+            \IfFontExistsTF{STHeiti}{%
+                \setCJKfamilyfont{jouabstracthei}[AutoFakeBold=\JOUAbstractHeiFakeBold]{STHeiti}%
+                \gdef\JOUAbstractHei{\CJKfamily{jouabstracthei}}%
+            }{%
+                \IfFontExistsTF{SimHei}{%
+                    \setCJKfamilyfont{jouabstracthei}[AutoFakeBold=\JOUAbstractHeiFakeBold]{SimHei}%
+                    \gdef\JOUAbstractHei{\CJKfamily{jouabstracthei}}%
+                }{}%
+            }%
+        }%
+    }%
+}
+
 % ============================================================================
 % 字体加载策略：优先标准学术字体，确保毕业论文可编辑、可交付、可跨平台
 % ============================================================================
@@ -1114,12 +1145,14 @@
 \fi
 \jou@applyprivatecjkoverrides
 \jou@applyreferencecoverfonts
+\jou@setupabstractheifamily
 
 % Shared family selectors for templates that need deterministic font routing.
 \newcommand{\JOUSong}{\CJKfamily{zhsong}}
 \newcommand{\JOUHei}{\CJKfamily{zhhei}}
 \newcommand{\JOUKai}{\CJKfamily{zhkai}}
 \newcommand{\JOUFang}{\CJKfamily{zhfs}}
+\providecommand{\JOUAbstractHei}{\JOUHei}
 \providecommand{\JOUCoverKai}{\JOUKai}
 \providecommand{\JOUCoverHei}{\JOUHei}
 \providecommand{\JOUXiaobiaoSong}{\JOUHei}

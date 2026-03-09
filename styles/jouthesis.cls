@@ -392,7 +392,7 @@
 
 \newcommand{\jou@abstracttitleblock}[1]{%
     \begin{textblock*}{\jou@abstracttitlewidth}(\jou@abstracttitleleft,\jou@abstracttitletop)
-        \centering\heiti\zihao{4}#1
+        \centering\JOUAbstractHei\bfseries\zihao{4}#1
     \end{textblock*}%
 }
 
@@ -427,8 +427,8 @@
     \mbox{}%
     \jou@abstracttitleblock{毕业设计（论文）中文摘要}
     \jou@abstractframebegin
-        {\noindent{\heiti\zihao{-4}摘\hspace{1em}要：}\zihao{-4}\songti}
-        {\heiti\zihao{4}\@title}
+        {\noindent{\JOUAbstractHei\bfseries\zihao{-4}摘\hspace{1em}要：}\zihao{-4}\songti}
+        {\JOUAbstractHei\bfseries\zihao{4}\@title}
 }{
     \jou@abstractframeend
     \null
@@ -453,7 +453,7 @@
 % 关键词命令
 \newcommand{\cnkeywords}[1]{
     \par\vspace{0.82cm}
-    \noindent{\heiti\zihao{-4}关键词：}{\zihao{-4}\songti #1}
+    \noindent{\JOUAbstractHei\bfseries\zihao{-4}关键词：}{\zihao{-4}\songti #1}
 }
 
 \newcommand{\enkeywords}[1]{
