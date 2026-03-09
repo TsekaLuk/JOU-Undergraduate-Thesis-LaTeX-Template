@@ -34,28 +34,21 @@
 
 % 正文章节
 \mainmatter
-\usebodypagestyle
 \include{contents/chapters/chapter1}
 \include{contents/chapters/chapter2}
 \include{contents/chapters/chapter3}
 % 添加更多章节...
 
 % 结论与展望
-\JOUBackmatterChapter{结论与展望}{结论与展望}
+\JOUBackmatterChapter{结论与展望}
 这里填写结论与展望的内容。
 
 % 致谢
-\JOUBackmatterChapter{致谢}{致\hspace{2em}谢}
+\JOUBackmatterChapter{致谢}
 \input{contents/acknowledgements}
 
 % 参考文献
-\addcontentsline{toc}{chapter}{\protect\JOUTocCenteredEntry{参考文献}}
-\renewcommand{\bibname}{参\hspace{0.5em}考\hspace{0.5em}文\hspace{0.5em}献}
-\nocite{*}
-
-% 使用国标参考文献格式
-\bibliographystyle{gbt7714-numerical}
-\bibliography{references/refs}
+\JOUPrintBibliography
 
 % 附录（可选）
 \appendix

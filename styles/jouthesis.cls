@@ -116,6 +116,11 @@
     \pagestyle{thesisbody}
     \fancypagestyle{plain}{\jou@bodystyle}
 }
+\let\jou@origmainmatter\mainmatter
+\renewcommand{\mainmatter}{%
+    \jou@origmainmatter
+    \usebodypagestyle
+}
 
 % 标题、段落与目录规范统一交由 jouheadings 维护
 \JOUApplyBodySectioning
@@ -261,6 +266,14 @@
 
 % 结论/致谢/参考文献等无编号章节统一使用共享居中标题
 \renewcommand{\bibsection}{\JOUBackmatterHeadingOnly{\bibname}}
+
+% 参考文献一键打印命令（可选参数为 .bib 文件路径，默认 references/refs）
+\newcommand{\JOUPrintBibliography}[1][references/refs]{%
+    \addcontentsline{toc}{chapter}{参考文献}%
+    \renewcommand{\bibname}{参\hspace{0.5em}考\hspace{0.5em}文\hspace{0.5em}献}%
+    \bibliographystyle{gbt7714-numerical}%
+    \bibliography{#1}%
+}
 
 \JOUApplyBodyReferenceNames
 

@@ -87,8 +87,8 @@ def main() -> int:
         failures.append("参考文献标题未接入共享 backmatter 标题入口。")
 
     main_backmatter_patterns = {
-        "conclusion-macro": r"\\JOUBackmatterChapter\{结论与展望\}\{结论与展望\}",
-        "acknowledgement-macro": r"\\JOUBackmatterChapter\{致谢\}\{致\\hspace\{2em\}谢\}",
+        "conclusion-macro": r"\\JOUBackmatterChapter\{结论与展望\}",
+        "acknowledgement-macro": r"\\JOUBackmatterChapter\{致谢\}",
     }
     for name, pattern in main_backmatter_patterns.items():
         if not re.search(pattern, main_tex):
