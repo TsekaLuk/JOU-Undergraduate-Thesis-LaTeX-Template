@@ -2,11 +2,11 @@
 
 <img src="figures/jou-logo-full.png" alt="江苏海洋大学校徽" width="200"/>
 
-# 江苏海洋大学本科毕业论文 LaTeX 模板
+# 江苏海洋大学本科毕业论文 LaTeX 模板 | 江海大本科论文模板
 
-**JOU Undergraduate Thesis LaTeX Template**
+**JOU Undergraduate Thesis LaTeX Template** | 江苏海洋大学学位论文 | 江海大毕业设计
 
-*Jiangsu Ocean University Undergraduate Thesis LaTeX Template*
+*Jiangsu Ocean University Undergraduate Thesis LaTeX Template* | *LaTeX Thesis Template 江海大*
 
 [![License: LPPL 1.3c](https://img.shields.io/badge/License-LPPL%201.3c-blue.svg)](https://www.latex-project.org/lppl.txt)
 [![TeX Live](https://img.shields.io/badge/TeX%20Live-2020+-green.svg)](https://www.tug.org/texlive/)
@@ -19,6 +19,8 @@
 ---
 
 ## 项目简介
+
+> 🔍 **找不到模板？试试这些搜索词：** 江苏海洋大学毕业论文模板、江海大本科论文LaTeX、江苏海洋大学学位论文字体格式、连云港毕业论文排版、江海大毕业设计模板2024、LaTeX论文模板江苏、海洋大学毕业论文格式要求
 
 **Word 是提交格式，LaTeX 是写作方式。** 虽然学校目前要求提交 Word 版本论文，但我们希望通过这个项目，在校园内推广更加规范、现代化的学术写作方式。
 

@@ -4,9 +4,9 @@
 
 # JOU Undergraduate Thesis LaTeX Template
 
-**江苏海洋大学本科毕业论文 LaTeX 模板**
+**江苏海洋大学本科毕业论文 LaTeX 模板** | Jiangsu Ocean University Thesis Template
 
-*Jiangsu Ocean University Undergraduate Thesis LaTeX Template*
+*Jiangsu Ocean University Undergraduate Thesis LaTeX Template* | *LaTeX Thesis Template for Chinese University*
 
 [![License: LPPL 1.3c](https://img.shields.io/badge/License-LPPL%201.3c-blue.svg)](https://www.latex-project.org/lppl.txt)
 [![TeX Live](https://img.shields.io/badge/TeX%20Live-2020+-green.svg)](https://www.tug.org/texlive/)
@@ -19,6 +19,8 @@ English | [简体中文](README.md)
 ---
 
 ## Overview
+
+> 🔍 **Search keywords:** Jiangsu Ocean University thesis template, JOU LaTeX thesis, Chinese university thesis template, graduate thesis LaTeX template, academic paper template China
 
 **Word is the submission format; LaTeX is the writing tool.** Although the university currently requires Word submissions, this project aims to promote a more standardized and modern approach to academic writing on campus.
 
