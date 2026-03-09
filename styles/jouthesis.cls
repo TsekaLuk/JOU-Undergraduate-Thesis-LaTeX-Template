@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{jouthesis}[2026/03/07 Jiangsu Ocean University Undergraduate Thesis Template]
+\ProvidesClass{jouthesis}[2026/03/09 Jiangsu Ocean University Undergraduate Thesis Template]
 
 \newif\ifjousupercite
 \jousupercitefalse
