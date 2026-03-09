@@ -42,6 +42,19 @@
     \hspace*{4em}\makebox[\jouHeadingUnnumberedTocBoxWidth][c]{#1}%
 }
 
+\newcommand{\JOUBackmatterHeadingOnly}[1]{%
+    \clearpage
+    \phantomsection
+    \markboth{}{}%
+    {\centering\JOUHeadingHei\zihao{-3}#1\par}%
+    \vspace{0.5\baselineskip}%
+}
+
+\newcommand{\JOUBackmatterChapter}[2]{%
+    \JOUBackmatterHeadingOnly{#2}%
+    \addcontentsline{toc}{chapter}{\protect\JOUTocCenteredEntry{#1}}%
+}
+
 \newcommand{\JOUChapterHeadingLine}[2]{%
     {\JOUHeadingHei\zihao{-3}\noindent\JOUHeadingChapterLabel{#1}#2\par}%
 }
@@ -148,7 +161,7 @@
     \titlecontents{chapter}[0pt]{\songti\zihao{-4}}%
         {\contentslabel{3.2em}}{}%
         {\titlerule*[0.5pc]{.}\contentspage}%
-    \titlecontents{section}[2.2em]{\songti\zihao{-4}}%
-        {\contentslabel{3.0em}}{}%
+    \titlecontents{section}[2.8em]{\songti\zihao{-4}}%
+        {\contentslabel{3.4em}}{}%
         {\titlerule*[0.5pc]{.}\contentspage}%
 }
