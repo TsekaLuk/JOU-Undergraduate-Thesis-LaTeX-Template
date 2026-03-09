@@ -31,6 +31,7 @@
 \newcommand{\JOUReferenceCoverDir}{}
 \newcommand{\JOUCoverHeiFakeBold}{1.4}
 \newcommand{\JOUCoverKaiFakeBold}{2.6}
+\newcommand{\JOUCoverMainTitleFakeBold}{3.8}
 \newcommand{\JOUAbstractHeiFakeBold}{2.8}
 \newif\ifjou@bundledfontsavailable
 \jou@bundledfontsavailablefalse
@@ -774,6 +775,41 @@
     }{}%
 }
 
+\newcommand{\jou@setupcovermaintitlefamily}{%
+    \IfFileExists{\JOUProprietaryFontDir/FangZhengXiaoBiaoSongJianTi.ttf}{%
+        \setCJKfamilyfont{joucovermaintitle}[
+            Path=\JOUProprietaryFontDir/,
+            UprightFont=FangZhengXiaoBiaoSongJianTi.ttf,
+            AutoFakeBold=\JOUCoverMainTitleFakeBold
+        ]{FangZhengXiaoBiaoSongJianTi.ttf}%
+        \gdef\JOUCoverMainTitle{\CJKfamily{joucovermaintitle}}%
+    }{%
+        \IfFileExists{\JOUWPSFontDir/FZSSK.ttf}{%
+            \setCJKfamilyfont{joucovermaintitle}[
+                Path=\JOUWPSFontDir/,
+                UprightFont=FZSSK.ttf,
+                AutoFakeBold=\JOUCoverMainTitleFakeBold
+            ]{FZSSK.ttf}%
+            \gdef\JOUCoverMainTitle{\CJKfamily{joucovermaintitle}}%
+        }{%
+            \IfFontExistsTF{FZXiaoBiaoSong-B05}{%
+                \setCJKfamilyfont{joucovermaintitle}[AutoFakeBold=\JOUCoverMainTitleFakeBold]{FZXiaoBiaoSong-B05}%
+                \gdef\JOUCoverMainTitle{\CJKfamily{joucovermaintitle}}%
+            }{%
+                \IfFontExistsTF{FZXBSJW--GB1-0}{%
+                    \setCJKfamilyfont{joucovermaintitle}[AutoFakeBold=\JOUCoverMainTitleFakeBold]{FZXBSJW--GB1-0}%
+                    \gdef\JOUCoverMainTitle{\CJKfamily{joucovermaintitle}}%
+                }{%
+                    \IfFontExistsTF{STSong}{%
+                        \setCJKfamilyfont{joucovermaintitle}[AutoFakeBold=\JOUCoverMainTitleFakeBold]{STSong}%
+                        \gdef\JOUCoverMainTitle{\CJKfamily{joucovermaintitle}}%
+                    }{}%
+                }%
+            }%
+        }%
+    }%
+}
+
 \newcommand{\jou@setupabstractheifamily}{%
     \IfFileExists{\JOUWPSFontDir/HYQiHei-55J.ttf}{%
         \setCJKfamilyfont{jouabstracthei}[
@@ -1145,6 +1181,7 @@
 \fi
 \jou@applyprivatecjkoverrides
 \jou@applyreferencecoverfonts
+\jou@setupcovermaintitlefamily
 \jou@setupabstractheifamily
 
 % Shared family selectors for templates that need deterministic font routing.
@@ -1155,6 +1192,7 @@
 \providecommand{\JOUAbstractHei}{\JOUHei}
 \providecommand{\JOUCoverKai}{\JOUKai}
 \providecommand{\JOUCoverHei}{\JOUHei}
+\providecommand{\JOUCoverMainTitle}{\JOUXiaobiaoSong}
 \providecommand{\JOUXiaobiaoSong}{\JOUHei}
 \providecommand{\JOUXingkai}{\JOUKai}
 \providecommand{\JOULishu}{\JOUHei}

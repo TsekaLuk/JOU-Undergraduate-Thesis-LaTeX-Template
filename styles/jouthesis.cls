@@ -291,7 +291,7 @@
 \newcommand{\jou@coverlabelid}{\makebox[2.72cm][l]{学\hspace{0.55cm}号：}}
 \newcommand{\jou@coverdatexoffset}{0.58cm}
 \newcommand{\jou@coverdateyoffset}{0.00cm}
-\newcommand{\jou@covermaintitlefont}{\JOUXiaobiaoSong\bfseries}
+\newcommand{\jou@covermaintitlefont}{\JOUCoverMainTitle}
 \newcommand{\jou@coverheavierkai}{\JOUCoverKai\bfseries}
 \newcommand{\jou@coverdateformat}{%
     \makebox[\textwidth][c]{%
