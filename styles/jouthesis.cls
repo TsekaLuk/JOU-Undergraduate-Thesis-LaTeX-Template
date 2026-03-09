@@ -297,7 +297,7 @@
 \newcommand{\jou@coverdateformat}{%
     \makebox[\textwidth][c]{%
         \hspace*{\jou@coverdatexoffset}%
-        \raisebox{\jou@coverdateyoffset}{\jou@coverheavierkai\zihao{3}\@coverdate}%
+        \raisebox{\jou@coverdateyoffset}{\JOUCoverHei\zihao{3}\@coverdate}%
     }%
 }
 
@@ -389,7 +389,7 @@
 \newlength{\jou@abstracttitletop}
 \setlength{\jou@abstracttitletop}{2.55cm}
 \newlength{\jou@abstracttitleleft}
-\setlength{\jou@abstracttitleleft}{1.66cm}
+\setlength{\jou@abstracttitleleft}{2.5cm}
 
 \newcommand{\jou@abstracttitleblock}[1]{%
     \begin{textblock*}{\jou@abstracttitlewidth}(\jou@abstracttitleleft,\jou@abstracttitletop)
