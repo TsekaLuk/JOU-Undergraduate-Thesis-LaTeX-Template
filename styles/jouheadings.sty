@@ -125,14 +125,25 @@
     \Crefformat{subsection}{##2##1##3小节}%
 }
 
+\makeatletter
+\newcommand{\JOUAppendixChapter}[2]{%
+    \begingroup
+        \let\JOUOriginalCTEXAddTocLine\CTEX@addtocline
+        \renewcommand{\CTEX@addtocline}[2]{}%
+        \chapter{#2}%
+    \endgroup
+    \addcontentsline{toc}{chapter}{#1}%
+}
+\makeatother
+
 \newcommand{\JOUApplyBodyTocLayout}{%
     \renewcommand{\contentsname}{\JOUTocTitle}%
     \setcounter{tocdepth}{1}%
     \contentsmargin{0pt}%
     \titlecontents{chapter}[0pt]{\songti\zihao{-4}}%
-        {\contentslabel{2.2em}}{}%
+        {\contentslabel{7em}}{\hspace*{7em}}%
         {\titlerule*[0.5pc]{.}\contentspage}%
     \titlecontents{section}[2.2em]{\songti\zihao{-4}}%
-        {\contentslabel{2.8em}}{}%
+        {\contentslabel{3.8em}}{}%
         {\titlerule*[0.5pc]{.}\contentspage}%
 }
