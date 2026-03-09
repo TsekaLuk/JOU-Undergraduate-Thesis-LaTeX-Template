@@ -6,6 +6,8 @@
 
 **江苏海洋大学本科毕业论文 LaTeX 模板**
 
+*Jiangsu Ocean University Undergraduate Thesis LaTeX Template*
+
 [![License: LPPL 1.3c](https://img.shields.io/badge/License-LPPL%201.3c-blue.svg)](https://www.latex-project.org/lppl.txt)
 [![TeX Live](https://img.shields.io/badge/TeX%20Live-2020+-green.svg)](https://www.tug.org/texlive/)
 [![XeLaTeX](https://img.shields.io/badge/Engine-XeLaTeX-orange.svg)](#)
@@ -18,200 +20,256 @@ English | [简体中文](README.md)
 
 ## Overview
 
-This repository provides a reproducible LaTeX workflow for the Jiangsu Ocean University undergraduate thesis package defined by the *2026 Graduation Internship and Thesis Work Manual*.
+**Word is the submission format; LaTeX is the writing tool.** Although the university currently requires Word submissions, this project aims to promote a more standardized and modern approach to academic writing on campus.
+
+This project provides a ready-to-use LaTeX thesis template based on the *Jiangsu Ocean University 2026 Graduation Internship and Thesis Work Manual*, suitable for local writing and use with AI-assisted tools.
 
 The repository currently includes:
 
-- `main.tex` for the thesis body
-- 18 handbook templates for forms, reports, and grading sheets
-- 1 dedicated template for the school-level excellent thesis abstract submission
-- WPS-PDF-based end-to-end alignment checks
-- A bundled open-source font stack for consistent builds on Linux, macOS, and Windows
-- A three-OS CI matrix that keeps Windows, macOS, and Linux thesis builds under regression checks
+- 1 main thesis template `main.tex`
+- 18 handbook companion templates
+- 1 school-level excellent thesis abstract template
+- 1 bundled open-source font set — compiles on Linux, macOS, and Windows without manual font installation
 
-The font strategy is now standards-first for academic writing:
-
-- `KaiTi_GB2312`
-- `SimSun`
-- `SimHei`
-- `Times New Roman`
-
-The public repository does not redistribute commercial Foundertype or Microsoft fonts. Instead, it ships an open-source fallback layer in `fonts/opensource/`, supports user-provided licensed overrides in `fonts/proprietary/`, and treats WPS fonts as a compatibility fallback rather than the default target.
+The template ships with bundled open-source fallback fonts, ready to compile out of the box. If standard fonts such as SimSun, SimHei, KaiTi_GB2312, or Times New Roman are already installed on your system, the template will automatically prefer them for formal submissions.
 
 ## Distribution Channels
 
-- `GitHub repository`: the canonical maintained version, including the full font strategy, E2E tests, packaging scripts, and issue tracking.
-- `Overleaf Gallery`: a lightweight community edition for discovery and quick preview.
+- `GitHub repository`: the complete version with full font strategy, latest fixes, and issue tracking — use this as the canonical source.
+- `Overleaf Gallery`: a lightweight preview edition with limited fonts and incomplete resources — not recommended for formal submissions.
 
-If you are starting real thesis writing or need the latest fixes, use the GitHub repository first rather than relying only on the gallery copy.
+**We recommend cloning the GitHub repository** for writing. Do not rely solely on the Overleaf Gallery version.
 
 ## Highlights
 
-- `Academic standards first`: the thesis prioritizes `KaiTi_GB2312 / SimSun / SimHei / Times New Roman` for real submission workflows.
-- `Handbook baseline checks`: page anchors, page count, orientation, and Word XML table grids are checked against the handbook export.
-- `Cross-platform builds`: the default setup does not require preinstalled `KaiTi_GB2312`, `FangSong_GB2312`, or `Times New Roman`.
-- `Complete template set`: thesis + 18 handbook templates + 1 excellent-abstract template.
-- `Optional licensed mode`: users with valid local font licenses can override the default font stack for higher fidelity.
-- `Executable QA`: layout expectations are written into E2E tests instead of being left as informal guidance.
+- `Academic standards first`: covers and body text prioritize KaiTi_GB2312 / SimSun / SimHei / Times New Roman for formal submission requirements.
+- `Ready out of the box`: bundled open-source fallback fonts require no additional system font installation — clone and compile immediately.
+- `Cross-platform consistency`: compiles correctly on Windows, macOS, and Linux with consistent output.
+- `Complete template set`: in addition to the thesis body, includes 18 form/report/grading templates from the handbook.
+- `Automatic font adaptation`: if standard fonts are installed locally, the template automatically prefers them; use the `strictfonts` option for final submission verification.
+- `Layout aligned with handbook`: cover, abstract, table of contents, and body layout all follow the work manual specifications, continuously verified via CI.
 
 ## Preview
 
-The preview section is organized as a product page: first visual quality, then thesis completeness, then handbook coverage. Regenerate everything with `make readme-images`.
-
-### Thesis cover: reference vs current template
+### Thesis cover: reference page vs current template
 
 ![Thesis cover comparison](docs/images/cover-compare.png)
 
 ### Thesis template gallery
 
-This gallery shows the current thesis workflow pages: cover, Chinese abstract, English abstract, table of contents, body page, and references.
+The image below shows the core thesis pages from the current template: cover, Chinese abstract, English abstract, table of contents, first body page, and references.
 
 ![Thesis template gallery](docs/images/thesis-gallery.png)
 
 ### Excellent thesis abstract template
 
-This dedicated template follows the official school-level excellent thesis abstract notice as a separate submission artifact: the title, author line, supervisor line, and Chinese abstract stay full width on page 1, the body and references switch to a balanced two-column layout, and the English title plus abstract return to full width at the end. This entrypoint now enables strict font checks by default, so missing official submission fonts fail fast instead of silently falling back to open-source substitutes.
+This dedicated template follows the *Jiangsu Ocean University School-Level Excellent Graduation Internship and Thesis Abstract Format Guidelines*: page 1 retains the full-width blocks for title, author, supervisor, and Chinese abstract; the body and references switch to a two-column layout; and the English title and English abstract return to full-width at the end.
 
-![Excellent thesis abstract gallery](docs/images/excellent-abstract-gallery.png)
+![Excellent thesis abstract preview](docs/images/excellent-abstract-gallery.png)
 
 Rule-by-rule notes are documented in [docs/reports/excellent-thesis-abstract-compliance.md](docs/reports/excellent-thesis-abstract-compliance.md).
 
-### Detail checks: abstract and body comparison
+### Key layout details: abstract and body comparison
 
-The main hero image is not enough on its own, so the README also keeps focused comparisons for the abstract and body pages. For the body sample, the comparison uses a dedicated `body-sample.pdf` artifact instead of a real thesis chapter page, so the right-hand side matches the handbook sample semantics.
-The abstract comparison is cropped to the title, frame, and abstract content area so the handbook note block does not dilute the README demo.
+The following comparison images show how the abstract and body pages align with the handbook sample pages.
 
 ![Chinese abstract comparison](docs/images/abstract-compare.png)
 
 ![Body page comparison](docs/images/body-compare.png)
 
-### Representative handbook forms
+### Companion form gallery
 
-The gallery below shows six representative templates: topic selection, task book, science proposal, midterm check, thesis evaluation, and defense record.
+The image below shows 6 representative companion templates: topic selection and review form, task book, proposal report (science/engineering/agriculture/medicine), midterm check form, evaluation form, and defense record.
 
 ![Forms gallery](docs/images/forms-gallery.png)
 
-### Technical comparison artifacts
+## Template List
 
-Overlay, diff, and checkerboard assets stay in `docs/assets/` for debugging residual font or geometry drift. Regenerate them with `make cover-diff`.
+### Thesis Body
+
+| Document | File |
+|----------|------|
+| Graduation Thesis (Design) Manual | `main.tex` |
+
+### Companion Templates
+
+#### Handbook Templates (18)
+
+| Category | Count | Files |
+|----------|-------|-------|
+| Forms | 10 | `preliminary-materials-cover.tex`, `topic-selection.tex`, `internship-registration.tex`, `task-book-science.tex`, `task-book-humanities.tex`, `proposal-defense-record.tex`, `midterm-check.tex`, `defense-record.tex`, `topic-summary.tex`, `handbook-statistics.tex` |
+| Reports | 5 | `internship-diary.tex`, `internship-report.tex`, `proposal-science.tex`, `proposal-humanities.tex`, `translation.tex` |
+| Evaluations | 3 | `thesis-evaluation.tex`, `grading-science.tex`, `grading-humanities.tex` |
+
+#### Special Submission Template (1)
+
+| Document | File |
+|----------|------|
+| School-Level Excellent Thesis Abstract | `templates/reports/excellent-thesis-abstract.tex` |
+
+See [templates/README.md](templates/README.md) for more details.
 
 ## Quick Start
 
-### Requirements
+### Local Compilation (Recommended)
 
-- TeX Live 2020+ or MikTeX 2.9+
-- `xelatex`
-- Python 3.9+
-- `pdfinfo`, `pdftotext`, `pdffonts` from Poppler for the test suite
+Local compilation provides access to the complete font library, meeting the university's formal submission requirements, and works well with AI-assisted writing tools.
 
-### Install TeX and Poppler
+**Requirements:** TeX Live 2020+ (recommended) or MikTeX 2.9+, with `xelatex`. Running automated tests also requires Python 3.9+ and Poppler, but these are not needed for regular writing.
 
-#### macOS
+#### Install TeX Environment
+
+**macOS**
 
 ```bash
 brew install --cask mactex
-brew install poppler
 ```
 
-#### Windows
+**Windows**
 
-- Install [TeX Live](https://www.tug.org/texlive/) or [MikTeX](https://miktex.org/)
-- Install [Poppler for Windows](https://github.com/oschwartz10612/poppler-windows/releases)
+Install [TeX Live](https://www.tug.org/texlive/) or [MikTeX](https://miktex.org/) (choose one).
 
-#### Linux
+**Linux**
 
 ```bash
-sudo apt-get install texlive-xetex texlive-lang-chinese poppler-utils
+# Ubuntu / Debian
+sudo apt-get install texlive-xetex texlive-lang-chinese
 ```
 
-### Download bundled fonts
+#### Download Repository Fonts
 
 ```bash
 make fonts
 ```
 
-This downloads the repository-managed open-source fonts into `fonts/opensource/`.
+This command downloads the open-source fonts used by the repository into `fonts/opensource/`. This is the default compilation mode and requires no additional system font installation.
 
-### Build the thesis
+#### Compile the Thesis
 
 ```bash
 make
 ```
 
-Or:
+Or manually:
 
 ```bash
 python3 scripts/download_fonts.py
 latexmk -xelatex main.tex
 ```
 
-### Build one handbook form
+#### Compile a Single Form
 
 ```bash
 cd templates/forms
 latexmk -xelatex topic-selection.tex
 ```
 
-### Run the tests
+### AI-Assisted Writing
+
+The `.tex` source files of this template are clearly structured, making them ideal for use with AI editing tools:
+
+| Tool | Usage |
+|------|-------|
+| **Cursor / Trae** | Open the repository in an AI-native editor and modify `.tex` files through conversation |
+| **Claude Code** | Command-line AI, suitable for batch content modification and layout adjustments |
+| **Codex / OpenClaw / Antigravity** | Other AI programming tools that can directly edit `.tex` source files |
+
+> Recommended workflow: use AI tools to assist with content and structure, then compile locally with `latexmk` or `make` for preview.
+
+### Overleaf (Preview Only, with Limitations)
+
+Overleaf can be used for quick preview, but has the following limitations — **not recommended for final submission**:
+
+- Must use the dedicated Overleaf release package (`jouthesis-overleaf-*.zip` from the Releases page), which differs from the full repository version
+- **Cannot use standard academic fonts** (KaiTi_GB2312, SimSun, SimHei, Times New Roman) — only open-source substitute fonts are available, with slight visual differences
+- Free-tier compilations have a time limit (approximately 20 seconds)
+
+## Font Strategy
+
+**Graduation theses prioritize standard academic fonts.** The template automatically loads fonts in the following priority order:
+
+### Font Loading Priority
+
+1. **📁 Local Standard Fonts** (`fonts/proprietary/`)
+   - Manually placed official font files
+   - Best suited for final submission and high-fidelity local output
+
+2. **💻 System Standard Academic Fonts**
+   - Windows: probes `C:/Windows/Fonts` for `times/simsun/simhei/simkai/simfang`
+   - macOS: prefers system-level `STSong/STHeiti/STKaiti/STFangsong`
+   - Linux: prefers system-installed `Times New Roman / SimSun / SimHei / KaiTi / FangSong`
+
+3. **🧩 WPS Compatibility Fonts**
+   - Used only when standard academic fonts are incomplete
+   - Includes fonts from WPS installation directories and system `HY... / FZ...` fonts
+
+4. **🆓 Open-Source Fallback Fonts** (`fonts/opensource/`)
+   - Used only when the above three tiers are unavailable
+   - Tinos, Noto CJK, LXGW WenKai, FandolFang
+
+### Check Font Status
 
 ```bash
-make test
+python3 scripts/check_fonts.py
 ```
 
-### Generate README preview images
+This script automatically detects your system's font configuration and provides improvement suggestions.
 
-```bash
-make readme-images
+For Windows users, the script additionally checks:
+- `C:/Windows/Fonts`
+- WPS installation directories under `Program Files` / `Program Files (x86)`
+- WPS font directories under `LOCALAPPDATA`
+
+If fonts are installed in non-standard locations, refer to [styles/joufontspaths.local.example.tex](styles/joufontspaths.local.example.tex) to define a local override file.
+
+### Compilation Output Examples
+
+**With standard academic fonts** (best):
+```
+===============================================
+Font Mode: system-licensed
+Status: Using system academic standard fonts (Excellent)
+===============================================
 ```
 
-## Font strategy
+**Without standard fonts** (open-source fallback):
+```
+===============================================
+Font Mode: oss
+Status: Using open source academic fallback fonts (Preview)
+===============================================
 
-### Font priority
+TIP: For best academic output, prefer KaiTi_GB2312,
+     SimSun, SimHei, and Times New Roman.
+     Check: python3 scripts/check_fonts.py
+```
 
-1. Local licensed standard fonts under `fonts/proprietary/`
-2. System-standard academic fonts on Windows/macOS/Linux
-3. WPS compatibility fonts
-4. Bundled open-source fallback fonts
+The template **automatically selects the best available fonts**. Open-source fonts are fully usable for daily preview and development.
 
-### Open-source fallback mapping
+**Final submission check** (optional):
 
-| Standard academic font | Bundled fallback |
-|------|------|
-| Times New Roman | Tinos |
-| Courier New | Courier Prime |
-| SimSun / STSong | Noto Serif CJK SC |
-| SimHei / STHeiti | Noto Sans CJK SC |
-| KaiTi / KaiTi_GB2312 / STKaiti | LXGW WenKai GB |
-| FangSong / FangSong_GB2312 / STFangsong | FandolFang |
-| FangZheng XiaoBiaoSong | Noto Serif CJK SC Black |
-| Xingkai styles | LXGW WenKai GB Medium |
+To ensure standard official fonts are used, enable strict mode:
 
-### Optional proprietary overrides
+```latex
+\documentclass[strictfonts]{jouthesis}  % Pre-submission check
+```
 
-If you have a valid commercial font license, place the expected files under `fonts/proprietary/`. The template will automatically prefer them. See [fonts/README.md](fonts/README.md) for the exact filenames.
+### Font Mapping Table
 
-## Tests
+| Standard Academic Font | Preferred | Open-Source Fallback |
+|------------------------|-----------|---------------------|
+| Times New Roman | System / Local Times New Roman | Tinos |
+| Courier New | System / Local Courier New | Courier Prime |
+| SimSun (宋体) | SimSun / STSong | Noto Serif CJK SC |
+| SimHei (黑体) | SimHei / STHeiti | Noto Sans CJK SC |
+| KaiTi / KaiTi_GB2312 (楷体) | KaiTi_GB2312 / KaiTi / STKaiti | LXGW WenKai GB |
+| FangSong / FangSong_GB2312 (仿宋) | FangSong / STFangsong | FandolFang |
+| FZXiaoBiaoSong (方正小标宋简体) | FZXiaoBiaoSong-B05 | Noto Serif CJK SC Black |
+| STXingkai (华文行楷) | STXingkai | LXGW WenKai GB Medium |
 
-### `tests/test_pixel_perfect_alignment.py`
+Note: The repository does not distribute commercial font files. See [fonts/README.md](fonts/README.md) for full details.
 
-Checks the handbook template contract:
-
-- reference `docx/pdf` availability
-- all 18 template `tex/pdf` artifacts
-- Word XML table grid to LaTeX width mapping
-- output PDF page count, orientation, and content anchors
-- bundled font assets and embedded font stack
-
-### `tests/test_thesis_alignment.py`
-
-Checks the thesis template:
-
-- cover, declaration, abstracts, TOC, body, references ordering
-- heading style contract for TOC and body
-- page-header anchors
-- embedded fonts for OSS mode or licensed mode
-
-## Repository layout
+## Repository Layout
 
 ```text
 JOU-Undergraduate-Thesis-LaTeX-Template/
@@ -235,20 +293,45 @@ JOU-Undergraduate-Thesis-LaTeX-Template/
 
 ## FAQ
 
-### Missing font errors
+### How do I fill in my name, student ID, thesis title, and other personal information?
 
-Run `make fonts` first. The default mode should not require any system-installed licensed standard fonts.
+Edit `contents/shared/metadata.tex` and fill in the fields as indicated by the comments.
 
-On Windows, the project now probes:
-- `C:/Windows/Fonts`
-- common `WPS Office/office6/fonts` install locations
-- WPS font folders under `LOCALAPPDATA`
+### How do I add a new chapter?
 
-If the client machine uses a non-standard install path, use [styles/joufontspaths.local.example.tex](/Users/tseka_luk/Documents/江苏海洋大学个人事物工作/JOU-Undergraduate-Thesis-LaTeX-Template/styles/joufontspaths.local.example.tex) as the local override template.
+Create a new file `chapterN.tex` under `contents/chapters/`, then add `\include{contents/chapters/chapterN}` in `main.tex`.
+
+### How do I add references?
+
+Add bibliography entries to `references/refs.bib`, cite them in the body text with `\cite{key}`, and the references list will be generated automatically upon compilation.
+
+### Font not found error during compilation
+
+Run `make fonts` (or `python3 scripts/download_fonts.py`) first. The default mode automatically downloads open-source fallback fonts and does not require standard official fonts to be preinstalled.
+
+### Do I need standard fonts for final submission?
+
+The university typically requires standard fonts (SimSun, SimHei, KaiTi_GB2312, Times New Roman). If these fonts are already on your computer, the template will automatically prefer them. If not, the compiled output will use open-source substitutes, which are close in appearance but have minor differences. To enforce a check, add `strictfonts` to the `\documentclass` options:
+
+```latex
+\documentclass[strictfonts]{styles/jouthesis}
+```
 
 ### I want to use local Foundertype or Microsoft fonts
 
-Place your licensed font files under `fonts/proprietary/` using the filenames documented in [fonts/README.md](fonts/README.md).
+Place the font files under `fonts/proprietary/`, with filenames matching the conventions in [fonts/README.md](fonts/README.md).
+
+### A chapter is missing from the table of contents
+
+Check whether the corresponding `.tex` file has been included in `main.tex` via `\include`, and that the section uses `\chapter{...}` or `\section{...}` commands.
+
+### References are not showing after compilation
+
+Ensure `references/refs.bib` contains the corresponding entries and that `\cite{...}` is used in the body text, then do a full recompilation (`latexmk -xelatex main.tex` handles multi-pass compilation automatically).
+
+### How do I use appendices?
+
+After `\appendix` in `main.tex`, add `\include{contents/appendices/appendixA}`. In the appendix file, use `\chapter{...}` as usual to write content.
 
 ## Documentation
 
@@ -258,8 +341,8 @@ Place your licensed font files under `fonts/proprietary/` using the filenames do
 | [docs/guides/usage.md](docs/guides/usage.md) | Thesis usage guide |
 | [docs/guides/table-examples.md](docs/guides/table-examples.md) | Table examples |
 | [docs/guides/assets.md](docs/guides/assets.md) | Image asset notes |
-| [templates/README.md](templates/README.md) | Auxiliary template overview |
-| [fonts/README.md](fonts/README.md) | Font tiers and override rules |
+| [templates/README.md](templates/README.md) | Companion template overview |
+| [fonts/README.md](fonts/README.md) | Font strategy and override rules |
 | [slides/README.md](slides/README.md) | Slide generation workflow |
 
 ## License
