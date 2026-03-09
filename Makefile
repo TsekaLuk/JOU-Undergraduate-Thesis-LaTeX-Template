@@ -136,10 +136,4 @@ help:
 
 test:
 	$(MAKE) $(BODY_SAMPLE_PDF)
-	python3 tests/test_cross_platform_font_support.py
-	python3 tests/test_pixel_perfect_alignment.py
-	python3 tests/test_thesis_alignment.py
-	python3 tests/test_body_sample_alignment.py
-	python3 tests/test_cover_alignment.py
-	python3 tests/test_academic_features.py
-	python3 tests/test_format_compliance.py
+	python3 -m pytest tests/ -v --tb=short

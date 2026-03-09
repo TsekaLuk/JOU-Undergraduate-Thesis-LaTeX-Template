@@ -29,6 +29,8 @@
 *.alg
 *.nlo
 *.nls
+*.loa
+missfont.log
 
 # BibTeX
 *.bib.bak

@@ -2,87 +2,89 @@
 """
 Static contract checks for cross-platform font support.
 
-This guards the repository-level promises around:
+Guards the repository-level promises around:
 - Windows font-file probing
 - WPS bundled font probing on macOS/Linux/Windows
 - local path override hooks
 - CI matrix coverage across the three desktop platforms
 """
 
-from pathlib import Path
-import sys
+import pytest
+
+from conftest import JOUFONTS_FILE, CHECK_FONTS_SCRIPT, WORKFLOW_FILE, FONTPATHS_EXAMPLE
 
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-JOUFONTS = PROJECT_ROOT / "styles" / "joufonts.sty"
-CHECK_FONTS = PROJECT_ROOT / "scripts" / "check_fonts.py"
-WORKFLOW = PROJECT_ROOT / ".github" / "workflows" / "cross-platform-fonts.yml"
-EXAMPLE = PROJECT_ROOT / "styles" / "joufontspaths.local.example.tex"
+@pytest.fixture(scope="module")
+def joufonts_content() -> str:
+    return JOUFONTS_FILE.read_text(encoding="utf-8")
 
 
-def main() -> int:
-    failures: list[str] = []
-
-    joufonts = JOUFONTS.read_text(encoding="utf-8")
-    checks = CHECK_FONTS.read_text(encoding="utf-8")
-    workflow = WORKFLOW.read_text(encoding="utf-8")
-
-    required_joufonts_markers = [
-        "C:/Windows/Fonts",
-        "C:/Program Files/WPS Office/office6/fonts",
-        "C:/Program Files (x86)/WPS Office/office6/fonts",
-        "C:/Program Files/Kingsoft/WPS Office/office6/fonts",
-        "styles/joufontspaths.local.tex",
-        "times.ttf",
-        "simsun.ttc",
-        "simkai.ttf",
-        "simfang.ttf",
-        "jou@setupwindowslatin",
-        "jou@setupwindowscjk",
-    ]
-    for marker in required_joufonts_markers:
-        if marker not in joufonts:
-            failures.append(f"styles/joufonts.sty 缺少跨平台字体探测标记: {marker}")
-
-    required_check_markers = [
-        "WINDIR",
-        "ProgramFiles",
-        "LOCALAPPDATA",
-        "C:/Program Files/WPS Office/office6/fonts",
-        "simsun.ttc",
-        "simkai.ttf",
-        "simfang.ttf",
-    ]
-    for marker in required_check_markers:
-        if marker not in checks:
-            failures.append(f"scripts/check_fonts.py 缺少 Windows/WPS 诊断标记: {marker}")
-
-    required_workflow_markers = [
-        "ubuntu-latest",
-        "macos-latest",
-        "windows-latest",
-        "tests/test_cross_platform_font_support.py",
-        "tests/test_thesis_alignment.py",
-        "tests/test_cover_alignment.py",
-    ]
-    for marker in required_workflow_markers:
-        if marker not in workflow:
-            failures.append(f"CI workflow 缺少跨平台覆盖标记: {marker}")
-
-    if not EXAMPLE.exists():
-        failures.append("缺少本地字体路径覆盖示例文件 styles/joufontspaths.local.example.tex")
-
-    print("跨系统字体支持检查")
-    print("=" * 72)
-    if failures:
-        for idx, failure in enumerate(failures, 1):
-            print(f"{idx}. {failure}")
-        print(f"\n结果: FAIL ({len(failures)} 项缺失)")
-        return 1
-
-    print("结果: PASS")
-    return 0
+@pytest.fixture(scope="module")
+def check_fonts_content() -> str:
+    return CHECK_FONTS_SCRIPT.read_text(encoding="utf-8")
 
 
-if __name__ == "__main__":
-    sys.exit(main())
+@pytest.fixture(scope="module")
+def workflow_content() -> str:
+    return WORKFLOW_FILE.read_text(encoding="utf-8")
+
+
+# ── joufonts.sty markers ───────────────────────────────────────────────────
+
+JOUFONTS_MARKERS = [
+    "C:/Windows/Fonts",
+    "C:/Program Files/WPS Office/office6/fonts",
+    "C:/Program Files (x86)/WPS Office/office6/fonts",
+    "C:/Program Files/Kingsoft/WPS Office/office6/fonts",
+    "styles/joufontspaths.local.tex",
+    "times.ttf",
+    "simsun.ttc",
+    "simkai.ttf",
+    "simfang.ttf",
+    "jou@setupwindowslatin",
+    "jou@setupwindowscjk",
+]
+
+
+@pytest.mark.parametrize("marker", JOUFONTS_MARKERS)
+def test_joufonts_has_cross_platform_marker(joufonts_content: str, marker: str):
+    assert marker in joufonts_content, f"styles/joufonts.sty 缺少跨平台字体探测标记: {marker}"
+
+
+# ── check_fonts.py markers ─────────────────────────────────────────────────
+
+CHECK_FONTS_MARKERS = [
+    "WINDIR",
+    "ProgramFiles",
+    "LOCALAPPDATA",
+    "C:/Program Files/WPS Office/office6/fonts",
+    "simsun.ttc",
+    "simkai.ttf",
+    "simfang.ttf",
+]
+
+
+@pytest.mark.parametrize("marker", CHECK_FONTS_MARKERS)
+def test_check_fonts_has_windows_wps_marker(check_fonts_content: str, marker: str):
+    assert marker in check_fonts_content, f"scripts/check_fonts.py 缺少 Windows/WPS 诊断标记: {marker}"
+
+
+# ── CI workflow markers ────────────────────────────────────────────────────
+
+CI_MARKERS = [
+    "ubuntu-latest",
+    "macos-latest",
+    "windows-latest",
+    "pytest",
+]
+
+
+@pytest.mark.parametrize("marker", CI_MARKERS)
+def test_ci_workflow_has_platform_marker(workflow_content: str, marker: str):
+    assert marker in workflow_content, f"CI workflow 缺少跨平台覆盖标记: {marker}"
+
+
+# ── local override example ─────────────────────────────────────────────────
+
+def test_local_override_example_exists():
+    assert FONTPATHS_EXAMPLE.exists(), "缺少本地字体路径覆盖示例文件 styles/joufontspaths.local.example.tex"
