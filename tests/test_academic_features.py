@@ -22,7 +22,9 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).parent.parent
 CLASS_FILE = PROJECT_ROOT / "styles" / "jouthesis.cls"
+HEADINGS_FILE = PROJECT_ROOT / "styles" / "jouheadings.sty"
 BODY_SAMPLE_FILE = PROJECT_ROOT / "samples" / "body-sample.tex"
+MAIN_FILE = PROJECT_ROOT / "main.tex"
 MAIN_PDF = PROJECT_ROOT / "main.pdf"
 MAIN_NLS = PROJECT_ROOT / "main.nls"
 
@@ -45,6 +47,8 @@ def normalize(text: str) -> str:
 def main() -> int:
     failures: list[str] = []
     cls = CLASS_FILE.read_text(encoding="utf-8")
+    headings = HEADINGS_FILE.read_text(encoding="utf-8")
+    main_tex = MAIN_FILE.read_text(encoding="utf-8")
 
     required_patterns = {
         "amsthm": r"RequirePackage\{amsthm\}",
@@ -71,6 +75,34 @@ def main() -> int:
         if not re.search(pattern, cls):
             failures.append(f"类文件缺少学术能力定义：{name}")
 
+    shared_backmatter_patterns = {
+        "backmatter-heading-macro": r"newcommand\{\\JOUBackmatterHeadingOnly\}",
+        "backmatter-chapter-macro": r"newcommand\{\\JOUBackmatterChapter\}",
+    }
+    for name, pattern in shared_backmatter_patterns.items():
+        if not re.search(pattern, headings):
+            failures.append(f"共享标题层缺少 backmatter 统一入口：{name}")
+
+    if not re.search(r"renewcommand\{\\bibsection\}\{\\JOUBackmatterHeadingOnly\{\\bibname\}\}", cls):
+        failures.append("参考文献标题未接入共享 backmatter 标题入口。")
+
+    main_backmatter_patterns = {
+        "conclusion-macro": r"\\JOUBackmatterChapter\{结论与展望\}\{结论与展望\}",
+        "acknowledgement-macro": r"\\JOUBackmatterChapter\{致谢\}\{致\\hspace\{2em\}谢\}",
+    }
+    for name, pattern in main_backmatter_patterns.items():
+        if not re.search(pattern, main_tex):
+            failures.append(f"main.tex 未使用共享 backmatter 标题入口：{name}")
+
+    manual_centering_patterns = [
+        r"\\chapter\*\{\\centering\s*结论与展望\}",
+        r"\\chapter\*\{\\centering\s*致\\hspace\{2em\}谢\}",
+        r"\\renewcommand\{\\bibname\}\{\\centering",
+    ]
+    for pattern in manual_centering_patterns:
+        if re.search(pattern, main_tex):
+            failures.append("main.tex 仍保留手工居中 backmatter 标题逻辑，未完全收敛到共享规则。")
+
     if not BODY_SAMPLE_FILE.exists():
         failures.append("缺少 samples/body-sample.tex，无法验证正文样页与正文标题系统复用。")
     else:
@@ -79,7 +111,7 @@ def main() -> int:
             "shared-chapter-line": r"\\JOUChapterHeadingLine",
             "shared-section-line": r"\\JOUSectionHeadingLine",
             "shared-subsection-line": r"\\JOUSubsectionHeadingLine",
-            "shared-header-text": r"\\JOUHeadingBodyHeaderLeftInline",
+            "shared-header-macro": r"\\JOUMakeBodyHeader",
         }
         for name, pattern in shared_heading_patterns.items():
             if not re.search(pattern, body_sample):
@@ -104,28 +136,55 @@ def main() -> int:
 
         fonts = run(["pdffonts", str(MAIN_PDF)])
         has_oss_stack = all(
-            font_name in fonts for font_name in ["CourierPrime", "NotoSerifCJKsc", "Tinos"]
-        )
-        has_latin_commercial = all(
-            marker in fonts for marker in ["TimesNewRoman", "CourierNew"]
+            font_name in fonts
+            for font_name in ["CourierPrime", "NotoSerifCJKsc", "LXGWWenKaiGB"]
+        ) and any(font_name in fonts for font_name in ["NotoSansCJKsc", "FandolHei"])
+        has_latin_standard = any(
+            marker in fonts
+            for marker in ["TimesNewRoman", "Times-Roman", "Tinos", "texgyretermes"]
+        ) and any(
+            marker in fonts
+            for marker in ["CourierNew", "CourierPrime", "lmmono", "LMMono", "LMMono10"]
         )
         has_song_family = any(
             marker in fonts
-            for marker in ["SimSun", "STSong", "FZShuSong", "FZSSK", "HYShuSongErKW"]
+            for marker in [
+                "SimSun",
+                "STSong",
+                "FZShuSong",
+                "FZSSK",
+                "HYShuSongErKW",
+                "NotoSerifCJKsc",
+                "FandolSong",
+            ]
         )
         has_kai_family = any(
             marker in fonts
-            for marker in ["KaiTi_GB2312", "KaiTi", "STKaiti", "HYKaiTi", "HYc1gj"]
+            for marker in [
+                "KaiTi_GB2312",
+                "KaiTi",
+                "STKaiti",
+                "HYKaiTi",
+                "HYc1gj",
+                "LXGWWenKaiGB",
+                "FandolKai",
+            ]
         )
         has_hei_family = any(
             marker in fonts
-            for marker in ["SimHei", "STHeiti", "HYZhongJianHei", "HYZhongHeiKW"]
+            for marker in [
+                "SimHei",
+                "STHeiti",
+                "HYZhongJianHei",
+                "HYZhongHeiKW",
+                "HYQiHei",
+                "NotoSansCJKsc",
+                "FandolHei",
+            ]
         )
-        has_cjk_commercial = has_song_family and has_kai_family and (
-            has_hei_family or "FZShuSong" in fonts or "HYShuSongErKW" in fonts
-        )
-        if not has_oss_stack and not (has_latin_commercial and has_cjk_commercial):
-            failures.append("main.pdf 未嵌入可接受的字体栈（开源兜底或标准学术字体均未满足）")
+        has_standard_cjk_stack = has_song_family and has_kai_family and has_hei_family
+        if not has_oss_stack and not (has_latin_standard and has_standard_cjk_stack):
+            failures.append("main.pdf 未嵌入可接受的标准学术字体栈（正文/楷体/黑体/西文字体）。")
 
     if not MAIN_NLS.exists():
         failures.append("缺少 main.nls，说明符号表索引尚未生成")

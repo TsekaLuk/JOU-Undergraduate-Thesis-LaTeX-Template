@@ -259,6 +259,9 @@
 }
 \bookmarksetup{numbered=true,open=true}
 
+% 结论/致谢/参考文献等无编号章节统一使用共享居中标题
+\renewcommand{\bibsection}{\JOUBackmatterHeadingOnly{\bibname}}
+
 \JOUApplyBodyReferenceNames
 
 % 便捷引用命令

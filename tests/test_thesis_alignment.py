@@ -169,6 +169,67 @@ def require_page(
     return page
 
 
+def bbox_lines(pdf: Path, page: int) -> list[dict[str, float | str]]:
+    completed = subprocess.run(
+        ["pdftotext", "-bbox-layout", "-f", str(page), "-l", str(page), str(pdf), "-"],
+        check=True,
+        text=True,
+        capture_output=True,
+    )
+    html = completed.stdout
+    lines: list[dict[str, float | str]] = []
+    line_pattern = re.compile(
+        r'<line xMin="(?P<xmin>[^"]+)" yMin="(?P<ymin>[^"]+)" '
+        r'xMax="(?P<xmax>[^"]+)" yMax="(?P<ymax>[^"]+)">(?P<body>.*?)</line>',
+        re.DOTALL,
+    )
+    word_pattern = re.compile(r"<word [^>]*>(?P<text>.*?)</word>", re.DOTALL)
+    for match in line_pattern.finditer(html):
+        words = word_pattern.findall(match.group("body"))
+        text = "".join(words)
+        lines.append(
+            {
+                "text": text,
+                "xMin": float(match.group("xmin")),
+                "xMax": float(match.group("xmax")),
+                "yMin": float(match.group("ymin")),
+                "yMax": float(match.group("ymax")),
+            }
+        )
+    return lines
+
+
+def assert_centered_heading(
+    failures: list[str], pdf: Path, page: int, label: str, heading: str
+) -> None:
+    lines = bbox_lines(pdf, page)
+    normalized_heading = normalize(heading)
+    top_lines = [line for line in lines if line["yMin"] < 180]
+    logical_lines: list[dict[str, float | str]] = []
+    for line in sorted(top_lines, key=lambda item: (float(item["yMin"]), float(item["xMin"]))):
+        if logical_lines and abs(float(line["yMin"]) - float(logical_lines[-1]["yMin"])) < 1.5:
+            logical_lines[-1]["text"] = str(logical_lines[-1]["text"]) + str(line["text"])
+            logical_lines[-1]["xMax"] = max(float(logical_lines[-1]["xMax"]), float(line["xMax"]))
+            logical_lines[-1]["yMax"] = max(float(logical_lines[-1]["yMax"]), float(line["yMax"]))
+        else:
+            logical_lines.append(dict(line))
+
+    candidates = [
+        line for line in logical_lines if normalize(str(line["text"])) == normalized_heading
+    ]
+    if not candidates:
+        failures.append(f"{label} 未在页首区域识别到标题“{heading}”。")
+        return
+
+    target = min(candidates, key=lambda word: abs(float(word["yMin"]) - 95))
+    page_center = 595.28 / 2
+    title_center = (float(target["xMin"]) + float(target["xMax"])) / 2
+    if abs(title_center - page_center) > 18:
+        failures.append(
+            f"{label} 标题未居中，当前中心点约为 x={title_center:.1f}pt。"
+        )
+
+
 def main() -> int:
     failures = []
 
@@ -223,6 +284,12 @@ def main() -> int:
     body_page = require_page(
         failures, pages, "正文首页", "理工农医类", "绪论", "研究背景与意义"
     )
+    conclusion_page = require_page(
+        failures, pages, "结论与展望页", "结论与展望", "这里填写结论与展望的内容"
+    )
+    acknowledgement_page = require_page(
+        failures, pages, "致谢页", "致谢", "在此感谢导师的悉心指导"
+    )
     references_page = require_page(
         failures, pages, "参考文献页", "参考文献", "示例文献标题"
     )
@@ -252,6 +319,19 @@ def main() -> int:
     if en_abstract_page is not None:
         assert_abstract_frame(failures, MAIN_PDF, en_abstract_page, "外文摘要页")
 
+    if conclusion_page is not None:
+        assert_centered_heading(
+            failures, MAIN_PDF, conclusion_page, "结论与展望页", "结论与展望"
+        )
+    if acknowledgement_page is not None:
+        assert_centered_heading(
+            failures, MAIN_PDF, acknowledgement_page, "致谢页", "致 谢"
+        )
+    if references_page is not None:
+        assert_centered_heading(
+            failures, MAIN_PDF, references_page, "参考文献页", "参 考 文 献"
+        )
+
     if toc_page is not None:
         if "第1章" in pages[toc_page]:
             failures.append("目录仍采用“第1章”体例，手册目录样式要求使用阿拉伯数字“1”。")
@@ -274,6 +354,11 @@ def main() -> int:
     if references_page is not None:
         if body_page is not None and references_page <= body_page:
             failures.append("参考文献页顺序异常，应位于正文之后。")
+        if (
+            acknowledgement_page is not None
+            and references_page <= acknowledgement_page
+        ):
+            failures.append("参考文献页顺序异常，应位于致谢之后。")
 
     if licensed_mode:
         if not commercial_latin:

@@ -25,7 +25,9 @@
 
 % 目录
 \tableofcontents
-\clearpage
+
+% 符号说明（如有符号表条目则输出）
+\printsymbols
 
 % 图表清单（可选，如有较多图表时使用）
 % \listoffigures
@@ -42,20 +44,16 @@
 % 添加更多章节...
 
 % 结论与展望
-\chapter*{\centering 结论与展望}
-\addcontentsline{toc}{chapter}{\protect\JOUTocCenteredEntry{结论与展望}}
+\JOUBackmatterChapter{结论与展望}{结论与展望}
 这里填写结论与展望的内容。
 
 % 致谢
-\chapter*{\centering 致\hspace{2em}谢}
-\addcontentsline{toc}{chapter}{\protect\JOUTocCenteredEntry{致谢}}
+\JOUBackmatterChapter{致谢}{致\hspace{2em}谢}
 \input{contents/acknowledgements}
 
 % 参考文献
-\clearpage
-\phantomsection
 \addcontentsline{toc}{chapter}{\protect\JOUTocCenteredEntry{参考文献}}
-\renewcommand{\bibname}{\centering 参\hspace{0.5em}考\hspace{0.5em}文\hspace{0.5em}献}
+\renewcommand{\bibname}{参\hspace{0.5em}考\hspace{0.5em}文\hspace{0.5em}献}
 \nocite{*}
 
 % 使用国标参考文献格式
