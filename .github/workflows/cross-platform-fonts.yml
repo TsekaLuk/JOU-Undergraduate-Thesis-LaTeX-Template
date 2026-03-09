@@ -64,12 +64,7 @@ jobs:
         shell: pwsh
         run: |
           choco install poppler -y --no-progress
-          $bin = Get-ChildItem "C:\ProgramData\chocolatey\lib\poppler" -Recurse -Filter "pdftoppm.exe" -ErrorAction SilentlyContinue |
-            Select-Object -First 1 -ExpandProperty DirectoryName
-          if ($bin) {
-            Write-Host "Adding Poppler to PATH: $bin"
-            Add-Content $env:GITHUB_PATH $bin
-          }
+          Add-Content $env:GITHUB_PATH "C:\ProgramData\chocolatey\lib\poppler\tools\Library\bin"
 
       - name: Install TeX Live
         uses: zauguin/install-texlive@v4
