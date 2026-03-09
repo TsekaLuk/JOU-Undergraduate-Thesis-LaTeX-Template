@@ -63,8 +63,11 @@ jobs:
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
-          choco install poppler -y --no-progress
-          Add-Content $env:GITHUB_PATH "C:\ProgramData\chocolatey\lib\poppler\tools\Library\bin"
+          $ver = "25.12.0-0"
+          Invoke-WebRequest "https://github.com/oschwartz10612/poppler-windows/releases/download/v${ver}/Release-${ver}.zip" -OutFile poppler.zip
+          Expand-Archive poppler.zip -DestinationPath C:\poppler-extract
+          $inner = (Get-ChildItem C:\poppler-extract -Directory | Select-Object -First 1).FullName
+          Add-Content $env:GITHUB_PATH "$inner\Library\bin"
 
       - name: Install TeX Live
         uses: zauguin/install-texlive@v4
