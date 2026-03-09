@@ -9,8 +9,6 @@
 \setlength{\jouHeadingSubsectionNumberWidth}{4.15em}
 \newlength{\jouHeadingHeaderPageBoxWidth}
 \setlength{\jouHeadingHeaderPageBoxWidth}{1.8em}
-\newlength{\jouHeadingUnnumberedTocBoxWidth}
-\setlength{\jouHeadingUnnumberedTocBoxWidth}{8em}
 
 \newcommand{\JOUHeadingHeaderYearToken}{二{\songti 〇}二六}
 \newcommand{\JOUHeadingBodyHeaderLeftInline}{江苏海洋大学\JOUHeadingHeaderYearToken{}届本科毕业设计（论文）}
@@ -38,9 +36,7 @@
 \newcommand{\JOUHeadingSubsectionLabel}[1]{%
     \makebox[\jouHeadingSubsectionNumberWidth][l]{#1}%
 }
-\newcommand{\JOUTocCenteredEntry}[1]{%
-    \makebox[\jouHeadingUnnumberedTocBoxWidth][c]{#1}%
-}
+\newcommand{\JOUTocCenteredEntry}[1]{#1}
 
 \newcommand{\JOUBackmatterHeadingOnly}[1]{%
     \clearpage
