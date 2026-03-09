@@ -102,9 +102,7 @@
 
 \newcommand{\jou@bodystyle}{
     \fancyhf{}
-    \fancyhead[L]{\zihao{5}\kaishu \JOUHeadingBodyHeaderLeftInline}
-    \fancyhead[C]{\zihao{5}\kaishu \@thesiscategory}
-    \fancyhead[R]{\zihao{5}\kaishu 第\thepage 页\ 共 \pageref*{LastPage} 页}
+    \fancyhead[C]{\JOUMakeBodyHeader{\textwidth}{\@thesiscategory}{\JOUHeadingBodyHeaderRight{\thepage}{\pageref*{LastPage}}}}
     \renewcommand{\headrulewidth}{0.4pt}
     \renewcommand{\footrulewidth}{0pt}
 }

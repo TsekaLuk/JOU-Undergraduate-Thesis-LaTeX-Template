@@ -32,6 +32,7 @@
 \newcommand{\JOUCoverHeiFakeBold}{1.4}
 \newcommand{\JOUCoverKaiFakeBold}{2.6}
 \newcommand{\JOUCoverMainTitleFakeBold}{3.8}
+\newcommand{\JOUHeadingHeiFakeBold}{2.2}
 \newcommand{\JOUAbstractHeiFakeBold}{2.8}
 \newif\ifjou@bundledfontsavailable
 \jou@bundledfontsavailablefalse
@@ -810,6 +811,36 @@
     }%
 }
 
+\newcommand{\jou@setupheadingheifamily}{%
+    \IfFileExists{\JOUWPSFontDir/HYQiHei-55J.ttf}{%
+        \setCJKfamilyfont{jouheadinghei}[
+            Path=\JOUWPSFontDir/,
+            UprightFont=HYQiHei-55J.ttf,
+            AutoFakeBold=\JOUHeadingHeiFakeBold
+        ]{HYQiHei-55J.ttf}%
+        \gdef\JOUHeadingHei{\CJKfamily{jouheadinghei}}%
+    }{%
+        \IfFileExists{\JOUWPSFontDir/HYZhongJianHeiJ.ttf}{%
+            \setCJKfamilyfont{jouheadinghei}[
+                Path=\JOUWPSFontDir/,
+                UprightFont=HYZhongJianHeiJ.ttf,
+                AutoFakeBold=\JOUHeadingHeiFakeBold
+            ]{HYZhongJianHeiJ.ttf}%
+            \gdef\JOUHeadingHei{\CJKfamily{jouheadinghei}}%
+        }{%
+            \IfFontExistsTF{STHeiti}{%
+                \setCJKfamilyfont{jouheadinghei}[AutoFakeBold=\JOUHeadingHeiFakeBold]{STHeiti}%
+                \gdef\JOUHeadingHei{\CJKfamily{jouheadinghei}}%
+            }{%
+                \IfFontExistsTF{SimHei}{%
+                    \setCJKfamilyfont{jouheadinghei}[AutoFakeBold=\JOUHeadingHeiFakeBold]{SimHei}%
+                    \gdef\JOUHeadingHei{\CJKfamily{jouheadinghei}}%
+                }{}%
+            }%
+        }%
+    }%
+}
+
 \newcommand{\jou@setupabstractheifamily}{%
     \IfFileExists{\JOUWPSFontDir/HYQiHei-55J.ttf}{%
         \setCJKfamilyfont{jouabstracthei}[
@@ -1182,6 +1213,7 @@
 \jou@applyprivatecjkoverrides
 \jou@applyreferencecoverfonts
 \jou@setupcovermaintitlefamily
+\jou@setupheadingheifamily
 \jou@setupabstractheifamily
 
 % Shared family selectors for templates that need deterministic font routing.
@@ -1189,6 +1221,7 @@
 \newcommand{\JOUHei}{\CJKfamily{zhhei}}
 \newcommand{\JOUKai}{\CJKfamily{zhkai}}
 \newcommand{\JOUFang}{\CJKfamily{zhfs}}
+\providecommand{\JOUHeadingHei}{\JOUHei}
 \providecommand{\JOUAbstractHei}{\JOUHei}
 \providecommand{\JOUCoverKai}{\JOUKai}
 \providecommand{\JOUCoverHei}{\JOUHei}
@@ -1197,7 +1230,7 @@
 \providecommand{\JOUXingkai}{\JOUKai}
 \providecommand{\JOULishu}{\JOUHei}
 \providecommand{\songti}{\JOUSong}
-\providecommand{\heiti}{\JOUHei}
+\providecommand{\heiti}{\JOUHeadingHei}
 \providecommand{\kaishu}{\JOUKai}
 \providecommand{\fangsong}{\JOUFang}
 

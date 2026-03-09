@@ -30,14 +30,7 @@
 
 \newcommand{\samplebodypagestyle}{%
     \fancyhf{}
-    \fancyhead[C]{%
-        \makebox[\textwidth][c]{%
-            \kaishu\zihao{5}%
-            \begin{tabular*}{\samplecontentwidth}{@{}l@{\extracolsep{\fill}}c r@{}}
-                \JOUHeadingBodyHeaderLeftInline & 理工农医类 & \JOUHeadingBodyHeaderRightPlaceholder
-            \end{tabular*}%
-        }%
-    }
+    \fancyhead[C]{\JOUMakeBodyHeader{\samplecontentwidth}{理工农医类}{\JOUHeadingBodyHeaderRightPlaceholder}}
     \fancyfoot[C]{\zihao{5}\thepage}
     \renewcommand{\headrulewidth}{0.4pt}
     \renewcommand{\footrulewidth}{0pt}

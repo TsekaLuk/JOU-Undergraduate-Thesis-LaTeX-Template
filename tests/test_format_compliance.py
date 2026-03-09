@@ -108,9 +108,9 @@ class FormatComplianceTest:
         
         # 验证章节标题字号
         tests = [
-            (r'chapter=\{.*?format=\{\\heiti\\zihao\{-3\}', "一级标题", "小三号黑体"),
-            (r'section=\{.*?format=\{\\heiti\\zihao\{-4\}', "二级标题", "小四号黑体"),
-            (r'subsection=\{.*?format=\{\\heiti\\zihao\{-4\}', "三级标题", "小四号黑体"),
+            (r'chapter=\{.*?format=\{\\JOUHeadingHei\\zihao\{-3\}', "一级标题", "小三号黑体"),
+            (r'section=\{.*?format=\{\\JOUHeadingHei\\zihao\{-4\}', "二级标题", "小四号黑体"),
+            (r'subsection=\{.*?format=\{\\JOUHeadingHei\\zihao\{-4\}', "三级标题", "小四号黑体"),
         ]
         
         all_passed = True

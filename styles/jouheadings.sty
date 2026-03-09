@@ -7,10 +7,23 @@
 \setlength{\jouHeadingSectionNumberWidth}{2.75em}
 \newlength{\jouHeadingSubsectionNumberWidth}
 \setlength{\jouHeadingSubsectionNumberWidth}{4.15em}
+\newlength{\jouHeadingHeaderPageBoxWidth}
+\setlength{\jouHeadingHeaderPageBoxWidth}{1.8em}
 
 \newcommand{\JOUHeadingHeaderYearToken}{二{\songti 〇}二六}
 \newcommand{\JOUHeadingBodyHeaderLeftInline}{江苏海洋大学\JOUHeadingHeaderYearToken{}届本科毕业设计（论文）}
-\newcommand{\JOUHeadingBodyHeaderRightPlaceholder}{第\hspace{1.6em}页\hspace{1.2em}共\hspace{1.6em}页}
+\newcommand{\JOUHeadingBodyHeaderRight}[2]{%
+    第\makebox[\jouHeadingHeaderPageBoxWidth][c]{#1}页\hspace{1.1em}共\makebox[\jouHeadingHeaderPageBoxWidth][c]{#2}页%
+}
+\newcommand{\JOUHeadingBodyHeaderRightPlaceholder}{\JOUHeadingBodyHeaderRight{}{}}
+\newcommand{\JOUMakeBodyHeader}[3]{%
+    \makebox[#1][c]{%
+        \kaishu\zihao{5}%
+        \begin{tabular*}{#1}{@{}l@{\extracolsep{\fill}}c r@{}}
+            \JOUHeadingBodyHeaderLeftInline & #2 & #3
+        \end{tabular*}%
+    }%
+}
 
 \newcommand{\JOUHeadingChapterLabel}[1]{%
     \makebox[\jouHeadingChapterNumberWidth][l]{#1}%
@@ -23,13 +36,13 @@
 }
 
 \newcommand{\JOUChapterHeadingLine}[2]{%
-    {\heiti\zihao{-3}\noindent\JOUHeadingChapterLabel{#1}#2\par}%
+    {\JOUHeadingHei\zihao{-3}\noindent\JOUHeadingChapterLabel{#1}#2\par}%
 }
 \newcommand{\JOUSectionHeadingLine}[2]{%
-    {\heiti\zihao{-4}\noindent\JOUHeadingSectionLabel{#1}#2\par}%
+    {\JOUHeadingHei\zihao{-4}\noindent\JOUHeadingSectionLabel{#1}#2\par}%
 }
 \newcommand{\JOUSubsectionHeadingLine}[2]{%
-    {\heiti\zihao{-4}\noindent\JOUHeadingSubsectionLabel{#1}#2\par}%
+    {\JOUHeadingHei\zihao{-4}\noindent\JOUHeadingSubsectionLabel{#1}#2\par}%
 }
 
 \newcommand{\JOUApplyBodySectioning}{%
@@ -38,7 +51,7 @@
     \renewcommand{\thesubsection}{\thesection.\arabic{subsection}}%
     \ctexset{%
         chapter={%
-            format={\heiti\zihao{-3}\raggedright},%
+            format={\JOUHeadingHei\zihao{-3}\raggedright},%
             name={,},%
             number={\arabic{chapter}},%
             aftername=\hspace{1em},%
@@ -46,13 +59,13 @@
             afterskip=0.5\baselineskip%
         },%
         section={%
-            format={\heiti\zihao{-4}},%
+            format={\JOUHeadingHei\zihao{-4}},%
             beforeskip=0.5\baselineskip,%
             afterskip=0.5\baselineskip,%
             indent=0pt%
         },%
         subsection={%
-            format={\heiti\zihao{-4}},%
+            format={\JOUHeadingHei\zihao{-4}},%
             beforeskip=0pt,%
             afterskip=0pt,%
             indent=0pt%
