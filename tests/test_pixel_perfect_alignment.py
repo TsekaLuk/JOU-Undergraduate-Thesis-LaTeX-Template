@@ -69,7 +69,7 @@ def get_pdfinfo(pdf_path: Path) -> Dict[str, str]:
 
 def extract_pdf_page_text(pdf_path: Path, page: int) -> str:
     return run_command(
-        ["pdftotext", "-layout", "-f", str(page), "-l", str(page), str(pdf_path), "-"]
+        ["pdftotext", "-enc", "UTF-8", "-layout", "-f", str(page), "-l", str(page), str(pdf_path), "-"]
     )
 
 

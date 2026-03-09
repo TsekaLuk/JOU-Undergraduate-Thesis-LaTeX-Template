@@ -123,7 +123,7 @@ def main() -> int:
     if not MAIN_PDF.exists():
         failures.append("缺少 main.pdf，无法验证学术功能示例")
     else:
-        text = normalize(run(["pdftotext", "-layout", str(MAIN_PDF), "-"]))
+        text = normalize(run(["pdftotext", "-enc", "UTF-8", "-layout", str(MAIN_PDF), "-"]))
         expected_snippets = [
             "示例：定理、证明与智能引用",
             "模型训练流程",

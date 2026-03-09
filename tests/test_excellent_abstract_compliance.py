@@ -55,7 +55,7 @@ def main() -> int:
         failures.append("缺少校优摘要 PDF，请先编译 templates/reports/excellent-thesis-abstract.tex")
     else:
         extracted = subprocess.run(
-            ["pdftotext", "-layout", str(PDF), "-"],
+            ["pdftotext", "-enc", "UTF-8", "-layout", str(PDF), "-"],
             check=True,
             text=True,
             capture_output=True,

@@ -27,7 +27,7 @@ def normalize(text: str) -> str:
 
 def page_text(pdf: Path, page: int) -> str:
     completed = subprocess.run(
-        ["pdftotext", "-layout", "-f", str(page), "-l", str(page), str(pdf), "-"],
+        ["pdftotext", "-enc", "UTF-8", "-layout", "-f", str(page), "-l", str(page), str(pdf), "-"],
         check=True,
         text=True,
         capture_output=True,
@@ -171,7 +171,7 @@ def require_page(
 
 def bbox_lines(pdf: Path, page: int) -> list[dict[str, float | str]]:
     completed = subprocess.run(
-        ["pdftotext", "-bbox-layout", "-f", str(page), "-l", str(page), str(pdf), "-"],
+        ["pdftotext", "-enc", "UTF-8", "-bbox-layout", "-f", str(page), "-l", str(page), str(pdf), "-"],
         check=True,
         text=True,
         capture_output=True,

@@ -31,7 +31,7 @@ def normalize(text: str) -> str:
 
 def page_text(pdf: Path, page: int) -> str:
     completed = subprocess.run(
-        ["pdftotext", "-layout", "-f", str(page), "-l", str(page), str(pdf), "-"],
+        ["pdftotext", "-enc", "UTF-8", "-layout", "-f", str(page), "-l", str(page), str(pdf), "-"],
         check=True,
         text=True,
         capture_output=True,
