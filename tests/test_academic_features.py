@@ -103,6 +103,9 @@ def main() -> int:
         if re.search(pattern, main_tex):
             failures.append("main.tex 仍保留手工居中 backmatter 标题逻辑，未完全收敛到共享规则。")
 
+    if re.search(r"\\printsymbols\b", main_tex):
+        failures.append("main.tex 默认示例论文不应直接插入符号说明页。")
+
     if not BODY_SAMPLE_FILE.exists():
         failures.append("缺少 samples/body-sample.tex，无法验证正文样页与正文标题系统复用。")
     else:
@@ -126,13 +129,16 @@ def main() -> int:
             "模型训练流程",
             "训练脚本片段",
             "推理时延/ms",
-            "符号说明",
-            "卷积神经网络",
             "附录横向表示例",
         ]
         for snippet in expected_snippets:
             if normalize(snippet) not in text:
                 failures.append(f"PDF 未找到学术功能示例文本：{snippet}")
+
+        unexpected_snippets = ["符号说明", "卷积神经网络"]
+        for snippet in unexpected_snippets:
+            if normalize(snippet) in text:
+                failures.append(f"默认示例论文不应展示符号表示例文本：{snippet}")
 
         fonts = run(["pdffonts", str(MAIN_PDF)])
         has_oss_stack = all(
