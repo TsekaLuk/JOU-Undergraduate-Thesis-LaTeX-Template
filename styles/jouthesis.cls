@@ -291,12 +291,12 @@
 \newcommand{\jou@coverlabelid}{\makebox[2.72cm][l]{学\hspace{0.55cm}号：}}
 \newcommand{\jou@coverdatexoffset}{0.58cm}
 \newcommand{\jou@coverdateyoffset}{0.00cm}
-\newcommand{\jou@coverheavierhei}{\JOUCoverHei\bfseries}
+\newcommand{\jou@covermaintitlefont}{\JOUXiaobiaoSong\bfseries}
 \newcommand{\jou@coverheavierkai}{\JOUCoverKai\bfseries}
 \newcommand{\jou@coverdateformat}{%
     \makebox[\textwidth][c]{%
         \hspace*{\jou@coverdatexoffset}%
-        \raisebox{\jou@coverdateyoffset}{\jou@coverheavierhei\zihao{3}\@coverdate}%
+        \raisebox{\jou@coverdateyoffset}{\jou@coverheavierkai\zihao{3}\@coverdate}%
     }%
 }
 
@@ -310,7 +310,7 @@
         \includegraphics[width=11.05cm]{\JOUCoverHeader}\par
         \vspace{0.48cm}
 
-        {\makebox[0pt][c]{\hspace*{-0.12cm}\jou@coverheavierhei\zihao{2}本\hspace{0.42em}科\hspace{0.42em}毕\hspace{0.42em}业\hspace{0.42em}设\hspace{0.42em}计\hspace{0.42em}（论\hspace{0.42em}文）}\par}
+        {\makebox[0pt][c]{\hspace*{-0.12cm}\jou@covermaintitlefont\zihao{2}本\hspace{0.42em}科\hspace{0.42em}毕\hspace{0.42em}业\hspace{0.42em}设\hspace{0.42em}计\hspace{0.42em}（论\hspace{0.42em}文）}\par}
         \vspace{3.56cm}
 
         {\makebox[0pt][c]{\hspace*{0.17cm}\jou@coverheavierkai\zihao{2}\scalebox{0.965}[1]{\@title}}\par}

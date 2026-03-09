@@ -28,6 +28,7 @@
 \newcommand{\JOUProprietaryFontDir}{fonts/proprietary}
 \newcommand{\JOUWPSFontDir}{}
 \newcommand{\JOUWindowsFontDir}{}
+\newcommand{\JOUReferenceCoverDir}{}
 \newcommand{\JOUCoverHeiFakeBold}{1.4}
 \newcommand{\JOUCoverKaiFakeBold}{2.6}
 \newif\ifjou@bundledfontsavailable
@@ -42,11 +43,13 @@
 \IfFileExists{fonts/opensource/Tinos-Regular.ttf}{%
     \renewcommand{\JOUOpenSourceFontDir}{fonts/opensource}%
     \renewcommand{\JOUProprietaryFontDir}{fonts/proprietary}%
+    \renewcommand{\JOUReferenceCoverDir}{fonts/proprietary/reference-cover}%
     \jou@bundledfontsavailabletrue
 }{%
     \IfFileExists{../../fonts/opensource/Tinos-Regular.ttf}{%
         \renewcommand{\JOUOpenSourceFontDir}{../../fonts/opensource}%
         \renewcommand{\JOUProprietaryFontDir}{../../fonts/proprietary}%
+        \renewcommand{\JOUReferenceCoverDir}{../../fonts/proprietary/reference-cover}%
         \jou@bundledfontsavailabletrue
     }{}
 }
@@ -755,6 +758,21 @@
     }%
 }
 
+\newcommand{\jou@applyreferencecoverfonts}{%
+    \IfFileExists{\JOUReferenceCoverDir/JOURefCoverKai-STKaiti.ttf}{%
+        \typeout{JOU: Applying reference-cover Kai font preference}%
+        \IfFontExistsTF{STKaiti}{%
+            \setCJKfamilyfont{jourefcoverkai}[AutoFakeBold=2.0]{STKaiti}%
+            \renewcommand{\JOUCoverKai}{\CJKfamily{jourefcoverkai}}%
+        }{%
+            \IfFontExistsTF{Kaiti SC}{%
+                \setCJKfamilyfont{jourefcoverkai}[AutoFakeBold=2.0]{Kaiti SC}%
+                \renewcommand{\JOUCoverKai}{\CJKfamily{jourefcoverkai}}%
+            }{}%
+        }%
+    }{}%
+}
+
 % ============================================================================
 % 字体加载策略：优先标准学术字体，确保毕业论文可编辑、可交付、可跨平台
 % ============================================================================
@@ -1095,6 +1113,7 @@
     \fi
 \fi
 \jou@applyprivatecjkoverrides
+\jou@applyreferencecoverfonts
 
 % Shared family selectors for templates that need deterministic font routing.
 \newcommand{\JOUSong}{\CJKfamily{zhsong}}
