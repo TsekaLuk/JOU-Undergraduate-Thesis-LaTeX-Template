@@ -466,6 +466,23 @@
     \clearpage
 }
 
+\renewcommand{\tableofcontents}{%
+    \clearpage
+    \thispagestyle{frontmatterstyle}%
+    \phantomsection
+    \pdfbookmark[0]{\JOUPlainContentsName}{toc}%
+    \null\vspace*{2\baselineskip}%
+    \begin{center}
+        {\JOUHeadingHei\zihao{-2}\JOUTocTitle\par}
+    \end{center}
+    \vspace{1\baselineskip}%
+    \begingroup
+        \parindent=0pt%
+        \@starttoc{toc}%
+    \endgroup
+    \clearpage
+}
+
 % 目录格式
 \JOUApplyBodyTocLayout
 

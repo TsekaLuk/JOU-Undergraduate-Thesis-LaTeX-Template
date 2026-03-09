@@ -342,10 +342,6 @@ JOU-Undergraduate-Thesis-LaTeX-Template/
 
 把字体文件放入 `fonts/proprietary/`，文件名需与 [fonts/README.md](fonts/README.md) 中的约定一致。
 
-### 为什么 README 不再直接承诺“绝对像素级一致”
-
-当前仓库对齐标准已经写进 E2E，但公开可复现的是“WPS 渲染基线 + 版式/分页/字体契约”。如果你要进一步做逐像素叠图，需要在同一字体资源和同一渲染器环境下再增加图像 diff 流程。
-
 ## 文档
 
 | 文件 | 内容 |

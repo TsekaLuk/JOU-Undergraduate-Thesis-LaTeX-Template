@@ -24,6 +24,8 @@
         \end{tabular*}%
     }%
 }
+\newcommand{\JOUPlainContentsName}{目录}
+\newcommand{\JOUTocTitle}{目\hspace{2em}录}
 
 \newcommand{\JOUHeadingChapterLabel}[1]{%
     \makebox[\jouHeadingChapterNumberWidth][l]{#1}%
@@ -124,12 +126,13 @@
 }
 
 \newcommand{\JOUApplyBodyTocLayout}{%
-    \renewcommand{\contentsname}{目\hspace{2em}录}%
+    \renewcommand{\contentsname}{\JOUTocTitle}%
     \setcounter{tocdepth}{1}%
+    \contentsmargin{0pt}%
     \titlecontents{chapter}[0pt]{\songti\zihao{-4}}%
-        {\thecontentslabel\hspace{1em}}{}%
+        {\contentslabel{2.2em}}{}%
         {\titlerule*[0.5pc]{.}\contentspage}%
-    \titlecontents{section}[2em]{\songti\zihao{-4}}%
-        {\thecontentslabel\hspace{1em}}{}%
+    \titlecontents{section}[2.2em]{\songti\zihao{-4}}%
+        {\contentslabel{2.8em}}{}%
         {\titlerule*[0.5pc]{.}\contentspage}%
 }

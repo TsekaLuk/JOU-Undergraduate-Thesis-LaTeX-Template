@@ -250,10 +250,6 @@ If the client machine uses a non-standard install path, use [styles/joufontspath
 
 Place your licensed font files under `fonts/proprietary/` using the filenames documented in [fonts/README.md](fonts/README.md).
 
-### Why not promise strict pixel-perfect equality everywhere?
-
-The public, reproducible contract is currently based on the WPS render baseline plus layout, pagination, and font-embedding checks. True per-pixel overlay matching requires the same renderer and the same exact font files on both sides.
-
 ## Documentation
 
 | File | Purpose |
