@@ -119,6 +119,32 @@ EXCELLENT_GALLERY_SPECS = (
 )
 
 
+def build_pdf_if_needed(pdf: Path) -> None:
+    tex = pdf.with_suffix(".tex")
+    if not tex.exists():
+        if not pdf.exists():
+            raise RuntimeError(f"Missing gallery PDF and no matching TeX source found: {pdf}")
+        return
+
+    needs_build = not pdf.exists() or tex.stat().st_mtime > pdf.stat().st_mtime
+    if not needs_build:
+        return
+
+    subprocess.run(
+        [
+            "latexmk",
+            "-xelatex",
+            "-interaction=nonstopmode",
+            "-halt-on-error",
+            tex.name,
+        ],
+        check=True,
+        cwd=tex.parent,
+        capture_output=True,
+        text=True,
+    )
+
+
 def load_font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
     if bold:
         candidates = (
@@ -293,8 +319,7 @@ def compose_gallery(
 
     start_y = margin + title_height
     for idx, spec in enumerate(specs):
-        if not spec.pdf.exists():
-            raise RuntimeError(f"Missing gallery PDF: {spec.pdf}")
+        build_pdf_if_needed(spec.pdf)
         row = idx // columns
         col = idx % columns
         x0 = margin + col * (tile_width + gap)

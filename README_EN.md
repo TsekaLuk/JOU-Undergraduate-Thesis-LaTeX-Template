@@ -39,6 +39,7 @@ The template ships with bundled open-source fallback fonts, ready to compile out
 
 - `GitHub repository`: the complete version with full font strategy, latest fixes, and issue tracking — use this as the canonical source.
 - `Overleaf Gallery`: a lightweight preview edition with limited fonts and incomplete resources — not recommended for formal submissions.
+- `Graduate template`: if you need the Jiangsu Ocean University graduate thesis template, see [JOU-Graduate-Thesis-LaTeX-Template](https://github.com/TsekaLuk/JOU-Graduate-Thesis-LaTeX-Template).
 
 **We recommend cloning the GitHub repository** for writing. Do not rely solely on the Overleaf Gallery version.
 

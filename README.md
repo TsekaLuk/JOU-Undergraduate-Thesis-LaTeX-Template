@@ -39,6 +39,7 @@
 
 - `GitHub 仓库`：完整版本，包含完整字体策略、最新修复、issue 跟踪，以此为准。
 - `Overleaf Gallery`：轻量预览版，字体受限，不包含完整资源，不适合正式提交。
+- `研究生模板`：如果你需要江苏海洋大学研究生毕业论文模板，请前往 [JOU-Graduate-Thesis-LaTeX-Template](https://github.com/TsekaLuk/JOU-Graduate-Thesis-LaTeX-Template)。
 
 **建议克隆 GitHub 仓库**进行写作，不要只使用 Overleaf Gallery 版本。
 
