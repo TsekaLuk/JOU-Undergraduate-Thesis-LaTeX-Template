@@ -31,7 +31,7 @@ EXCELLENT_ABSTRACT_DEPS = $(EXCELLENT_ABSTRACT_TEX) \
 # 编译选项
 TEXFLAGS = -interaction=nonstopmode -halt-on-error
 
-.PHONY: all fonts clean cleanall view help wordcount test cover-diff readme-images
+.PHONY: all fonts import-fonts clean cleanall view help wordcount test cover-diff readme-images
 
 # 默认目标：完整编译
 all: fonts $(MAIN).pdf $(BODY_SAMPLE_PDF)
@@ -40,6 +40,11 @@ all: fonts $(MAIN).pdf $(BODY_SAMPLE_PDF)
 fonts:
 	@echo "==> 检查仓库字体资源..."
 	python3 scripts/download_fonts.py
+
+# 从系统 / 桌面 / WPS 目录导入本机字体到 fonts/proprietary/
+import-fonts:
+	@echo "==> 导入本机标准字体..."
+	python3 scripts/import_fonts.py
 
 # 编译PDF（完整流程）
 $(MAIN).pdf: $(THESIS_DEPS)
@@ -118,6 +123,7 @@ help:
 	@echo "  make all      - 完整编译论文"
 	@echo "  make body-sample.pdf - 编译正文样页基线页"
 	@echo "  make fonts    - 下载/校验仓库内置字体"
+	@echo "  make import-fonts - 从系统 / 桌面 / WPS 目录导入本机字体"
 	@echo "  make clean    - 清理临时文件"
 	@echo "  make cleanall - 完全清理（包括PDF）"
 	@echo "  make view     - 编译并预览PDF"

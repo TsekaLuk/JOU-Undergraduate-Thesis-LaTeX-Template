@@ -19,6 +19,14 @@ WPS 字体仍然支持，但只是兼容兜底，不是默认优先级。
 
 如果你已经拥有合法字体文件，把它们放在 `fonts/proprietary/`，模板会优先使用。
 
+如果不想手动复制，可直接运行：
+
+```bash
+make import-fonts
+```
+
+该命令会自动扫描系统字体目录、WPS 安装目录，以及桌面上的常见字体文件夹（如 `~/Desktop/毕业论文字体`），并按模板约定文件名复制到 `fonts/proprietary/`。
+
 推荐文件名：
 
 - `TimesNewRoman-Regular.ttf`
@@ -33,6 +41,7 @@ WPS 字体仍然支持，但只是兼容兜底，不是默认优先级。
 - `FangSong_GB2312.ttf`
 - `FangZhengXiaoBiaoSongJianTi.ttf`
 - `STXingkai.ttf`
+- `STLiti.ttf`（可选）
 
 ### 2. 系统标准学术字体
 

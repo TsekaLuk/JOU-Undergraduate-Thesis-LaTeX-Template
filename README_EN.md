@@ -146,6 +146,25 @@ make fonts
 
 This command downloads the open-source fonts used by the repository into `fonts/opensource/`. This is the default compilation mode and requires no additional system font installation.
 
+#### Import Local Academic Fonts
+
+```bash
+make import-fonts
+```
+
+This command copies fonts into `fonts/proprietary/` from common locations, including:
+
+- Windows: `C:/Windows/Fonts`
+- macOS: `/System/Library/Fonts`, `/Library/Fonts`, `~/Library/Fonts`
+- WPS installation directories
+- Desktop font folders such as `~/Desktop/毕业论文字体`
+
+Existing files are left untouched. To add custom search paths:
+
+```bash
+python3 scripts/import_fonts.py --search-dir /path/to/fonts
+```
+
 #### Compile the Thesis
 
 ```bash
@@ -310,6 +329,21 @@ Add bibliography entries to `references/refs.bib`, cite them in the body text wi
 ### Font not found error during compilation
 
 Run `make fonts` (or `python3 scripts/download_fonts.py`) first. The default mode automatically downloads open-source fallback fonts and does not require standard official fonts to be preinstalled.
+
+### What if classmates do not want to manually find fonts?
+
+Run:
+
+```bash
+make import-fonts
+```
+
+This command scans common system font directories, WPS installation folders, and desktop font folders, then copies matching fonts into `fonts/proprietary/`. After that, run:
+
+```bash
+python3 scripts/check_fonts.py
+make
+```
 
 ### Do I need standard fonts for final submission?
 

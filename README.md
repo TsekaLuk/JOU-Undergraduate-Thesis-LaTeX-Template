@@ -146,6 +146,25 @@ make fonts
 
 该命令会拉取仓库默认使用的开源字体到 `fonts/opensource/`。这是默认编译模式，不需要额外安装系统字体。
 
+#### 一键导入本机正式字体
+
+```bash
+make import-fonts
+```
+
+这个命令会自动从常见位置复制字体到 `fonts/proprietary/`，优先扫描：
+
+- Windows: `C:/Windows/Fonts`
+- macOS: `/System/Library/Fonts`、`/Library/Fonts`、`~/Library/Fonts`
+- WPS 安装目录
+- 桌面常见字体文件夹，如 `~/Desktop/毕业论文字体`
+
+默认不会覆盖已有文件；如需自定义目录，可直接运行：
+
+```bash
+python3 scripts/import_fonts.py --search-dir /path/to/fonts
+```
+
 #### 编译论文
 
 ```bash
@@ -310,6 +329,21 @@ JOU-Undergraduate-Thesis-LaTeX-Template/
 ### 编译时报”字体未找到”
 
 先执行 `make fonts`（或 `python3 scripts/download_fonts.py`）。默认模式会自动下载开源兜底字体，不要求系统预装标准正式字体。
+
+### 同学不想自己找字体怎么办？
+
+直接运行：
+
+```bash
+make import-fonts
+```
+
+这个命令会自动从系统字体目录、WPS 安装目录和桌面常见字体文件夹中导入可用字体到 `fonts/proprietary/`。导入后再运行：
+
+```bash
+python3 scripts/check_fonts.py
+make
+```
 
 ### 最终提交时需要标准字体吗？
 
