@@ -53,7 +53,7 @@
 \RequirePackage{setspace}      % 行距
 \RequirePackage{indentfirst}   % 首行缩进
 \RequirePackage{lastpage}      % 总页数引用
-\RequirePackage[preferwps]{styles/joufonts} % 统一字体配置
+\RequirePackage{styles/joufonts} % 统一字体配置，优先使用标准学术字体
 \RequirePackage{styles/jouheadings} % 标题/页眉/目录统一规范
 \RequirePackage[absolute,overlay]{textpos} % 摘要等页面的绝对定位
 \RequirePackage{hyperref}      % 超链接

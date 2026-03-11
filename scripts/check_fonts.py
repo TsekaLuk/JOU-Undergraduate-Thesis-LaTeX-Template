@@ -77,6 +77,18 @@ REQUIRED_FONTS = {
     },
 }
 
+PROPRIETARY_FONT_FILES = {
+    "Times New Roman": ["TimesNewRoman-Regular.ttf"],
+    "Arial": ["Arial-Regular.ttf"],
+    "Courier New": ["CourierNew-Regular.ttf"],
+    "宋体": ["SimSun.ttf", "SimSun.ttc"],
+    "黑体": ["SimHei.ttf"],
+    "楷体": ["KaiTi_GB2312.ttf", "KaiTi.ttf"],
+    "仿宋": ["FangSong_GB2312.ttf", "FangSong.ttf"],
+    "方正小标宋-通用": ["FangZhengXiaoBiaoSongJianTi.ttf", "FZXBSJW.TTF"],
+    "华文行楷": ["STXingkai.ttf"],
+}
+
 # 开源字体兜底方案
 OPENSOURCE_FONTS = {
     "Tinos": "Tinos-Regular.ttf",
@@ -221,17 +233,20 @@ def main():
     # 优先级 1: 本地 proprietary 文件
     print("【优先级 1】fonts/proprietary/ 本地标准字体")
     prop_found = False
+    local_found_names = set()
     for category, fonts in REQUIRED_FONTS.items():
         for font_name, font_files in fonts.items():
-            local_file = next(
-                (candidate for candidate in reversed(font_files) if "." in candidate),
-                "",
+            local_candidates = PROPRIETARY_FONT_FILES.get(
+                font_name,
+                [candidate for candidate in reversed(font_files) if "." in candidate],
             )
-            if local_file:
+            for local_file in local_candidates:
                 exists, source = check_local_font(local_file)
                 if exists and source == "proprietary":
                     prop_found = True
+                    local_found_names.add(font_name)
                     print_font_status(f"{font_name} ({local_file})", "✓ 已找到", "green")
+                    break
 
     if not prop_found:
         print_font_status("无本地标准字体", "跳过此优先级", "yellow")
@@ -283,7 +298,7 @@ def main():
                 print_font_status(f"  {font_name}", f"✓ {found_name}", "green")
             else:
                 print_font_status(f"  {font_name}", "✗ 未找到", "red")
-                if category != "WPS 兼容字体（可选）":
+                if category != "WPS 兼容字体（可选）" and font_name not in local_found_names:
                     missing_fonts.append(font_name)
 
     # 优先级 3: 开源字体兜底
@@ -377,15 +392,9 @@ def main():
 
         print("\n  或者，将字体文件手动放入 fonts/proprietary/:")
         for font in missing_fonts:
-            if font in REQUIRED_FONTS.get("拉丁字体（标准学术）", {}):
-                filename = REQUIRED_FONTS["拉丁字体（标准学术）"][font][1]
-                print(f"    - {filename}")
-            elif font in REQUIRED_FONTS.get("中文字体（标准学术）", {}):
-                filename = REQUIRED_FONTS["中文字体（标准学术）"][font][2]
-                print(f"    - {filename}")
-            elif font in REQUIRED_FONTS.get("特殊字体", {}):
-                filename = REQUIRED_FONTS["特殊字体"][font][1]
-                print(f"    - {filename}")
+            candidates = PROPRIETARY_FONT_FILES.get(font)
+            if candidates:
+                print(f"    - {candidates[0]}")
     else:
         print("  ✓ 字体配置完善，无需额外操作")
 

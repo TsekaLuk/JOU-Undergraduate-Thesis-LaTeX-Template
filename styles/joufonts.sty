@@ -477,7 +477,31 @@
             BoldItalicFont=SimSun.ttf
         ]{SimSun.ttf}%
     }{%
-        \jou@useopensourcesong
+        \IfFileExists{\JOUProprietaryFontDir/SimSun.ttc}{%
+            \setCJKmainfont[
+                Path=\JOUProprietaryFontDir/,
+                UprightFont=SimSun.ttc,
+                BoldFont=SimSun.ttc,
+                ItalicFont=SimSun.ttc,
+                BoldItalicFont=SimSun.ttc
+            ]{SimSun.ttc}%
+            \setCJKfamilyfont{zhsong}[
+                Path=\JOUProprietaryFontDir/,
+                UprightFont=SimSun.ttc,
+                BoldFont=SimSun.ttc,
+                ItalicFont=SimSun.ttc,
+                BoldItalicFont=SimSun.ttc
+            ]{SimSun.ttc}%
+            \setCJKmonofont[
+                Path=\JOUProprietaryFontDir/,
+                UprightFont=SimSun.ttc,
+                BoldFont=SimSun.ttc,
+                ItalicFont=SimSun.ttc,
+                BoldItalicFont=SimSun.ttc
+            ]{SimSun.ttc}%
+        }{%
+            \jou@useopensourcesong
+        }%
     }%
     \IfFileExists{\JOUProprietaryFontDir/SimHei.ttf}{%
         \setCJKsansfont[
@@ -712,7 +736,19 @@
                 Path=\JOUProprietaryFontDir/,
                 UprightFont=SimSun.ttf
             ]{SimSun.ttf}%
-        }{}%
+        }{%
+            \IfFileExists{\JOUProprietaryFontDir/SimSun.ttc}{%
+                \typeout{JOU: Applying local SimSun override from \JOUProprietaryFontDir}%
+                \setCJKmainfont[
+                    Path=\JOUProprietaryFontDir/,
+                    UprightFont=SimSun.ttc
+                ]{SimSun.ttc}%
+                \setCJKfamilyfont{zhsong}[
+                    Path=\JOUProprietaryFontDir/,
+                    UprightFont=SimSun.ttc
+                ]{SimSun.ttc}%
+            }{}%
+        }%
         \IfFileExists{\JOUProprietaryFontDir/SimHei.ttf}{%
             \typeout{JOU: Applying local SimHei override from \JOUProprietaryFontDir}%
             \setCJKsansfont[
