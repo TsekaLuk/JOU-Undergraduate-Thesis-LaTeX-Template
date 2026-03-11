@@ -330,9 +330,11 @@ JOU-Undergraduate-Thesis-LaTeX-Template/
 
 先执行 `make fonts`（或 `python3 scripts/download_fonts.py`）。默认模式会自动下载开源兜底字体，不要求系统预装标准正式字体。
 
-### 同学不想自己找字体怎么办？
+### 为什么仓库不直接附带商业字体？怎么一键导入？
 
-直接运行：
+仓库不会直接分发商业字体文件，因为微软、方正、华文字体通常都受各自许可证约束，公共仓库默认不应直接再分发。
+
+如果你的电脑本机已经安装了这些字体，直接运行：
 
 ```bash
 make import-fonts

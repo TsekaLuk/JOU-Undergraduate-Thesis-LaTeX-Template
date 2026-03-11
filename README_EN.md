@@ -330,9 +330,11 @@ Add bibliography entries to `references/refs.bib`, cite them in the body text wi
 
 Run `make fonts` (or `python3 scripts/download_fonts.py`) first. The default mode automatically downloads open-source fallback fonts and does not require standard official fonts to be preinstalled.
 
-### What if classmates do not want to manually find fonts?
+### Why does the repository not bundle commercial fonts, and how do I import them in one step?
 
-Run:
+The repository does not redistribute commercial font files by default, because Microsoft, Foundertype, and other proprietary fonts are typically governed by their own licenses.
+
+If those fonts are already installed on your machine, run:
 
 ```bash
 make import-fonts
