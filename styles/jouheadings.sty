@@ -72,8 +72,11 @@
             name={,},%
             number={\arabic{chapter}},%
             aftername=\hspace{1em},%
-            beforeskip=0.4\baselineskip,%   段前 0.5 行 (Word: 0.5×单倍行距×字号 = 0.5×1.2 = 0.6×fs)
-            afterskip=0.4\baselineskip%     段后 0.5 行 同上
+            % ctex book class 默认会在章首插入约 1.5 \baselineskip 的额外垂直空间。
+            % 负 beforeskip 用于抵消该默认值，使章标题在新页顶部约 0.5 行处出现，
+            % 与 Word "段前 0.5 行" 的视觉效果一致（采用参考模板二学历的经验值）。
+            beforeskip=-0.95\baselineskip,%
+            afterskip=1.0\baselineskip%
         },%
         section={%
             format={\JOUHeadingHei\zihao{4}},%
