@@ -71,12 +71,12 @@
             name={,},%
             number={\arabic{chapter}},%
             aftername=\hspace{1em},%
-            beforeskip=0.5\baselineskip,%
-            afterskip=0.5\baselineskip%
+            beforeskip=-0.95\baselineskip,%
+            afterskip=1.0\baselineskip%
         },%
         section={%
-            format={\JOUHeadingHei\zihao{-4}},%
-            beforeskip=0.5\baselineskip,%
+            format={\JOUHeadingHei\zihao{4}},%
+            beforeskip=1.0\baselineskip,%
             afterskip=0.5\baselineskip,%
             indent=0pt%
         },%
@@ -154,10 +154,13 @@
     \renewcommand{\contentsname}{\JOUTocTitle}%
     \setcounter{tocdepth}{1}%
     \contentsmargin{0pt}%
-    \titlecontents{chapter}[0pt]{\songti\zihao{-4}}%
-        {\contentslabel{3.2em}}{}%
+    \titlecontents{chapter}[0em]{\songti\zihao{-4}}%
+        {\thecontentslabel\hspace{0.5em}}{}%
         {\titlerule*[0.5pc]{.}\contentspage}%
-    \titlecontents{section}[2.8em]{\songti\zihao{-4}}%
-        {\contentslabel{3.4em}}{}%
+    \titlecontents{section}[1.8em]{\songti\zihao{-4}}%
+        {\thecontentslabel\hspace{0.45em}}{}%
+        {\titlerule*[0.5pc]{.}\contentspage}%
+    \titlecontents{subsection}[3.4em]{\songti\zihao{-4}}%
+        {\thecontentslabel\hspace{0.4em}}{}%
         {\titlerule*[0.5pc]{.}\contentspage}%
 }

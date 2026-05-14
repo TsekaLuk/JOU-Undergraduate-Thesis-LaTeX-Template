@@ -50,6 +50,7 @@
 \RequirePackage{xcolor}        % 颜色
 \RequirePackage{enumerate}     % 列表
 \RequirePackage{enumitem}      % 增强列表功能
+\RequirePackage{etoolbox}      % 环境钩子（\AtBeginEnvironment 等）
 \RequirePackage{setspace}      % 行距
 \RequirePackage{indentfirst}   % 首行缩进
 \RequirePackage{lastpage}      % 总页数引用
@@ -60,16 +61,17 @@
 \RequirePackage{bookmark}      % PDF书签
 \RequirePackage[capitalize,nameinlink,noabbrev]{cleveref} % 智能引用
 
-% 页面设置 - 精确按照Word文档要求
-% Word中: pgSz w="11906" h="16838", pgMar top/right/bottom/left="1418"
+% 页面设置 - 对齐通过稿常见 Word 页面参数
+% Word中: pgSz w="11906" h="16838"
+% 通过稿对应的 pgMar 约为: top/bottom=1440, left/right=1797
 % 1缇(twip) = 1/20 磅 = 1/1440 英寸
-% 1418缇 ≈ 2.5cm
+% 1440缇 ≈ 2.54cm, 1797缇 ≈ 3.17cm
 \geometry{
     a4paper,
-    top=2.5cm,
-    bottom=2.5cm,
-    left=2.5cm,
-    right=2.5cm,
+    top=2.54cm,
+    bottom=2.54cm,
+    left=3.17cm,
+    right=3.17cm,
     headheight=0.8cm,
     headsep=0.5cm,
     footskip=1cm
@@ -113,6 +115,7 @@
 \pagestyle{frontmatterstyle}
 
 \newcommand{\usebodypagestyle}{
+    \setlength{\headsep}{0.35cm}
     \pagestyle{thesisbody}
     \fancypagestyle{plain}{\jou@bodystyle}
 }
@@ -127,16 +130,22 @@
 \JOUApplyBodyTextLayout
 
 % 图表标题格式: 五号楷体_GB2312
-\DeclareCaptionFont{kaiti5}{\zihao{5}\kaishu}
+\DeclareCaptionFont{kaiti5}{\zihao{5}\JOUKai}
 \captionsetup{
     font=kaiti5,
-    labelsep=quad,
-    skip=6pt
+    labelsep=space,
+    skip=8pt,
+    justification=centering,
+    singlelinecheck=false
 }
 \captionsetup[table]{position=top}
 \captionsetup[figure]{position=bottom}
 \captionsetup[algorithm]{position=top}
 \captionsetup[lstlisting]{position=top}
+% 表/图浮动体内统一应用五号楷体（与标题字体一致）
+\AtBeginEnvironment{table}{\zihao{5}\JOUKai}
+\AtBeginEnvironment{longtable}{\zihao{5}\JOUKai}
+\AtBeginEnvironment{figure}{\zihao{5}\JOUKai}
 
 % 表格精确配置 - 像素级对齐
 % 三线表线宽设置（匹配Word默认）
@@ -149,8 +158,8 @@
 % 表格单元格内边距 - 像素级对齐配置
 % 关键：\tabcolsep=0pt 确保列宽精确匹配 Word XML 表格网格
 % 单元格内边距通过列定义(L/C/R)中的 \arraybackslash 控制
-\setlength{\tabcolsep}{0pt}         % 零列间距（与 jouhandbook.sty 统一）
-\renewcommand{\arraystretch}{1.2}   % 行高倍数
+\setlength{\tabcolsep}{4pt}         % 列间距（保守可读值，与参考模板一致）
+\renewcommand{\arraystretch}{1.28}  % 行高倍数
 
 % 表格列类型定义
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}  % 左对齐定宽列
@@ -250,15 +259,15 @@
     topsep=0pt,           % 列表前后间距
     partopsep=0pt,
     itemsep=0pt,          % 列表项间距
-    parsep=0pt
+    parsep=0pt,
+    leftmargin=2em,       % 左侧缩进对齐段落
+    labelsep=0.5em        % 标签与文字的间距
 }
 
 % 超链接设置
 \hypersetup{
-    colorlinks=true,
-    linkcolor=black,
-    citecolor=black,
-    urlcolor=blue,
+    hidelinks,
+    colorlinks=false,
     bookmarksnumbered=true,
     pdfstartview=FitH
 }
@@ -294,7 +303,7 @@
     \makebox[0pt][l]{\raisebox{-0.52ex}{\rule{#1}{0.35pt}}}%
 }
 \newcommand{\jou@coverunderline}[2]{%
-    \jou@coverrule{#1}\makebox[#1][l]{#2\hfill}%
+    \jou@coverrule{#1}\makebox[#1][c]{#2}%
 }
 
 \newcommand{\jou@coverrowspace}{\\[0.24cm]}
@@ -330,7 +339,7 @@
         {\makebox[0pt][c]{\hspace*{0.17cm}\jou@coverheavierkai\zihao{2}\scalebox{0.965}[1]{\@title}}\par}
         \vspace{0.53cm}
 
-        {\makebox[0pt][c]{\hspace*{0.14cm}\rmfamily\bfseries\fontsize{21.5pt}{28pt}\selectfont \scalebox{0.960}[1]{\@entitle}}\par}
+        {\hspace*{0.14cm}\parbox{\textwidth}{\centering\rmfamily\bfseries\fontsize{18pt}{24pt}\selectfont \@entitle}\par}
         \vspace{3.92cm}
 
         {\JOUCoverKai\zihao{4}
@@ -418,7 +427,7 @@
             \centering
             \vspace*{0.70cm}
             {#2\par}
-            \vspace{0.92cm}
+            \vspace{0.65cm}
             \begin{minipage}[t]{\jou@abstractinnerwidth}
                 \raggedright
                 #1%
@@ -441,7 +450,7 @@
     \mbox{}%
     \jou@abstracttitleblock{毕业设计（论文）中文摘要}
     \jou@abstractframebegin
-        {\noindent{\JOUAbstractHei\bfseries\zihao{-4}摘\hspace{1em}要：}\zihao{-4}\songti}
+        {\setlength{\parindent}{2em}\indent{\JOUAbstractHei\bfseries\zihao{-4}摘\hspace{1em}要：}\zihao{-4}\songti}
         {\JOUAbstractHei\bfseries\zihao{4}\@title}
 }{
     \jou@abstractframeend
@@ -456,7 +465,7 @@
     \mbox{}%
     \jou@abstracttitleblock{毕业设计（论文）外文摘要}
     \jou@abstractframebegin
-        {\noindent{\rmfamily\bfseries\zihao{-4}Abstract: }\rmfamily\zihao{-4}}
+        {\setlength{\parindent}{2em}\indent{\rmfamily\bfseries\zihao{-4}Abstract: }\rmfamily\zihao{-4}}
         {\rmfamily\bfseries\zihao{-4}\@entitle}
 }{
     \jou@abstractframeend
@@ -465,14 +474,14 @@
 }
 
 % 关键词命令
-\newcommand{\cnkeywords}[1]{
-    \par\vspace{0.82cm}
-    \noindent{\JOUAbstractHei\bfseries\zihao{-4}关键词：}{\zihao{-4}\songti #1}
+\newcommand{\cnkeywords}[1]{%
+    \par\vspace{0.10cm}%
+    \noindent{\JOUAbstractHei\bfseries\zihao{-4}关键词：}{\zihao{-4}\songti #1}\par
 }
 
-\newcommand{\enkeywords}[1]{
-    \par\vspace{0.82cm}
-    \noindent{\rmfamily\bfseries\zihao{-4}Keywords: }{\rmfamily\zihao{-4}#1}
+\newcommand{\enkeywords}[1]{%
+    \par\vspace{0.10cm}%
+    \noindent{\rmfamily\bfseries\zihao{-4}Keywords: }{\rmfamily\zihao{-4}#1}\par
 }
 
 \newcommand{\printsymbols}{
@@ -489,7 +498,7 @@
     \pdfbookmark[0]{\JOUPlainContentsName}{toc}%
     \null\vspace*{2\baselineskip}%
     \begin{center}
-        {\JOUHeadingHei\zihao{-2}\JOUTocTitle\par}
+        {\JOUHeadingHei\zihao{4}\JOUTocTitle\par}
     \end{center}
     \vspace{1\baselineskip}%
     \begingroup
