@@ -116,7 +116,7 @@
 
 \newcommand{\jou@bodystyle}{
     \fancyhf{}
-    \fancyhead[C]{\JOUMakeBodyHeader{\textwidth}{\@title}{\JOUHeadingBodyHeaderRight{\thepage}{\pageref*{LastPage}}}}
+    \fancyhead[C]{\JOUMakeBodyHeader{\textwidth}{\@thesiscategory}{\JOUHeadingBodyHeaderRight{\thepage}{\pageref*{LastPage}}}}
     \renewcommand{\headrulewidth}{0.4pt}
     \renewcommand{\footrulewidth}{0pt}
 }
@@ -435,7 +435,9 @@
     \begin{textblock*}{\jou@abstractframewidth}(\jou@abstractframeleft,\jou@abstractframetop)
     \begin{tabular}{|@{}p{\jou@abstractframewidth}@{}|}
         \hline
-        \begin{minipage}[t][\jou@abstractframeheight][t]{\jou@abstractframewidth}
+        % 自适应高度 minipage：内容长则框自然变高，避免溢出；
+        % 内容短则维持紧凑外观。
+        \begin{minipage}[t]{\jou@abstractframewidth}
             \centering
             \vspace*{0.30cm}
             {#2\par}
@@ -447,8 +449,8 @@
 
 \newcommand{\jou@abstractframeend}{%
                 \par
-                \vfill
             \end{minipage}
+            \vspace{0.40cm}%  框内底部留白，保持视觉平衡
         \end{minipage}\\
         \hline
     \end{tabular}%
