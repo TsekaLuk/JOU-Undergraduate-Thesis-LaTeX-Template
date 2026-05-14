@@ -435,9 +435,10 @@
     \begin{textblock*}{\jou@abstractframewidth}(\jou@abstractframeleft,\jou@abstractframetop)
     \begin{tabular}{|@{}p{\jou@abstractframewidth}@{}|}
         \hline
-        % 自适应高度 minipage：内容长则框自然变高，避免溢出；
-        % 内容短则维持紧凑外观。
-        \begin{minipage}[t]{\jou@abstractframewidth}
+        % 固定高度 minipage：框为 \jou@abstractframeheight 的页面级矩形，
+        % 内容从顶部排起，下方留白由 \vfill 兜底，避免因内容长短不一导致框线
+        % 跟随收缩（短摘要时贴底、长摘要时溢出的现象）。
+        \begin{minipage}[t][\jou@abstractframeheight][t]{\jou@abstractframewidth}
             \centering
             \vspace*{0.30cm}
             {#2\par}
@@ -450,7 +451,7 @@
 \newcommand{\jou@abstractframeend}{%
                 \par
             \end{minipage}
-            \vspace{0.40cm}%  框内底部留白，保持视觉平衡
+            \vfill
         \end{minipage}\\
         \hline
     \end{tabular}%
