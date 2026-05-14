@@ -334,13 +334,13 @@
         \vspace{0.48cm}
 
         {\makebox[0pt][c]{\hspace*{-0.12cm}\jou@covermaintitlefont\zihao{2}本\hspace{0.42em}科\hspace{0.42em}毕\hspace{0.42em}业\hspace{0.42em}设\hspace{0.42em}计\hspace{0.42em}（论\hspace{0.42em}文）}\par}
-        \vspace{3.56cm}
+        \vspace{3.56cm minus 1.5cm}
 
         {\makebox[0pt][c]{\hspace*{0.17cm}\jou@coverheavierkai\zihao{2}\scalebox{0.965}[1]{\@title}}\par}
-        \vspace{0.53cm}
+        \vspace{0.53cm minus 0.2cm}
 
         {\parbox{\textwidth}{\centering\rmfamily\bfseries\zihao{2} \@entitle}\par}
-        \vspace{3.92cm}
+        \vspace{3.92cm minus 2.5cm}
 
         {\JOUCoverKai\zihao{4}
             \makebox[0pt][c]{\hspace*{0.16cm}\begin{tabular}{@{}p{3.57cm}p{3.43cm}p{2.72cm}p{3.10cm}@{}}
@@ -360,7 +360,7 @@
             \end{tabular}}\par
         }
 
-        \vspace{1.51cm}
+        \vspace{1.51cm minus 0.8cm}
         {\jou@coverdateformat\par}
     \end{titlepage}
 
