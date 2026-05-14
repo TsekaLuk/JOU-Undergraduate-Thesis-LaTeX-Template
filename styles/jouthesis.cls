@@ -2,8 +2,8 @@
 \ProvidesClass{jouthesis}[2026/03/09 Jiangsu Ocean University Undergraduate Thesis Template]
 
 \newif\ifjousupercite
-\jousupercitefalse
-\def\jouNatbibOptions{numbers,sort&compress}
+\jousupercitetrue  % 默认上标引用（符合GB/T 7714 与中文学位论文惯例）
+\def\jouNatbibOptions{super,numbers,sort&compress}
 
 \DeclareOption{supercite}{%
     \jousupercitetrue
