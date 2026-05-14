@@ -36,6 +36,7 @@
 \RequirePackage{multirow}      % 跨行单元格
 \RequirePackage{makecell}      % 单元格内换行
 \RequirePackage{longtable}     % 跨页表格
+\RequirePackage{tabularx}      % 自适应宽度表格
 \RequirePackage{threeparttable} % 表注
 \RequirePackage{pdflscape}     % 横向页面
 \RequirePackage{tablefootnote} % 表格脚注
@@ -60,6 +61,17 @@
 \RequirePackage{hyperref}      % 超链接
 \RequirePackage{bookmark}      % PDF书签
 \RequirePackage[capitalize,nameinlink,noabbrev]{cleveref} % 智能引用
+\RequirePackage{seqsplit}      % 长字符串自动换行（用于API路径等）
+
+% 排版最佳实践（毕业论文标准设置）
+% XeLaTeX 下 microtype 仅支持 protrusion (字符突出，改善右边缘均匀度)
+\RequirePackage[protrusion=true,final]{microtype}
+\widowpenalty=10000            % 严禁孤行（段末单行落到下页）
+\clubpenalty=10000             % 严禁寡行（段首单行留在上页）
+\displaywidowpenalty=10000     % 公式前后同等级
+\interfootnotelinepenalty=10000 % 脚注不分页
+\raggedbottom                  % 不强制垂直拉伸页面填满
+\overfullrule=0pt              % 隐藏 Overfull 的黑条视觉警告（仅日志记录）
 
 % 页面设置 - 对齐通过稿常见 Word 页面参数
 % Word中: pgSz w="11906" h="16838"
@@ -399,7 +411,7 @@
 \newlength{\jou@abstractframewidth}
 \setlength{\jou@abstractframewidth}{15.08cm}
 \newlength{\jou@abstractframeheight}
-\setlength{\jou@abstractframeheight}{22.90cm}
+\setlength{\jou@abstractframeheight}{23.30cm}  % 扩大至A4最大可用高度，容纳长英文摘要
 \newlength{\jou@abstractinnerwidth}
 \setlength{\jou@abstractinnerwidth}{13.95cm}
 \newlength{\jou@abstracttitlewidth}
@@ -407,7 +419,7 @@
 \newlength{\jou@abstractframeleft}
 \setlength{\jou@abstractframeleft}{2.13cm}
 \newlength{\jou@abstractframetop}
-\setlength{\jou@abstractframetop}{3.86cm}
+\setlength{\jou@abstractframetop}{3.50cm}      % 上移0.36cm，与标题保持适当间距
 \newlength{\jou@abstracttitletop}
 \setlength{\jou@abstracttitletop}{2.55cm}
 \newlength{\jou@abstracttitleleft}
@@ -425,9 +437,9 @@
         \hline
         \begin{minipage}[t][\jou@abstractframeheight][t]{\jou@abstractframewidth}
             \centering
-            \vspace*{0.70cm}
+            \vspace*{0.30cm}
             {#2\par}
-            \vspace{0.65cm}
+            \vspace{0.30cm}
             \begin{minipage}[t]{\jou@abstractinnerwidth}
                 \raggedright
                 #1%
@@ -475,12 +487,12 @@
 
 % 关键词命令
 \newcommand{\cnkeywords}[1]{%
-    \par\vspace{\baselineskip}%
+    \par\vspace{0.4\baselineskip}%
     \noindent{\JOUAbstractHei\bfseries\zihao{-4}关键词：}{\zihao{-4}\songti #1}\par
 }
 
 \newcommand{\enkeywords}[1]{%
-    \par\vspace{\baselineskip}%
+    \par\vspace{0.4\baselineskip}%
     \noindent{\rmfamily\bfseries\zihao{-4}Keywords: }{\rmfamily\zihao{-4}#1}\par
 }
 
