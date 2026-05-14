@@ -44,7 +44,7 @@
     \markboth{}{}%
     \vspace*{2\baselineskip}%  前空（小三号）两行，对齐手册结论/致谢/参考文献规范
     {\centering\JOUHeadingHei\zihao{-3}#1\par}%
-    \vspace{0.5\baselineskip}%
+    \vspace{0.4\baselineskip}%  段后 0.5 行 (Word严格解读: 0.5×单倍行距×字号 = 0.6×fs)
 }
 
 \newcommand{\JOUBackmatterChapter}[1]{%
@@ -72,13 +72,13 @@
             name={,},%
             number={\arabic{chapter}},%
             aftername=\hspace{1em},%
-            beforeskip=-0.95\baselineskip,%
-            afterskip=1.0\baselineskip%
+            beforeskip=0.4\baselineskip,%   段前 0.5 行 (Word: 0.5×单倍行距×字号 = 0.5×1.2 = 0.6×fs)
+            afterskip=0.4\baselineskip%     段后 0.5 行 同上
         },%
         section={%
             format={\JOUHeadingHei\zihao{4}},%
-            beforeskip=1.0\baselineskip,%
-            afterskip=0.5\baselineskip,%
+            beforeskip=0pt,%   段前无间距 (per 手册"二级标题段前、段后无")
+            afterskip=0pt,%    段后无间距
             indent=0pt%
         },%
         subsection={%
