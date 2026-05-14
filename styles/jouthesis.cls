@@ -339,7 +339,7 @@
         {\makebox[0pt][c]{\hspace*{0.17cm}\jou@coverheavierkai\zihao{2}\scalebox{0.965}[1]{\@title}}\par}
         \vspace{0.53cm}
 
-        {\hspace*{0.14cm}\parbox{\textwidth}{\centering\rmfamily\bfseries\fontsize{18pt}{24pt}\selectfont \@entitle}\par}
+        {\parbox{\textwidth}{\centering\rmfamily\bfseries\zihao{2} \@entitle}\par}
         \vspace{3.92cm}
 
         {\JOUCoverKai\zihao{4}
@@ -450,7 +450,7 @@
     \mbox{}%
     \jou@abstracttitleblock{毕业设计（论文）中文摘要}
     \jou@abstractframebegin
-        {\setlength{\parindent}{2em}\indent{\JOUAbstractHei\bfseries\zihao{-4}摘\hspace{1em}要：}\zihao{-4}\songti}
+        {\noindent{\JOUAbstractHei\bfseries\zihao{-4}摘\hspace{1em}要：}\zihao{-4}\songti}
         {\JOUAbstractHei\bfseries\zihao{4}\@title}
 }{
     \jou@abstractframeend
@@ -465,7 +465,7 @@
     \mbox{}%
     \jou@abstracttitleblock{毕业设计（论文）外文摘要}
     \jou@abstractframebegin
-        {\setlength{\parindent}{2em}\indent{\rmfamily\bfseries\zihao{-4}Abstract: }\rmfamily\zihao{-4}}
+        {\noindent{\rmfamily\bfseries\zihao{-4}Abstract: }\rmfamily\zihao{-4}}
         {\rmfamily\bfseries\zihao{-4}\@entitle}
 }{
     \jou@abstractframeend
@@ -475,12 +475,12 @@
 
 % 关键词命令
 \newcommand{\cnkeywords}[1]{%
-    \par\vspace{0.10cm}%
+    \par\vspace{\baselineskip}%
     \noindent{\JOUAbstractHei\bfseries\zihao{-4}关键词：}{\zihao{-4}\songti #1}\par
 }
 
 \newcommand{\enkeywords}[1]{%
-    \par\vspace{0.10cm}%
+    \par\vspace{\baselineskip}%
     \noindent{\rmfamily\bfseries\zihao{-4}Keywords: }{\rmfamily\zihao{-4}#1}\par
 }
 
