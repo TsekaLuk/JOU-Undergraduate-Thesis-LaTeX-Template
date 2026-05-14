@@ -116,7 +116,7 @@
 
 \newcommand{\jou@bodystyle}{
     \fancyhf{}
-    \fancyhead[C]{\JOUMakeBodyHeader{\textwidth}{\@thesiscategory}{\JOUHeadingBodyHeaderRight{\thepage}{\pageref*{LastPage}}}}
+    \fancyhead[C]{\JOUMakeBodyHeader{\textwidth}{\@title}{\JOUHeadingBodyHeaderRight{\thepage}{\pageref*{LastPage}}}}
     \renewcommand{\headrulewidth}{0.4pt}
     \renewcommand{\footrulewidth}{0pt}
 }
