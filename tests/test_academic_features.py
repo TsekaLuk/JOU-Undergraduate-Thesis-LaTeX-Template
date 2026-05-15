@@ -100,7 +100,7 @@ def test_bibsection_uses_shared_heading(cls_content: str):
 
 @pytest.mark.parametrize("name,pattern", [
     ("conclusion-macro", r"\\JOUBackmatterChapter\{结论与展望\}"),
-    ("acknowledgement-macro", r"\\JOUBackmatterChapter\{致(?:谢|\\hspace\{1em\}谢)\}"),
+    ("acknowledgement-macro", r"\\JOUAcknowledgementChapter\b"),
 ])
 def test_main_uses_shared_backmatter(main_tex_content: str, name: str, pattern: str):
     assert re.search(pattern, main_tex_content), \

@@ -94,12 +94,23 @@ def bbox_lines(pdf, page: int) -> list[dict]:
         r'xMax="(?P<xmax>[^"]+)" yMax="(?P<ymax>[^"]+)">(?P<body>.*?)</line>',
         re.DOTALL,
     )
-    word_pattern = re.compile(r"<word [^>]*>(?P<text>.*?)</word>", re.DOTALL)
+    word_pattern = re.compile(
+        r'<word xMin="(?P<xmin>[^"]+)" yMin="(?P<ymin>[^"]+)" '
+        r'xMax="(?P<xmax>[^"]+)" yMax="(?P<ymax>[^"]+)">(?P<text>.*?)</word>',
+        re.DOTALL,
+    )
     for match in line_pattern.finditer(html):
-        words = word_pattern.findall(match.group("body"))
-        text = "".join(words)
+        words = [
+            {
+                "text": word.group("text"),
+                "xMin": float(word.group("xmin")),
+                "xMax": float(word.group("xmax")),
+            }
+            for word in word_pattern.finditer(match.group("body"))
+        ]
         lines.append({
-            "text": text,
+            "text": "".join(str(word["text"]) for word in words),
+            "words": words,
             "xMin": float(match.group("xmin")),
             "xMax": float(match.group("xmax")),
             "yMin": float(match.group("ymin")),
@@ -128,6 +139,26 @@ def _assert_centered_heading(pdf, page: int, label: str, heading: str):
     page_center = 595.28 / 2
     title_center = (float(target["xMin"]) + float(target["xMax"])) / 2
     assert abs(title_center - page_center) <= 18, f"{label} 标题未居中，当前中心点约为 x={title_center:.1f}pt。"
+
+
+def _assert_raw_heading_line(pdf, page: int, label: str, heading: str):
+    lines = [line.strip() for line in page_text(pdf, page).splitlines()]
+    assert heading in lines, f"{label} 标题应按指定字间距显示为 '{heading}'。"
+
+
+def _assert_heading_gaps(pdf, page: int, label: str, heading: str, expected_gaps: list[tuple[float, float]]):
+    lines = bbox_lines(pdf, page)
+    candidates = [line for line in lines if normalize(str(line["text"])) == normalize(heading)]
+    assert candidates, f"{label} 未找到可计算字距的标题 '{heading}'。"
+    target = min(candidates, key=lambda line: abs(float(line["yMin"]) - 95))
+    words = target["words"]
+    gaps = [
+        float(words[index + 1]["xMin"]) - float(words[index]["xMax"])
+        for index in range(len(words) - 1)
+    ]
+    assert len(gaps) == len(expected_gaps), f"{label} 标题字距数量异常：{gaps}"
+    for gap, (lower, upper) in zip(gaps, expected_gaps):
+        assert lower <= gap <= upper, f"{label} 标题字距 {gap:.2f}pt 不在预期范围 {lower:.2f}-{upper:.2f}pt。"
 
 
 def _find_page(pages: dict[int, str], *patterns: str) -> int | None:
@@ -226,13 +257,16 @@ def test_conclusion_heading_centered(thesis_pages):
 def test_acknowledgement_heading_centered(thesis_pages):
     page = _find_page(thesis_pages, "致谢", "在此感谢导师的悉心指导")
     if page is not None:
-        _assert_centered_heading(MAIN_PDF, page, "致谢页", "致 谢")
+        _assert_centered_heading(MAIN_PDF, page, "致谢页", "致  谢")
+        _assert_heading_gaps(MAIN_PDF, page, "致谢页", "致谢", [(13.0, 17.0)])
 
 
 def test_references_heading_centered(thesis_pages):
     page = _find_page(thesis_pages, "参考文献", "示例文献标题")
     if page is not None:
         _assert_centered_heading(MAIN_PDF, page, "参考文献页", "参 考 文 献")
+        _assert_heading_gaps(MAIN_PDF, page, "参考文献页", "参考文献", [(6.0, 9.0), (6.0, 9.0), (6.0, 9.0)])
+        _assert_raw_heading_line(MAIN_PDF, page, "参考文献页", "参 考 文 献")
 
 
 # ── TOC and body style checks ──────────────────────────────────────────────

@@ -26,6 +26,10 @@
 }
 \newcommand{\JOUPlainContentsName}{目录}
 \newcommand{\JOUTocTitle}{目\hspace{2em}录}
+\newcommand{\JOUAcknowledgementPlainTitle}{致谢}
+\newcommand{\JOUAcknowledgementDisplayTitle}{致\hspace{1em}谢}
+\newcommand{\JOUReferencesPlainTitle}{参考文献}
+\newcommand{\JOUReferencesDisplayTitle}{参\hspace{0.5em}考\hspace{0.5em}文\hspace{0.5em}献}
 
 \newcommand{\JOUHeadingChapterLabel}[1]{%
     \makebox[\jouHeadingChapterNumberWidth][l]{#1}%
@@ -50,6 +54,15 @@
 \newcommand{\JOUBackmatterChapter}[1]{%
     \JOUBackmatterHeadingOnly{#1}%
     \addcontentsline{toc}{chapter}{#1}%
+}
+
+\newcommand{\JOUBackmatterChapterWithToc}[2]{%
+    \JOUBackmatterHeadingOnly{#1}%
+    \addcontentsline{toc}{chapter}{#2}%
+}
+
+\newcommand{\JOUAcknowledgementChapter}{%
+    \JOUBackmatterChapterWithToc{\JOUAcknowledgementDisplayTitle}{\JOUAcknowledgementPlainTitle}%
 }
 
 \newcommand{\JOUChapterHeadingLine}[2]{%

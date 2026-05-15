@@ -306,8 +306,8 @@
 
 % 参考文献一键打印命令（可选参数为 .bib 文件路径，默认 references/refs）
 \newcommand{\JOUPrintBibliography}[1][references/refs]{%
-    \addcontentsline{toc}{chapter}{参考文献}%
-    \renewcommand{\bibname}{参\hspace{0.5em}考\hspace{0.5em}文\hspace{0.5em}献}%
+    \addcontentsline{toc}{chapter}{\JOUReferencesPlainTitle}%
+    \renewcommand{\bibname}{\JOUReferencesDisplayTitle}%
     \bibliographystyle{gbt7714-numerical}%
     \bibliography{#1}%
 }
