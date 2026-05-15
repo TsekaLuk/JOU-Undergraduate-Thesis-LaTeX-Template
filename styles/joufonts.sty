@@ -124,11 +124,11 @@
         BoldItalicFont=texgyretermes-bolditalic.otf
     ]{texgyretermes-regular.otf}%
     \setsansfont[
-        UprightFont=texgyreheros-regular.otf,
-        BoldFont=texgyreheros-bold.otf,
-        ItalicFont=texgyreheros-italic.otf,
-        BoldItalicFont=texgyreheros-bolditalic.otf
-    ]{texgyreheros-regular.otf}%
+        UprightFont=texgyretermes-regular.otf,
+        BoldFont=texgyretermes-bold.otf,
+        ItalicFont=texgyretermes-italic.otf,
+        BoldItalicFont=texgyretermes-bolditalic.otf
+    ]{texgyretermes-regular.otf}%
     \setmonofont[
         UprightFont=lmmono10-regular.otf,
         BoldFont=lmmonolt10-bold.otf,
@@ -147,9 +147,11 @@
     ]{Tinos-Regular.ttf}%
     \setsansfont[
         Path=\JOUOpenSourceFontDir/,
-        UprightFont=NotoSansCJKsc-Regular.otf,
-        BoldFont=NotoSansCJKsc-Bold.otf
-    ]{NotoSansCJKsc-Regular.otf}%
+        UprightFont=Tinos-Regular.ttf,
+        BoldFont=Tinos-Bold.ttf,
+        ItalicFont=Tinos-Italic.ttf,
+        BoldItalicFont=Tinos-BoldItalic.ttf
+    ]{Tinos-Regular.ttf}%
     \setmonofont[
         Path=\JOUOpenSourceFontDir/,
         UprightFont=CourierPrime-Regular.ttf,
@@ -164,19 +166,11 @@
         UprightFont=TimesNewRoman-Regular.ttf,
         BoldFont=TimesNewRoman-Bold.ttf
     ]{TimesNewRoman-Regular.ttf}%
-    \IfFileExists{\JOUProprietaryFontDir/Arial-Regular.ttf}{%
-        \setsansfont[
-            Path=\JOUProprietaryFontDir/,
-            UprightFont=Arial-Regular.ttf,
-            BoldFont=Arial-Bold.ttf
-        ]{Arial-Regular.ttf}%
-    }{%
-        \setsansfont[
-            Path=\JOUOpenSourceFontDir/,
-            UprightFont=NotoSansCJKsc-Regular.otf,
-            BoldFont=NotoSansCJKsc-Bold.otf
-        ]{NotoSansCJKsc-Regular.otf}%
-    }%
+    \setsansfont[
+        Path=\JOUProprietaryFontDir/,
+        UprightFont=TimesNewRoman-Regular.ttf,
+        BoldFont=TimesNewRoman-Bold.ttf
+    ]{TimesNewRoman-Regular.ttf}%
     \IfFileExists{\JOUProprietaryFontDir/CourierNew-Regular.ttf}{%
         \setmonofont[
             Path=\JOUProprietaryFontDir/,
@@ -201,21 +195,13 @@
         ItalicFont=timesi.ttf,
         BoldItalicFont=timesbi.ttf
     ]{times.ttf}%
-    \IfFileExists{\JOUWindowsFontDir/arial.ttf}{%
-        \setsansfont[
-            Path=\JOUWindowsFontDir/,
-            UprightFont=arial.ttf,
-            BoldFont=arialbd.ttf,
-            ItalicFont=ariali.ttf,
-            BoldItalicFont=arialbi.ttf
-        ]{arial.ttf}%
-    }{%
-        \setsansfont[
-            Path=\JOUOpenSourceFontDir/,
-            UprightFont=NotoSansCJKsc-Regular.otf,
-            BoldFont=NotoSansCJKsc-Bold.otf
-        ]{NotoSansCJKsc-Regular.otf}%
-    }%
+    \setsansfont[
+        Path=\JOUWindowsFontDir/,
+        UprightFont=times.ttf,
+        BoldFont=timesbd.ttf,
+        ItalicFont=timesi.ttf,
+        BoldItalicFont=timesbi.ttf
+    ]{times.ttf}%
     \IfFileExists{\JOUWindowsFontDir/cour.ttf}{%
         \setmonofont[
             Path=\JOUWindowsFontDir/,
@@ -938,24 +924,7 @@
         \IfFontExistsTF{Times New Roman}{%
             \renewcommand{\JOUFontMode}{system-licensed}%
             \setmainfont{Times New Roman}%
-            \IfFontExistsTF{Arial}{%
-                \setsansfont{Arial}%
-            }{%
-                \ifjou@bundledfontsavailable
-                    \setsansfont[
-                        Path=\JOUOpenSourceFontDir/,
-                        UprightFont=NotoSansCJKsc-Regular.otf,
-                        BoldFont=NotoSansCJKsc-Bold.otf
-                    ]{NotoSansCJKsc-Regular.otf}%
-                \else
-                    \setsansfont[
-                        UprightFont=texgyreheros-regular.otf,
-                        BoldFont=texgyreheros-bold.otf,
-                        ItalicFont=texgyreheros-italic.otf,
-                        BoldItalicFont=texgyreheros-bolditalic.otf
-                    ]{texgyreheros-regular.otf}%
-                \fi
-            }%
+            \setsansfont{Times New Roman}%
             \IfFontExistsTF{Courier New}{%
                 \setmonofont{Courier New}%
             }{%

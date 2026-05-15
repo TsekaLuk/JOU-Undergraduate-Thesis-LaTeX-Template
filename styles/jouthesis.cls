@@ -24,6 +24,7 @@
 \RequirePackage{fancyhdr}      % 页眉页脚
 \RequirePackage{titletoc}      % 目录格式
 \RequirePackage{graphicx}      % 插图
+\RequirePackage[export]{adjustbox} % 插图最大尺寸保护
 \RequirePackage{amsmath}       % 数学公式
 \RequirePackage{amssymb}       % 数学符号
 \RequirePackage{amsthm}        % 定理环境
@@ -159,6 +160,16 @@
 \captionsetup[figure]{position=bottom}
 \captionsetup[algorithm]{position=top}
 \captionsetup[lstlisting]{position=top}
+\setkeys{Gin}{max width=\linewidth,max height=0.62\textheight,keepaspectratio}
+\setcounter{topnumber}{2}
+\setcounter{bottomnumber}{1}
+\setcounter{totalnumber}{3}
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.65}
+\renewcommand{\textfraction}{0.15}
+\renewcommand{\floatpagefraction}{0.99}
+\renewcommand{\dbltopfraction}{0.85}
+\renewcommand{\dblfloatpagefraction}{0.99}
 % 表/图浮动体内统一应用五号楷体（与标题字体一致）
 \AtBeginEnvironment{table}{\zihao{5}\JOUKai}
 \AtBeginEnvironment{longtable}{\zihao{5}\JOUKai}
@@ -429,6 +440,15 @@
 \setlength{\jou@abstracttitletop}{2.55cm}
 \newlength{\jou@abstracttitleleft}
 \setlength{\jou@abstracttitleleft}{2.5cm}
+\let\jou@normalpar\par
+\newcommand{\jou@abstractsingleparagraph}{%
+    \parindent=0pt%
+    \parskip=0pt%
+    \let\par\space
+}
+\newcommand{\jou@abstractrestoreparagraph}{%
+    \let\par\jou@normalpar
+}
 
 \newcommand{\jou@abstracttitleblock}[1]{%
     \begin{textblock*}{\jou@abstracttitlewidth}(\jou@abstracttitleleft,\jou@abstracttitletop)
@@ -451,10 +471,12 @@
             \begin{minipage}[t]{\jou@abstractinnerwidth}
                 \raggedright
                 #1%
+                \jou@abstractsingleparagraph
+                \ignorespaces
 }
 
 \newcommand{\jou@abstractframeend}{%
-                \par
+                \jou@normalpar
             \end{minipage}
             \vfill
         \end{minipage}\\
@@ -473,6 +495,7 @@
         {\noindent{\JOUAbstractHei\bfseries\zihao{-4}摘\hspace{1em}要：}\zihao{-4}\songti}
         {\JOUAbstractHei\bfseries\zihao{4}\@title}
 }{
+    \jou@abstractrestoreparagraph
     \jou@abstractframeend
     \null
     \clearpage
@@ -488,6 +511,7 @@
         {\noindent{\rmfamily\bfseries\zihao{-4}Abstract: }\rmfamily\zihao{-4}}
         {\rmfamily\bfseries\zihao{-4}\@entitle}
 }{
+    \jou@abstractrestoreparagraph
     \jou@abstractframeend
     \null
     \clearpage
@@ -495,13 +519,13 @@
 
 % 关键词命令
 \newcommand{\cnkeywords}[1]{%
-    \par\vspace{0.4\baselineskip}%
-    \noindent{\JOUAbstractHei\bfseries\zihao{-4}关键词：}{\zihao{-4}\songti #1}\par
+    \jou@normalpar\vspace{0.4\baselineskip}%
+    \noindent{\JOUAbstractHei\bfseries\zihao{-4}关键词：}{\zihao{-4}\songti #1}\jou@normalpar
 }
 
 \newcommand{\enkeywords}[1]{%
-    \par\vspace{0.4\baselineskip}%
-    \noindent{\rmfamily\bfseries\zihao{-4}Keywords: }{\rmfamily\zihao{-4}#1}\par
+    \jou@normalpar\vspace{0.4\baselineskip}%
+    \noindent{\rmfamily\bfseries\zihao{-4}Keywords: }{\rmfamily\zihao{-4}#1}\jou@normalpar
 }
 
 \newcommand{\printsymbols}{

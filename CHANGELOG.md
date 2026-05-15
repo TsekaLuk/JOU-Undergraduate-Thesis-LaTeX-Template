@@ -19,6 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 ### Fixed
 
+- Keep Chinese and English abstracts as single visual paragraphs, route Latin text through Times-compatible families, and cap default figure floats to avoid full-page figure/table-only pages.
 - Preserve square brackets in superscript numeric citations.
 - Honor `preferwps` font routing before bundled proprietary fonts and align margin compliance tests with Word twip values.
 - Replace choco poppler with direct download on Windows CI ([105fd37](https://github.com/TsekaLuk/JOU-Undergraduate-Thesis-LaTeX-Template/commit/105fd37))

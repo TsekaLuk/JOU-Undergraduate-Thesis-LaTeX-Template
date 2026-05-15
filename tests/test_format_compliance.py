@@ -19,7 +19,7 @@ from pathlib import Path
 
 import pytest
 
-from conftest import CLASS_FILE, PROJECT_ROOT
+from conftest import CLASS_FILE, JOUFONTS_FILE, PROJECT_ROOT
 
 
 # ── Fixtures ────────────────────────────────────────────────────────────────
@@ -32,6 +32,11 @@ def cls_content() -> str:
 @pytest.fixture(scope="module")
 def headings_content() -> str:
     return (PROJECT_ROOT / "styles" / "jouheadings.sty").read_text(encoding="utf-8")
+
+
+@pytest.fixture(scope="module")
+def joufonts_content() -> str:
+    return JOUFONTS_FILE.read_text(encoding="utf-8")
 
 
 # ── 1. 页面设置 ────────────────────────────────────────────────────────────
@@ -164,3 +169,52 @@ def test_cn_abstract_label_font_split(cls_content: str):
     expected = r"{\noindent{\JOUAbstractHei\bfseries\zihao{-4}摘\hspace{1em}要：}\zihao{-4}\songti}"
     assert expected in cls_content, \
         "中文摘要标签/正文字体规则不符合预期"
+
+
+def test_abstract_body_collapses_paragraph_breaks(cls_content: str):
+    assert r"\newcommand{\jou@abstractsingleparagraph}" in cls_content, \
+        "摘要环境缺少单段落保护宏"
+    assert r"\let\par\space" in cls_content, \
+        "摘要正文中的空行应被折叠为空格，不能生成多个段落"
+    assert r"\newcommand{\jou@abstractrestoreparagraph}" in cls_content, \
+        "摘要环境结束前应恢复正常段落命令"
+
+
+def test_abstract_keywords_keep_their_own_line_break(cls_content: str):
+    assert r"\jou@normalpar\vspace{0.4\baselineskip}" in cls_content, \
+        "关键词应使用受控换行，而不是重新打开摘要正文分段"
+
+
+# ── 8. 英文字体与浮动体安全边界 ─────────────────────────────────────────
+
+@pytest.mark.parametrize("forbidden", [
+    r"\setsansfont{Arial}",
+    "UprightFont=Arial-Regular.ttf",
+    "UprightFont=arial.ttf",
+])
+def test_latin_sans_does_not_fall_back_to_non_times(joufonts_content: str, forbidden: str):
+    assert forbidden not in joufonts_content, \
+        f"英文字体不应回退到非 Times 族字体：{forbidden}"
+
+
+@pytest.mark.parametrize("pattern", [
+    r"\\setsansfont\[[^\]]*texgyretermes-regular\.otf",
+    r"\\setsansfont\[[^\]]*Tinos-Regular\.ttf",
+    r"\\setsansfont\[[^\]]*TimesNewRoman-Regular\.ttf",
+    r"\\setsansfont\[[^\]]*UprightFont=times\.ttf",
+    r"\\setsansfont\{Times New Roman\}",
+])
+def test_latin_sans_routes_to_times_family(joufonts_content: str, pattern: str):
+    assert re.search(pattern, joufonts_content, re.DOTALL), \
+        "英文字体的 sans 路由应统一落到 Times/Times-compatible 字族"
+
+
+def test_figures_are_capped_to_avoid_full_page_float(cls_content: str):
+    assert r"\RequirePackage[export]{adjustbox}" in cls_content, \
+        "缺少 adjustbox 的 max width/max height 图像保护"
+    assert r"max height=0.62\textheight" in cls_content, \
+        "默认插图高度应保守限制，避免单图顶成整页"
+    assert r"\renewcommand{\floatpagefraction}{0.99}" in cls_content, \
+        "浮动页阈值应抬高，避免图表轻易独占一整页"
+    assert r"\renewcommand{\textfraction}{0.15}" in cls_content, \
+        "正文页应保留最小文字比例，避免图表页空心化"
