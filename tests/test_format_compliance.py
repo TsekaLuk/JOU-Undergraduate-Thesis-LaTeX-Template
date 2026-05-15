@@ -42,13 +42,21 @@ def test_paper_is_a4(cls_content: str):
     assert "a4paper" in match.group(1), "纸张不是 A4"
 
 
-@pytest.mark.parametrize("margin", ["top", "bottom", "left", "right"])
-def test_margin_is_25cm(cls_content: str, margin: str):
+@pytest.mark.parametrize(("margin", "expected_cm"), [
+    ("top", 2.54),
+    ("bottom", 2.54),
+    ("left", 3.17),
+    ("right", 3.17),
+])
+def test_margin_matches_word_twip_reference(cls_content: str, margin: str, expected_cm: float):
     geo = re.search(r"\\geometry\{([^}]+)\}", cls_content, re.DOTALL)
     assert geo, "未找到 geometry 设置"
     match = re.search(rf"{margin}=([0-9.]+)cm", geo.group(1))
     assert match, f"未找到 {margin} 边距设置"
-    assert float(match.group(1)) == 2.5, f"{margin} 边距为 {match.group(1)}cm，要求 2.5cm"
+    actual_cm = float(match.group(1))
+    assert actual_cm == expected_cm, (
+        f"{margin} 边距为 {actual_cm}cm，要求匹配通过稿 Word twip 换算值 {expected_cm}cm"
+    )
 
 
 # ── 2. 行距 ────────────────────────────────────────────────────────────────

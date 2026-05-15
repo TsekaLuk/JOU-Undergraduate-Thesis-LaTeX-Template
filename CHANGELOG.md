@@ -19,6 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 ### Fixed
 
+- Honor `preferwps` font routing before bundled proprietary fonts and align margin compliance tests with Word twip values.
 - Replace choco poppler with direct download on Windows CI ([105fd37](https://github.com/TsekaLuk/JOU-Undergraduate-Thesis-LaTeX-Template/commit/105fd37))
 - Hardcode poppler Library/bin path for Windows CI ([c053c83](https://github.com/TsekaLuk/JOU-Undergraduate-Thesis-LaTeX-Template/commit/c053c83))
 - Resolve Windows CI failures for pdftotext encoding and poppler PATH ([7bb7f94](https://github.com/TsekaLuk/JOU-Undergraduate-Thesis-LaTeX-Template/commit/7bb7f94))

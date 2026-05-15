@@ -999,10 +999,20 @@
     \setCJKfamilyfont{zhfs}{FandolFang-Regular.otf}%
     \jou@cjkconfiguredtrue
 \else
-    \IfFileExists{\JOUProprietaryFontDir/SimSun.ttf}{%
-        \jou@setupproprietarycjk
-        \jou@cjkconfiguredtrue
-    }{}%
+    \ifjou@preferwps
+        \IfFileExists{\JOUWPSFontDir/HYKaiTiJ.ttf}{%
+            \typeout{JOU: preferwps enabled, using WPS bundled compatibility fonts from \JOUWPSFontDir}%
+            \jou@setupwpsbundledcjk
+            \jou@cjkconfiguredtrue
+        }{}%
+    \fi
+
+    \ifjou@cjkconfigured\else
+        \IfFileExists{\JOUProprietaryFontDir/SimSun.ttf}{%
+            \jou@setupproprietarycjk
+            \jou@cjkconfiguredtrue
+        }{}%
+    \fi
 
     \ifjou@cjkconfigured\else
         \IfFileExists{\JOUWindowsFontDir/simsun.ttc}{%
