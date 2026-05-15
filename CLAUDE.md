@@ -63,6 +63,7 @@ latexmk -xelatex main.tex
 ```latex
 % 无编号章节（结论、致谢等后置章节）
 \JOUBackmatterChapter{结论与展望}
+\JOUAcknowledgementChapter
 
 % 打印参考文献（默认读取 references/refs.bib）
 \JOUPrintBibliography
@@ -103,7 +104,7 @@ latexmk -xelatex main.tex
 
 ```latex
 \cite{key}        % 普通引用 [1]
-\upcite{key}      % 上标引用 ¹（已有标准字体时）
+\upcite{key}      % 上标引用 [1]（保留方括号）
 ```
 
 ## 文档类选项

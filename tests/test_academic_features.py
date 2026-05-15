@@ -73,6 +73,16 @@ def main_tex_content() -> str:
     return MAIN_FILE.read_text(encoding="utf-8")
 
 
+@pytest.fixture(scope="module")
+def usage_guide_content() -> str:
+    return (MAIN_FILE.parent / "docs" / "guides" / "usage.md").read_text(encoding="utf-8")
+
+
+@pytest.fixture(scope="module")
+def claude_content() -> str:
+    return (MAIN_FILE.parent / "CLAUDE.md").read_text(encoding="utf-8")
+
+
 @pytest.mark.parametrize("name,pattern", list(CLS_PATTERNS.items()), ids=list(CLS_PATTERNS.keys()))
 def test_cls_has_academic_capability(cls_content: str, name: str, pattern: str):
     assert re.search(pattern, cls_content), f"类文件缺少学术能力定义：{name}"
@@ -125,6 +135,26 @@ def test_no_printsymbols_in_default(main_tex_content: str):
 def test_main_documents_jou_frontmatter_lists(main_tex_content: str):
     assert re.search(r"\\JOUListOfTablesAndFigures\b", main_tex_content), \
         "main.tex 应示例化目录后的附表清单、附图清单入口。"
+
+
+def test_usage_guide_uses_shared_backmatter_macros(usage_guide_content: str):
+    assert r"\JOUBackmatterChapter{结论与展望}" in usage_guide_content, \
+        "使用指南应引导结论章节走共享 backmatter 宏。"
+    assert r"\JOUAcknowledgementChapter" in usage_guide_content, \
+        "使用指南应引导致谢走共享 backmatter 宏。"
+    assert r"\JOUPrintBibliography" in usage_guide_content, \
+        "使用指南应引导参考文献走共享打印宏。"
+    assert r"\chapter*{致\hspace{1em}谢}" not in usage_guide_content, \
+        "使用指南不应继续传播手写致谢标题间距。"
+    assert r"\addcontentsline{toc}{chapter}{致谢}" not in usage_guide_content, \
+        "使用指南不应继续传播手写致谢目录项。"
+
+
+def test_claude_documents_bracketed_upcite(claude_content: str):
+    assert "上标引用 [1]" in claude_content, \
+        "CLAUDE.md 应说明 \\upcite 保留方括号，而不是裸数字上标。"
+    assert "上标引用 ¹" not in claude_content, \
+        "CLAUDE.md 不应继续描述裸数字上标引用。"
 
 
 # ── Body sample reuses shared heading system ───────────────────────────────

@@ -135,8 +135,7 @@ xelatex main.tex
 #### 结论与展望
 
 ```latex
-\chapter*{结论与展望}
-\addcontentsline{toc}{chapter}{结论与展望}
+\JOUBackmatterChapter{结论与展望}
 
 通过本文的研究，得出以下结论：...
 ```
@@ -144,11 +143,20 @@ xelatex main.tex
 #### 致谢
 
 ```latex
-\chapter*{致\hspace{1em}谢}
-\addcontentsline{toc}{chapter}{致谢}
+\JOUAcknowledgementChapter
 
 在此感谢...
 ```
+
+#### 参考文献
+
+```latex
+\JOUPrintBibliography
+% 如需自定义 .bib 文件路径：
+% \JOUPrintBibliography[references/other]
+```
+
+后置章节请优先使用这些模板宏。它们会同时维护正文显示、目录文本和 PDF 书签，避免手写 `\chapter*`、`\addcontentsline` 或标题字间距导致格式漂移。
 
 ## 图表插入
 
