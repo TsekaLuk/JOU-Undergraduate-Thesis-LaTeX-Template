@@ -22,6 +22,8 @@ from conftest import (
     MAIN_PDF,
     MAIN_NLS,
     normalize,
+    page_text,
+    pdf_page_count,
 )
 
 
@@ -42,6 +44,7 @@ CLS_PATTERNS = {
     "pdflscape": r"RequirePackage\{pdflscape\}",
     "nomencl": r"RequirePackage\[intoc\]\{nomencl\}",
     "supercite-option": r"DeclareOption\{supercite\}",
+    "bracketed-super-cite-style": r"setcitestyle\{super,square,comma\}",
     "upcite-command": r"newcommand\{\\upcite\}",
     "printsymbols-command": r"newcommand\{\\printsymbols\}",
     "frontmatter-list-wrapper": r"newcommand\{\\JOUFrontMatterList\}",
@@ -178,6 +181,22 @@ def test_pdf_has_academic_snippet(main_pdf_text: str, snippet: str):
 def test_pdf_lacks_symbols_table_snippet(main_pdf_text: str, snippet: str):
     assert normalize(snippet) not in main_pdf_text, \
         f"默认示例论文不应展示符号表示例文本：{snippet}"
+
+
+def test_pdf_uses_bracketed_numeric_citations():
+    if not MAIN_PDF.exists():
+        pytest.skip("缺少 main.pdf")
+    citation_page = None
+    for page in range(1, pdf_page_count(MAIN_PDF) + 1):
+        text = normalize(page_text(MAIN_PDF, page))
+        if normalize("研究背景与意义") in text and normalize("上标引用") in text:
+            citation_page = text
+            break
+    assert citation_page is not None, "未找到正文引用示例所在页面。"
+    assert normalize("参考文献[1]") in citation_page, \
+        "正文 \\cite 输出应保留 GB/T 数字制方括号。"
+    assert normalize("上标引用[2]") in citation_page, \
+        "正文 \\upcite 输出应保留 GB/T 数字制方括号。"
 
 
 # ── Font stack validation ──────────────────────────────────────────────────

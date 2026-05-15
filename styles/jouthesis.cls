@@ -30,6 +30,11 @@
 \RequirePackage{mathtools}     % 增强数学功能
 \RequirePackage{bm}            % 数学粗体
 \RequirePackage[\jouNatbibOptions]{natbib} % 数字制参考文献
+\ifjousupercite
+    \setcitestyle{super,square,comma}%
+\else
+    \setcitestyle{numbers,square,comma}%
+\fi
 \RequirePackage{booktabs}      % 三线表
 \RequirePackage{tabularx}      % 可伸缩表格
 \RequirePackage{array}         % 增强表格功能
