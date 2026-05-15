@@ -549,11 +549,15 @@ make clean && make
 在 `main.tex` 目录部分添加：
 
 ```latex
-\listoffigures  % 图清单
-\clearpage
-\listoftables   % 表清单
-\clearpage
+% 目录
+\tableofcontents
+
+% 附表清单、附图清单
+\JOUListOfTablesAndFigures
 ```
+
+如只需要其中一个清单，也可以单独使用 `\JOUListOfTables` 或 `\JOUListOfFigures`。
+清单会自动读取正文中的 `table` 和 `figure` 标题，并按照“表 3.1 标题……页码”“图 4.1 标题……页码”的格式生成点线引导。
 
 ### Q7: 如何修改页眉内容？
 

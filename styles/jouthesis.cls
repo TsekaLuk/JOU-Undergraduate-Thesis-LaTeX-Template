@@ -523,7 +523,41 @@
     \clearpage
 }
 
+\newcommand{\JOUFrontMatterList}[3]{%
+    \clearpage
+    \thispagestyle{frontmatterstyle}%
+    \phantomsection
+    \pdfbookmark[0]{#1}{#2}%
+    \null\vspace*{2\baselineskip}%
+    {\noindent\JOUHeadingHei\zihao{-4}#1：\par}%
+    \vspace{0.8\baselineskip}%
+    \begingroup
+        \parindent=0pt%
+        #3%
+    \endgroup
+    \clearpage
+}
+
+\newcommand{\JOUListOfTables}{%
+    \JOUFrontMatterList{附表清单}{lot}{\@starttoc{lot}}%
+}
+
+\newcommand{\JOUListOfFigures}{%
+    \JOUFrontMatterList{附图清单}{lof}{\@starttoc{lof}}%
+}
+
+\newcommand{\JOUListOfTablesAndFigures}{%
+    \JOUListOfTables
+    \JOUListOfFigures
+}
+
 % 目录格式
 \JOUApplyBodyTocLayout
+\titlecontents{table}[0em]{\songti\zihao{-4}}%
+    {\makebox[4.2em][l]{表~\thecontentslabel}}{}%
+    {\titlerule*[0.5pc]{.}\contentspage}%
+\titlecontents{figure}[0em]{\songti\zihao{-4}}%
+    {\makebox[4.2em][l]{图~\thecontentslabel}}{}%
+    {\titlerule*[0.5pc]{.}\contentspage}%
 
 \endinput

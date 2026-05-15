@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 ## [Unreleased]
 
+### Added
+
+- Add JOU-style front-matter list commands for tables and figures.
+
 ### Documentation
 
 - Sync English README with Chinese README ([2e710bc](https://github.com/TsekaLuk/JOU-Undergraduate-Thesis-LaTeX-Template/commit/2e710bc))

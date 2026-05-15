@@ -51,6 +51,7 @@ The template ships with bundled open-source fallback fonts, ready to compile out
 - `Complete template set`: in addition to the thesis body, includes 18 form/report/grading templates from the handbook.
 - `Automatic font adaptation`: if standard fonts are installed locally, the template automatically prefers them; use the `strictfonts` option for final submission verification.
 - `Layout aligned with handbook`: cover, abstract, table of contents, and body layout all follow the work manual specifications, continuously verified via CI.
+- `Front-matter lists`: `\JOUListOfTablesAndFigures` can generate Chinese-style lists of tables and figures after the table of contents.
 
 ## Preview
 

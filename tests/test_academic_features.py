@@ -44,6 +44,12 @@ CLS_PATTERNS = {
     "supercite-option": r"DeclareOption\{supercite\}",
     "upcite-command": r"newcommand\{\\upcite\}",
     "printsymbols-command": r"newcommand\{\\printsymbols\}",
+    "frontmatter-list-wrapper": r"newcommand\{\\JOUFrontMatterList\}",
+    "list-of-tables-command": r"newcommand\{\\JOUListOfTables\}",
+    "list-of-figures-command": r"newcommand\{\\JOUListOfFigures\}",
+    "list-of-tables-and-figures-command": r"newcommand\{\\JOUListOfTablesAndFigures\}",
+    "table-list-format": r"titlecontents\{table\}",
+    "figure-list-format": r"titlecontents\{figure\}",
     "theorem-env": r"newtheorem\{theorem\}\{定理\}",
     "definition-env": r"newtheorem\{definition\}\[theorem\]\{定义\}",
 }
@@ -91,7 +97,7 @@ def test_bibsection_uses_shared_heading(cls_content: str):
 
 @pytest.mark.parametrize("name,pattern", [
     ("conclusion-macro", r"\\JOUBackmatterChapter\{结论与展望\}"),
-    ("acknowledgement-macro", r"\\JOUBackmatterChapter\{致谢\}"),
+    ("acknowledgement-macro", r"\\JOUBackmatterChapter\{致(?:谢|\\hspace\{1em\}谢)\}"),
 ])
 def test_main_uses_shared_backmatter(main_tex_content: str, name: str, pattern: str):
     assert re.search(pattern, main_tex_content), \
@@ -111,6 +117,11 @@ def test_no_manual_centering_in_main(main_tex_content: str, pattern: str):
 def test_no_printsymbols_in_default(main_tex_content: str):
     assert not re.search(r"\\printsymbols\b", main_tex_content), \
         "main.tex 默认示例论文不应直接插入符号说明页。"
+
+
+def test_main_documents_jou_frontmatter_lists(main_tex_content: str):
+    assert re.search(r"\\JOUListOfTablesAndFigures\b", main_tex_content), \
+        "main.tex 应示例化目录后的附表清单、附图清单入口。"
 
 
 # ── Body sample reuses shared heading system ───────────────────────────────
