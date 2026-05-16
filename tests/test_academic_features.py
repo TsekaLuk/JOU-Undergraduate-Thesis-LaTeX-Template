@@ -88,6 +88,28 @@ def test_cls_has_academic_capability(cls_content: str, name: str, pattern: str):
     assert re.search(pattern, cls_content), f"类文件缺少学术能力定义：{name}"
 
 
+# ── Frontmatter list behavior ──────────────────────────────────────────────
+
+def _frontmatter_list_macro(cls_content: str) -> str:
+    start = cls_content.index(r"\newcommand{\JOUFrontMatterList}[3]")
+    end = cls_content.index(r"\newcommand{\JOUListOfTables}", start)
+    return cls_content[start:end]
+
+
+def test_frontmatter_lists_do_not_write_themselves_to_toc(cls_content: str):
+    macro = _frontmatter_list_macro(cls_content)
+    assert r"\addcontentsline{toc}{chapter}" not in macro, \
+        "附图/附表清单页不应把自身写入正文目录"
+
+
+def test_frontmatter_lists_locally_suppress_lof_lot_chapter_spacing(cls_content: str):
+    macro = _frontmatter_list_macro(cls_content)
+    assert r"\let\JOUFrontMatterListSavedAddVspace\addvspace" in macro, \
+        "清单宏未保存原始 \\addvspace，无法证明屏蔽是局部的"
+    assert r"\renewcommand{\addvspace}[1]{}" in macro, \
+        ".lof/.lot 中章节分组写入的 \\addvspace{10pt} 未在清单宏内部屏蔽"
+
+
 # ── Shared backmatter heading system ───────────────────────────────────────
 
 def test_headings_has_backmatter_heading_macro(headings_content: str):

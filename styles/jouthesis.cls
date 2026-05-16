@@ -562,6 +562,8 @@
     \vspace{0.8\baselineskip}%
     \begingroup
         \parindent=0pt%
+        \let\JOUFrontMatterListSavedAddVspace\addvspace
+        \renewcommand{\addvspace}[1]{}%
         #3%
     \endgroup
     \clearpage
