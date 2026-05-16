@@ -137,6 +137,23 @@ def test_main_documents_jou_frontmatter_lists(main_tex_content: str):
         "main.tex 应示例化目录后的附表清单、附图清单入口。"
 
 
+@pytest.mark.parametrize(("env_name", "keyword_command"), [
+    ("cnabstract", "cnkeywords"),
+    ("enabstract", "enkeywords"),
+])
+def test_main_abstract_examples_do_not_split_before_keywords(
+    main_tex_content: str, env_name: str, keyword_command: str
+):
+    block = re.search(
+        rf"\\begin\{{{env_name}\}}(?P<body>.*?)\\end\{{{env_name}\}}",
+        main_tex_content,
+        re.DOTALL,
+    )
+    assert block, f"main.tex 缺少 {env_name} 示例。"
+    assert not re.search(rf"\n\s*\n\s*\\{keyword_command}\b", block.group("body")), \
+        f"{env_name} 示例中摘要正文和关键词之间不应留空行。"
+
+
 def test_usage_guide_uses_shared_backmatter_macros(usage_guide_content: str):
     assert r"\JOUBackmatterChapter{结论与展望}" in usage_guide_content, \
         "使用指南应引导结论章节走共享 backmatter 宏。"
@@ -155,6 +172,23 @@ def test_claude_documents_bracketed_upcite(claude_content: str):
         "CLAUDE.md 应说明 \\upcite 保留方括号，而不是裸数字上标。"
     assert "上标引用 ¹" not in claude_content, \
         "CLAUDE.md 不应继续描述裸数字上标引用。"
+
+
+@pytest.mark.parametrize(("env_name", "keyword_command"), [
+    ("cnabstract", "cnkeywords"),
+    ("enabstract", "enkeywords"),
+])
+def test_usage_guide_abstract_examples_do_not_split_before_keywords(
+    usage_guide_content: str, env_name: str, keyword_command: str
+):
+    block = re.search(
+        rf"\\begin\{{{env_name}\}}(?P<body>.*?)\\end\{{{env_name}\}}",
+        usage_guide_content,
+        re.DOTALL,
+    )
+    assert block, f"使用指南缺少 {env_name} 示例。"
+    assert not re.search(rf"\n\s*\n\s*\\{keyword_command}\b", block.group("body")), \
+        f"使用指南 {env_name} 示例不应在摘要正文和关键词之间留空行。"
 
 
 # ── Body sample reuses shared heading system ───────────────────────────────

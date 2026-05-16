@@ -519,12 +519,12 @@
 
 % 关键词命令
 \newcommand{\cnkeywords}[1]{%
-    \jou@normalpar\vspace{0.4\baselineskip}%
+    \jou@normalpar%
     \noindent{\JOUAbstractHei\bfseries\zihao{-4}关键词：}{\zihao{-4}\songti #1}\jou@normalpar
 }
 
 \newcommand{\enkeywords}[1]{%
-    \jou@normalpar\vspace{0.4\baselineskip}%
+    \jou@normalpar%
     \noindent{\rmfamily\bfseries\zihao{-4}Keywords: }{\rmfamily\zihao{-4}#1}\jou@normalpar
 }
 

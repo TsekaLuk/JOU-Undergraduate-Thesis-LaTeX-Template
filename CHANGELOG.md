@@ -19,6 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 ### Fixed
 
+- Keep abstract body and keyword lines visually tight without paragraph-like spacing.
 - Align upstream usage docs with shared backmatter macros and bracketed superscript citations.
 - Normalize backmatter heading display spacing for `致  谢` and `参 考 文 献`.
 - Keep Chinese and English abstracts as single visual paragraphs, route Latin text through Times-compatible families, and cap default figure floats to avoid full-page figure/table-only pages.

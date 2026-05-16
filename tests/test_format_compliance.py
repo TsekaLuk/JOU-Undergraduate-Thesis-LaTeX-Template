@@ -181,8 +181,10 @@ def test_abstract_body_collapses_paragraph_breaks(cls_content: str):
 
 
 def test_abstract_keywords_keep_their_own_line_break(cls_content: str):
-    assert r"\jou@normalpar\vspace{0.4\baselineskip}" in cls_content, \
-        "关键词应使用受控换行，而不是重新打开摘要正文分段"
+    assert r"\jou@normalpar\vspace" not in cls_content, \
+        "关键词前不应额外加竖向间距，摘要区域必须保持紧凑的一整段观感"
+    assert r"\jou@normalpar%" in cls_content, \
+        "关键词应只使用受控换行，不能重新打开摘要正文分段"
 
 
 # ── 8. 英文字体与浮动体安全边界 ─────────────────────────────────────────

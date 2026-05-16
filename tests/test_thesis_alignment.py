@@ -81,6 +81,16 @@ def _assert_abstract_frame(pdf, page: int, label: str):
     assert 1320 <= frame_height <= 1540, f"{label} 外框高度异常，当前约为 {frame_height:.1f}px。"
 
 
+def _assert_no_blank_line_between(pdf, page: int, label: str, before: str, after: str):
+    lines = [line.strip() for line in page_text(pdf, page).splitlines()]
+    before_index = next((index for index, line in enumerate(lines) if before in line), None)
+    after_index = next((index for index, line in enumerate(lines) if after in line), None)
+    assert before_index is not None, f"{label} 未找到摘要正文锚点：{before}"
+    assert after_index is not None, f"{label} 未找到关键词锚点：{after}"
+    gap_lines = lines[before_index + 1:after_index]
+    assert all(line for line in gap_lines), f"{label} 摘要正文和关键词之间不应出现空行。"
+
+
 def bbox_lines(pdf, page: int) -> list[dict]:
     import subprocess
     completed = subprocess.run(
@@ -238,12 +248,14 @@ def test_cn_abstract_frame(thesis_pages):
     cn = _find_page(thesis_pages, "毕业设计（论文）中文摘要", "摘 要")
     if cn is not None:
         _assert_abstract_frame(MAIN_PDF, cn, "中文摘要页")
+        _assert_no_blank_line_between(MAIN_PDF, cn, "中文摘要页", "300 字左右。", "关键词：")
 
 
 def test_en_abstract_frame(thesis_pages):
     en = _find_page(thesis_pages, "毕业设计（论文）外文摘要", "Abstract:")
     if en is not None:
         _assert_abstract_frame(MAIN_PDF, en, "外文摘要页")
+        _assert_no_blank_line_between(MAIN_PDF, en, "外文摘要页", "200-300 words.", "Keywords:")
 
 
 # ── Heading centering checks ───────────────────────────────────────────────

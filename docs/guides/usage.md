@@ -77,13 +77,13 @@ xelatex main.tex
 ```latex
 \begin{cnabstract}
     本文研究了...（摘要内容约300字）
-
     \cnkeywords{深度学习；图像识别；卷积神经网络；特征提取}
 \end{cnabstract}
 ```
 
 **注意事项**：
 - 摘要约300字
+- 摘要正文写成一整段，不在正文内部空行分段
 - 关键词3-5个
 - 关键词之间用中文分号"；"分隔
 - 最后一个关键词后无标点
@@ -93,7 +93,6 @@ xelatex main.tex
 ```latex
 \begin{enabstract}
     This paper studies... (About 200-300 words)
-
     \enkeywords{Deep Learning; Image Recognition; CNN; Feature Extraction}
 \end{enabstract}
 ```
