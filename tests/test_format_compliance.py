@@ -220,3 +220,13 @@ def test_figures_are_capped_to_avoid_full_page_float(cls_content: str):
         "浮动页阈值应抬高，避免图表轻易独占一整页"
     assert r"\renewcommand{\textfraction}{0.15}" in cls_content, \
         "正文页应保留最小文字比例，避免图表页空心化"
+
+
+def test_table_and_figure_content_uses_kaiti_five(cls_content: str):
+    assert r"\newcommand{\JOUTableFigureTextFont}{\zihao{5}\JOUKai}" in cls_content, \
+        "图表内容缺少统一的五号楷体_GB2312入口"
+    assert r"\DeclareCaptionFont{kaiti5}{\JOUTableFigureTextFont}" in cls_content, \
+        "图表标题未复用统一的五号楷体_GB2312入口"
+    for env in ["table", "longtable", "tabular", "tabular*", "tabularx", "threeparttable", "figure"]:
+        assert rf"\AtBeginEnvironment{{{env}}}{{\JOUTableFigureTextFont}}" in cls_content, \
+            f"{env} 环境未统一使用五号楷体_GB2312"

@@ -147,8 +147,9 @@
 \JOUApplyBodySectioning
 \JOUApplyBodyTextLayout
 
-% 图表标题格式: 五号楷体_GB2312
-\DeclareCaptionFont{kaiti5}{\zihao{5}\JOUKai}
+% 图表中文格式: 五号楷体_GB2312
+\newcommand{\JOUTableFigureTextFont}{\zihao{5}\JOUKai}
+\DeclareCaptionFont{kaiti5}{\JOUTableFigureTextFont}
 \captionsetup{
     font=kaiti5,
     labelsep=space,
@@ -171,9 +172,13 @@
 \renewcommand{\dbltopfraction}{0.85}
 \renewcommand{\dblfloatpagefraction}{0.99}
 % 表/图浮动体内统一应用五号楷体（与标题字体一致）
-\AtBeginEnvironment{table}{\zihao{5}\JOUKai}
-\AtBeginEnvironment{longtable}{\zihao{5}\JOUKai}
-\AtBeginEnvironment{figure}{\zihao{5}\JOUKai}
+\AtBeginEnvironment{table}{\JOUTableFigureTextFont}
+\AtBeginEnvironment{longtable}{\JOUTableFigureTextFont}
+\AtBeginEnvironment{tabular}{\JOUTableFigureTextFont}
+\AtBeginEnvironment{tabular*}{\JOUTableFigureTextFont}
+\AtBeginEnvironment{tabularx}{\JOUTableFigureTextFont}
+\AtBeginEnvironment{threeparttable}{\JOUTableFigureTextFont}
+\AtBeginEnvironment{figure}{\JOUTableFigureTextFont}
 
 % 表格精确配置 - 像素级对齐
 % 三线表线宽设置（匹配Word默认）
